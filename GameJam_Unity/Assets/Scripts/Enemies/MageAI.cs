@@ -3,30 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MageAI : MonoBehaviour
+public class MageAI : Enemy
 {
     ///<summary>
     //This Scripts handles the AI logic of the Mage
     ///</summary>
-    [Header("General")]
-    [SerializeField] GameObject target;
-    [SerializeField] NavMeshAgent agent;
+    
+    
+
+    [Header("Shooting")]
     [SerializeField] float shootingRange;
     [SerializeField] float aoeRadius;
     [SerializeField] float castTime;
     [SerializeField] float reloadTime;
     [SerializeField] GameObject AOESplash;
+    
+    
 
     bool canShoot;
 
     void Start()
     {
         canShoot = true;
+        currentHealth = maxHealth;
+        isAlive = true;
     }
     void Update()
     {
         Move();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(currentHealth, target);
+        }
+        if(currentHealth<=0&&isAlive)
+        {
+            isAlive = false;
+            canShoot = false;
+            onDeath();
+        }
     }
+    #region Shooting
     void Move()
     {
         if(Vector3.Distance(this.transform.position, target.transform.position)>shootingRange)
@@ -59,6 +75,7 @@ public class MageAI : MonoBehaviour
                 Debug.Log("Coffin Took Damage");
             }
         }
+
         Destroy(obj);
         
     }
@@ -66,5 +83,6 @@ public class MageAI : MonoBehaviour
     {
         canShoot = true;
     }
-    
+    #endregion
+   
 }
