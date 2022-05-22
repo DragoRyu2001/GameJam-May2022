@@ -357,7 +357,7 @@ MonoBehaviour:
   airMoveMult: 0.15
   mouseSensX: 2
   mouseSensY: 5
-  jumpForce: 7
+  jumpForce: 10
   groundDrag: 6
   airDrag: 1.5
   rb: {fileID: 806549765}
