@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementScript : MonoBehaviour
+public class PlayerScript : BasePlayerClass
 {
 
     [Header("Movement variables")]
     [SerializeField] float moveMult;
     [SerializeField] float sprintMult;
-    [Range(0.1f, 0.5f)]
-    [SerializeField] float airMoveMult;
+    [SerializeField, Range(0.1f, 0.5f)] float airMoveMult;
     [SerializeField] Transform orientation;
     RaycastHit slopeHit;
 
@@ -18,6 +17,7 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float groundDrag;
     [SerializeField] float airDrag;
+    [SerializeField, Range(0.01f, 0.3f)] float fallingDrag;
 
     [Header("Misc References")]
     [SerializeField] Rigidbody rb;
@@ -29,16 +29,24 @@ public class MovementScript : MonoBehaviour
     private float moveY;
     private float playerHeight;
 
-    bool sprinting, onSlope, onGround;
+    bool sprinting, onSlope, onGround, isDashing;
+
+    [Header("Reposition Parameters")]
+    [SerializeField] float dashForce;
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
     [Header("Translate Modifier")]
     [SerializeField, ReadOnly] float translateModifier;
+    private Vector3 rotateVector;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        BaseParametersUpdate();
+        
         ControlDrag();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -52,10 +60,10 @@ public class MovementScript : MonoBehaviour
         onSlope = SlopeCheck();
         ControlDrag();
         ReadInput();
+
         slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
+        transform.rotation = Quaternion.Euler(orientation.rotation.eulerAngles);
     }
-
-
 
     private void ControlDrag()
     {
@@ -65,7 +73,14 @@ public class MovementScript : MonoBehaviour
         }
         else
         {
-            rb.drag = airDrag;
+            if (rb.velocity.normalized.y < -0.6f)
+            {
+                rb.drag = fallingDrag;
+            }
+            else
+            {
+                rb.drag = airDrag;
+            }
         }
     }
 
@@ -102,13 +117,47 @@ public class MovementScript : MonoBehaviour
             Jump();
         }
 
+        if(Input.GetKeyDown(KeyCode.Q)&&CheckMana())
+        {
+            if (!isDashing)
+            {
+                isDashing = true;
+                Reposition();
+                Invoke(nameof(SetDashingToFalse), 0.9f);
+            }
+        }
 
+        if(Input.GetKeyDown(KeyCode.E)&&CheckMana())
+        {
+
+        }
+    }
+
+    private void SetDashingToFalse()
+    {
+        isDashing = false;
+    }
+
+    private void Reposition()
+    {
+        currentMana -= manaCost;
+        manaRechargePause = true;
+        if (!manaRecharging)
+            StartCoroutine(StartManaRecharge());
+
+        Vector3 ShootVector = playerCam.forward;
+        rb.AddForce(ShootVector * dashForce, ForceMode.Impulse);
     }
 
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnDrawGizmos()
+    {
+     
     }
 
     #region Physical Checks
@@ -128,7 +177,6 @@ public class MovementScript : MonoBehaviour
         }
         return false;
     }
-
     private bool SprintCheck()
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -142,8 +190,6 @@ public class MovementScript : MonoBehaviour
     private bool GroundCheck()
     {
         return Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
-
-        //layermask 6 is currently ground
     }
     #endregion
 }

@@ -16,20 +16,35 @@ public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float maxHealth;
-    [ReadOnly] public float currentHealth;
-    public float maxMana;
-    [ReadOnly] public float currentMana;
-    public float sprintResource;
-    [ReadOnly] public float currentSResource;
+    [Header("Base Class Parameters")]
+    [SerializeField] protected float maxHealth;
+    [SerializeField, ReadOnly] protected float currentHealth;
+    [SerializeField] protected float maxMana;
+    [SerializeField, ReadOnly] protected float currentMana;
+    [SerializeField] protected float sprintResource;
+    [SerializeField, ReadOnly] protected float currentSResource;
+    [SerializeField] protected float berserkTime;                                                 
+    [SerializeField, ReadOnly] protected float currentBT;                                        
                                                                               
-    public float berserkTime;                                                 
-    [ReadOnly] public float currentBT;                                        
-                                                                              
-    [ReadOnly]public bool isAlive;                                            
-    [ReadOnly]public bool inBerserk;                                          
-    [ReadOnly]public bool canSprint;
+    [SerializeField, ReadOnly] protected bool isAlive;                                            
+    [SerializeField, ReadOnly] protected bool inBerserk;                                          
+    [SerializeField, ReadOnly] protected bool canSprint;
+    [SerializeField, ReadOnly] protected bool canCast;
 
+    [SerializeField] protected float manaRegenRate;
+    [SerializeField] protected float healthRegenRate;
+    [SerializeField] protected float sprintRegenRate;
+
+    [SerializeField] protected bool manaRecharging=false;
+    [SerializeField] protected bool healthRecharging;
+    [SerializeField] protected bool sprintRecharging;
+
+
+    [SerializeField] protected bool manaRechargePause;
+    [SerializeField] protected bool healthRechargePause;
+    [SerializeField] protected bool sprintRechargePause;
+
+    [SerializeField] protected float manaCost;
 
     public void TakeDamage(float damage)
     {
@@ -71,7 +86,6 @@ public class BasePlayerClass : MonoBehaviour
 
     public bool CheckHealth()
     {
-
         return isAlive = currentHealth >= 0;
     }
 
@@ -85,9 +99,25 @@ public class BasePlayerClass : MonoBehaviour
         return canSprint = currentSResource >= 0;
     }
 
-    void Start()
+    public void BaseParametersUpdate()
     {
         currentHealth = maxHealth;
+        currentMana = maxMana;
+        currentSResource = sprintResource;
+        currentBT = berserkTime;
+        CheckHealth();
+        CheckSprint();
+        CheckMana();
+    }
+
+    public bool CheckMana()
+    {
+        return canCast = currentMana - 30 >= 0f;
+    }
+
+    void Start()
+    {
+    
     }
 
     // Update is called once per frame
@@ -101,6 +131,28 @@ public class BasePlayerClass : MonoBehaviour
         Vector3 playerPos;
         Vector3 playerVelocity;
         float playerHealth;
+    }
+
+    public IEnumerator StartManaRecharge()
+    {
+        manaRecharging = true;
+        while(currentMana<=maxMana)
+        {
+            currentMana += Time.deltaTime*manaRegenRate;
+            yield return null;
+            if (currentMana > maxMana || Mathf.Approximately(currentMana, maxMana))
+            {
+                currentMana = maxMana;
+                yield break;
+            }
+            if (manaRechargePause)
+            {
+                manaRechargePause = false;
+                Debug.Log("Pause");
+                yield return new WaitForSeconds(1.25f);
+            }
+        }
+        manaRecharging = false;
     }
 
 }

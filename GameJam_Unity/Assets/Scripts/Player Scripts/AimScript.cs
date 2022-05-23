@@ -24,6 +24,7 @@ public class AimScript : MonoBehaviour
     private float camYPos;
     private float camZPos;
 
+
     void Start()
     {
         desiredFOV = cam.fieldOfView;
@@ -54,9 +55,9 @@ public class AimScript : MonoBehaviour
     }
     private void Look()
     {
-        cam.transform.SetPositionAndRotation(new Vector3(camXPos, camYPos, camZPos), Quaternion.Euler(xRot, 0, 0));
-        cam.transform.LookAt(new Vector3(player.position.x, -xRot+player.position.y, player.position.z));
-        orientation.rotation = Quaternion.Euler(0,yRot*Mathf.Rad2Deg,0);
+        transform.SetPositionAndRotation(new Vector3(camXPos, camYPos, camZPos), Quaternion.Euler(xRot, 0, 0));
+        transform.LookAt(new Vector3(player.position.x, -xRot+player.position.y, player.position.z));
+        orientation.rotation = Quaternion.Euler(0, yRot*Mathf.Rad2Deg,0);
     }
 
 

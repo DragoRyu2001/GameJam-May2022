@@ -353,6 +353,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c55307358e9b534ca24a61bfbd8896e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 0
+  maxMana: 10000
+  currentMana: 0
+  sprintResource: 5
+  currentSResource: 0
+  berserkTime: 15
+  currentBT: 0
+  isAlive: 0
+  inBerserk: 0
+  canSprint: 0
+  canCast: 0
+  manaRegenRate: 5
+  healthRegenRate: 20
+  sprintRegenRate: 1.5
+  manaRecharging: 0
+  healthRecharging: 0
+  sprintRecharging: 0
+  manaRechargePause: 0
+  healthRechargePause: 0
+  sprintRechargePause: 0
+  manaCost: 30
   moveMult: 50
   sprintMult: 150
   airMoveMult: 0.15
@@ -360,12 +382,14 @@ MonoBehaviour:
   jumpForce: 10
   groundDrag: 6
   airDrag: 1.5
+  fallingDrag: 0.2
   rb: {fileID: 806549765}
   playerCam: {fileID: 1387746999}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   coll: {fileID: 806549759}
+  dashForce: 50
   translateModifier: 0
 --- !u!54 &806549765
 Rigidbody:
@@ -382,7 +406,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1387746997
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1976591850}
+  - component: {fileID: 1976591851}
   m_Layer: 0
   m_Name: CamPos
   m_TagString: Untagged
@@ -584,6 +609,18 @@ Transform:
   m_Father: {fileID: 806549762}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976591851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976591849}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae92feb4828cfd4888c6adac7b7cde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2025489252
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +665,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129049338}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: efdfb6f8acb66b84ba0f55963abb18b0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
