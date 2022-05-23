@@ -17,6 +17,7 @@ public class MageAI : Enemy
     [SerializeField] float castTime;
     [SerializeField] float reloadTime;
     [SerializeField] GameObject AOESplash;
+    [SerializeField] GameObject explode_PS;
     
     
 
@@ -59,6 +60,7 @@ public class MageAI : Enemy
     {
         GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, 1.2f,targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
+        
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
         foreach(var hitCollider in collider)
         {
@@ -73,6 +75,8 @@ public class MageAI : Enemy
         }
 
         Destroy(obj);
+        GameObject explode = Instantiate(explode_PS,  new Vector3(targetPos.x, 1.2f,targetPos.z), explode_PS.transform.rotation);
+        Destroy(explode, 1f);
         
     }
     void ResetShoot()
@@ -80,5 +84,5 @@ public class MageAI : Enemy
         canShoot = true;
     }
     #endregion
-   
+    
 }
