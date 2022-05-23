@@ -14,8 +14,6 @@ public class AimScript : MonoBehaviour
     [Header("Look variables")]
     [SerializeField] float mouseSensX;
     [SerializeField] float mouseSensY;
-    [SerializeField] float orbitYOffset;
-    [SerializeField] float orbitXOffset;
     [SerializeField] float orbitRadius;
     [SerializeField] Transform orientation;
 
@@ -50,14 +48,14 @@ public class AimScript : MonoBehaviour
 
         xRot = Mathf.Clamp(xRot, -90f, 90f);
 
-        camXPos = Mathf.Sin(yRot) * orbitRadius + player.position.x + orbitXOffset;
-        camYPos = player.position.y + orbitYOffset;
+        camXPos = Mathf.Sin(yRot) * orbitRadius + player.position.x;
+        camYPos = player.position.y;
         camZPos = Mathf.Cos(yRot) * orbitRadius + player.position.z;       
     }
     private void Look()
     {
         cam.transform.SetPositionAndRotation(new Vector3(camXPos, camYPos, camZPos), Quaternion.Euler(xRot, 0, 0));
-        cam.transform.LookAt(new Vector3(player.position.x, -xRot, player.position.z));
+        cam.transform.LookAt(new Vector3(player.position.x, -xRot+player.position.y, player.position.z));
         orientation.rotation = Quaternion.Euler(0,yRot*Mathf.Rad2Deg,0);
     }
 

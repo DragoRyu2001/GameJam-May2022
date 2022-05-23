@@ -33,7 +33,8 @@ public class MovementScript : MonoBehaviour
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
-    float translateModifier;
+    [Header("Translate Modifier")]
+    [SerializeField, ReadOnly] float translateModifier;
 
     // Start is called before the first frame update
     void Start()
