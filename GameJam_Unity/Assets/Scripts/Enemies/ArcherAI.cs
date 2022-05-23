@@ -41,7 +41,6 @@ public class ArcherAI : Enemy
         if(Vector3.Distance(this.transform.position, target.transform.position)<=shootingRange && CanShoot())
         {
             agent.ResetPath();
-            
             transform.LookAt(target.transform);
             if(canShoot)
             {
