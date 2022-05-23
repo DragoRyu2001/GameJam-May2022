@@ -19,10 +19,14 @@ public class Enemy : MonoBehaviour
         target = obj;
     }
     #region General
-    public void TakeDamage(float dmg, GameObject obj)
+    public void TakeDamage(float dmg, bool isPlayer)
     {
         currentHealth-=dmg;
-        target = obj;
+        if(isPlayer)
+        {
+            //GameManer info about Player
+            //target = player
+        }
     }
     protected void onDeath()
     {

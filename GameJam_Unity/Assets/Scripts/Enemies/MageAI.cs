@@ -31,10 +31,6 @@ public class MageAI : Enemy
     void Update()
     {
         Move();
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(currentHealth, target);
-        }
         if(currentHealth<=0&&isAlive)
         {
             isAlive = false;
@@ -61,7 +57,7 @@ public class MageAI : Enemy
 
     IEnumerator AOEShoot(Vector3 targetPos)
     {
-        GameObject obj = Instantiate(AOESplash, targetPos, Quaternion.identity);
+        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, 1.2f,targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
         foreach(var hitCollider in collider)
