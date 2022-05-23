@@ -11,12 +11,8 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float sprintMult;
     [Range(0.1f, 0.5f)]
     [SerializeField] float airMoveMult;
+    [SerializeField] Transform orientation;
     RaycastHit slopeHit;
-
-
-    [Header("Look variables")]
-    [SerializeField] float mouseSensX;
-    [SerializeField] float mouseSensY;
 
     [Header("Jump/Drag variables")]
     [SerializeField] float jumpForce;
@@ -31,14 +27,12 @@ public class MovementScript : MonoBehaviour
 
     private float moveX;
     private float moveY;
-    private float xRotation;
     private float playerHeight;
 
     bool sprinting, onSlope, onGround;
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
-    private Vector2 lookVector;
     float translateModifier;
 
     // Start is called before the first frame update
@@ -57,7 +51,6 @@ public class MovementScript : MonoBehaviour
         onSlope = SlopeCheck();
         ControlDrag();
         ReadInput();
-        Look();
         slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
     }
 
@@ -80,12 +73,6 @@ public class MovementScript : MonoBehaviour
         Move();
     }
 
-    private void Look()
-    {
-        playerCam.localEulerAngles = Vector3.right * xRotation;
-        transform.Rotate(Vector3.up * lookVector.x);
-    }
-
     private void Move()
     {
         translateModifier = 1f;
@@ -106,13 +93,7 @@ public class MovementScript : MonoBehaviour
         //keyboard input
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
-        translateVector = transform.forward * moveY + transform.right * moveX;
-
-        //mouse input
-
-        lookVector = new Vector2(Input.GetAxis("Mouse X") * mouseSensX, Input.GetAxis("Mouse Y") * mouseSensY);
-        xRotation -= lookVector.y;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        translateVector = -orientation.forward * moveY - orientation.right * moveX;
 
         //jump input
         if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
