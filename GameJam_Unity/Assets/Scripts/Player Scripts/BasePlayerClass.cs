@@ -16,19 +16,19 @@ public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] float maxHealth;
-    [SerializeField, ReadOnly] float currentHealth;
-    [SerializeField] float maxMana;
-    [SerializeField, ReadOnly] float currentMana;
-    [SerializeField] float sprintResource;
-    [SerializeField, ReadOnly] float currentSResource;
-
-    [SerializeField] float berserkTime;
-    [SerializeField, ReadOnly] float currentBT;
-
-    [SerializeField, ReadOnly] bool isAlive;
-    [SerializeField, ReadOnly] bool inBerserk;
-    [SerializeField, ReadOnly] bool canSprint;
+    public float maxHealth;
+    [ReadOnly] public float currentHealth;
+    public float maxMana;
+    [ReadOnly] public float currentMana;
+    public float sprintResource;
+    [ReadOnly] public float currentSResource;
+                                                                              
+    public float berserkTime;                                                 
+    [ReadOnly] public float currentBT;                                        
+                                                                              
+    [ReadOnly]public bool isAlive;                                            
+    [ReadOnly]public bool inBerserk;                                          
+    [ReadOnly]public bool canSprint;
 
 
     public void TakeDamage(float damage)
