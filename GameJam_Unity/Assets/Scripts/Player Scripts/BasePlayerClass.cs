@@ -36,6 +36,7 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] protected float maxSprint;
     [SerializeField, ReadOnly] protected float currentSprint;
     [SerializeField] protected float sprintRegenRate;
+    [SerializeField] protected float sprintDecayRate;
     [SerializeField] protected bool sprintRecharging;
     [SerializeField] protected bool sprintRechargePause;
     [SerializeField, Range(0.5f, 2f)] protected float sprintRechargePauseTime;

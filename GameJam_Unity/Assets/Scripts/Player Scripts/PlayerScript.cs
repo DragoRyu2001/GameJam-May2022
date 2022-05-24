@@ -55,8 +55,8 @@ public class PlayerScript : BasePlayerClass
 
     void Update()
     {
-        onGround = GroundCheck();
-        sprinting = SprintCheck();
+        GroundCheck();
+        SprintCheck();
         onSlope = SlopeCheck();
         ControlDrag();
         ReadInput();
@@ -227,12 +227,22 @@ public class PlayerScript : BasePlayerClass
     }
     private bool SprintCheck()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        Debug.Log(currentSprint);
+        if (Input.GetKey(KeyCode.LeftShift)&&CheckSprint())
         {
-            return true;
+            currentSprint -= Time.deltaTime * sprintDecayRate;
+            return sprinting = true;
+            
         }
         else
-            return false;
+        {
+            if(currentSprint<=maxSprint)
+            {
+                currentSprint += Time.deltaTime * sprintDecayRate;
+            }
+            currentSprint = currentSprint > maxSprint ? maxSprint : currentSprint;
+            return sprinting = false;
+        }
     }
 
     private bool GroundCheck()

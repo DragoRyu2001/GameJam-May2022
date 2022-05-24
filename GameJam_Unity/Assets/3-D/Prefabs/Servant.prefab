@@ -206,14 +206,22 @@ MonoBehaviour:
   manaRecharging: 0
   manaRechargePause: 0
   manaRechargePauseTime: 1.25
-  maxSprint: 5
+  maxSprint: 10
   currentSprint: 0
   sprintRegenRate: 1.5
+  sprintDecayRate: 3
   sprintRecharging: 0
   sprintRechargePause: 0
   sprintRechargePauseTime: 0.5
   berserkTime: 15
   currentBT: 0
+  dashForce: 50
+  dashReloadTime: 0
+  slowTime: 0
+  slowMult: 0
+  slowReloadTime: 0
+  aggroRange: 0
+  aggroReloadTime: 0
   isAlive: 0
   inBerserk: 0
   canSprint: 0
@@ -235,7 +243,6 @@ MonoBehaviour:
     m_Bits: 64
   coll: {fileID: 982878094783673620}
   playerObj: {fileID: 982878093403100853}
-  dashForce: 50
   translateModifier: 0
 --- !u!54 &982878094783673621
 Rigidbody:
