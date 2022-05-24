@@ -247,7 +247,7 @@ public class PlayerScript : BasePlayerClass
 
     private bool GroundCheck()
     {
-        return Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
+        return onGround = Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
     }
     #endregion
 
