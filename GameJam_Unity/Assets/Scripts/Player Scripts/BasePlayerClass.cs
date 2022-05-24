@@ -17,74 +17,108 @@ public class BasePlayerClass : MonoBehaviour
     // Start is called before the first frame update
 
     [Header("Health")]
-    [SerializeField] protected float maxHealth;
-    [SerializeField, ReadOnly] protected float currentHealth;
-    [SerializeField] protected float healthRegenRate;
-    [SerializeField] protected bool healthRecharging;
-    [SerializeField] protected bool healthRechargePause;
-    [SerializeField, Range(0.5f, 2f)] protected float healthRechargePauseTime;
+    [SerializeField] private float maxHealth;
+    [SerializeField, ReadOnly] private float currentHealth;
+    [SerializeField] private float healthRegenRate;
+    [SerializeField] private bool healthRecharging;
+    [SerializeField] private bool healthRechargePause;
+    [SerializeField, Range(0.5f, 2f)] private float healthRechargePauseTime;
 
     [Header("Mana")]
-    [SerializeField] protected float maxMana;
-    [SerializeField, ReadOnly] protected float currentMana;
-    [SerializeField] protected float manaRegenRate;
-    [SerializeField] protected bool manaRecharging;
-    [SerializeField] protected bool manaRechargePause;
-    [SerializeField, Range(0.5f, 2f)] protected float manaRechargePauseTime;
+    [SerializeField] private float maxMana;
+    [SerializeField, ReadOnly] private float currentMana;
+    [SerializeField] private float manaRegenRate;
+    [SerializeField] private bool manaRecharging;
+    [SerializeField] private bool manaRechargePause;
+    [SerializeField, Range(0.5f, 2f)] private float manaRechargePauseTime;
 
     [Header("Sprint")]
-    [SerializeField] protected float maxSprint;
-    [SerializeField, ReadOnly] protected float currentSprint;
-    [SerializeField] protected float sprintRegenRate;
-    [SerializeField] protected float sprintDecayRate;
-    [SerializeField] protected bool sprintRecharging;
-    [SerializeField] protected bool sprintRechargePause;
-    [SerializeField, Range(0.5f, 2f)] protected float sprintRechargePauseTime;
+    [SerializeField] private float maxSprint;
+    [SerializeField, ReadOnly] private float currentSprint;
+    [SerializeField] private float sprintRegenRate;
+    [SerializeField] private float sprintDecayRate;
+    [SerializeField] private bool sprintRecharging;
+    [SerializeField] private bool sprintRechargePause;
+    [SerializeField, Range(0.5f, 2f)] private float sprintRechargePauseTime;
 
     [Header("Berserk")]
-    [SerializeField] protected float berserkTime;
-    [SerializeField, ReadOnly] protected float currentBT;
+    [SerializeField] private float berserkTime;
+    [SerializeField, ReadOnly] private float currentBT;
 
     [Header("Dash Parameters")]
-    [SerializeField] protected float dashForce;
-    [SerializeField, Range(0.7f, 1.25f)] protected float dashReloadTime;
+    [SerializeField] private float dashForce;
+    [SerializeField, Range(0.7f, 1.25f)] private float dashReloadTime;
 
     [Header("Slow Mo Parameters")]
-    [SerializeField] protected float slowTime;
-    [SerializeField, Range(0.3f, 0.5f)] protected float slowMult;
-    [SerializeField, Range(4f, 5f)] protected float slowReloadTime;
+    [SerializeField] private float slowTime;
+    [SerializeField, Range(0.3f, 0.5f)] private float slowMult;
+    [SerializeField, Range(4f, 5f)] private float slowReloadTime;
 
     [Header("Aggro Parameters")]
-    [SerializeField] protected float aggroRange;
-    [SerializeField, Range(0.7f, 1.25f)] protected float aggroReloadTime;
+    [SerializeField] private float aggroRange;
+    [SerializeField, Range(0.7f, 1.25f)] private float aggroReloadTime;
 
     [Header("Statuses")]
-    [SerializeField, ReadOnly] protected bool isAlive;
-    [SerializeField, ReadOnly] protected bool inBerserk;
-    [SerializeField, ReadOnly] protected bool canSprint;
-    [SerializeField, ReadOnly] protected bool canCast;
+    [SerializeField, ReadOnly] private bool isAlive;
+    [SerializeField, ReadOnly] private bool inBerserk;
+    [SerializeField, ReadOnly] private bool canSprint;
+    [SerializeField, ReadOnly] private bool canCast;
 
-    [SerializeField] protected float manaCost;
+    [SerializeField] private float manaCost;
+
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+    public float HealthRegenRate { get => healthRegenRate; set => healthRegenRate = value; }
+    public bool HealthRecharging { get => healthRecharging; set => healthRecharging = value; }
+    public bool HealthRechargePause { get => healthRechargePause; set => healthRechargePause = value; }
+    public float HealthRechargePauseTime { get => healthRechargePauseTime; set => healthRechargePauseTime = value; }
+    public float MaxMana { get => maxMana; set => maxMana = value; }
+    public float CurrentMana { get => currentMana; set => currentMana = value; }
+    public float ManaRegenRate { get => manaRegenRate; set => manaRegenRate = value; }
+    public bool ManaRecharging { get => manaRecharging; set => manaRecharging = value; }
+    public bool ManaRechargePause { get => manaRechargePause; set => manaRechargePause = value; }
+    public float ManaRechargePauseTime { get => manaRechargePauseTime; set => manaRechargePauseTime = value; }
+    public float MaxSprint { get => maxSprint; set => maxSprint = value; }
+    public float CurrentSprint { get => currentSprint; set => currentSprint = value; }
+    public float SprintRegenRate { get => sprintRegenRate; set => sprintRegenRate = value; }
+    public float SprintDecayRate { get => sprintDecayRate; set => sprintDecayRate = value; }
+    public bool SprintRecharging { get => sprintRecharging; set => sprintRecharging = value; }
+    public bool SprintRechargePause { get => sprintRechargePause; set => sprintRechargePause = value; }
+    public float SprintRechargePauseTime { get => sprintRechargePauseTime; set => sprintRechargePauseTime = value; }
+    public float BerserkTime { get => berserkTime; set => berserkTime = value; }
+    public float CurrentBT { get => currentBT; set => currentBT = value; }
+    public float DashForce { get => dashForce; set => dashForce = value; }
+    public float DashReloadTime { get => dashReloadTime; set => dashReloadTime = value; }
+    public float SlowTime { get => slowTime; set => slowTime = value; }
+    public float SlowMult { get => slowMult; set => slowMult = value; }
+    public float SlowReloadTime { get => slowReloadTime; set => slowReloadTime = value; }
+    public float AggroRange { get => aggroRange; set => aggroRange = value; }
+    public float AggroReloadTime { get => aggroReloadTime; set => aggroReloadTime = value; }
+    public bool IsAlive { get => isAlive; set => isAlive = value; }
+    public bool InBerserk { get => inBerserk; set => inBerserk = value; }
+    public bool CanSprint { get => canSprint; set => canSprint = value; }
+    public bool CanCast { get => canCast; set => canCast = value; }
+    public float ManaCost { get => manaCost; set => manaCost = value; }
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        isAlive = CheckHealth();
+        CurrentHealth -= damage;
+        IsAlive = CheckHealth();
 
-        if (currentHealth / maxHealth < 0.15f)
+        if (CurrentHealth / MaxHealth < 0.15f)
         {
             StartRecording();
         }
 
-        if (!isAlive && !inBerserk)
+        if (!IsAlive && !InBerserk)
         {
-            inBerserk = true;
-            isAlive = true;
+            InBerserk = true;
+            IsAlive = true;
             Rewind();
         }
-        else if (!isAlive && inBerserk)
+        else if (!IsAlive && InBerserk)
         {
-            inBerserk = false;
+            InBerserk = false;
             Death();
         }
     }
@@ -106,25 +140,25 @@ public class BasePlayerClass : MonoBehaviour
 
     public bool CheckHealth()
     {
-        return isAlive = currentHealth >= 0;
+        return IsAlive = CurrentHealth >= 0;
     }
 
     public bool CheckBerserking()
     {
-        return inBerserk = currentBT >= 0;
+        return InBerserk = CurrentBT >= 0;
     }
 
     public bool CheckSprint()
     {
-        return canSprint = currentSprint >= 0;
+        return CanSprint = CurrentSprint >= 0;
     }
 
     public void BaseParametersUpdate()
     {
-        currentHealth = maxHealth;
-        currentMana = maxMana;
-        currentSprint = maxSprint;
-        currentBT = berserkTime;
+        CurrentHealth = MaxHealth;
+        CurrentMana = MaxMana;
+        CurrentSprint = MaxSprint;
+        CurrentBT = BerserkTime;
         CheckHealth();
         CheckSprint();
         CheckMana();
@@ -132,7 +166,7 @@ public class BasePlayerClass : MonoBehaviour
 
     public bool CheckMana()
     {
-        return canCast = currentMana - 30 >= 0f;
+        return CanCast = CurrentMana - 30 >= 0f;
     }
 
     void Start()
@@ -155,73 +189,73 @@ public class BasePlayerClass : MonoBehaviour
 
     public IEnumerator StartManaRecharge()
     {
-        manaRecharging = true;
-        while (currentMana <= maxMana)
+        ManaRecharging = true;
+        while (CurrentMana <= MaxMana)
         {
-            if (manaRechargePause)
+            if (ManaRechargePause)
             {
-                manaRechargePause = false;
+                ManaRechargePause = false;
                 Debug.Log("Pause");
-                yield return new WaitForSeconds(manaRechargePauseTime);
+                yield return new WaitForSeconds(ManaRechargePauseTime);
             }
-            currentMana += Time.deltaTime * manaRegenRate;
+            CurrentMana += Time.deltaTime * ManaRegenRate;
             yield return null;
-            if (currentMana > maxMana || Mathf.Approximately(currentMana, maxMana))
+            if (CurrentMana > MaxMana || Mathf.Approximately(CurrentMana, MaxMana))
             {
-                currentMana = maxMana;
+                CurrentMana = MaxMana;
                 yield break;
             }
 
         }
-        manaRecharging = false;
+        ManaRecharging = false;
     }
 
     public IEnumerator StartHealthRecharge()
     {
-        healthRecharging = true;
-        while (currentHealth <= maxHealth)
+        HealthRecharging = true;
+        while (CurrentHealth <= MaxHealth)
         {
-            if (healthRechargePause)
+            if (HealthRechargePause)
             {
-                healthRechargePause = false;
+                HealthRechargePause = false;
                 Debug.Log("health Pause");
                 yield return new WaitForSeconds(1.25f);
             }
 
-            currentHealth += Time.deltaTime * healthRegenRate;
+            CurrentHealth += Time.deltaTime * HealthRegenRate;
             yield return null;
 
-            if (currentHealth > maxHealth || Mathf.Approximately(currentHealth, maxHealth))
+            if (CurrentHealth > MaxHealth || Mathf.Approximately(CurrentHealth, MaxHealth))
             {
-                currentHealth = maxHealth;
+                CurrentHealth = MaxHealth;
                 yield break;
             }
 
         }
-        healthRecharging = false;
+        HealthRecharging = false;
     }
 
     public IEnumerator StartSprintRecharge()
     {
-        sprintRecharging = true;
-        while (currentSprint <= maxSprint)
+        SprintRecharging = true;
+        while (CurrentSprint <= MaxSprint)
         {
-            if (sprintRechargePause)
+            if (SprintRechargePause)
             {
-                sprintRechargePause = false;
+                SprintRechargePause = false;
                 Debug.Log("Sprint Pause");
-                yield return new WaitForSeconds(sprintRechargePauseTime);
+                yield return new WaitForSeconds(SprintRechargePauseTime);
             }
-            currentSprint += Time.deltaTime * sprintRegenRate;
+            CurrentSprint += Time.deltaTime * SprintRegenRate;
             yield return null;
-            if (currentSprint > maxSprint || Mathf.Approximately(currentSprint, maxSprint))
+            if (CurrentSprint > MaxSprint || Mathf.Approximately(CurrentSprint, MaxSprint))
             {
-                currentSprint = maxSprint;
+                CurrentSprint = MaxSprint;
                 yield break;
             }
 
         }
-        sprintRecharging = false;
+        SprintRecharging = false;
     }
 
 }

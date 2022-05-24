@@ -69,15 +69,15 @@ public class PlayerScript : BasePlayerClass
     //don't use this, use event based regen
     private void StatRegen()
     {
-        if(currentHealth<maxHealth)
+        if(CurrentHealth<MaxHealth)
         {
             StartCoroutine(StartHealthRecharge());
         }
-        if(currentMana<maxMana)
+        if(CurrentMana<MaxMana)
         {
             StartCoroutine(StartManaRecharge());
         }
-        if(currentSprint<maxSprint)
+        if(CurrentSprint<MaxSprint)
         {
             StartCoroutine(StartSprintRecharge());
         }
@@ -157,7 +157,7 @@ public class PlayerScript : BasePlayerClass
             {
                 isDashing = true;
                 Reposition();
-                Invoke(nameof(SetDashingToFalse), dashReloadTime);
+                Invoke(nameof(SetDashingToFalse), DashReloadTime);
             }
         }
 
@@ -167,7 +167,7 @@ public class PlayerScript : BasePlayerClass
             {
                 inSlowMo = true;
                 TriggerSlowMo();
-                Invoke(nameof(SetinSlowMoToFalse), slowReloadTime);
+                Invoke(nameof(SetinSlowMoToFalse), SlowReloadTime);
             }
         }
     }
@@ -189,12 +189,12 @@ public class PlayerScript : BasePlayerClass
 
     private void Reposition()
     {
-        currentMana -= manaCost;
-        manaRechargePause = true;
-        if (!manaRecharging)
+        CurrentMana -= ManaCost;
+        ManaRechargePause = true;
+        if (!ManaRecharging)
             StartCoroutine(StartManaRecharge());
         Vector3 ShootVector = playerCam.forward;
-        rb.AddForce(ShootVector * dashForce, ForceMode.Impulse);
+        rb.AddForce(ShootVector * DashForce, ForceMode.Impulse);
     }
 
     private void Jump()
@@ -221,19 +221,19 @@ public class PlayerScript : BasePlayerClass
     }
     private bool SprintCheck()
     {
-        Debug.Log(currentSprint);
+        Debug.Log(CurrentSprint);
         if (Input.GetKey(KeyCode.LeftShift)&&CheckSprint())
         {
-            currentSprint -= Time.deltaTime * sprintDecayRate;
-            sprintRechargePause = true;
+            CurrentSprint -= Time.deltaTime * SprintDecayRate;
+            SprintRechargePause = true;
             return true;
             
         }
         else
         {
-            if(currentSprint<maxSprint)
+            if(CurrentSprint<MaxSprint)
             {
-                if(!sprintRecharging)
+                if(!SprintRecharging)
                 {
                     StartCoroutine(StartSprintRecharge());
                 }    
