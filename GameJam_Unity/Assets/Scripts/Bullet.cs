@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -7,54 +5,48 @@ public class Bullet : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] float speed;
     [SerializeField] bool isPlayer;
-    [SerializeField] GameObject player;
     [SerializeField] float maxDist;
     Vector3 startPos;
     bool canMove;
-    
+
     void Start()
     {
-        startPos = this.transform.position;
+        startPos = transform.position;
         canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, startPos)>maxDist)
+        if (Vector3.Distance(transform.position, startPos) > maxDist)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        if(canMove)
+        if (canMove)
         {
-            transform.Translate(new Vector3(0, 0, 1f) * Time.deltaTime * speed);
+            transform.Translate(speed * Time.deltaTime * transform.forward);
         }
 
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("This is colliding");
-        if(isPlayer && other.transform.tag=="Enemy")
+        if (isPlayer && other.transform.CompareTag("Enemy"))
         {
             other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer);
-            Destroy(this.gameObject, 5f);
+            Destroy(gameObject, 5f);
         }
-        else if(!isPlayer && other.transform.tag=="Player")
+        else if (!isPlayer && other.transform.tag == "Player")
         {
             other.transform.gameObject.GetComponent<BasePlayerClass>().TakeDamage(damage);
             Debug.Log("Player Shot");
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        else if(other.transform.tag=="Level")
+        else if (other.transform.CompareTag("Level"))
         {
             canMove = false;
-            Destroy(this.gameObject, 5f);
+            Destroy(gameObject, 5f);
         }
-        
+
     }
-    public void WhoISPlayer(GameObject obj)
-    {
-        player = obj;
-    }
-    
+
 }

@@ -3,15 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum Weapon
-{
-    RIFLE = 0,
-    SHOTGUN = 1,
-    CROSSBOW = 2
-}
-
-
 public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
