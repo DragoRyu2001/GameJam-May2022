@@ -64,28 +64,47 @@ public class PlayerScript : BasePlayerClass
         onSlope = SlopeCheck();
         ControlDrag();
         ReadInput();
-
         slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
+        RotateModelToOrientation();
+
+    }
+
+
+    //don't use this, use event based regen
+    private void StatRegen()
+    {
+        if(currentHealth<maxHealth)
+        {
+            StartCoroutine(StartHealthRecharge());
+        }
+        if(currentMana<maxMana)
+        {
+            StartCoroutine(StartManaRecharge());
+        }
+        if(currentSprint<maxSprint)
+        {
+            StartCoroutine(StartSprintRecharge());
+        }
+    }
+
+    private void RotateModelToOrientation()
+    {
         if (playerObj.forward != orientation.forward)
         {
             angle = Vector3.SignedAngle(playerObj.forward, orientation.forward, Vector3.up);
-            playerObj.Rotate(Vector3.up, angle * Time.deltaTime*5f);
+            playerObj.Rotate(Vector3.up, angle * Time.deltaTime * 5f);
         }
         else
         {
             angle = 0;
         }
-
     }
+
     private void FixedUpdate()
     {
         Move();
     }
 
-    private void LateUpdate()
-    {
-        
-    }
 
     private void ControlDrag()
     {
@@ -165,7 +184,7 @@ public class PlayerScript : BasePlayerClass
         manaRechargePause = true;
         if (!manaRecharging)
             StartCoroutine(StartManaRecharge());
-
+        Debug.Log(currentMana);
         Vector3 ShootVector = playerCam.forward;
         rb.AddForce(ShootVector * dashForce, ForceMode.Impulse);
     }

@@ -289,7 +289,7 @@ Transform:
   m_Children:
   - {fileID: 1550774931}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550774928
 GameObject:
@@ -453,10 +453,15 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 1387746999}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: healthRechargePauseTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
@@ -594,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 5856894541370642751, guid: f3cb4f36e91d4e142985585de575c294,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5856894541370642751, guid: f3cb4f36e91d4e142985585de575c294,
         type: 3}

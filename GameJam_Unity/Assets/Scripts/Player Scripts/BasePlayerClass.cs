@@ -16,33 +16,40 @@ public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [Header("Base Class Parameters")]
+    [Header("Health")]
     [SerializeField] protected float maxHealth;
     [SerializeField, ReadOnly] protected float currentHealth;
+    [SerializeField] protected float healthRegenRate;
+    [SerializeField] protected bool healthRecharging;
+    [SerializeField] protected bool healthRechargePause;
+    [SerializeField, Range(0.5f, 2f)] protected float healthRechargePauseTime;
+
+    [Header("Mana")]
     [SerializeField] protected float maxMana;
     [SerializeField, ReadOnly] protected float currentMana;
-    [SerializeField] protected float sprintResource;
-    [SerializeField, ReadOnly] protected float currentSResource;
-    [SerializeField] protected float berserkTime;                                                 
-    [SerializeField, ReadOnly] protected float currentBT;                                        
-                                                                              
-    [SerializeField, ReadOnly] protected bool isAlive;                                            
-    [SerializeField, ReadOnly] protected bool inBerserk;                                          
+    [SerializeField] protected float manaRegenRate;
+    [SerializeField] protected bool manaRecharging;
+    [SerializeField] protected bool manaRechargePause;
+    [SerializeField, Range(0.5f, 2f)] protected float manaRechargePauseTime;
+
+    [Header("Sprint")]
+    [SerializeField] protected float maxSprint;
+    [SerializeField, ReadOnly] protected float currentSprint;
+    [SerializeField] protected float sprintRegenRate;
+    [SerializeField] protected bool sprintRecharging;
+    [SerializeField] protected bool sprintRechargePause;
+    [SerializeField, Range(0.5f, 2f)] protected float sprintRechargePauseTime;
+
+    [Header("Berserk")]
+    [SerializeField] protected float berserkTime;
+    [SerializeField, ReadOnly] protected float currentBT;
+
+
+    [Header("Statuses")]
+    [SerializeField, ReadOnly] protected bool isAlive;
+    [SerializeField, ReadOnly] protected bool inBerserk;
     [SerializeField, ReadOnly] protected bool canSprint;
     [SerializeField, ReadOnly] protected bool canCast;
-
-    [SerializeField] protected float manaRegenRate;
-    [SerializeField] protected float healthRegenRate;
-    [SerializeField] protected float sprintRegenRate;
-
-    [SerializeField] protected bool manaRecharging=false;
-    [SerializeField] protected bool healthRecharging;
-    [SerializeField] protected bool sprintRecharging;
-
-
-    [SerializeField] protected bool manaRechargePause;
-    [SerializeField] protected bool healthRechargePause;
-    [SerializeField] protected bool sprintRechargePause;
 
     [SerializeField] protected float manaCost;
 
@@ -51,18 +58,18 @@ public class BasePlayerClass : MonoBehaviour
         currentHealth -= damage;
         isAlive = CheckHealth();
 
-        if(currentHealth/maxHealth<0.15f)
+        if (currentHealth / maxHealth < 0.15f)
         {
             StartRecording();
         }
 
-        if(!isAlive&&!inBerserk)
+        if (!isAlive && !inBerserk)
         {
             inBerserk = true;
             isAlive = true;
             Rewind();
         }
-        else if(!isAlive&&inBerserk)
+        else if (!isAlive && inBerserk)
         {
             inBerserk = false;
             Death();
@@ -96,14 +103,14 @@ public class BasePlayerClass : MonoBehaviour
 
     public bool CheckSprint()
     {
-        return canSprint = currentSResource >= 0;
+        return canSprint = currentSprint >= 0;
     }
 
     public void BaseParametersUpdate()
     {
         currentHealth = maxHealth;
         currentMana = maxMana;
-        currentSResource = sprintResource;
+        currentSprint = maxSprint;
         currentBT = berserkTime;
         CheckHealth();
         CheckSprint();
@@ -117,7 +124,7 @@ public class BasePlayerClass : MonoBehaviour
 
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
@@ -136,23 +143,72 @@ public class BasePlayerClass : MonoBehaviour
     public IEnumerator StartManaRecharge()
     {
         manaRecharging = true;
-        while(currentMana<=maxMana)
+        while (currentMana <= maxMana)
         {
-            currentMana += Time.deltaTime*manaRegenRate;
+            if (manaRechargePause)
+            {
+                manaRechargePause = false;
+                Debug.Log("Pause");
+                yield return new WaitForSeconds(manaRechargePauseTime);
+            }
+            currentMana += Time.deltaTime * manaRegenRate;
             yield return null;
             if (currentMana > maxMana || Mathf.Approximately(currentMana, maxMana))
             {
                 currentMana = maxMana;
                 yield break;
             }
-            if (manaRechargePause)
-            {
-                manaRechargePause = false;
-                Debug.Log("Pause");
-                yield return new WaitForSeconds(1.25f);
-            }
+
         }
         manaRecharging = false;
+    }
+
+    public IEnumerator StartHealthRecharge()
+    {
+        healthRecharging = true;
+        while (currentHealth <= maxHealth)
+        {
+            if (healthRechargePause)
+            {
+                healthRechargePause = false;
+                Debug.Log("health Pause");
+                yield return new WaitForSeconds(1.25f);
+            }
+
+            currentHealth += Time.deltaTime * healthRegenRate;
+            yield return null;
+
+            if (currentHealth > maxHealth || Mathf.Approximately(currentHealth, maxHealth))
+            {
+                currentHealth = maxHealth;
+                yield break;
+            }
+
+        }
+        healthRecharging = false;
+    }
+
+    public IEnumerator StartSprintRecharge()
+    {
+        sprintRecharging = true;
+        while (currentSprint <= maxSprint)
+        {
+            if (sprintRechargePause)
+            {
+                sprintRechargePause = false;
+                Debug.Log("Sprint Pause");
+                yield return new WaitForSeconds(sprintRechargePauseTime);
+            }
+            currentSprint += Time.deltaTime * sprintRegenRate;
+            yield return null;
+            if (currentSprint > maxSprint || Mathf.Approximately(currentSprint, maxSprint))
+            {
+                currentSprint = maxSprint;
+                yield break;
+            }
+
+        }
+        sprintRecharging = false;
     }
 
 }
