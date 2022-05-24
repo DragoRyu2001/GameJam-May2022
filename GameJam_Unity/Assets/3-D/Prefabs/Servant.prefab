@@ -196,25 +196,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   currentHealth: 0
-  maxMana: 10000
+  healthRegenRate: 20
+  healthRecharging: 0
+  healthRechargePause: 0
+  healthRechargePauseTime: 2
+  maxMana: 100
   currentMana: 0
-  sprintResource: 5
-  currentSResource: 0
+  manaRegenRate: 5
+  manaRecharging: 0
+  manaRechargePause: 0
+  manaRechargePauseTime: 1.25
+  maxSprint: 5
+  currentSprint: 0
+  sprintRegenRate: 1.5
+  sprintRecharging: 0
+  sprintRechargePause: 0
+  sprintRechargePauseTime: 0.5
   berserkTime: 15
   currentBT: 0
   isAlive: 0
   inBerserk: 0
   canSprint: 0
   canCast: 0
-  manaRegenRate: 5
-  healthRegenRate: 20
-  sprintRegenRate: 1.5
-  manaRecharging: 0
-  healthRecharging: 0
-  sprintRecharging: 0
-  manaRechargePause: 0
-  healthRechargePause: 0
-  sprintRechargePause: 0
   manaCost: 30
   moveMult: 50
   sprintMult: 150

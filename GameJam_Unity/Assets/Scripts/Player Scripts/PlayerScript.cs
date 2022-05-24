@@ -33,17 +33,13 @@ public class PlayerScript : BasePlayerClass
     private float angle;
     private float playerHeight;
 
-    bool sprinting, onSlope, onGround, isDashing;
-
-    [Header("Reposition Parameters")]
-    [SerializeField] float dashForce;
+    bool sprinting, onSlope, onGround, isDashing, inSlowMo;
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
     [Header("Translate Modifier")]
     [SerializeField, ReadOnly] float translateModifier;
     private Vector3 rotateVector;
-
 
 
     // Start is called before the first frame update
@@ -159,23 +155,36 @@ public class PlayerScript : BasePlayerClass
         {
             if (!isDashing)
             {
-                rb.useGravity = false;
                 isDashing = true;
                 Reposition();
-                Invoke(nameof(SetDashingToFalse), 0.9f);
+                Invoke(nameof(SetDashingToFalse), dashReloadTime);
             }
         }
 
         if(Input.GetKeyDown(KeyCode.E)&&CheckMana())
         {
-
+            if(!inSlowMo)
+            {
+                inSlowMo = true;
+                TriggerSlowMo();
+                Invoke(nameof(SetinSlowMoToFalse), slowReloadTime);
+            }
         }
+    }
+
+    private object SetinSlowMoToFalse()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void TriggerSlowMo()
+    {
+        throw new NotImplementedException();
     }
 
     private void SetDashingToFalse()
     {
         isDashing = false;
-        rb.useGravity = true;
     }
 
     private void Reposition()
@@ -184,7 +193,6 @@ public class PlayerScript : BasePlayerClass
         manaRechargePause = true;
         if (!manaRecharging)
             StartCoroutine(StartManaRecharge());
-        Debug.Log(currentMana);
         Vector3 ShootVector = playerCam.forward;
         rb.AddForce(ShootVector * dashForce, ForceMode.Impulse);
     }

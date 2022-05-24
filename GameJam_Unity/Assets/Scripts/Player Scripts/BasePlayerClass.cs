@@ -44,6 +44,18 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] protected float berserkTime;
     [SerializeField, ReadOnly] protected float currentBT;
 
+    [Header("Dash Parameters")]
+    [SerializeField] protected float dashForce;
+    [SerializeField, Range(0.7f, 1.25f)] protected float dashReloadTime;
+
+    [Header("Slow Mo Parameters")]
+    [SerializeField] protected float slowTime;
+    [SerializeField, Range(0.3f, 0.5f)] protected float slowMult;
+    [SerializeField, Range(4f, 5f)] protected float slowReloadTime;
+
+    [Header("Aggro Parameters")]
+    [SerializeField] protected float aggroRange;
+    [SerializeField, Range(0.7f, 1.25f)] protected float aggroReloadTime;
 
     [Header("Statuses")]
     [SerializeField, ReadOnly] protected bool isAlive;
