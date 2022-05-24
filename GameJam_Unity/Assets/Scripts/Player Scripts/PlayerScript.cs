@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerScript : BasePlayerClass
 {
@@ -18,15 +19,18 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float groundDrag;
     [SerializeField] float airDrag;
     [SerializeField, Range(0.01f, 0.3f)] float fallingDrag;
+    [SerializeField, Range(-0.8f, -0.1f)] float fallThreshold;
 
     [Header("Misc References")]
     [SerializeField] Rigidbody rb;
     [SerializeField] Transform playerCam;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Collider coll;
+    [SerializeField] Transform playerObj;
 
     private float moveX;
     private float moveY;
+    private float angle;
     private float playerHeight;
 
     bool sprinting, onSlope, onGround, isDashing;
@@ -62,7 +66,25 @@ public class PlayerScript : BasePlayerClass
         ReadInput();
 
         slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
-        transform.rotation = Quaternion.Euler(orientation.rotation.eulerAngles);
+        if (playerObj.forward != orientation.forward)
+        {
+            angle = Vector3.SignedAngle(playerObj.forward, orientation.forward, Vector3.up);
+            playerObj.Rotate(Vector3.up, angle * Time.deltaTime*5f);
+        }
+        else
+        {
+            angle = 0;
+        }
+
+    }
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     private void ControlDrag()
@@ -73,7 +95,7 @@ public class PlayerScript : BasePlayerClass
         }
         else
         {
-            if (rb.velocity.normalized.y < -0.6f)
+            if (rb.velocity.normalized.y < fallThreshold)
             {
                 rb.drag = fallingDrag;
             }
@@ -84,10 +106,7 @@ public class PlayerScript : BasePlayerClass
         }
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
+
 
     private void Move()
     {
@@ -121,6 +140,7 @@ public class PlayerScript : BasePlayerClass
         {
             if (!isDashing)
             {
+                rb.useGravity = false;
                 isDashing = true;
                 Reposition();
                 Invoke(nameof(SetDashingToFalse), 0.9f);
@@ -136,6 +156,7 @@ public class PlayerScript : BasePlayerClass
     private void SetDashingToFalse()
     {
         isDashing = false;
+        rb.useGravity = true;
     }
 
     private void Reposition()
@@ -190,6 +211,14 @@ public class PlayerScript : BasePlayerClass
     private bool GroundCheck()
     {
         return Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
+    }
+    #endregion
+
+    #region Debugs
+    private void OnDrawGizmosSelected()
+    {
+        Debug.DrawRay(transform.position, playerObj.forward*20f, Color.green);
+        Debug.DrawRay(transform.position, orientation.forward*20f, Color.red);
     }
     #endregion
 }
