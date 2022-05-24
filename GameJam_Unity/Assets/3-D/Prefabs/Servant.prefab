@@ -235,7 +235,7 @@ MonoBehaviour:
   groundDrag: 6
   airDrag: 1.5
   fallingDrag: 0.2
-  fallThreshold: 0
+  fallThreshold: -0.4
   rb: {fileID: 982878094783673621}
   playerCam: {fileID: 0}
   groundLayer:

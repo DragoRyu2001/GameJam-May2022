@@ -460,6 +460,11 @@ PrefabInstance:
       objectReference: {fileID: 1387746999}
     - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
+      propertyPath: fallThreshold
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
       propertyPath: dashReloadTime
       value: 0.75
       objectReference: {fileID: 0}

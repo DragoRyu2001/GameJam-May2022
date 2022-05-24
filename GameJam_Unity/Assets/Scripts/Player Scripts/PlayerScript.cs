@@ -33,7 +33,7 @@ public class PlayerScript : BasePlayerClass
     private float angle;
     private float playerHeight;
 
-    bool sprinting, onSlope, onGround, isDashing, inSlowMo;
+    bool onSlope, isDashing, inSlowMo;
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
@@ -126,8 +126,8 @@ public class PlayerScript : BasePlayerClass
     private void Move()
     {
         translateModifier = 1f;
-        translateModifier = sprinting ? sprintMult / moveMult : 1f;
-        translateModifier = onGround ? translateModifier : airMoveMult;
+        translateModifier = SprintCheck() ? sprintMult / moveMult : 1f;
+        translateModifier = GroundCheck()? translateModifier : airMoveMult;
         if (!onSlope)
         {
             rb.AddForce(translateModifier * moveMult * translateVector.normalized, ForceMode.Acceleration);
@@ -203,13 +203,7 @@ public class PlayerScript : BasePlayerClass
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
-    private void OnDrawGizmos()
-    {
-     
-    }
-
     #region Physical Checks
-
     private bool SlopeCheck()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (playerHeight / 2) + 1.5f))
@@ -231,23 +225,26 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKey(KeyCode.LeftShift)&&CheckSprint())
         {
             currentSprint -= Time.deltaTime * sprintDecayRate;
-            return sprinting = true;
+            sprintRechargePause = true;
+            return true;
             
         }
         else
         {
-            if(currentSprint<=maxSprint)
+            if(currentSprint<maxSprint)
             {
-                currentSprint += Time.deltaTime * sprintDecayRate;
+                if(!sprintRecharging)
+                {
+                    StartCoroutine(StartSprintRecharge());
+                }    
             }
-            currentSprint = currentSprint > maxSprint ? maxSprint : currentSprint;
-            return sprinting = false;
+            return false;
         }
     }
 
     private bool GroundCheck()
     {
-        return onGround = Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
+        return Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
     }
     #endregion
 

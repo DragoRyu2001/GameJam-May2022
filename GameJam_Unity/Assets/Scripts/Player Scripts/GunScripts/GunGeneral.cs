@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class GunGeneral : MonoBehaviour
 {
-    
+
+    [SerializeField] protected float damage;
+    [SerializeField] protected float rateOfFire;
+    [SerializeField] protected int maxAmmo;
+    [SerializeField] protected int currentAmmo;
+
+
     void Start()
     {
         
