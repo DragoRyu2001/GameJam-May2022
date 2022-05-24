@@ -453,11 +453,6 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 1387746999}
-    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
-        type: 3}
-      propertyPath: healthRechargePauseTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_RootOrder
@@ -471,7 +466,7 @@ PrefabInstance:
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.673
       objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
