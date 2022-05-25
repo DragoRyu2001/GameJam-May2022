@@ -12,6 +12,7 @@ public class Crossbow : GunGeneral
     private void Update()
     {
         OrientMuzzle();
+        CanShootCheck();
         ReadInput();
     }
 
@@ -20,6 +21,7 @@ public class Crossbow : GunGeneral
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
             Shoot();
+            StartCoroutine(Reload());
         }
     }
 
@@ -27,6 +29,6 @@ public class Crossbow : GunGeneral
     {
         Instantiate(bolt, muzzle.position, muzzle.rotation);
         currentAmmo -= 1;
-        StartCoroutine(Reload());
+
     }
 }

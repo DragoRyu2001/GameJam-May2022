@@ -30,6 +30,11 @@ public class AutoCrossbow : GunGeneral
             if(currentAmmo==0&&!reloading)
                 StartCoroutine(Reload());
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            StopAllCoroutines();
+            StartCoroutine(Reload());
+        }
     }
 
     private void Shoot()

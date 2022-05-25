@@ -63,7 +63,7 @@ Transform:
   - {fileID: 3742120921023461465}
   m_Father: {fileID: 7663156722918113722}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6973486795732678462
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7663156722918113722
 Transform:
   m_ObjectHideFlags: 0
@@ -119,12 +119,12 @@ MonoBehaviour:
   currentAmmo: 0
   canShoot: 0
   reloading: 0
+  fired: 0
+  inFireRateDelay: 0
   maxDistance: 0
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576
-  shootVector: {x: 0, y: 0, z: 0}
-  shootQuaternion: {x: 0, y: 0, z: 0}
   bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
   yOffset: 0.2
   xOffset: 0.2
@@ -158,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 7311916330342536981, guid: bd1bdcfcf14a8d4499a6ca8402acb7eb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7311916330342536981, guid: bd1bdcfcf14a8d4499a6ca8402acb7eb,
         type: 3}
@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 7311916330342536981, guid: bd1bdcfcf14a8d4499a6ca8402acb7eb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7311916330342536981, guid: bd1bdcfcf14a8d4499a6ca8402acb7eb,
         type: 3}

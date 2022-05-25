@@ -18,6 +18,7 @@ public class TripleCrossbow : GunGeneral
     void Update()
     {
         OrientMuzzle();
+        CanShootCheck();
         ReadInput();
     }
 
@@ -26,6 +27,7 @@ public class TripleCrossbow : GunGeneral
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
             Shoot();
+            StartCoroutine(Reload());
         }
     }
 
@@ -38,7 +40,6 @@ public class TripleCrossbow : GunGeneral
         Instantiate(bolt, b, muzzle.rotation);
         Instantiate(bolt, c, muzzle.rotation);
         currentAmmo -= 1;
-        StartCoroutine(Reload());
     }
 
 }

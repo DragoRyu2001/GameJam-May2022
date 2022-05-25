@@ -81,7 +81,7 @@ public class GunGeneral : MonoBehaviour
 
     protected void CanShootCheck()
     {
-        canShoot = !inFireRateDelay && !reloading;
+        canShoot = !inFireRateDelay && !reloading && currentAmmo > 0;
     }
 
     // Update is called once per frame

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90829da994c198b4bbba8e9498ed7fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 3742120921023461465}
+  muzzle: {fileID: 6363198543863139730}
   cam: {fileID: 0}
   damage: 25
   reloadTime: 1
@@ -119,12 +119,12 @@ MonoBehaviour:
   currentAmmo: 0
   canShoot: 0
   reloading: 0
+  fired: 0
+  inFireRateDelay: 0
   maxDistance: 0
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576
-  shootVector: {x: 0, y: 0, z: 0}
-  shootQuaternion: {x: 0, y: 0, z: 0}
   bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
 --- !u!1001 &6589179815890632706
 PrefabInstance:
