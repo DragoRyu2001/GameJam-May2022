@@ -327,7 +327,7 @@ public class Upgrade : MonoBehaviour
         string str;
         if((slowLevel+1)<=5)
         {
-            str = "Cost: "+(slowLevel*costSouls*abilitySoulMult)+"\n Slow Duration: "+player.SlowTime+" + "+slowDuration+"\n Slow Cooldown: "+player.SlowReloadTime+" - "+slowReload;
+            str = "Cost: "+((slowLevel+1)*costSouls*abilitySoulMult)+"\n Slow Duration: "+player.SlowTime+" + "+slowDuration+"\n Slow Cooldown: "+player.SlowReloadTime+" - "+slowReload;
         }
         else
             str = " No Upgrades Available";
@@ -338,7 +338,7 @@ public class Upgrade : MonoBehaviour
         string str;
         if((aggroLevel+1)<=5)
         {
-            str = "Cost: "+(aggroLevel*costSouls*abilitySoulMult)+"\n Aggro Range: "+player.AggroRange+" + "+aggroRange+"\n Aggro Cooldown: "+player.AggroReloadTime+" - "+aggroReload;
+            str = "Cost: "+((aggroLevel+1)*costSouls*abilitySoulMult)+"\n Aggro Range: "+player.AggroRange+" + "+aggroRange+"\n Aggro Cooldown: "+player.AggroReloadTime+" - "+aggroReload;
         }
         else
             str = " No Upgrades Available";
@@ -349,7 +349,7 @@ public class Upgrade : MonoBehaviour
         string str;
         if((dashLevel+1)<=5)
         {
-            str = "Cost: "+(dashLevel*costSouls*abilitySoulMult)+"\n Dash Force: "+player.DashForce+" + "+dashForce+"\n Dash Cooldown: "+player.DashReloadTime+" - "+dashReload;
+            str = "Cost: "+((dashLevel+1)*costSouls*abilitySoulMult)+"\n Dash Force: "+player.DashForce+" + "+dashForce+"\n Dash Cooldown: "+player.DashReloadTime+" - "+dashReload;
         }
         else
             str = " No Upgrades Available";
