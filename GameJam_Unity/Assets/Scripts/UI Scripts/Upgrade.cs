@@ -86,7 +86,7 @@ public class Upgrade : MonoBehaviour
         {
             Debug.Log("Shop Open");
             //Open Shop
-            Cursor.lockState = false;
+            Cursor.lockState = CursorLockMode.None;
             upgradeMenu.SetActive(true);
         }
     }
