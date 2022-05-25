@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         }
         if (canMove)
         {
-            transform.Translate(speed * Time.deltaTime * transform.forward);
+            transform.Translate(speed * Time.deltaTime * Vector3.forward);
         }
 
     }
