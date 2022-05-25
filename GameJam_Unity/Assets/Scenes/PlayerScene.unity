@@ -327,11 +327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AutoCrossbow
       objectReference: {fileID: 0}
-    - target: {fileID: 2898605849053761938, guid: d10ca54ee82976f42a305704a725bed1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3776894743095847565, guid: d10ca54ee82976f42a305704a725bed1,
         type: 3}
       propertyPath: m_RootOrder
@@ -582,35 +577,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1550774930}
-    - target: {fileID: 4738666506263349448, guid: 80853998e6bd5f147837b32078ae0604,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738666506263349448, guid: 80853998e6bd5f147837b32078ae0604,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738666506263349448, guid: 80853998e6bd5f147837b32078ae0604,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6363198543863139730, guid: 80853998e6bd5f147837b32078ae0604,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
     - target: {fileID: 6973486795732678462, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}
       propertyPath: m_Name
       value: TripleCrossbow
-      objectReference: {fileID: 0}
-    - target: {fileID: 6973486795732678462, guid: 80853998e6bd5f147837b32078ae0604,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7663156722918113722, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}
@@ -946,12 +916,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 982878093672509367}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2128665777 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5851886564446345634, guid: e920cefadd5b16e429932d79e54479b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 982878093672509367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2129049338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6488576700109163397, guid: f3cb4f36e91d4e142985585de575c294,
@@ -1089,11 +1053,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1550774930}
-    - target: {fileID: 7688239809563077299, guid: e920cefadd5b16e429932d79e54479b6,
-        type: 3}
-      propertyPath: muzzle
-      value: 
-      objectReference: {fileID: 2128665777}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e920cefadd5b16e429932d79e54479b6, type: 3}
 --- !u!1001 &4833839550485760537
