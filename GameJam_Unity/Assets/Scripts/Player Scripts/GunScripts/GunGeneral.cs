@@ -8,17 +8,21 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] protected Camera cam;
     [SerializeField] private float damage;
     [SerializeField] private float reloadTime;
-    [SerializeField] protected float rateOfFire;
-    [SerializeField] protected int maxAmmo;
-    [SerializeField, ReadOnly] protected int currentAmmo;
-    [SerializeField] protected float maxDistance;
-
+    [SerializeField] protected float fireRate;
     [SerializeField, ReadOnly] protected float firingDelay;
 
-    [SerializeField] Vector3 shootVector;
-    [SerializeField] Vector3 shootQuaternion;
+    [SerializeField] protected int maxAmmo;
+    [SerializeField, ReadOnly] protected int currentAmmo;
+    [SerializeField, ReadOnly] protected bool canShoot = true;
+    [SerializeField, ReadOnly] protected bool reloading;
+    [SerializeField, ReadOnly] protected bool fired;
+    [SerializeField, ReadOnly] protected bool inFireRateDelay;
+    [SerializeField] protected float maxDistance;
+    [SerializeField] LayerMask layersToCheck;
 
-    private bool canFire;
+
+
+
     private Ray destRay;
     private RaycastHit hit;
     protected Vector3 dest;
@@ -28,10 +32,20 @@ public class GunGeneral : MonoBehaviour
     public float Damage { get => damage; set => damage = value; }
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
 
+
+    protected void SetBaseParameters()
+    {
+        currentAmmo = maxAmmo;
+        canShoot = true;
+        firingDelay = 0f;
+        reloading = false;
+        inFireRateDelay = false;
+    }
+
     public void OrientMuzzle()
     {
-        destRay = cam.ViewportPointToRay(Input.mousePosition);
-        if(Physics.Raycast(destRay, out hit))
+        destRay = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        if (Physics.Raycast(destRay, out hit, 100f, layersToCheck))
         {
             dest = hit.point;
         }
@@ -41,8 +55,33 @@ public class GunGeneral : MonoBehaviour
         }
 
         direction = dest - transform.position;
-        direction = new Vector3(direction.x, direction.y + 20f, direction.z);
-        muzzle.LookAt(direction);
+        muzzle.LookAt(dest);
+    }
+
+    protected IEnumerator RateOfFireLimiter()
+    {
+        inFireRateDelay = true;
+        yield return new WaitForSeconds(fireRate);
+        inFireRateDelay = false;
+
+    }
+
+
+    protected IEnumerator Reload()
+    {
+        reloading = true;
+        //animate here
+        Debug.Log("Reloading");
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = maxAmmo;
+        reloading = false;
+        Debug.Log("Reloaded");
+
+    }
+
+    protected void CanShootCheck()
+    {
+        canShoot = !inFireRateDelay && !reloading;
     }
 
     // Update is called once per frame

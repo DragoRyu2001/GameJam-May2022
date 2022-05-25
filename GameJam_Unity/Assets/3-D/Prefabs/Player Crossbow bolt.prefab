@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
-  speed: 10
+  speed: 30
   isPlayer: 1
   maxDist: 100
 --- !u!54 &2475439408802478182

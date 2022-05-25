@@ -186,7 +186,6 @@ public class BasePlayerClass : MonoBehaviour
             if (ManaRechargePause)
             {
                 ManaRechargePause = false;
-                Debug.Log("Pause");
                 yield return new WaitForSeconds(ManaRechargePauseTime);
             }
             CurrentMana += Time.deltaTime * ManaRegenRate;
