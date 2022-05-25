@@ -165,9 +165,14 @@ public class PlayerScript : BasePlayerClass
         {
             if(!inSlowMo)
             {
-                inSlowMo = true;
-                TriggerSlowMo();
-                Invoke(nameof(SetinSlowMoToFalse), SlowReloadTime);
+                CurrentMana -= ManaCost;
+                //inSlowMo = true;
+                //TriggerSlowMo();
+                ManaRechargePause = true;
+                if (!ManaRecharging)
+                    StartCoroutine(StartManaRecharge());
+
+                //Invoke(nameof(SetinSlowMoToFalse), SlowReloadTime);
             }
         }
     }

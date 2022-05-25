@@ -181,7 +181,7 @@ public class BasePlayerClass : MonoBehaviour
     public IEnumerator StartManaRecharge()
     {
         ManaRecharging = true;
-        while (CurrentMana <= MaxMana)
+        while (CurrentMana < MaxMana)
         {
             if (ManaRechargePause)
             {
@@ -194,9 +194,9 @@ public class BasePlayerClass : MonoBehaviour
             if (CurrentMana > MaxMana || Mathf.Approximately(CurrentMana, MaxMana))
             {
                 CurrentMana = MaxMana;
+                ManaRecharging = false;
                 yield break;
             }
-
         }
         ManaRecharging = false;
     }
@@ -204,7 +204,7 @@ public class BasePlayerClass : MonoBehaviour
     public IEnumerator StartHealthRecharge()
     {
         HealthRecharging = true;
-        while (CurrentHealth <= MaxHealth)
+        while (CurrentHealth < MaxHealth)
         {
             if (HealthRechargePause)
             {
@@ -219,6 +219,7 @@ public class BasePlayerClass : MonoBehaviour
             if (CurrentHealth > MaxHealth || Mathf.Approximately(CurrentHealth, MaxHealth))
             {
                 CurrentHealth = MaxHealth;
+                HealthRecharging = false;
                 yield break;
             }
 
@@ -229,7 +230,7 @@ public class BasePlayerClass : MonoBehaviour
     public IEnumerator StartSprintRecharge()
     {
         SprintRecharging = true;
-        while (CurrentSprint <= MaxSprint)
+        while (CurrentSprint < MaxSprint)
         {
             if (SprintRechargePause)
             {
@@ -242,6 +243,7 @@ public class BasePlayerClass : MonoBehaviour
             if (CurrentSprint > MaxSprint || Mathf.Approximately(CurrentSprint, MaxSprint))
             {
                 CurrentSprint = MaxSprint;
+                SprintRecharging = false;
                 yield break;
             }
 
