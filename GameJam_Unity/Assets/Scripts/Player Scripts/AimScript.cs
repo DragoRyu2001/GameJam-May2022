@@ -16,7 +16,6 @@ public class AimScript : MonoBehaviour
     [SerializeField] float mouseSensY;
     [SerializeField] float orbitRadius;
     [SerializeField] Transform orientation;
-    public Quaternion shootQuaternion;
 
     float mouseX, mouseY;
     private float yRot;
@@ -56,10 +55,9 @@ public class AimScript : MonoBehaviour
     }
     private void Look()
     {
-        transform.SetPositionAndRotation(new Vector3(camXPos, camYPos, camZPos), Quaternion.Euler(xRot, 0, 0));
+        transform.position = new Vector3(camXPos, camYPos, camZPos);
         transform.LookAt(new Vector3(player.position.x, -xRot+player.position.y, player.position.z));
         orientation.rotation = Quaternion.Euler(0, yRot*Mathf.Rad2Deg,0);
-        shootQuaternion = Quaternion.Euler(xRot, yRot * Mathf.Rad2Deg, 0);
     }
 
 

@@ -226,7 +226,6 @@ public class PlayerScript : BasePlayerClass
     }
     private bool SprintCheck()
     {
-        Debug.Log(CurrentSprint);
         if (Input.GetKey(KeyCode.LeftShift)&&CheckSprint())
         {
             CurrentSprint -= Time.deltaTime * SprintDecayRate;
