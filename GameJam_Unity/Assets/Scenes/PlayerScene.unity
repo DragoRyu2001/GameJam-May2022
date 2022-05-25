@@ -281,6 +281,7 @@ MonoBehaviour:
   mouseSensY: 0.1
   orbitRadius: 3
   orientation: {fileID: 2025489253}
+  shootQuaternion: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &1387746999
 Transform:
   m_ObjectHideFlags: 0
@@ -440,6 +441,9 @@ MonoBehaviour:
   currentAmmo: 0
   maxDistance: 0
   firingDelay: 0
+  aimscript: {fileID: 1387746998}
+  shootVector: {x: 0, y: 0, z: 0}
+  shootQuaternion: {x: 0, y: 0, z: 0}
   bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
 --- !u!4 &1976591850 stripped
 Transform:

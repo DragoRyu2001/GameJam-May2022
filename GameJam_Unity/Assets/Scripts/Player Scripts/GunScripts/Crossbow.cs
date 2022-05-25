@@ -17,7 +17,7 @@ public class Crossbow : GunGeneral
     void Shoot()
     {
         firingDelay = rateOfFire;
-        Instantiate(bolt ,muzzle.position, Quaternion.Euler(muzzle.forward));
+        Instantiate(bolt ,GetShootVector() , GetShootQuaternion());
     }
 
     // Update is called once per frame
