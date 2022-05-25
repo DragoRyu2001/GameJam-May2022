@@ -14,6 +14,7 @@ public class Upgrade : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject upgradeMenu;
+    [SerializeField] GameObject openCloseText;
     [SerializeField] TMP_Text basicInfoText;
     [SerializeField] TMP_Text abilityInfoText;
 
@@ -33,10 +34,15 @@ public class Upgrade : MonoBehaviour
     [ReadOnly, SerializeField] float dashForce, dashReload;
     [ReadOnly, SerializeField] float slowDuration, slowReload;
 
+    //Gun Stats
+
     void OnTriggerEnter(Collider col)
     {
         if(col.transform.tag=="Player")
+        {
             canShop = true;
+            openCloseText.SetActive(true);
+        }
     }
     void OnTriggerExit(Collider col)
     {
@@ -348,6 +354,7 @@ public class Upgrade : MonoBehaviour
         else
             str = " No Upgrades Available";
         basicInfoText.text = str;
+        Debug.Log("DASH SLOW UPGRADE!!!");
     }
 
     #endregion
