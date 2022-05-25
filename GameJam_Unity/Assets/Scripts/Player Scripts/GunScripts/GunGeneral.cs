@@ -18,16 +18,15 @@ public class GunGeneral : MonoBehaviour
     [SerializeField, ReadOnly] protected bool fired;
     [SerializeField, ReadOnly] protected bool inFireRateDelay;
     [SerializeField] protected float maxDistance;
-    [SerializeField] LayerMask layersToCheck;
+    [SerializeField] protected LayerMask layersToCheck;
 
 
 
 
-    private Ray destRay;
-    private RaycastHit hit;
+    protected Ray destRay;
+    protected RaycastHit hit;
     protected Vector3 dest;
 
-    protected Vector3 direction;
 
     public float Damage { get => damage; set => damage = value; }
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
@@ -53,8 +52,6 @@ public class GunGeneral : MonoBehaviour
         {
             dest = destRay.GetPoint(100);
         }
-
-        direction = dest - transform.position;
         muzzle.LookAt(dest);
     }
 
