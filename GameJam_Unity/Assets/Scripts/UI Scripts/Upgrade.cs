@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Upgrade : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Upgrade : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject upgradeMenu;
-    [SerializeField] Text infoText;
+    [SerializeField] TMP_Text infoText;
 
     [Header("ReadOnly")]
     [ReadOnly, SerializeField] int manaLevel, healthLevel, sprintLevel;//Base Stats
