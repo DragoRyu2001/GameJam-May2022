@@ -14,6 +14,7 @@ public class MageAI : Enemy
     [Header("Shooting")]
     [SerializeField] float shootingRange;
     [SerializeField] float aoeRadius;
+    [SerializeField]float castPre;
     [SerializeField] float castTime;
     [SerializeField] float reloadTime;
     [SerializeField] GameObject AOESplash;
@@ -42,22 +43,31 @@ public class MageAI : Enemy
     #region Shooting
     void Move()
     {
-        if(Vector3.Distance(this.transform.position, target.transform.position)>shootingRange)
-            agent.SetDestination(target.transform.position);
-        else
+        if(isAlive)
         {
-            agent.ResetPath();
-            if(canShoot)
+            if(Vector3.Distance(this.transform.position, target.transform.position)>shootingRange)
             {
-                StartCoroutine(AOEShoot(target.transform.position));
-                canShoot = false;
-                Invoke("ResetShoot", reloadTime);
+                anim.SetFloat("Blend", 1, 0.5f, Time.deltaTime);
+                agent.SetDestination(target.transform.position);
+            }
+            else
+            {
+                agent.ResetPath();
+                anim.SetFloat("Blend", 0);
+                if(canShoot)
+                {
+                    StartCoroutine(AOEShoot(target.transform.position));
+                    canShoot = false;
+                    Invoke("ResetShoot", reloadTime);
+                }
             }
         }
     }
 
     IEnumerator AOEShoot(Vector3 targetPos)
     {
+        anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(castPre);
         GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, 1.2f,targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
         

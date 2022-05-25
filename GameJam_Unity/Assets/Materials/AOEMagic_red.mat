@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AOEMagic
+  m_Name: AOEMagic_red
   m_Shader: {fileID: -6465566751694194690, guid: c9ae7815443815e48b529d4bea49f1f0,
     type: 3}
   m_ValidKeywords: []

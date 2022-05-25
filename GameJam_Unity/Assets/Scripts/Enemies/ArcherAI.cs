@@ -14,6 +14,7 @@ public class ArcherAI : Enemy
     [SerializeField] GameObject arrow;
     [SerializeField] LayerMask aimMask;
     [SerializeField] Transform arrowPos;
+    [SerializeField] GameObject targetLookAt;
     
     
 
@@ -38,19 +39,27 @@ public class ArcherAI : Enemy
     #region Shooting
     void Move()
     {
-        if(Vector3.Distance(this.transform.position, target.transform.position)<=shootingRange && CanShoot())
+        if(isAlive)
         {
-            agent.ResetPath();
-            transform.LookAt(target.transform);
-            if(canShoot)
+            if(Vector3.Distance(this.transform.position, target.transform.position)<=shootingRange && CanShoot())
             {
-                canShoot = false;
-                StartCoroutine(Shoot(target.transform.position));
+                agent.ResetPath();
+                anim.SetFloat("Blend", 0);
+                targetLookAt.transform.position = target.transform.position+(Vector3.up*0.5f);
+                transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+                arrowPos.LookAt(target.transform);
+                if(canShoot)
+                {
+                    canShoot = false;
+                    StartCoroutine(Shoot(target.transform.position));
+                }
             }
-        }
-        else
-        {
-            agent.SetDestination(target.transform.position);
+            else
+            {
+                agent.SetDestination(target.transform.position);
+                anim.SetFloat("Blend", 1, 0.5f, Time.deltaTime);
+                targetLookAt.transform.position = transform.position+transform.forward*2f;
+            }
         }
     }
     bool CanShoot()
@@ -72,7 +81,7 @@ public class ArcherAI : Enemy
     {
         
         yield return new WaitForSeconds(drawSpeed);
-        
+        anim.SetTrigger("Attack");
         Instantiate(arrow, arrowPos.position, arrowPos.rotation);
         canShoot = true;
     }

@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [ReadOnly, SerializeField]protected float currentHealth;
     [ReadOnly, SerializeField]protected bool isAlive;
     [SerializeField]protected Animator anim;
+    [SerializeField] protected GameObject deathFX;
     
     
     public void Aggro(GameObject obj)
@@ -43,9 +44,10 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        
-        //anim.SetTrigger("Death");
-        Destroy(this.gameObject);
+        GameObject obj = Instantiate(deathFX, transform.position-new Vector3(0, 0.9f, 0), deathFX.transform.rotation);
+        anim.SetTrigger("Death");
+        Destroy(obj, 0.85f);
+        Destroy(this.gameObject, 0.9f);
     }
 
     #endregion

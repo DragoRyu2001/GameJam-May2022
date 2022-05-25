@@ -18,20 +18,36 @@ public class KnightAI : Enemy
     
     void Update()
     {
-        if(Vector3.Distance(this.transform.position, target.transform.position)<=swordRange)
+        
+        Move();
+        if(currentHealth<=0&&isAlive)
         {
-            agent.ResetPath();
-            
-            transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
-            if(canAttack)
-            {
-                canAttack = false;
-                StartCoroutine(Attack());
-            }
+            isAlive = false;
+            canAttack = false;
+            onDeath();
         }
-        else
+
+    }
+    void Move()
+    {
+        if(isAlive)
         {
-            agent.SetDestination(target.transform.position);
+            if(Vector3.Distance(this.transform.position, target.transform.position)<=swordRange)
+            {
+                agent.ResetPath();
+                anim.SetFloat("Blend", 0, 0.1f, Time.deltaTime);
+                transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+                if(canAttack)
+                {
+                    canAttack = false;
+                    StartCoroutine(Attack());
+                }
+            }
+            else
+            {
+                agent.SetDestination(target.transform.position);
+                anim.SetFloat("Blend", 1, 0.5f, Time.deltaTime);
+            }
         }
     }
 
@@ -41,5 +57,9 @@ public class KnightAI : Enemy
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(attackTime);
         canAttack = true;
+    }
+    public bool CanAttack()
+    {
+        return !canAttack;
     }
 }
