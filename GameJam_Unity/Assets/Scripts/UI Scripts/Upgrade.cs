@@ -10,6 +10,7 @@ public class Upgrade : MonoBehaviour
     [ReadOnly, SerializeField] bool canShop;
     [SerializeField] bool vampPhase;
     [SerializeField] PlayerScript player;
+    [SerializeField] GunGeneral gun;
     [SerializeField] int souls, costSouls, abilitySoulMult;
 
     [Header("UI")]
@@ -52,6 +53,7 @@ public class Upgrade : MonoBehaviour
     void Start()
     {
         Initialise();
+        
     }
     void Initialise()
     {
