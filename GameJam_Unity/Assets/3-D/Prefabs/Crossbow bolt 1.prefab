@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2475439408802478182}
   - component: {fileID: 2475439408802478169}
   m_Layer: 0
-  m_Name: Crossbow bolt
+  m_Name: Crossbow bolt 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
