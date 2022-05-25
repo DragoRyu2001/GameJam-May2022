@@ -331,7 +331,7 @@ public class Upgrade : MonoBehaviour
         }
         else
             str = " No Upgrades Available";
-        basicInfoText.text = str;
+        abilityInfoText.text = str;
     }
     public void AggroShowUpgrade()
     {
@@ -342,7 +342,7 @@ public class Upgrade : MonoBehaviour
         }
         else
             str = " No Upgrades Available";
-        basicInfoText.text = str;
+        abilityInfoText.text = str;
     }
     public void DashShowUpgrade()
     {
@@ -353,7 +353,7 @@ public class Upgrade : MonoBehaviour
         }
         else
             str = " No Upgrades Available";
-        basicInfoText.text = str;
+        abilityInfoText.text = str;
         Debug.Log("DASH SLOW UPGRADE!!!");
     }
 
