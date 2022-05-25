@@ -10,10 +10,14 @@ public class Upgrade : MonoBehaviour
     [ReadOnly, SerializeField] bool canShop;
     [SerializeField] bool vampPhase;
     [SerializeField] PlayerScript player;
+    [SerializeField] int souls, costSouls, abilitySoulMult;
 
     [Header("UI")]
     [SerializeField] GameObject upgradeMenu;
-    [SerializeField] TMP_Text infoText;
+    [SerializeField] TMP_Text basicInfoText;
+    [SerializeField] TMP_Text abilityInfoText;
+
+    [SerializeField] TMP_Text soulsText;
 
     [Header("ReadOnly")]
     [ReadOnly, SerializeField] int manaLevel, healthLevel, sprintLevel;//Base Stats
@@ -42,8 +46,6 @@ public class Upgrade : MonoBehaviour
     void Start()
     {
         Initialise();
-        
-        
     }
     void Initialise()
     {
@@ -54,6 +56,7 @@ public class Upgrade : MonoBehaviour
         aggroLevel = 0;
         slowLevel = 0;
         dashLevel = 0;
+        UpdateSouls();//Initialise Souls value
         //Base Stats Initialised=====================================
         //Set Mana values
         manaIncrease = 0.1f*player.MaxMana;
@@ -86,74 +89,103 @@ public class Upgrade : MonoBehaviour
         {
             Debug.Log("Shop Open");
             //Open Shop
-            Cursor.lockState = CursorLockMode.None;
             upgradeMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
+    }
+    void UpdateSouls()
+    {
+        soulsText.text = souls.ToString();
     }
     #region Base Stats Upgrade
     public void ManaUpgrade()
     {
         manaLevel++;
-        switch(manaLevel)
+        if(souls-(costSouls*manaLevel)>0)
         {
-            //Special upgrades
-            case 3:
-            case 6:
-            case 9:
-            case 12:
-            case 15:
-                //Upgrade things for level 5
-                player.ManaRegenRate+=manaRegenIncrease;
-                player.ManaCost-=manaCostDecrease;
-                player.MaxMana+=manaIncrease;
-                break;
-            default:
-                // Increase Base Mana Level
-                player.MaxMana+=manaIncrease;
-                break;
+            souls-=(costSouls*manaLevel);
+            switch(manaLevel)
+            {
+                //Special upgrades
+                case 3:
+                case 6:
+                case 9:
+                case 12:
+                case 15:
+                    //Upgrade things for level 5
+                    player.ManaRegenRate+=manaRegenIncrease;
+                    player.ManaCost-=manaCostDecrease;
+                    player.MaxMana+=manaIncrease;
+                    break;
+                default:
+                    // Increase Base Mana Level
+                    player.MaxMana+=manaIncrease;
+                    break;
+            }
+            ManaShowUpgrade();
+            UpdateSouls();
         }
+        else
+            basicInfoText.text="Don't have enough funds";
+        
     }
     public void HealthUpgrade()
     {
         healthLevel++;
-        switch(healthLevel)
+        if(souls-(costSouls*healthLevel)>0)
         {
-            case 3:
-            case 6:
-            case 9:
-            case 12:
-            case 15:
-                //Upgrade things for level 5
-                player.MaxHealth+=healthIncrease;
-                player.HealthRechargePauseTime -= healthPauseTimeDecrease;
-                player.HealthRegenRate += healthRegenIncrease;
-                break;
-            default:
-                // Increase Base Health Level
-                player.MaxHealth+=healthIncrease;
-                break;
+            souls-=(costSouls*healthLevel);
+            switch(healthLevel)
+            {
+                case 3:
+                case 6:
+                case 9:
+                case 12:
+                case 15:
+                    //Upgrade things for level 5
+                    player.MaxHealth+=healthIncrease;
+                    player.HealthRechargePauseTime -= healthPauseTimeDecrease;
+                    player.HealthRegenRate += healthRegenIncrease;
+                    break;
+                default:
+                    // Increase Base Health Level
+                    player.MaxHealth+=healthIncrease;
+                    break;
+            }
+            HealthShowUpgrade();
+            UpdateSouls();
         }
+        else
+            basicInfoText.text="Don't have enough funds";
     }
     public void SprintUpgrade()
     {
         sprintLevel++;
-        switch(sprintLevel)
+        if(souls-(costSouls*sprintLevel)>0)
         {
-            case 3:
-            case 6:
-            case 9:
-            case 12:
-            case 15:
-                //Upgrade things for level 5
-                player.MaxSprint+=sprintIncrease;
-                player.SprintDecayRate-=sprintDecayRateDecrease;
-                player.SprintRegenRate+=sprintRegenRateIncrease;
-                break;
-            default:
-                // Increase Base Sprint Level
-                player.MaxSprint+=sprintIncrease;
-                break;
+            souls-=(costSouls*sprintLevel);
+            switch(sprintLevel)
+            {
+                case 3:
+                case 6:
+                case 9:
+                case 12:
+                case 15:
+                    //Upgrade things for level 5
+                    player.MaxSprint+=sprintIncrease;
+                    player.SprintDecayRate-=sprintDecayRateDecrease;
+                    player.SprintRegenRate+=sprintRegenRateIncrease;
+                    break;
+                default:
+                    // Increase Base Sprint Level
+                    player.MaxSprint+=sprintIncrease;
+                    break;
+            }
+            SprintShowUpgrade();
+            UpdateSouls();
         }
+        else
+            basicInfoText.text="Don't have enough funds";
     }
 
     public void ManaShowUpgrade()
@@ -167,14 +199,14 @@ public class Upgrade : MonoBehaviour
             case 12:
             case 15:
                 //Upgrade things for level 5
-                str = " Mana: "+player.MaxMana+" + "+manaIncrease+"\n Mana Cost: "+player.ManaCost+" - "+manaCostDecrease + "\n Mana Regen Rate: "+player.ManaRegenRate+ " + " + manaRegenIncrease;
+                str = "Cost: "+ ((manaLevel+1)*costSouls)+"\n Mana: "+player.MaxMana+" + "+manaIncrease+"\n Mana Cost: "+player.ManaCost+" - "+manaCostDecrease + "\n Mana Regen Rate: "+player.ManaRegenRate+ " + " + manaRegenIncrease;
                 break;
             default:
                 // Increase Base Mana Level           
-                str = " Mana: "+player.MaxMana+" + "+manaIncrease;
+                str = "Cost: "+ ((manaLevel+1)*costSouls)+"\n Mana: "+player.MaxMana+" + "+manaIncrease;
                 break;
         }
-        infoText.text = str;
+        basicInfoText.text = str;
     }
     public void HealthShowUpgrade()
     {
@@ -187,14 +219,14 @@ public class Upgrade : MonoBehaviour
             case 12:
             case 15:
                 //Upgrade things for level 5
-                str = " Health: "+player.MaxHealth+" + "+healthIncrease+"\n Health Regen Start Time: "+player.HealthRechargePauseTime+" - "+healthPauseTimeDecrease+"\n Health Regen Rate: "+player.HealthRegenRate+" + "+healthRegenIncrease;
+                str = "Cost: "+ ((healthLevel+1)*costSouls)+"\n Health: "+player.MaxHealth+" + "+healthIncrease+"\n Health Regen Start Time: "+player.HealthRechargePauseTime+" - "+healthPauseTimeDecrease+"\n Health Regen Rate: "+player.HealthRegenRate+" + "+healthRegenIncrease;
                 break;
             default:
                 // Increase Base Mana Level           
-                str = " Health: "+player.MaxHealth+" + "+healthIncrease;
+                str = "Cost: "+ ((healthLevel+1)*costSouls)+"\n Health: "+player.MaxHealth+" + "+healthIncrease;
                 break;
         }
-        infoText.text = str;
+        basicInfoText.text = str;
     }
     public void SprintShowUpgrade()
     {
@@ -207,14 +239,14 @@ public class Upgrade : MonoBehaviour
             case 12:
             case 15:
                 //Upgrade things for level 5
-                str = " Sprint: "+player.MaxSprint + " + " + sprintIncrease+"\n Sprint Decay Rate: " + player.SprintDecayRate+" - "+sprintDecayRateDecrease+"\n Sprint Regen Rate: "+ player.SprintRegenRate+" + "+sprintRegenRateIncrease;
+                str = "Cost: "+ ((sprintLevel+1)*costSouls)+"\n Sprint: "+player.MaxSprint + " + " + sprintIncrease+"\n Sprint Decay Rate: " + player.SprintDecayRate+" - "+sprintDecayRateDecrease+"\n Sprint Regen Rate: "+ player.SprintRegenRate+" + "+sprintRegenRateIncrease;
                 break;
             default:
                 // Increase Base Mana Level           
-                str = " Sprint: "+player.MaxSprint + " + " + sprintIncrease;
+                str = "Cost: "+ ((sprintLevel+1)*costSouls)+"\n Sprint: "+player.MaxSprint + " + " + sprintIncrease;
                 break;
         }
-        infoText.text = str;
+        basicInfoText.text = str;
     }
 
     #endregion
@@ -226,8 +258,16 @@ public class Upgrade : MonoBehaviour
         slowLevel++;
         if(slowLevel<=5)
         {
-            player.SlowTime+=slowDuration;
-            player.SlowReloadTime-=slowReload;
+            if(souls-(slowLevel*costSouls*abilitySoulMult)>0)
+            {
+                souls-=(slowLevel*costSouls*abilitySoulMult);
+                player.SlowTime+=slowDuration;
+                player.SlowReloadTime-=slowReload;    
+                UpdateSouls();  
+                SlowShowUpgrade();
+            }
+            else
+                abilityInfoText.text = "Don't have enough funds";
         }
         else
         {
@@ -239,8 +279,16 @@ public class Upgrade : MonoBehaviour
         dashLevel++;
         if(dashLevel<=5)
         {
-            player.DashForce+=dashForce;
-            player.DashReloadTime-=dashReload;
+            if(souls-(dashLevel*costSouls*abilitySoulMult)>0)
+            {
+                souls-=(dashLevel*costSouls*abilitySoulMult);
+                player.DashForce+=dashForce;
+                player.DashReloadTime-=dashReload;
+                UpdateSouls();
+                DashShowUpgrade();
+            }
+            else
+                abilityInfoText.text = "Don't have enough funds";
         }
         else
         {
@@ -252,8 +300,16 @@ public class Upgrade : MonoBehaviour
         aggroLevel++;
         if(aggroLevel<=5)
         {
-            player.AggroRange+=aggroRange;
-            player.AggroReloadTime-=aggroReload;
+            if(souls-(aggroLevel*costSouls*abilitySoulMult)>0)
+            {
+                souls-=(aggroLevel*costSouls*abilitySoulMult);
+                player.AggroRange+=aggroRange;
+                player.AggroReloadTime-=aggroReload;
+                AggroShowUpgrade();
+                UpdateSouls();
+            }
+            else
+                abilityInfoText.text = "Don't have enough funds";
         }
         else
         {
@@ -265,40 +321,40 @@ public class Upgrade : MonoBehaviour
         string str;
         if((slowLevel+1)<=5)
         {
-            str = " Slow Duration: "+player.SlowTime+" + "+slowDuration+"\n Slow Cooldown: "+player.SlowReloadTime+" - "+slowReload;
+            str = "Cost: "+(slowLevel*costSouls*abilitySoulMult)+"\n Slow Duration: "+player.SlowTime+" + "+slowDuration+"\n Slow Cooldown: "+player.SlowReloadTime+" - "+slowReload;
         }
         else
             str = " No Upgrades Available";
-        infoText.text = str;
+        basicInfoText.text = str;
     }
     public void AggroShowUpgrade()
     {
         string str;
         if((aggroLevel+1)<=5)
         {
-            str = " Aggro Range: "+player.AggroRange+" + "+aggroRange+"\n Aggro Cooldown: "+player.AggroReloadTime+" - "+aggroReload;
+            str = "Cost: "+(aggroLevel*costSouls*abilitySoulMult)+"\n Aggro Range: "+player.AggroRange+" + "+aggroRange+"\n Aggro Cooldown: "+player.AggroReloadTime+" - "+aggroReload;
         }
         else
             str = " No Upgrades Available";
-        infoText.text = str;
+        basicInfoText.text = str;
     }
     public void DashShowUpgrade()
     {
         string str;
         if((dashLevel+1)<=5)
         {
-            str = " Dash Force: "+player.DashForce+" + "+dashForce+"\n Dash Cooldown: "+player.DashReloadTime+" - "+dashReload;
+            str = "Cost: "+(dashLevel*costSouls*abilitySoulMult)+"\n Dash Force: "+player.DashForce+" + "+dashForce+"\n Dash Cooldown: "+player.DashReloadTime+" - "+dashReload;
         }
         else
             str = " No Upgrades Available";
-        infoText.text = str;
+        basicInfoText.text = str;
     }
 
     #endregion
 
     public void ResetInfo()
     {
-        infoText.text = "";
+        basicInfoText.text = "";
     }
     
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -237,8 +237,13 @@ MonoBehaviour:
   canShop: 0
   vampPhase: 1
   player: {fileID: 111037863}
+  souls: 1000
+  costSouls: 10
+  abilitySoulMult: 10
   upgradeMenu: {fileID: 458973747}
-  infoText: {fileID: 458973746}
+  basicInfoText: {fileID: 458973746}
+  abilityInfoText: {fileID: 0}
+  soulsText: {fileID: 0}
   manaLevel: 0
   healthLevel: 0
   sprintLevel: 0
