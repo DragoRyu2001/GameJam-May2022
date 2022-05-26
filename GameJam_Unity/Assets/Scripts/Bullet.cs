@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] bool isPlayer;
     [SerializeField] float maxDist;
+    [SerializeField] PlayerScript playerScript;
     Vector3 startPos;
     bool canMove;
 
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour
     {
         if (isPlayer && other.transform.CompareTag("Enemy"))
         {
-            other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer);
+            other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer, playerScript.InBerserk);
             Destroy(gameObject, 5f);
         }
         else if (!isPlayer && other.transform.tag == "Player")
