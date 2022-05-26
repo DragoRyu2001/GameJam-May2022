@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   agent: {fileID: 2864614773998203523}
-  maxHealth: 50
+  maxHealth: 90
   currentHealth: 0
   isAlive: 0
   anim: {fileID: 2864614774170648809}

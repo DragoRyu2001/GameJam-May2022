@@ -48,5 +48,9 @@ public class Bullet : MonoBehaviour
         }
 
     }
+    public void SetDamage(float dmg)
+    {
+        damage = dmg;
+    }
 
 }

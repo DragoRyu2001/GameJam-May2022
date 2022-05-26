@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     }
     protected void onDeath()
     {
+        GameObject obj = Instantiate(deathFX, transform.position-new Vector3(0, 0.5f, 0), deathFX.transform.rotation);
         Collider[] cols = Physics.OverlapSphere(this.transform.position, 10f);
         Debug.Log("Enemy has Died");
         if(cols.Length>0)
@@ -44,10 +45,9 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        GameObject obj = Instantiate(deathFX, transform.position-new Vector3(0, 0.9f, 0), deathFX.transform.rotation);
         anim.SetTrigger("Death");
-        Destroy(obj, 0.85f);
-        Destroy(this.gameObject, 0.9f);
+        Destroy(obj, 1f);
+        Destroy(this.gameObject, 1f);
     }
 
     #endregion

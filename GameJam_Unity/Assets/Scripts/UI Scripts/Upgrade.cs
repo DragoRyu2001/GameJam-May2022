@@ -11,13 +11,20 @@ public class Upgrade : MonoBehaviour
     [SerializeField] bool vampPhase;
     [SerializeField] PlayerScript player;
     [SerializeField] GunGeneral gun;
-    [SerializeField] int souls, costSouls, abilitySoulMult;
+    [SerializeField] int souls, costSouls, abilitySoulMult, gunSoulMult;
+    [Header("GUNNSSSSSS")]
+    [SerializeField] Rifle rifle;
+    [SerializeField] Shotgun shotgun;
+    [SerializeField] Crossbow crossbow;
+    [SerializeField] AutoCrossbow autoCrossbow;
+    [SerializeField] TripleCrossbow tripleCrossbow;
 
     [Header("UI")]
     [SerializeField] GameObject upgradeMenu;
     [SerializeField] GameObject openCloseText;
     [SerializeField] TMP_Text basicInfoText;
     [SerializeField] TMP_Text abilityInfoText;
+    [SerializeField] TMP_Text gunInfoText;
 
     [SerializeField] TMP_Text soulsText;
 
@@ -36,6 +43,10 @@ public class Upgrade : MonoBehaviour
     [ReadOnly, SerializeField] float slowDuration, slowReload;
 
     //Gun Stats
+    [ReadOnly, SerializeField] int crossbowLevel, rifleLevel, shotgunLevel;
+    [ReadOnly, SerializeField] float crossBowReloadDecrease, rifleReloadDecrease, shotgunReloadDecrease;
+    [ReadOnly, SerializeField] float rifleDamageIncrease, shotGunDamageIncrease;
+
 
     void OnTriggerEnter(Collider col)
     {
@@ -53,7 +64,6 @@ public class Upgrade : MonoBehaviour
     void Start()
     {
         Initialise();
-        
     }
     void Initialise()
     {
@@ -90,6 +100,12 @@ public class Upgrade : MonoBehaviour
         //Slow values
         slowDuration = 0.1f*player.SlowTime;
         slowReload = 0.1f*player.SlowReloadTime;
+        //=============================================================
+        //Guns Stats Initialised=======================================
+        rifleReloadDecrease = 0.1f*rifle.ReloadTime;
+        crossBowReloadDecrease = 0.1f*rifle.ReloadTime;
+        rifleDamageIncrease = 0.1f*rifle.Damage;
+        shotGunDamageIncrease = 0.1f*shotgun.Damage;
     }
     void Update()
     {
@@ -361,6 +377,63 @@ public class Upgrade : MonoBehaviour
 
     #endregion
 
+    #region GUNNSS Stats Upgrade
+    //Lvl 1, Lvl2, Lvl 3
+    public void UpgradeCrossBow()
+    {
+        //Base: Damage = 75 DPS
+        //Level 1: Prefab different arrow= +20%                         (Single)
+        //Level 2: Model change, Prefab different arrow= +20%           (Triple)
+        //Level 3: Model change, Prefab different arrow= +20% 22 per shot (Auto)
+        crossbowLevel++;
+        switch(crossbowLevel)
+        {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+                
+                break;
+            default:
+                //can not upgrade
+                break;
+        }
+    }
+    public void UpgradeRifle()
+    {
+        if(rifleLevel<5)
+        {
+            rifleLevel++;
+            rifle.ReloadTime-=rifleReloadDecrease;
+            rifle.Damage+=rifleDamageIncrease;
+        }
+        else
+        {
+            gunInfoText.text = "No Upgrades Available";
+        }
+        
+    }
+    public void UpgradeShotGun()
+    {
+        if(shotgunLevel<5)
+        {
+            shotgunLevel++;
+            shotgun.ReloadTime-=shotgunReloadDecrease;
+            shotgun.Damage+=shotGunDamageIncrease;
+        }
+        else
+        {
+            gunInfoText.text = "No Upgrades Available";
+        }
+
+    }
+
+    #endregion
+    
+    
     public void ResetInfo()
     {
         basicInfoText.text = "";
