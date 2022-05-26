@@ -36,7 +36,7 @@ public class BasePlayerClass : MonoBehaviour
     [Header("Berserk")]
     [SerializeField] private float berserkTime;
     [SerializeField, ReadOnly] private float currentBT;
-    [SerializeField] private float berserkHealth;
+    [SerializeField] private float berserkHealthMult;
 
     [Header("Dash Parameters")]
     [SerializeField, ReadOnly] private bool isDashing;
@@ -114,7 +114,7 @@ public class BasePlayerClass : MonoBehaviour
     public bool InSlowMo { get => inSlowMo; set => inSlowMo = value; }
     public bool CanCall { get => canCall; set => canCall = value; }
     public bool IsDashing { get => isDashing; set => isDashing = value; }
-    public float BerserkHealth { get => berserkHealth; set => berserkHealth = value; }
+    public float BerserkHealthMult { get => berserkHealthMult; set => berserkHealthMult = value; }
     public bool Critical { get => critical; set => critical = value; }
     public bool IsRewinding { get => isRewinding; set => isRewinding = value; }
 
@@ -127,7 +127,7 @@ public class BasePlayerClass : MonoBehaviour
 
     public bool CheckHealth()
     {
-        return IsAlive = CurrentHealth >= 0;
+        return IsAlive = CurrentHealth > 0;
     }
 
     public bool CheckBerserking()

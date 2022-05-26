@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c55307358e9b534ca24a61bfbd8896e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  critical: 0
   maxHealth: 200
   currentHealth: 0
   healthRegenRate: 20
@@ -164,7 +165,7 @@ MonoBehaviour:
   sprintRechargePauseTime: 0.5
   berserkTime: 15
   currentBT: 0
-  berserkHealth: 0
+  berserkHealthMult: 0.375
   isDashing: 0
   dashForce: 35
   dashReloadTime: 1.75
@@ -183,7 +184,6 @@ MonoBehaviour:
   poundRange: 5
   isAlive: 0
   isRewinding: 0
-  critical: 0
   inBerserk: 0
   canSprint: 0
   canCast: 0

@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 5474118664717252572}
   cam: {fileID: 0}
-  damage: 50
+  damage: 5
   reloadTime: 0.8
   fireRate: 0
   firingDelay: 0
@@ -125,11 +125,11 @@ MonoBehaviour:
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576
-  bloom: 1
+  bloom: 2.5
   pellets: 12
   aim: {fileID: 0}
   directions: []
-  chokeDistance: 2.5
+  chokeDistance: 2
   chokeDelta: 1.5
   choke: 0
   shortRange: 3.5
