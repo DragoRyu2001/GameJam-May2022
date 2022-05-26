@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float dmg, bool isPlayer)
     {
 
-        //currentHealth-=(GameManager.?(1.5f*dmg):dmg);
+        currentHealth-=(GameManager.instance.IsPlayerBerserking()?(1.5f*dmg):dmg);
         if(isPlayer)
         {
             //GameManer info about Player

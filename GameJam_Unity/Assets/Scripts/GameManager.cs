@@ -8,12 +8,6 @@ public class GameManager : MonoBehaviour
     PlayerScript pScript;
 
     public static GameManager instance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        pScript = Player.GetComponent<PlayerScript>();
-    }
-
     private void Awake()
     {
         if(instance==null)
@@ -21,6 +15,12 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
+    // Start is called before the first frame update
+    void Start()
+    {
+        pScript = Player.GetComponent<PlayerScript>();
+    }
+
 
     public bool IsPlayerBerserking()
     {
