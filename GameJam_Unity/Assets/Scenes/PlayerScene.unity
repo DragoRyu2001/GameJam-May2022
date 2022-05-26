@@ -590,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 5444159411536631566, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
@@ -1028,7 +1028,7 @@ PrefabInstance:
     - target: {fileID: 5110692958050701717, guid: 950122331c8fb1e4ba5ac427d6de609b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6236578831710260393, guid: 950122331c8fb1e4ba5ac427d6de609b,
         type: 3}
@@ -1201,6 +1201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TripleCrossbow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973486795732678462, guid: 80853998e6bd5f147837b32078ae0604,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7663156722918113722, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}

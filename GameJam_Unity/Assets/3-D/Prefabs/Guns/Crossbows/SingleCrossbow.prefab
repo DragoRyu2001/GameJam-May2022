@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 6363198543863139730}
   cam: {fileID: 0}
-  damage: 25
+  damage: 100
   reloadTime: 1
   fireRate: 0
   firingDelay: 0

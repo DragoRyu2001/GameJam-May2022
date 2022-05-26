@@ -26,18 +26,20 @@ public class TripleCrossbow : GunGeneral
     {
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
-            Shoot();
+            StartCoroutine(Shoot());
             StartCoroutine(Reload());
         }
     }
 
-    private void Shoot()
+    private IEnumerator Shoot()
     {
         a = new Vector3(muzzle.position.x, muzzle.position.y + (yOffset / 2), muzzle.position.z);
         b = new Vector3(muzzle.position.x + (xOffset/2) , muzzle.position.y - (yOffset / 2), muzzle.position.z);
         c = new Vector3(muzzle.position.x - (xOffset/2) , muzzle.position.y - (yOffset / 2), muzzle.position.z);
         Instantiate(bolt, a, muzzle.rotation);
+        yield return new WaitForSeconds(fireRate);
         Instantiate(bolt, b, muzzle.rotation);
+        yield return new WaitForSeconds(fireRate);
         Instantiate(bolt, c, muzzle.rotation);
         currentAmmo -= 1;
     }

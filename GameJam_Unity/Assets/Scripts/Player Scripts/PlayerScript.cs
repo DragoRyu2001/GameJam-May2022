@@ -68,6 +68,7 @@ public class PlayerScript : BasePlayerClass
         {
             rb.isKinematic = true;
             Rewind();
+
         }
     }
 
@@ -128,7 +129,7 @@ public class PlayerScript : BasePlayerClass
         if(recordedData.Count>0)
         {
             transform.position = recordedData[0].playerPos;
-            transform.rotation = recordedData[0].playerRot;
+            playerObj.rotation = recordedData[0].playerRot;
             recordedData.RemoveAt(0);
             IsRewinding = true;
             Debug.Log(recordedData.Count);
@@ -137,7 +138,8 @@ public class PlayerScript : BasePlayerClass
         {
             IsRewinding = false;
             rb.isKinematic = false;
-            CurrentHealth = BerserkHealthMult*MaxHealth;
+            CurrentHealth = BerserkHealthMult * MaxHealth;
+            rb.velocity = lastVelocity;
         }
     }
 
