@@ -164,21 +164,31 @@ MonoBehaviour:
   sprintRechargePauseTime: 0.5
   berserkTime: 15
   currentBT: 0
+  berserkHealth: 0
   isDashing: 0
   dashForce: 35
-  dashReloadTime: 0.75
+  dashReloadTime: 1.75
   inSlowMo: 0
   slowTime: 5
   slowMult: 0.5
-  slowReloadTime: 5
+  slowReloadTime: 8
   canCall: 0
   aggroRange: 10
-  aggroReloadTime: 1.25
+  aggroReloadTime: 5
+  canUlt: 0
+  isUlting: 0
+  ultDuration: 10
+  swipeDamage: 20
+  poundDamage: 35
+  poundRange: 5
   isAlive: 0
+  isRewinding: 0
+  critical: 0
   inBerserk: 0
   canSprint: 0
   canCast: 0
   manaCost: 30
+  rb: {fileID: 982878094783673621}
   moveMult: 50
   sprintMult: 150
   airMoveMult: 0.15
@@ -188,7 +198,6 @@ MonoBehaviour:
   airDrag: 1.5
   fallingDrag: 0.2
   fallThreshold: -0.4
-  rb: {fileID: 982878094783673621}
   playerCam: {fileID: 0}
   groundLayer:
     serializedVersion: 2

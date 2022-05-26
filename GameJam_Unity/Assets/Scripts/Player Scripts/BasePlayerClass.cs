@@ -8,6 +8,7 @@ public class BasePlayerClass : MonoBehaviour
     // Start is called before the first frame update
 
     [Header("Health")]
+    [SerializeField, ReadOnly] private bool critical;
     [SerializeField] private float maxHealth;
     [SerializeField, ReadOnly] private float currentHealth;
     [SerializeField] private float healthRegenRate;
@@ -35,6 +36,7 @@ public class BasePlayerClass : MonoBehaviour
     [Header("Berserk")]
     [SerializeField] private float berserkTime;
     [SerializeField, ReadOnly] private float currentBT;
+    [SerializeField] private float berserkHealth;
 
     [Header("Dash Parameters")]
     [SerializeField, ReadOnly] private bool isDashing;
@@ -51,14 +53,30 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField, ReadOnly] private bool canCall;
     [SerializeField] private float aggroRange;
     [SerializeField, Range(4f, 5f)] private float aggroReloadTime;
+    
+    [Header("Ultimate Parameters")]
+    [SerializeField, ReadOnly] private bool canUlt;
+    [SerializeField, ReadOnly] private bool isUlting;
+    [SerializeField, Range(10f, 18f)] private float ultDuration;
+    [SerializeField, Range(20f, 30f)] private float swipeDamage;
+    [SerializeField, Range(35f, 50f)] private float poundDamage;
+    [SerializeField] float poundRange; 
 
     [Header("Statuses")]
     [SerializeField, ReadOnly] private bool isAlive;
+    [SerializeField, ReadOnly] private bool isRewinding;
     [SerializeField, ReadOnly] private bool inBerserk;
     [SerializeField, ReadOnly] private bool canSprint;
     [SerializeField, ReadOnly] private bool canCast;
-
     [SerializeField] private float manaCost;
+
+    [Header("Misc References")]
+    [SerializeField] protected Rigidbody rb;
+
+
+
+    protected List<FrameStats> recordedData;
+    protected Vector3 lastVelocity;
 
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -96,41 +114,13 @@ public class BasePlayerClass : MonoBehaviour
     public bool InSlowMo { get => inSlowMo; set => inSlowMo = value; }
     public bool CanCall { get => canCall; set => canCall = value; }
     public bool IsDashing { get => isDashing; set => isDashing = value; }
+    public float BerserkHealth { get => berserkHealth; set => berserkHealth = value; }
+    public bool Critical { get => critical; set => critical = value; }
+    public bool IsRewinding { get => isRewinding; set => isRewinding = value; }
 
-    public void TakeDamage(float damage)
-    {
-        CurrentHealth -= damage;
-        IsAlive = CheckHealth();
+    
 
-        if (CurrentHealth / MaxHealth < 0.15f)
-        {
-            StartRecording();
-        }
-
-        if (!IsAlive && !InBerserk)
-        {
-            InBerserk = true;
-            IsAlive = true;
-            Rewind();
-        }
-        else if (!IsAlive && InBerserk)
-        {
-            InBerserk = false;
-            Death();
-        }
-    }
-
-    private void StartRecording()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Rewind()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Death()
+    protected void Death()
     {
         throw new NotImplementedException();
     }
@@ -178,11 +168,15 @@ public class BasePlayerClass : MonoBehaviour
 
     }
 
-    struct FrameStats
+    public struct FrameStats
     {
-        Vector3 playerPos;
-        Vector3 playerVelocity;
-        float playerHealth;
+        public Vector3 playerPos;
+        public Quaternion playerRot;
+        public FrameStats(Vector3 playerPos, Quaternion playerRotation)
+        {
+            this.playerPos = playerPos;
+            this.playerRot = playerRotation;
+        }
     }
 
     public IEnumerator StartManaRecharge()

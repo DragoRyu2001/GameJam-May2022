@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         }
         else if (!isPlayer && other.transform.tag == "Player")
         {
-            other.transform.gameObject.GetComponent<BasePlayerClass>().TakeDamage(damage);
+            other.transform.gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
             Debug.Log("Player Shot");
             Destroy(gameObject);
         }

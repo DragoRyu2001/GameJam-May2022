@@ -22,7 +22,6 @@ public class PlayerScript : BasePlayerClass
     [SerializeField, Range(-0.8f, -0.1f)] float fallThreshold;
 
     [Header("Misc References")]
-    [SerializeField] Rigidbody rb;
     [SerializeField] Transform playerCam;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask enemyLayer;
@@ -48,23 +47,97 @@ public class PlayerScript : BasePlayerClass
     void Start()
     {
         BaseParametersUpdate();
-        
+        recordedData = new List<FrameStats>();
         ControlDrag();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerHeight = coll.bounds.size.y;
     }
 
+    private void FixedUpdate()
+    {
+        if(!IsRewinding)
+        {
+            Move();
+            if(Critical)
+            {
+                StartRecording();
+            }
+        }
+        else
+        {
+            Rewind();
+            rb.isKinematic = true;
+        }
+    }
+
     void Update()
     {
-        GroundCheck();
-        SprintCheck();
-        onSlope = SlopeCheck();
-        ControlDrag();
-        ReadInput();
-        slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
-        RotateModelToOrientation();
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            TakeDamage(20);
+        }
+        if(!IsRewinding)
+        {
+            GroundCheck();
+            onSlope = SlopeCheck();
+            ControlDrag();
+            SprintCheck();
+            ReadInput();
+            slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
+            RotateModelToOrientation();
+        }
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+        IsAlive = CheckHealth();
+
+        if (CurrentHealth / MaxHealth < 0.25f)
+        {
+            Critical = true;
+            lastVelocity = rb.velocity;
+        }
+
+        if (!IsAlive && !InBerserk)
+        {
+            InBerserk = true;
+            IsAlive = true;
+            Rewind();
+        }
+        else if (!IsAlive && InBerserk)
+        {
+            InBerserk = false;
+            Death();
+        }
+    }
+
+    public void StartRecording()
+    {
+        recordedData.Insert(0, new FrameStats(transform.position, transform.rotation));
+        if(recordedData.Count > Mathf.Round(5f/Time.fixedDeltaTime))
+        {
+            recordedData.RemoveAt(recordedData.Count - 1);
+        }
+    }
+
+    public void Rewind()
+    {
+        if(recordedData.Count>0)
+        {
+            transform.position = recordedData[0].playerPos;
+            playerObj.rotation = recordedData[0].playerRot;
+            recordedData.RemoveAt(0);
+            IsRewinding = true;
+        }
+        else
+        {
+            IsRewinding = false;
+            rb.isKinematic = false;
+            CurrentHealth = BerserkHealth;
+        }
     }
 
 
@@ -98,10 +171,7 @@ public class PlayerScript : BasePlayerClass
         }
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
+    
 
 
     private void ControlDrag()
@@ -249,6 +319,11 @@ public class PlayerScript : BasePlayerClass
     }
 
     #region Physical Checks
+
+    public Vector3 GetVelocity()
+    {
+        return rb.velocity;
+    }
     private bool SlopeCheck()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (playerHeight / 2) + 1.5f))
