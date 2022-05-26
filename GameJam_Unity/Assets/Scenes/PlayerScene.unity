@@ -741,6 +741,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827133026}
   m_CullTransparentMesh: 0
+--- !u!1 &920216409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2898605849053761938, guid: d10ca54ee82976f42a305704a725bed1,
+    type: 3}
+  m_PrefabInstance: {fileID: 957190221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &957190221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -905,6 +911,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da8f39d902758b40ab84c27b84afe42, type: 3}
+--- !u!1 &1268683691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5444159411536631566, guid: 628f01ab9ee6d264594cfbf6aac05e80,
+    type: 3}
+  m_PrefabInstance: {fileID: 489103266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1387746997
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +970,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1411080854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5110692958050701717, guid: 950122331c8fb1e4ba5ac427d6de609b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1515003887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1515003887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1205,7 +1223,7 @@ PrefabInstance:
     - target: {fileID: 6973486795732678462, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7663156722918113722, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}
@@ -1658,6 +1676,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2142628305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6973486795732678462, guid: 80853998e6bd5f147837b32078ae0604,
+    type: 3}
+  m_PrefabInstance: {fileID: 1578152618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &982878093672509367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1680,6 +1704,26 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 1387746999}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: gunArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 1411080854}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: gunArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 1268683691}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: gunArray.Array.data[3]
+      value: 
+      objectReference: {fileID: 2142628305}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: gunArray.Array.data[4]
+      value: 
+      objectReference: {fileID: 920216409}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_RootOrder
