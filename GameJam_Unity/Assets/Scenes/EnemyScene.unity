@@ -241,10 +241,17 @@ MonoBehaviour:
   souls: 1000
   costSouls: 10
   abilitySoulMult: 10
+  gunSoulMult: 0
+  rifle: {fileID: 0}
+  shotgun: {fileID: 0}
+  crossbow: {fileID: 0}
+  autoCrossbow: {fileID: 0}
+  tripleCrossbow: {fileID: 0}
   upgradeMenu: {fileID: 458973747}
   openCloseText: {fileID: 0}
   basicInfoText: {fileID: 458973746}
   abilityInfoText: {fileID: 458973745}
+  gunInfoText: {fileID: 0}
   soulsText: {fileID: 844515677}
   manaLevel: 0
   healthLevel: 0
@@ -267,6 +274,14 @@ MonoBehaviour:
   dashReload: 0
   slowDuration: 0
   slowReload: 0
+  crossbowLevel: 0
+  rifleLevel: 0
+  shotgunLevel: 0
+  crossBowReloadDecrease: 0
+  rifleReloadDecrease: 0
+  shotgunReloadDecrease: 0
+  rifleDamageIncrease: 0
+  shotGunDamageIncrease: 0
 --- !u!65 &54528381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1838,6 +1853,7 @@ MonoBehaviour:
   mouseSensY: 0.1
   orbitRadius: 3
   orientation: {fileID: 1715441452}
+  isAiming: 0
 --- !u!4 &1387423452
 Transform:
   m_ObjectHideFlags: 0
@@ -2614,7 +2630,7 @@ PrefabInstance:
     - target: {fileID: 2864659008571195927, guid: 2dbba7b191e310b4f997b68c6812e888,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dbba7b191e310b4f997b68c6812e888, type: 3}
@@ -2625,6 +2641,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3894956385254351248, guid: 4da8f39d902758b40ab84c27b84afe42,
+        type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894956386002289458, guid: 4da8f39d902758b40ab84c27b84afe42,
+        type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3894956386507947120, guid: 4da8f39d902758b40ab84c27b84afe42,
         type: 3}
       propertyPath: m_RootOrder
@@ -2690,6 +2716,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 619346611}
+    - target: {fileID: 3894956386507947133, guid: 4da8f39d902758b40ab84c27b84afe42,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da8f39d902758b40ab84c27b84afe42, type: 3}
 --- !u!1001 &7541552498426273807
