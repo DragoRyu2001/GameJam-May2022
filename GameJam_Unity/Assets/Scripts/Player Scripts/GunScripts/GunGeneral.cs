@@ -18,7 +18,6 @@ public class GunGeneral : MonoBehaviour
     [SerializeField, ReadOnly] protected bool inFireRateDelay;
     [SerializeField] protected float maxDistance;
     [SerializeField] protected LayerMask layersToCheck;
-    [SerializeField] protected PlayerScript playerScript;
 
     protected bool hitSomething;
 
@@ -73,8 +72,6 @@ public class GunGeneral : MonoBehaviour
         yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
         reloading = false;
-
-
     }
 
     protected void CanShootCheck()

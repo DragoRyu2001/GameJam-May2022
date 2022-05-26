@@ -207,6 +207,15 @@ MonoBehaviour:
     m_Bits: 512
   coll: {fileID: 982878094783673620}
   playerObj: {fileID: 5918677666203026655}
+  gunArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 152684502095255237}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentGun: 0
+  previousGun: 0
+  currentType: 0
   translateModifier: 0
 --- !u!54 &982878094783673621
 Rigidbody:
@@ -340,6 +349,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0840669883f91e84ab5db699e7b3fa67, type: 3}
+--- !u!1 &152684502095255237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6973486795732678462, guid: 0840669883f91e84ab5db699e7b3fa67,
+    type: 3}
+  m_PrefabInstance: {fileID: 7122650574622663163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &612978307879919681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7663156722918113722, guid: 0840669883f91e84ab5db699e7b3fa67,

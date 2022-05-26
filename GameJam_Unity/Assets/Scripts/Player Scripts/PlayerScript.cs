@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+enum CrossbowTypes
+{
+    SINGLE = 0,
+    BURST = 1,
+    AUTO = 2
+}
+
+
 public class PlayerScript : BasePlayerClass
 {
-
     [Header("Movement variables")]
     [SerializeField] float moveMult;
     [SerializeField] float sprintMult;
@@ -27,6 +34,12 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] Collider coll;
     [SerializeField] Transform playerObj;
+
+    [Header("Gun variables")]
+    [SerializeField] GameObject[] gunArray;
+    [SerializeField] int currentGun;
+    [SerializeField] int previousGun;
+    [SerializeField] CrossbowTypes currentType;
 
     private float moveX;
     private float moveY;
@@ -52,6 +65,9 @@ public class PlayerScript : BasePlayerClass
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerHeight = coll.bounds.size.y;
+
+        gunArray[currentGun].SetActive(true);
+        currentGun = previousGun;
     }
 
     private void FixedUpdate()
@@ -114,6 +130,7 @@ public class PlayerScript : BasePlayerClass
             Jump();
         }
 
+        //dash input
         if (Input.GetKeyDown(KeyCode.Q) && CheckMana())
         {
             if (!IsDashing)
@@ -124,6 +141,7 @@ public class PlayerScript : BasePlayerClass
             }
         }
 
+        //Slow mo input trigger
         if (Input.GetKeyDown(KeyCode.E) && CheckMana())
         {
             if (!InSlowMo)
@@ -140,7 +158,7 @@ public class PlayerScript : BasePlayerClass
                 SetInSlowMoToFalse();
             }
         }
-
+        //AggroCall input
         if (Input.GetKeyDown(KeyCode.Z) && CheckMana())
         {
             if (CanCall)
@@ -148,6 +166,40 @@ public class PlayerScript : BasePlayerClass
                 CanCall = false;
                 TriggerAggroCall();
                 Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
+            }
+        }
+
+
+        //Weapon switching 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentGun = 0;
+            if(currentGun!=previousGun)
+            {
+                gunArray[previousGun].SetActive(false);
+                gunArray[currentGun].SetActive(true);
+                previousGun = currentGun;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentGun = 1;
+            if(currentGun!=previousGun)
+            {
+                gunArray[previousGun].SetActive(false);
+                gunArray[currentGun].SetActive(true);
+                previousGun = currentGun;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentGun = 2;
+            currentGun += (int)currentType;
+            if(currentGun!=previousGun)
+            {
+                gunArray[previousGun].SetActive(false);
+                gunArray[currentGun].SetActive(true);
+                previousGun = currentGun;
             }
         }
     }
@@ -294,6 +346,16 @@ public class PlayerScript : BasePlayerClass
     {
         InSlowMo = false;
         Time.timeScale = 1f;
+    }
+
+    public int GetCrossbowType()
+    {
+        return (int)currentType;
+    }
+
+    public void SetCrossbowType(int set)
+    {
+        currentType = (CrossbowTypes)set;
     }
 
     private void TriggerSlowMo()
