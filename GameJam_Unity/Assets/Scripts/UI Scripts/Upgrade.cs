@@ -385,23 +385,14 @@ public class Upgrade : MonoBehaviour
         //Level 1: Prefab different arrow= Damage = 100 DPS->0.6        (Single)
         //Level 2: Model change, Prefab different arrow= +20%           (Triple)
         //Level 3: Model change, Prefab different arrow= +20% 22 per shot (Auto)
-        crossbowLevel++;
-        switch(crossbowLevel)
+        if(crossbowLevel<3)
         {
-            case 1:
-                //Method(int)
-                //player.enum = State
-                //player.setCrossBow(GameObject)
-                break;
-            case 2:
-
-                break;
-            case 3:
-                
-                break;
-            default:
-                //can not upgrade
-                break;
+            player.SetCrossbowType(crossbowLevel);
+            crossbowLevel++;
+        }
+        else
+        {
+            gunInfoText.text = "No Upgrades Available";
         }
     }
     public void UpgradeRifle()
@@ -475,11 +466,23 @@ public class Upgrade : MonoBehaviour
     public void CrossbowShowUpgrade()
     {
         int cost = (crossbowLevel+1)*costSouls*gunSoulMult;
-        gunInfoText.text = "Feature not implemented: Blame Harmacist";
-        /*if(crossbowLevel+1<=5)
-            gunInfoText.text = " Cost: "+cost+"\n Shotgun Reload Time: "+shotgun.ReloadTime+" - "+shotgunReloadDecrease+"\n Shotgun Damage: "+shotgun.Damage+" + "+shotGunDamageIncrease;
-        else
-            gunInfoText.text = "No Upgrades Available";*/
+        string str;
+        switch(crossbowLevel+1)
+        {
+            case 1:
+                str="Damage: 75 + 25\n Reload Time: "+crossbow.ReloadTime+" - "+crossBowReloadDecrease;
+                break;
+            case 2:
+                str = "Triple CrossBow";
+                break;
+            case 3:
+                str = "Auto CrossBow";
+                break;
+            default:
+                str = "No Upgrades available";
+                break;
+        }
+        gunInfoText.text = str;
     }
 
     #endregion
