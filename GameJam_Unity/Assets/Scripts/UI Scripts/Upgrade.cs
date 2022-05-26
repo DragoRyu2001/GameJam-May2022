@@ -475,6 +475,7 @@ public class Upgrade : MonoBehaviour
     public void CrossbowShowUpgrade()
     {
         int cost = (crossbowLevel+1)*costSouls*gunSoulMult;
+        gunInfoText.text = "Feature not implemented: Blame Harmacist";
         /*if(crossbowLevel+1<=5)
             gunInfoText.text = " Cost: "+cost+"\n Shotgun Reload Time: "+shotgun.ReloadTime+" - "+shotgunReloadDecrease+"\n Shotgun Damage: "+shotgun.Damage+" + "+shotGunDamageIncrease;
         else
