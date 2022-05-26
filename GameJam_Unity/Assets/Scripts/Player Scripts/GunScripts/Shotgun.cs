@@ -64,7 +64,6 @@ public class Shotgun : GunGeneral
             {
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
-                    Debug.Log("Shot Enemy");
                     hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
                 }
                 else

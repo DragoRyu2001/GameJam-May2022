@@ -23,14 +23,12 @@ public class Rifle : GunGeneral
         OrientMuzzle();
         CanShootCheck();
         ReadInput();
-        Debug.DrawRay(muzzle.position, dest, Color.blue);
     }
 
     private void ReadInput()
     {
         if (Input.GetMouseButton(0) && canShoot)
         {
-            Debug.Log("Shot");
             Shoot();
             if (!inFireRateDelay)
                 StartCoroutine(RateOfFireLimiter());
@@ -51,12 +49,10 @@ public class Rifle : GunGeneral
             enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);
             if(enemyHit)
             {
-                Debug.Log("Shot Enemy");
                 hitEnemyComponent.TakeDamage(Damage, true);
             }
             else
             {
-                Debug.Log("Shot Wall");
                 randIndex = Random.Range(0, decalArray.Length);
                 decal = Instantiate(decalArray[randIndex], hit.point, Quaternion.identity);
                 decal.transform.rotation = Quaternion.FromToRotation(decal.transform.forward, hit.normal);

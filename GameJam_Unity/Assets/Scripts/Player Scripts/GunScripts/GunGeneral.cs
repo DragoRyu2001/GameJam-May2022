@@ -61,7 +61,7 @@ public class GunGeneral : MonoBehaviour
     protected IEnumerator RateOfFireLimiter()
     {
         inFireRateDelay = true;
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSecondsRealtime(fireRate);
         inFireRateDelay = false;
 
     }
@@ -71,11 +71,10 @@ public class GunGeneral : MonoBehaviour
     {
         reloading = true;
         //animate here
-        Debug.Log("Reloading");
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
         reloading = false;
-        Debug.Log("Reloaded");
+
 
     }
 

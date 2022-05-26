@@ -164,13 +164,16 @@ MonoBehaviour:
   sprintRechargePauseTime: 0.5
   berserkTime: 15
   currentBT: 0
+  isDashing: 0
   dashForce: 35
   dashReloadTime: 0.75
-  slowTime: 0
-  slowMult: 0
-  slowReloadTime: 0
-  aggroRange: 0
-  aggroReloadTime: 0
+  inSlowMo: 0
+  slowTime: 5
+  slowMult: 0.5
+  slowReloadTime: 5
+  canCall: 0
+  aggroRange: 10
+  aggroReloadTime: 1.25
   isAlive: 0
   inBerserk: 0
   canSprint: 0
@@ -190,6 +193,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
   coll: {fileID: 982878094783673620}
   playerObj: {fileID: 5918677666203026655}
   translateModifier: 0

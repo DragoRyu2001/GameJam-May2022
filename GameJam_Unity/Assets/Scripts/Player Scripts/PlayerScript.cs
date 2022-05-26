@@ -25,6 +25,7 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Rigidbody rb;
     [SerializeField] Transform playerCam;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask enemyLayer;
     [SerializeField] Collider coll;
     [SerializeField] Transform playerObj;
 
@@ -32,8 +33,9 @@ public class PlayerScript : BasePlayerClass
     private float moveY;
     private float angle;
     private float playerHeight;
-
-    bool onSlope, isDashing, inSlowMo;
+    private Collider[] aggroArr;
+    private Enemy enemyComponent;
+    bool onSlope, gotEnemy;
 
     Vector3 translateVector;
     Vector3 slopeTranslateDirection;
@@ -88,7 +90,7 @@ public class PlayerScript : BasePlayerClass
         if (playerObj.forward != orientation.forward)
         {
             angle = Vector3.SignedAngle(playerObj.forward, orientation.forward, Vector3.up);
-            playerObj.Rotate(Vector3.up, angle * Time.deltaTime * 5f);
+            playerObj.Rotate(Vector3.up, angle * Time.deltaTime * 5f/Time.timeScale);
         }
         else
         {
@@ -130,11 +132,11 @@ public class PlayerScript : BasePlayerClass
         translateModifier = GroundCheck()? translateModifier : airMoveMult;
         if (!onSlope)
         {
-            rb.AddForce(translateModifier * moveMult * translateVector.normalized, ForceMode.Acceleration);
+            rb.AddForce(translateModifier * moveMult * translateVector.normalized/Time.timeScale, ForceMode.Acceleration);
         }
         else
         {
-            rb.AddForce(translateModifier * moveMult * slopeTranslateDirection.normalized, ForceMode.Acceleration);
+            rb.AddForce(translateModifier * moveMult * slopeTranslateDirection.normalized/Time.timeScale, ForceMode.Acceleration);
         }
     }
 
@@ -153,43 +155,81 @@ public class PlayerScript : BasePlayerClass
 
         if(Input.GetKeyDown(KeyCode.Q)&&CheckMana())
         {
-            if (!isDashing)
+            if (!IsDashing)
             {
-                isDashing = true;
+                IsDashing = true;
                 Reposition();
-                Invoke(nameof(SetDashingToFalse), DashReloadTime);
+                Invoke(nameof(SetDashingToFalse), DashReloadTime/Time.timeScale);
             }
         }
 
         if(Input.GetKeyDown(KeyCode.E)&&CheckMana())
         {
-            if(!inSlowMo)
+            if(!InSlowMo)
             {
-                CurrentMana -= ManaCost;
-                //inSlowMo = true;
-                //TriggerSlowMo();
+                TriggerSlowMo();
                 ManaRechargePause = true;
                 if (!ManaRecharging)
                     StartCoroutine(StartManaRecharge());
 
-                //Invoke(nameof(SetinSlowMoToFalse), SlowReloadTime);
+                Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime/Time.timeScale);
+            }
+            else if(InSlowMo)
+            {
+                SetInSlowMoToFalse();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z) && CheckMana())
+        {
+            if(CanCall)
+            {
+                CanCall = false;
+                TriggerAggroCall();
+                Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
             }
         }
     }
 
-    private object SetinSlowMoToFalse()
+    private void TriggerAggroCall()
     {
-        throw new NotImplementedException();
+        aggroArr = Physics.OverlapSphere(transform.position, AggroRange, enemyLayer);
+        foreach(Collider col in aggroArr)
+        {
+            gotEnemy = col.TryGetComponent(out enemyComponent);
+            if(gotEnemy)
+            {
+                enemyComponent.Aggro(gameObject);
+            }
+        }
+
+    }
+
+    private void SetCanCallToTrue()
+    {
+        CanCall = true;
+    }
+
+    private void SetInSlowMoToFalse()
+    {
+        InSlowMo = false;
+        Time.timeScale = 1f;
     }
 
     private void TriggerSlowMo()
     {
-        throw new NotImplementedException();
+        CurrentMana -= ManaCost;
+        InSlowMo = true;
+        ManaRechargePause = true;
+        if (!ManaRecharging)
+            StartCoroutine(StartManaRecharge());
+        Time.timeScale *= SlowMult;
+        Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime);
     }
 
     private void SetDashingToFalse()
     {
-        isDashing = false;
+        IsDashing = false;
     }
 
     private void Reposition()
@@ -255,8 +295,6 @@ public class PlayerScript : BasePlayerClass
     #region Debugs
     private void OnDrawGizmosSelected()
     {
-        Debug.DrawRay(transform.position, playerObj.forward*20f, Color.green);
-        Debug.DrawRay(transform.position, orientation.forward*20f, Color.red);
     }
     #endregion
 }

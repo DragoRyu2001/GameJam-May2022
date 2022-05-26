@@ -82,7 +82,7 @@ public class AimScript : MonoBehaviour
         if (desiredFOV != cam.fieldOfView)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFOV, elapsedTime / rate);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime/Time.timeScale;
             if (elapsedTime > rate)
             {
                 cam.fieldOfView = desiredFOV;

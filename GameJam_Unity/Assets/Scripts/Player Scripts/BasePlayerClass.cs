@@ -37,17 +37,20 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField, ReadOnly] private float currentBT;
 
     [Header("Dash Parameters")]
+    [SerializeField, ReadOnly] private bool isDashing;
     [SerializeField] private float dashForce;
-    [SerializeField, Range(0.7f, 1.25f)] private float dashReloadTime;
+    [SerializeField, Range(0.5f, 1.75f)] private float dashReloadTime;
 
     [Header("Slow Mo Parameters")]
+    [SerializeField, ReadOnly] private bool inSlowMo;
     [SerializeField] private float slowTime;
-    [SerializeField, Range(0.3f, 0.5f)] private float slowMult;
-    [SerializeField, Range(4f, 5f)] private float slowReloadTime;
+    [SerializeField, Range(0.3f, 0.6f)] private float slowMult;
+    [SerializeField, Range(4f, 8f)] private float slowReloadTime;
 
     [Header("Aggro Parameters")]
+    [SerializeField, ReadOnly] private bool canCall;
     [SerializeField] private float aggroRange;
-    [SerializeField, Range(0.7f, 1.25f)] private float aggroReloadTime;
+    [SerializeField, Range(4f, 5f)] private float aggroReloadTime;
 
     [Header("Statuses")]
     [SerializeField, ReadOnly] private bool isAlive;
@@ -90,6 +93,9 @@ public class BasePlayerClass : MonoBehaviour
     public bool CanSprint { get => canSprint; set => canSprint = value; }
     public bool CanCast { get => canCast; set => canCast = value; }
     public float ManaCost { get => manaCost; set => manaCost = value; }
+    public bool InSlowMo { get => inSlowMo; set => inSlowMo = value; }
+    public bool CanCall { get => canCall; set => canCall = value; }
+    public bool IsDashing { get => isDashing; set => isDashing = value; }
 
     public void TakeDamage(float damage)
     {
@@ -150,6 +156,7 @@ public class BasePlayerClass : MonoBehaviour
         CurrentMana = MaxMana;
         CurrentSprint = MaxSprint;
         CurrentBT = BerserkTime;
+        canCall = true;
         CheckHealth();
         CheckSprint();
         CheckMana();
@@ -186,7 +193,7 @@ public class BasePlayerClass : MonoBehaviour
             if (ManaRechargePause)
             {
                 ManaRechargePause = false;
-                yield return new WaitForSeconds(ManaRechargePauseTime);
+                yield return new WaitForSecondsRealtime(ManaRechargePauseTime);
             }
             CurrentMana += Time.deltaTime * ManaRegenRate;
             yield return null;
@@ -208,8 +215,7 @@ public class BasePlayerClass : MonoBehaviour
             if (HealthRechargePause)
             {
                 HealthRechargePause = false;
-                Debug.Log("health Pause");
-                yield return new WaitForSeconds(1.25f);
+                yield return new WaitForSecondsRealtime(1.25f);
             }
 
             CurrentHealth += Time.deltaTime * HealthRegenRate;
@@ -234,8 +240,7 @@ public class BasePlayerClass : MonoBehaviour
             if (SprintRechargePause)
             {
                 SprintRechargePause = false;
-                Debug.Log("Sprint Pause");
-                yield return new WaitForSeconds(SprintRechargePauseTime);
+                yield return new WaitForSecondsRealtime(SprintRechargePauseTime);
             }
             CurrentSprint += Time.deltaTime * SprintRegenRate;
             yield return null;
