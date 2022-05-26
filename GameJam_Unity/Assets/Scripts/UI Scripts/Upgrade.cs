@@ -102,10 +102,10 @@ public class Upgrade : MonoBehaviour
         slowReload = 0.1f*player.SlowReloadTime;
         //=============================================================
         //Guns Stats Initialised=======================================
-        rifleReloadDecrease = 0.1f*rifle.ReloadTime;
-        crossBowReloadDecrease = 0.1f*rifle.ReloadTime;
-        rifleDamageIncrease = 0.1f*rifle.Damage;
-        shotGunDamageIncrease = 0.1f*shotgun.Damage;
+        rifleReloadDecrease = 0.2f*rifle.ReloadTime;
+        crossBowReloadDecrease = 0.2f*rifle.ReloadTime;
+        rifleDamageIncrease = 0.2f*rifle.Damage;
+        shotGunDamageIncrease = 0.2f*shotgun.Damage;
     }
     void Update()
     {
@@ -381,15 +381,17 @@ public class Upgrade : MonoBehaviour
     //Lvl 1, Lvl2, Lvl 3
     public void UpgradeCrossBow()
     {
-        //Base: Damage = 75 DPS
-        //Level 1: Prefab different arrow= +20%                         (Single)
+        //Base: Damage = 75 DPS->0.7
+        //Level 1: Prefab different arrow= Damage = 100 DPS->0.6        (Single)
         //Level 2: Model change, Prefab different arrow= +20%           (Triple)
         //Level 3: Model change, Prefab different arrow= +20% 22 per shot (Auto)
         crossbowLevel++;
         switch(crossbowLevel)
         {
             case 1:
-
+                //Method(int)
+                //player.enum = State
+                //player.setCrossBow(GameObject)
                 break;
             case 2:
 
@@ -404,11 +406,24 @@ public class Upgrade : MonoBehaviour
     }
     public void UpgradeRifle()
     {
+        
         if(rifleLevel<5)
         {
             rifleLevel++;
-            rifle.ReloadTime-=rifleReloadDecrease;
-            rifle.Damage+=rifleDamageIncrease;
+            int cost = rifleLevel*costSouls*gunSoulMult;
+            if(souls-cost>=0)
+            {
+                souls-=cost;
+                
+                rifle.ReloadTime-=rifleReloadDecrease;
+                rifle.Damage+=rifleDamageIncrease;
+                UpdateSouls();
+            }
+            else
+            {
+                gunInfoText.text="Don't have enough funds";
+            }
+            
         }
         else
         {
@@ -421,8 +436,19 @@ public class Upgrade : MonoBehaviour
         if(shotgunLevel<5)
         {
             shotgunLevel++;
-            shotgun.ReloadTime-=shotgunReloadDecrease;
-            shotgun.Damage+=shotGunDamageIncrease;
+            int cost = shotgunLevel*costSouls*gunSoulMult;
+            if(souls-cost>=0)
+            {
+                souls-=cost;
+                shotgun.ReloadTime-=shotgunReloadDecrease;
+                shotgun.Damage+=shotGunDamageIncrease;
+                UpdateSouls();
+            }
+            else
+            {
+                gunInfoText.text="Don't have enough funds";
+            }
+
         }
         else
         {
