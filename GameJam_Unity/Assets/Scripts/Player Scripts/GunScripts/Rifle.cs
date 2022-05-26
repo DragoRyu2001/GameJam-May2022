@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +6,11 @@ public class Rifle : GunGeneral
 {
     [SerializeField] bool enemyHit;
     Enemy hitEnemyComponent;
-    private RaycastHit shotHit;
 
+    [SerializeField] GameObject[] decalArray;
 
+    int randIndex;
+    private GameObject decal;
     // Start is called before the first frame update
 
     private void Start()
@@ -45,16 +46,21 @@ public class Rifle : GunGeneral
 
     private void Shoot()
     {
-        enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);
-        if(enemyHit)
+        if (hitSomething)
         {
-            Debug.Log("Shot Enemy");
-            hitEnemyComponent.TakeDamage(Damage, true);
-        }
-        else
-        {
-            Debug.Log("Shot Wall");
-            //Decal stuff
+            enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);
+            if(enemyHit)
+            {
+                Debug.Log("Shot Enemy");
+                hitEnemyComponent.TakeDamage(Damage, true);
+            }
+            else
+            {
+                Debug.Log("Shot Wall");
+                randIndex = Random.Range(0, decalArray.Length);
+                decal = Instantiate(decalArray[randIndex], hit.point, Quaternion.identity);
+                decal.transform.rotation = Quaternion.FromToRotation(decal.transform.forward, hit.normal);
+            }
         }
         currentAmmo -= 1;
         

@@ -23,7 +23,7 @@ public class AimScript : MonoBehaviour
     private float camXPos;
     private float camYPos;
     private float camZPos;
-
+    public bool isAiming;
 
     void Start()
     {
@@ -65,6 +65,7 @@ public class AimScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            isAiming = true;
             elapsedTime = 0;
         }
         if (Input.GetMouseButton(1))
@@ -73,6 +74,7 @@ public class AimScript : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
+            isAiming = false;
             elapsedTime = 0;
             desiredFOV = 60;
         }

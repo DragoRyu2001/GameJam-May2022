@@ -21,6 +21,7 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] protected LayerMask layersToCheck;
 
 
+    protected bool hitSomething;
 
 
     protected Ray destRay;
@@ -47,10 +48,12 @@ public class GunGeneral : MonoBehaviour
         if (Physics.Raycast(destRay, out hit, 100f, layersToCheck))
         {
             dest = hit.point;
+            hitSomething = true;
         }
         else
         {
             dest = destRay.GetPoint(100);
+            hitSomething = false;
         }
         muzzle.LookAt(dest);
     }

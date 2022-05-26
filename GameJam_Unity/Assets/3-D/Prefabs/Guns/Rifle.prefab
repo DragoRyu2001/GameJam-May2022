@@ -126,6 +126,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   enemyHit: 0
+  decalArray:
+  - {fileID: 2150207323430804898, guid: 41a8aebd22519834d9edc185fad599b6, type: 3}
+  - {fileID: 2150207323430804898, guid: 2b2582ff155681f4ea17682a41bd248a, type: 3}
+  - {fileID: 2150207323430804898, guid: 0ae685ff39280b2419d60a7ccddbb403, type: 3}
+  - {fileID: 2150207323430804898, guid: 5ffc7b13566f51345a4580eca8e769dc, type: 3}
+  - {fileID: 2150207323430804898, guid: 25c2629cab2a5ac4488e535a507319cd, type: 3}
 --- !u!1001 &4202191072170173547
 PrefabInstance:
   m_ObjectHideFlags: 0
