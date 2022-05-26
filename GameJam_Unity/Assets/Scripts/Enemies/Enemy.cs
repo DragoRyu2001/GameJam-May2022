@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Enemy : MonoBehaviour
 {
     [Header("General")]
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     [ReadOnly, SerializeField]protected bool isAlive;
     [SerializeField]protected Animator anim;
     [SerializeField] protected GameObject deathFX;
+
     
     
     public void Aggro(GameObject obj)
@@ -20,10 +22,10 @@ public class Enemy : MonoBehaviour
         target = obj;
     }
     #region General
-    public void TakeDamage(float dmg, bool isPlayer, bool berserk)
+    public void TakeDamage(float dmg, bool isPlayer)
     {
 
-        currentHealth-=(berserk?(1.5f*dmg):dmg);
+        //currentHealth-=(GameManager.?(1.5f*dmg):dmg);
         if(isPlayer)
         {
             //GameManer info about Player
