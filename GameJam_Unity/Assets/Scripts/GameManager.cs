@@ -5,12 +5,26 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject Player;
-
     PlayerScript pScript;
+
+    public static GameManager instance;
     // Start is called before the first frame update
     void Start()
     {
         pScript = Player.GetComponent<PlayerScript>();
+    }
+
+    private void Awake()
+    {
+        if(instance==null)
+        {
+            instance = this;
+        }
+    }
+
+    public bool IsPlayerBerserking()
+    {
+        return pScript.InBerserk;
     }
 
     public Vector3 WhereIsPlayer()
