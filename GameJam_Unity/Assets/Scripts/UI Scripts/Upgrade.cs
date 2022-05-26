@@ -456,6 +456,30 @@ public class Upgrade : MonoBehaviour
         }
 
     }
+    public void RifleShowUpgrade()
+    {
+        int cost = (rifleLevel+1)*costSouls*gunSoulMult;
+        if(rifleLevel+1<=5)
+            gunInfoText.text = " Cost: "+cost+"\n Rifle Reload Time: "+rifle.ReloadTime+" - "+rifleReloadDecrease+"\n Rifle Damage: "+rifle.Damage+" + "+rifleDamageIncrease;
+        else
+            gunInfoText.text = "No Upgrades Available";
+    }
+    public void ShotgunShowUpgrade()
+    {
+        int cost = (shotgunLevel+1)*costSouls*gunSoulMult;
+        if(shotgunLevel+1<=5)
+            gunInfoText.text = " Cost: "+cost+"\n Shotgun Reload Time: "+shotgun.ReloadTime+" - "+shotgunReloadDecrease+"\n Shotgun Damage: "+shotgun.Damage+" + "+shotGunDamageIncrease;
+        else
+            gunInfoText.text = "No Upgrades Available";
+    }
+    public void CrossbowShowUpgrade()
+    {
+        int cost = (crossbowLevel+1)*costSouls*gunSoulMult;
+        /*if(crossbowLevel+1<=5)
+            gunInfoText.text = " Cost: "+cost+"\n Shotgun Reload Time: "+shotgun.ReloadTime+" - "+shotgunReloadDecrease+"\n Shotgun Damage: "+shotgun.Damage+" + "+shotGunDamageIncrease;
+        else
+            gunInfoText.text = "No Upgrades Available";*/
+    }
 
     #endregion
     
@@ -463,6 +487,8 @@ public class Upgrade : MonoBehaviour
     public void ResetInfo()
     {
         basicInfoText.text = "";
+        abilityInfoText.text = "";
+        gunInfoText.text = "";
     }
     
 }
