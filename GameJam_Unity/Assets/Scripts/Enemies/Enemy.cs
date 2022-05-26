@@ -20,9 +20,10 @@ public class Enemy : MonoBehaviour
         target = obj;
     }
     #region General
-    public void TakeDamage(float dmg, bool isPlayer)
+    public void TakeDamage(float dmg, bool isPlayer, bool berserk)
     {
-        currentHealth-=dmg;
+
+        currentHealth-=(berserk?(1.5f*dmg):dmg);
         if(isPlayer)
         {
             //GameManer info about Player
