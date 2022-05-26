@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     {
         if (isPlayer && other.transform.CompareTag("Enemy"))
         {
-            other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer, playerScript.InBerserk);
+            other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer);
             Destroy(gameObject, 5f);
         }
         else if (!isPlayer && other.transform.tag == "Player")

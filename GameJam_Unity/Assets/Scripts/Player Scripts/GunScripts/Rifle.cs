@@ -47,7 +47,7 @@ public class Rifle : GunGeneral
             enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);
             if(enemyHit)
             {
-                hitEnemyComponent.TakeDamage(Damage, true, playerScript.InBerserk);
+                hitEnemyComponent.TakeDamage(Damage, true);
             }
             else
             {

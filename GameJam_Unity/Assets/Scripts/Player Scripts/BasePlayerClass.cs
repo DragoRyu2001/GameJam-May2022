@@ -14,7 +14,7 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] private float healthRegenRate;
     [SerializeField] private bool healthRecharging;
     [SerializeField] private bool healthRechargePause;
-    [SerializeField, Range(0.5f, 2f)] private float healthRechargePauseTime;
+    [SerializeField, Range(2f, 3.5f)] private float healthRechargePauseTime;
 
     [Header("Mana")]
     [SerializeField] private float maxMana;
@@ -76,7 +76,6 @@ public class BasePlayerClass : MonoBehaviour
 
 
     protected List<FrameStats> recordedData;
-    protected Vector3 lastVelocity;
 
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -122,17 +121,13 @@ public class BasePlayerClass : MonoBehaviour
 
     protected void Death()
     {
-        throw new NotImplementedException();
+        isAlive = false;
+        StopAllCoroutines();
     }
 
     public bool CheckHealth()
     {
         return IsAlive = CurrentHealth > 0;
-    }
-
-    public bool CheckBerserking()
-    {
-        return InBerserk = CurrentBT >= 0;
     }
 
     public bool CheckSprint()

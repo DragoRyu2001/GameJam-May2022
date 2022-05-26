@@ -64,7 +64,7 @@ public class Shotgun : GunGeneral
             {
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
-                    hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true, playerScript.InBerserk);
+                    hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
                 }
                 else
                 {

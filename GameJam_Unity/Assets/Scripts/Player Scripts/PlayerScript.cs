@@ -59,7 +59,7 @@ public class PlayerScript : BasePlayerClass
         if(!IsRewinding)
         {
             Move();
-            if(Critical)
+            if(Critical&&IsAlive)
             {
                 StartRecording();
             }
@@ -74,44 +74,112 @@ public class PlayerScript : BasePlayerClass
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        Debug.Log(CurrentHealth);
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             TakeDamage(20);
         }
-        if(!IsRewinding)
+        if(IsAlive)
         {
-            GroundCheck();
-            onSlope = SlopeCheck();
-            ControlDrag();
-            SprintCheck();
-            ReadInput();
-            slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
-            RotateModelToOrientation();
+            if (!IsRewinding)
+            {
+                GroundCheck();
+                onSlope = SlopeCheck();
+                ControlDrag();
+                SprintCheck();
+                ReadInput();
+                slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
+                RotateModelToOrientation();
+                if(InBerserk)
+                {
+                    CurrentBT -= Time.deltaTime;
+                    if (CurrentBT <= 0)
+                        CurrentBT = BerserkTime;
+                }
+            }
         }
 
     }
 
+    private void ReadInput()
+    {
+        //keyboard input
+        moveX = Input.GetAxisRaw("Horizontal");
+        moveY = Input.GetAxisRaw("Vertical");
+        translateVector = -orientation.forward * moveY - orientation.right * moveX;
+
+        //jump input
+        if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
+        {
+            Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && CheckMana())
+        {
+            if (!IsDashing)
+            {
+                IsDashing = true;
+                Reposition();
+                Invoke(nameof(SetDashingToFalse), DashReloadTime / Time.timeScale);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && CheckMana())
+        {
+            if (!InSlowMo)
+            {
+                TriggerSlowMo();
+                ManaRechargePause = true;
+                if (!ManaRecharging)
+                    StartCoroutine(StartManaRecharge());
+
+                Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime / Time.timeScale);
+            }
+            else if (InSlowMo)
+            {
+                SetInSlowMoToFalse();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z) && CheckMana())
+        {
+            if (CanCall)
+            {
+                CanCall = false;
+                TriggerAggroCall();
+                Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
+            }
+        }
+    }
+
+
     public void TakeDamage(float damage)
     {
-        CurrentHealth -= damage;
-        IsAlive = CheckHealth();
+        if(!IsRewinding)
+        {
+            CurrentHealth -= damage;
+            IsAlive = CheckHealth();
+            HealthRechargePause = true;
+            if (!HealthRecharging)
+                StartCoroutine(StartHealthRecharge());
 
-        if (CurrentHealth / MaxHealth < 0.25f)
-        {
-            Critical = true;
-            lastVelocity = rb.velocity;
-        }
+            if (CurrentHealth / MaxHealth < 0.25f)
+            {
+                Critical = true;
+            }
 
-        if (!IsAlive && !InBerserk)
-        {
-            InBerserk = true;
-            IsAlive = true;
-            Rewind();
-        }
-        else if (!IsAlive && InBerserk)
-        {
-            InBerserk = false;
-            Death();
+            if (!IsAlive && !InBerserk)
+            {
+                InBerserk = true;
+                IsAlive = true;
+                StopAllCoroutines();
+                Rewind();
+            }
+            else if (!IsAlive && InBerserk)
+            {
+                InBerserk = false;
+                Death();
+            }
         }
     }
 
@@ -132,33 +200,24 @@ public class PlayerScript : BasePlayerClass
             playerObj.rotation = recordedData[0].playerRot;
             recordedData.RemoveAt(0);
             IsRewinding = true;
-            Debug.Log(recordedData.Count);
         }
         else
         {
+            InBerserk = true;
             IsRewinding = false;
+            Time.timeScale = 1f;
             rb.isKinematic = false;
             CurrentHealth = BerserkHealthMult * MaxHealth;
-            rb.velocity = lastVelocity;
+            Invoke(nameof(SetIsBerserkToFalse), BerserkTime);
         }
     }
 
-
-    //don't use this, use event based regen
-    private void StatRegen()
+    void SetIsBerserkToFalse()
     {
-        if(CurrentHealth<MaxHealth)
-        {
-            StartCoroutine(StartHealthRecharge());
-        }
-        if(CurrentMana<MaxMana)
-        {
-            StartCoroutine(StartManaRecharge());
-        }
-        if(CurrentSprint<MaxSprint)
-        {
-            StartCoroutine(StartSprintRecharge());
-        }
+        InBerserk = false;
+        StartCoroutine(StartHealthRecharge());
+        StartCoroutine(StartManaRecharge());
+        StartCoroutine(StartSprintRecharge());
     }
 
     private void RotateModelToOrientation()
@@ -173,9 +232,6 @@ public class PlayerScript : BasePlayerClass
             angle = 0;
         }
     }
-
-    
-
 
     private void ControlDrag()
     {
@@ -213,56 +269,7 @@ public class PlayerScript : BasePlayerClass
         }
     }
 
-    private void ReadInput()
-    {
-        //keyboard input
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
-        translateVector = -orientation.forward * moveY - orientation.right * moveX;
-
-        //jump input
-        if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
-        {
-            Jump();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Q)&&CheckMana())
-        {
-            if (!IsDashing)
-            {
-                IsDashing = true;
-                Reposition();
-                Invoke(nameof(SetDashingToFalse), DashReloadTime/Time.timeScale);
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.E)&&CheckMana())
-        {
-            if(!InSlowMo)
-            {
-                TriggerSlowMo();
-                ManaRechargePause = true;
-                if (!ManaRecharging)
-                    StartCoroutine(StartManaRecharge());
-
-                Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime/Time.timeScale);
-            }
-            else if(InSlowMo)
-            {
-                SetInSlowMoToFalse();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z) && CheckMana())
-        {
-            if(CanCall)
-            {
-                CanCall = false;
-                TriggerAggroCall();
-                Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
-            }
-        }
-    }
+    
 
     private void TriggerAggroCall()
     {

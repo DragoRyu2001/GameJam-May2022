@@ -146,10 +146,10 @@ MonoBehaviour:
   critical: 0
   maxHealth: 200
   currentHealth: 0
-  healthRegenRate: 20
+  healthRegenRate: 7.5
   healthRecharging: 0
   healthRechargePause: 0
-  healthRechargePauseTime: 2
+  healthRechargePauseTime: 3.5
   maxMana: 100
   currentMana: 0
   manaRegenRate: 5
@@ -162,7 +162,7 @@ MonoBehaviour:
   sprintDecayRate: 3
   sprintRecharging: 0
   sprintRechargePause: 0
-  sprintRechargePauseTime: 0.5
+  sprintRechargePauseTime: 0.6
   berserkTime: 15
   currentBT: 0
   berserkHealthMult: 0.375
