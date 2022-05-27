@@ -26,6 +26,7 @@ public class MageAI : Enemy
 
     void Start()
     {
+        SetTarget();
         canShoot = true;
         currentHealth = maxHealth;
         isAlive = true;

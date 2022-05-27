@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum SpawnStates
+{
+    SPAWNING, WAITING, COUNTINGDOWN, CANSPAWN
+}
+
+
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject Archer;
-    [SerializeField] GameObject Knight;
-    [SerializeField] GameObject Mage;
+    [SerializeField] GameObject[] Enemies;
+    [SerializeField] GameObject Coffin;
+    [SerializeField] Light sun;
     
-    [Header("Phase and Wave Variables")]
+    [Header("Phase Variables")]
     [SerializeField] int phase;
     [SerializeField, ReadOnly] int currentWave;
     [SerializeField] int wavesThisPhase;
@@ -28,24 +34,80 @@ public class GameManager : MonoBehaviour
 
     [Header("Weighted Probability")]
     [SerializeField] float archerSpawnRate; 
-    [SerializeField] float knightSpawnRate; 
+    [SerializeField] float knightSpawnRate;
     [SerializeField] float mageSpawnRate;
-
-    public GameObject GiveTarget()
-    {
-        throw new System.NotImplementedException();
-    }
-
     [SerializeField, ReadOnly] float weightSum;
 
     [Header("Spawn Variables")]
     [SerializeField] float spawnRate;
     [SerializeField] Transform[] spawnPos;
-
+    [SerializeField] SpawnStates spawnState = SpawnStates.COUNTINGDOWN;
     PlayerScript pScript;
     public static GameManager instance;
 
-    bool nextWaveReady=true;
+    [Header("Wave Variables")]
+    [SerializeField] int nextWave = 0;
+    [SerializeField] float timeBetweenWaves = 5f;
+    [SerializeField, ReadOnly] float currentTimeBetweenWave;
+    [SerializeField] int waveNumber;
+    [SerializeField] int enemyCount;
+    [SerializeField] int killsThisWave;
+
+
+    void Start()
+    {
+        pScript = Player.GetComponent<PlayerScript>();
+        currentTimeBetweenWave = timeBetweenWaves;
+        spawnState = SpawnStates.CANSPAWN;
+        StartPhase();
+    }
+
+    void Update()
+    {
+        if (currentTimeBetweenWave <= 0)
+        {
+            if (spawnState == SpawnStates.CANSPAWN)
+            {
+                StartCoroutine(StartSpawning());
+                currentTimeBetweenWave = timeBetweenWaves;
+            }
+        }
+        else
+        {
+            currentTimeBetweenWave -= Time.deltaTime;
+        }
+    }
+
+    private void StartPhase()
+    {
+        currentWave = 0;
+        wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
+        enemiesThisWave = 5;
+        // text here saying phase x start
+
+    }
+
+    public GameObject GiveTarget(Component component)
+    {
+        if(component.name.Contains("Archer"))
+        {
+            return Player;
+        }
+        else if(component.name.Contains("Knight"))
+        {
+            return Random.Range(0, 100)>50?Player:Coffin;
+        }
+        else if(component.name.Contains("Mage"))
+        {
+            return Coffin;
+        }
+        else
+        {
+            return Player;
+        }
+    }
+
+
 
     public int RunRandom()
     {
@@ -69,15 +131,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseKills()
     {
         kills++;
-        if(CheckIfFinalKill())
-        {
-            Debug.Log("killed all");
-        }
-    }
-
-    private bool CheckIfFinalKill()
-    {
-        throw new System.NotImplementedException();
+        killsThisWave ++;
     }
 
     private void Awake()
@@ -87,14 +141,6 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    { 
-        pScript = Player.GetComponent<PlayerScript>();
-        Invoke(nameof(StartFirstPhase), 2f);
-    }
-
-
     public bool IsPlayerBerserking()
     {
         return pScript.InBerserk;
@@ -110,53 +156,36 @@ public class GameManager : MonoBehaviour
         pScript.TakeDamage(damage);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void StartFirstPhase()
-    {
-        phase = 0;
-        wavesThisPhase = 2;
-        enemiesThisWave = 15;
-        StartCoroutine(StartSpawning());
-    }
-
     private IEnumerator StartSpawning()
     {
+        spawnState = SpawnStates.SPAWNING;
         for (int i = 0; i < enemiesThisWave; i++)
         {
             yield return new WaitForSeconds(spawnRate);
-            switch (RunRandom())
-            {
-                case 0:
-                    {
-                        Instantiate(Archer, spawnPos[Random.Range(0, spawnPos.Length)].position, Quaternion.identity);
-                        break;
-                    }
+            Instantiate(Enemies[RunRandom()], spawnPos[Random.Range(0, spawnPos.Length)].position, Quaternion.identity);
+        }
 
-                case 1:
-                    {
-                        Instantiate(Knight, spawnPos[Random.Range(0, spawnPos.Length)].position, Quaternion.identity);
-                        break;
-                    }
-
-                case 2:
-                    {
-                        Instantiate(Mage, spawnPos[Random.Range(0, spawnPos.Length)].position, Quaternion.identity);
-                        break;
-                    }
-            }
+        spawnState = SpawnStates.WAITING;
+        yield return new WaitUntil(() => killsThisWave == enemiesThisWave);
+        currentWave++;
+        if(currentWave<wavesThisPhase)
+        {
+            Debug.Log("Wave Complete, moving on to next wave");
+            currentTimeBetweenWave = timeBetweenWaves;
+            killsThisWave = 0;
+            spawnState = SpawnStates.CANSPAWN;
+        }
+        else
+        {
+            Debug.Log("Wave And Phase Complete, nighttime");
+            EndPhase();
         }
     }
 
-    private void StartPhase()
+    private void EndPhase()
     {
-        currentWave = 0;
-        wavesThisPhase = 2 + phase;
-        enemiesThisWave = 15 +(enemyWaveDelta*survivedPhases);
+        sun.intensity = 0;
+        souls = kills * 150;
         
     }
 }

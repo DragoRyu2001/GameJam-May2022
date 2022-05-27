@@ -22,6 +22,7 @@ public class ArcherAI : Enemy
 
     void Start()
     {
+        SetTarget();
         canShoot = true;
         currentHealth = maxHealth;
         isAlive = true;

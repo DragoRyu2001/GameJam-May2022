@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     public void SetTarget()
     {
-       target = GameManager.instance.GiveTarget();
+        target = GameManager.instance.GiveTarget(this);
     }
 
     protected void onDeath()

@@ -12,6 +12,7 @@ public class KnightAI : Enemy
     bool canAttack;
     void Start()
     {
+        SetTarget();
         canAttack = true;
     }
 
