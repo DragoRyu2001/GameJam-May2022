@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float knightSpawnRate; 
     [SerializeField] float mageSpawnRate;
 
-    internal void GiveTarget()
+    public GameObject GiveTarget()
     {
         throw new System.NotImplementedException();
     }
