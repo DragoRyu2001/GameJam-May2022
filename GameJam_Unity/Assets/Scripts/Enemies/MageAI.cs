@@ -19,17 +19,11 @@ public class MageAI : Enemy
     [SerializeField] float reloadTime;
     [SerializeField] GameObject AOESplash;
     [SerializeField] GameObject explode_PS;
-    
-    
-
-    bool canShoot;
 
     void Start()
     {
         SetTarget();
-        canShoot = true;
-        currentHealth = maxHealth;
-        isAlive = true;
+        SetBaseParameters();
     }
     void Update()
     {
@@ -37,7 +31,7 @@ public class MageAI : Enemy
         if(currentHealth<=0&&isAlive)
         {
             isAlive = false;
-            canShoot = false;
+            canAttack = false;
             onDeath();
         }
     }
@@ -55,10 +49,10 @@ public class MageAI : Enemy
             {
                 agent.ResetPath();
                 anim.SetFloat("Blend", 0);
-                if(canShoot)
+                if(canAttack)
                 {
                     StartCoroutine(AOEShoot(target.transform.position));
-                    canShoot = false;
+                    canAttack = false;
                     Invoke("ResetShoot", reloadTime);
                 }
             }
@@ -69,7 +63,7 @@ public class MageAI : Enemy
     {
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(castPre);
-        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, 1.2f,targetPos.z), AOESplash.transform.rotation);
+        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, (targetPos.y-1f),targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
         
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
@@ -86,13 +80,13 @@ public class MageAI : Enemy
         }
 
         Destroy(obj);
-        GameObject explode = Instantiate(explode_PS,  new Vector3(targetPos.x, 1.2f,targetPos.z), explode_PS.transform.rotation);
+        GameObject explode = Instantiate(explode_PS,  new Vector3(targetPos.x, (targetPos.y-0.75f),targetPos.z), explode_PS.transform.rotation);
         Destroy(explode, 1f);
         
     }
     void ResetShoot()
     {
-        canShoot = true;
+        canAttack = true;
     }
     #endregion
     

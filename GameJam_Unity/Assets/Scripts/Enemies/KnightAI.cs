@@ -9,11 +9,11 @@ public class KnightAI : Enemy
     [SerializeField] float coolDown;
     [SerializeField]float attackTime;
     
-    bool canAttack;
+    
     void Start()
     {
         SetTarget();
-        canAttack = true;
+        SetBaseParameters();
     }
 
     
@@ -46,6 +46,7 @@ public class KnightAI : Enemy
             }
             else
             {
+                
                 agent.SetDestination(target.transform.position);
                 anim.SetFloat("Blend", 1, 0.5f, Time.deltaTime);
             }

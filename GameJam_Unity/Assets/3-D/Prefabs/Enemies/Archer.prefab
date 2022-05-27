@@ -492,6 +492,7 @@ MonoBehaviour:
   isAlive: 0
   anim: {fileID: 3894956386152109071}
   deathFX: {fileID: 616900232720059127, guid: 7bcc2569e17280e4f9dd78c115cfd03c, type: 3}
+  canAttack: 0
   shootingRange: 20
   drawSpeed: 5
   arrow: {fileID: 2475439408802478170, guid: ff18624ad005bee4e8774c50f58da164, type: 3}

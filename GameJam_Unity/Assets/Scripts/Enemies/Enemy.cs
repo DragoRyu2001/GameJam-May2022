@@ -14,8 +14,14 @@ public class Enemy : MonoBehaviour
     [ReadOnly, SerializeField]protected bool isAlive;
     [SerializeField]protected Animator anim;
     [SerializeField] protected GameObject deathFX;
+    [ReadOnly, SerializeField]protected bool canAttack;
 
-    
+    protected void SetBaseParameters()
+    {
+        isAlive = true;
+        currentHealth = maxHealth;
+        canAttack = true;
+    }
     
     public void Aggro(GameObject obj)
     {
@@ -24,13 +30,9 @@ public class Enemy : MonoBehaviour
     #region General
     public void TakeDamage(float dmg, bool isPlayer)
     {
-
         currentHealth-=(GameManager.instance.IsPlayerBerserking()?(1.5f*dmg):dmg);
         if(isPlayer)
-        {
-            //GameManer info about Player
-            //target = player
-        }
+            target = GameManager.instance.WhereIsPlayer();
     }
 
     public void SetTarget()

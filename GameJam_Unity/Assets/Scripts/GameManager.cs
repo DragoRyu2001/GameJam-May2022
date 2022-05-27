@@ -146,9 +146,9 @@ public class GameManager : MonoBehaviour
         return pScript.InBerserk;
     }
 
-    public Vector3 WhereIsPlayer()
+    public GameObject WhereIsPlayer()
     {
-        return Player.transform.position;
+        return Player;
     }
 
     public void DamagePlayer(float damage)

@@ -18,14 +18,12 @@ public class ArcherAI : Enemy
     
     
 
-    bool canShoot;
+    
 
     void Start()
     {
         SetTarget();
-        canShoot = true;
-        currentHealth = maxHealth;
-        isAlive = true;
+        SetBaseParameters();
     }
     void Update()
     {
@@ -33,7 +31,7 @@ public class ArcherAI : Enemy
         if(currentHealth<=0&&isAlive)
         {
             isAlive = false;
-            canShoot = false;
+            canAttack = false;
             onDeath();
         }
     }
@@ -49,9 +47,9 @@ public class ArcherAI : Enemy
                 targetLookAt.transform.position = target.transform.position+(Vector3.up*0.5f);
                 transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                 arrowPos.LookAt(target.transform);
-                if(canShoot)
+                if(canAttack)
                 {
-                    canShoot = false;
+                    canAttack = false;
                     StartCoroutine(Shoot(target.transform.position));
                 }
             }
@@ -84,7 +82,7 @@ public class ArcherAI : Enemy
         yield return new WaitForSeconds(drawSpeed);
         anim.SetTrigger("Attack");
         Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-        canShoot = true;
+        canAttack = true;
     }
     #endregion
    
