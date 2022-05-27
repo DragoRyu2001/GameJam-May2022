@@ -8,4 +8,62 @@ AvatarMask:
   m_PrefabAsset: {fileID: 0}
   m_Name: werewolfUpper
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Bone
+    m_Weight: 0
+  - m_Path: Armature/Bone/Bone.002
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Bone.008
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Bone.008/Bone.008_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Bone.008/wolfBust1.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.L/Shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.L/Shoulder.L/Elbow.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.L/Shoulder.L/Elbow.L/Wrist.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.L/Shoulder.L/Elbow.L/Wrist.L/Wrist.L_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.R/Shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.R/Shoulder.R/Elbow.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.R/Shoulder.R/Elbow.R/Wrist.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.002/Bone.001/Chest.R/Shoulder.R/Elbow.R/Wrist.R/Wrist.R_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/thigh.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.L/upperLeg.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.L/upperLeg.L/LowerLeg.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.L/upperLeg.L/LowerLeg.L/toe.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.L/upperLeg.L/LowerLeg.L/toe.L/toe.L_end
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.R/upperLeg.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.R/upperLeg.R/LowerLeg.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.R/upperLeg.R/LowerLeg.R/toe.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/thigh.R/upperLeg.R/LowerLeg.R/toe.R/toe.R_end
+    m_Weight: 0
+  - m_Path: Cube
+    m_Weight: 0

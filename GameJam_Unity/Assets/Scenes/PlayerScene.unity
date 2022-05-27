@@ -1098,6 +1098,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1750871109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085487308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1750871110
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750871109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: d4997ff2f3c0cfc4f8769ac850e1fb00, type: 3}
+  m_Controller: {fileID: 9100000, guid: ea8e5e41a3e3a284e808f28cb6a159b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1873781300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1365,75 @@ Transform:
   m_Father: {fileID: 711963379}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2085487308
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.43
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
+        type: 3}
+      propertyPath: m_Name
+      value: WerewolfAnimated
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4997ff2f3c0cfc4f8769ac850e1fb00, type: 3}
 --- !u!1 &2129049338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6488576700109163397, guid: f3cb4f36e91d4e142985585de575c294,
