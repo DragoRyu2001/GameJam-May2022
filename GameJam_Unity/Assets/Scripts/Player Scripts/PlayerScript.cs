@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-
 enum CrossbowTypes
 {
     SINGLE = 0,
@@ -33,7 +31,11 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] Collider coll;
+    [SerializeField] Collider wereWolfCollider;
     [SerializeField] Transform playerObj;
+    [SerializeField] GameObject servantModel;
+    [SerializeField] GameObject werewolfModel;
+    [SerializeField] WerewolfScript werewolfScript;
 
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
@@ -53,7 +55,6 @@ public class PlayerScript : BasePlayerClass
     Vector3 slopeTranslateDirection;
     [Header("Translate Modifier")]
     [SerializeField, ReadOnly] float translateModifier;
-    private Vector3 rotateVector;
 
 
     // Start is called before the first frame update
@@ -84,16 +85,11 @@ public class PlayerScript : BasePlayerClass
         {
             rb.isKinematic = true;
             Rewind();
-
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            TakeDamage(20);
-        }
         if(IsAlive)
         {
             if (!IsRewinding)
@@ -166,6 +162,21 @@ public class PlayerScript : BasePlayerClass
                 TriggerAggroCall();
                 Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
             }
+        }
+
+        //Ultimate Input
+        if(Input.GetKey(KeyCode.X)&&CheckUltMana())
+        {
+            servantModel.SetActive(false);
+            werewolfModel.SetActive(true);
+
+            coll.enabled = false;
+            wereWolfCollider.enabled = true;
+
+            werewolfScript.enabled = true;
+            enabled = false;
+
+            gunArray[currentGun].SetActive(false);
         }
 
 
@@ -331,6 +342,7 @@ public class PlayerScript : BasePlayerClass
             if(gotEnemy)
             {
                 enemyComponent.Aggro(gameObject);
+                enemyComponent.TakeDamage(40, true);
             }
         }
 
@@ -390,11 +402,6 @@ public class PlayerScript : BasePlayerClass
     }
 
     #region Physical Checks
-
-    public Vector3 GetVelocity()
-    {
-        return rb.velocity;
-    }
     private bool SlopeCheck()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (playerHeight / 2) + 1.5f))
@@ -417,7 +424,6 @@ public class PlayerScript : BasePlayerClass
             CurrentSprint -= Time.deltaTime * SprintDecayRate;
             SprintRechargePause = true;
             return true;
-            
         }
         else
         {

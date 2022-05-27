@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: 4a92bbd5a6649be4d97cf00ef2de4c6d
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      74: -3418135150911807900
+    second: SingleCrossbw_Idle
+  - first:
+      74: 4050911588569696729
+    second: BlunderBuss_Idle
+  - first:
+      74: -3638709708792651876
+    second: BlunderBuss_Shoot
+  - first:
+      74: -6148234244517374896
+    second: BlunderBuss_Reload
+  - first:
+      74: -6530161629307537324
+    second: BlunderBuss_Death/Transform
+  - first:
+      74: -5156208858995650391
+    second: CrossbowAuto_Reload
+  - first:
+      74: -5487367052718841520
+    second: Armature|BlunderBuss_Death/Transform
+  - first:
+      74: -6199903636489160445
+    second: Armature|BlunderBuss_Idle
+  - first:
+      74: 7950432824622332707
+    second: Armature|BlunderBuss_Reload
+  - first:
+      74: 8244757081986532592
+    second: Armature|BlunderBuss_Shoot
+  - first:
+      74: 8820737410158862693
+    second: Armature|CrossBowAuto_Death/Transform
+  - first:
+      74: -4155154205398250775
+    second: Armature|CrossbowAuto_Idle
+  - first:
+      74: 7625950041194500512
+    second: Armature|CrossbowAuto_Reload
+  - first:
+      74: 4198908700552567694
+    second: Armature|CrossbowAuto_Shoot
+  - first:
+      74: 7156190216753275713
+    second: Armature|CrossbowSingle_Death/Transform
+  - first:
+      74: 813116164905235634
+    second: Armature|Rifle_Death/Transform
+  - first:
+      74: -6368841857459982327
+    second: Armature|Rifle_Idle
+  - first:
+      74: 8961327575701343517
+    second: Armature|Rifle_Reload
+  - first:
+      74: -5340852042561386058
+    second: Armature|Rifle_Shoot
+  - first:
+      74: -7180107540722459108
+    second: Armature|Rifle_Walk
+  - first:
+      74: 2878776812428975253
+    second: Armature|SingleCrossbow_Reload
+  - first:
+      74: -743223808086938046
+    second: Armature|SingleCrossbow_Shoot
+  - first:
+      74: 6396180484127278997
+    second: Armature|SingleCrossbw_Idle
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

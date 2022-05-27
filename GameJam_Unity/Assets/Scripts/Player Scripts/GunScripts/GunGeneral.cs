@@ -18,6 +18,7 @@ public class GunGeneral : MonoBehaviour
     [SerializeField, ReadOnly] protected bool inFireRateDelay;
     [SerializeField] protected float maxDistance;
     [SerializeField] protected LayerMask layersToCheck;
+    [SerializeField] protected Transform aimPos;
 
     protected bool hitSomething;
 
@@ -54,6 +55,8 @@ public class GunGeneral : MonoBehaviour
             hitSomething = false;
         }
         muzzle.LookAt(dest);
+        if(aimPos!=null)
+        aimPos.position = dest;
     }
 
     protected IEnumerator RateOfFireLimiter()

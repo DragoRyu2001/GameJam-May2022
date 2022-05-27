@@ -152,6 +152,11 @@ public class BasePlayerClass : MonoBehaviour
         return CanCast = CurrentMana - 30 >= 0f;
     }
 
+    public bool CheckUltMana()
+    {
+        return currentMana >= maxMana;
+    }
+
     void Start()
     {
 

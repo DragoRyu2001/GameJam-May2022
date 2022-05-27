@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AimScript : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    [SerializeField] Transform lookPosition;
     [SerializeField] Camera cam;
     [SerializeField] float rate;
     float desiredFOV, elapsedTime = 0f;
@@ -49,14 +49,14 @@ public class AimScript : MonoBehaviour
 
         xRot = Mathf.Clamp(xRot, -90f, 90f);
 
-        camXPos = Mathf.Sin(yRot) * orbitRadius + player.position.x;
-        camYPos = player.position.y;
-        camZPos = Mathf.Cos(yRot) * orbitRadius + player.position.z;       
+        camXPos = Mathf.Sin(yRot) * orbitRadius + lookPosition.position.x;
+        camYPos = lookPosition.position.y;
+        camZPos = Mathf.Cos(yRot) * orbitRadius + lookPosition.position.z;       
     }
     private void Look()
     {
         transform.position = new Vector3(camXPos, camYPos, camZPos);
-        transform.LookAt(new Vector3(player.position.x, -xRot+player.position.y, player.position.z));
+        transform.LookAt(new Vector3(lookPosition.position.x, -xRot+lookPosition.position.y, lookPosition.position.z));
         orientation.rotation = Quaternion.Euler(0, yRot*Mathf.Rad2Deg,0);
     }
 
