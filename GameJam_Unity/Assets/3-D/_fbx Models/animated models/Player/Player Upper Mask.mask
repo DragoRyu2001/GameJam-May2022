@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player Upper Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Bone
+    m_Weight: 0
+  - m_Path: Armature/Bone/Bone.003
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/Bone.004
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/Bone.004/Bone.004_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/Bone.004/Cube
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001/shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001/shoulder.L/Elbow.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001/shoulder.L/Elbow.L/Wrist.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001/shoulder.L/Elbow.L/Wrist.L/Finger.L
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.L.001/shoulder.L/Elbow.L/Wrist.L/Finger.L/Finger.L_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001/shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001/shoulder.R/Elbow.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001/shoulder.R/Elbow.R/Wrist.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001/shoulder.R/Elbow.R/Wrist.R/Finger.R
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/Bone.002/Bone.001/shoulder.R.001/shoulder.R/Elbow.R/Wrist.R/Finger.R/Finger.R_end
+    m_Weight: 1
+  - m_Path: Armature/Bone/Bone.003/outer cloth.001
+    m_Weight: 1
+  - m_Path: Armature/Bone/Thigh.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.L/LowerLeg.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.L/LowerLeg.L/Ankle.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.L/LowerLeg.L/Ankle.L/Toe.L
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.L/LowerLeg.L/Ankle.L/Toe.L/Toe.L_end
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.R/LowerLeg.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.R/LowerLeg.R/Ankle.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.R/LowerLeg.R/Ankle.R/Toe.R
+    m_Weight: 0
+  - m_Path: Armature/Bone/Thigh.R/LowerLeg.R/Ankle.R/Toe.R/Toe.R_end
+    m_Weight: 0
+  - m_Path: Armature/ElbowIK.L
+    m_Weight: 0
+  - m_Path: Armature/ElbowIK.L/ElbowIK.L_end
+    m_Weight: 0
+  - m_Path: Armature/ElbowIK.R
+    m_Weight: 0
+  - m_Path: Armature/ElbowIK.R/ElbowIK.R_end
+    m_Weight: 0
+  - m_Path: Armature/LowerLegIK.L
+    m_Weight: 0
+  - m_Path: Armature/LowerLegIK.L/LowerLegIK.L_end
+    m_Weight: 0
+  - m_Path: Armature/LowerLegIK.R
+    m_Weight: 0
+  - m_Path: Armature/LowerLegIK.R/LowerLegIK.R_end
+    m_Weight: 0
+  - m_Path: Armature/shoulderPole.L
+    m_Weight: 0
+  - m_Path: Armature/shoulderPole.L/shoulderPole.L_end
+    m_Weight: 0
+  - m_Path: Armature/shoulderPole.R
+    m_Weight: 0
+  - m_Path: Armature/shoulderPole.R/shoulderPole.R_end
+    m_Weight: 0
+  - m_Path: Armature/ThighPole.L
+    m_Weight: 0
+  - m_Path: Armature/ThighPole.L/ThighPole.L_end
+    m_Weight: 0
+  - m_Path: Armature/ThighPole.R
+    m_Weight: 0
+  - m_Path: Armature/ThighPole.R/ThighPole.R_end
+    m_Weight: 0
+  - m_Path: Cube.002
+    m_Weight: 0
+  - m_Path: Cube.003
+    m_Weight: 0
+  - m_Path: middle cloth
+    m_Weight: 0
+  - m_Path: outer cloth
+    m_Weight: 0
