@@ -32,10 +32,17 @@ public class Enemy : MonoBehaviour
             //target = player
         }
     }
+
+    public void SetTarget()
+    {
+       target = GameManager.instance.GiveTarget();
+    }
+
     protected void onDeath()
     {
         GameObject obj = Instantiate(deathFX, transform.position-new Vector3(0, 0.5f, 0), deathFX.transform.rotation);
         Collider[] cols = Physics.OverlapSphere(this.transform.position, 10f);
+        GameManager.instance.IncreaseKills();
         Debug.Log("Enemy has Died");
         if(cols.Length>0)
         {

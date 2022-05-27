@@ -90,7 +90,6 @@ public class PlayerScript : BasePlayerClass
 
     void Update()
     {
-        Debug.Log(CurrentHealth);
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             TakeDamage(20);
