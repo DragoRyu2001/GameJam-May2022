@@ -397,6 +397,21 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
+        type: 3}
+      propertyPath: bloom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
+        type: 3}
+      propertyPath: chokeDelta
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
+        type: 3}
+      propertyPath: chokeDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6554067455169319981, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: m_RootOrder
