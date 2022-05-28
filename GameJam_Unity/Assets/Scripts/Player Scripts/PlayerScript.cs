@@ -149,15 +149,15 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsRewinding)
             {
-                if(rb.velocity.magnitude>0.2f)
+                if(rb.velocity.magnitude>0.2f&&GroundCheck())
                 {
                     if(Mathf.Abs(Vector3.SignedAngle(transform.forward, rb.velocity.normalized, Vector3.up))>90f)
                     {
-                        anim.SetFloat("Move", 0, 0.1f, Time.deltaTime);
+                        anim.SetFloat("Move", 2, 0.1f, Time.deltaTime);
                     }
                     else
                     {
-                        anim.SetFloat("Move", 2, 0.1f, Time.deltaTime);
+                        anim.SetFloat("Move", 0, 0.1f, Time.deltaTime);
                     }
                 }
                 else
@@ -236,17 +236,9 @@ public class PlayerScript : BasePlayerClass
         //Ultimate Input
         if (Input.GetKey(KeyCode.X) && CheckUltMana())
         {
-            rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
-            servantModel.SetActive(false);
-            werewolfModel.SetActive(true);
-
-            coll.enabled = false;
-            otherCollider.enabled = true;
-
-            werewolfScript.enabled = true;
-            enabled = false;
-
-            gunArray[currentGun].SetActive(false);
+            anim.StopPlayback();
+            anim.SetTrigger("Death");
+            Invoke(nameof(TurnToWerewolf), 1.2f);
         }
 
 
@@ -254,6 +246,8 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentGun = 0;
+            anim.SetInteger("Weapon", currentGun);
+            anim.SetTrigger("ChangeWeapon");
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -264,6 +258,8 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentGun = 1;
+            anim.SetInteger("Weapon", currentGun);
+            anim.SetTrigger("ChangeWeapon");
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -275,6 +271,12 @@ public class PlayerScript : BasePlayerClass
         {
             currentGun = 2;
             currentGun += (int)currentType;
+            if(currentGun==4)
+            {
+                anim.SetBool("AutoCrossbow",true);
+            }
+            anim.SetInteger("Weapon", 2);
+            anim.SetTrigger("ChangeWeapon");
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -287,6 +289,21 @@ public class PlayerScript : BasePlayerClass
         {
             coffin.HealCoffin(Time.deltaTime*coffinRepairSpeed);
         }
+    }
+
+    private void TurnToWerewolf()
+    {
+        //rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+        servantModel.SetActive(false);
+        werewolfModel.SetActive(true);
+
+        coll.enabled = false;
+        otherCollider.enabled = true;
+
+        werewolfScript.enabled = true;
+        enabled = false;
+
+        gunArray[currentGun].SetActive(false);
     }
 
     private void Jump()

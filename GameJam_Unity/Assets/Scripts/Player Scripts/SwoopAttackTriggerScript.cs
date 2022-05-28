@@ -22,14 +22,14 @@ public class SwoopAttackTriggerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Hello");
-        if(other.gameObject.tag=="Enemy")
+        if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("got enemy");
             enemySuccess = other.TryGetComponent<Enemy>(out enemyComponent);
             if(enemySuccess)
                 enemyComponent.TakeDamage(2000, true);
         }
-        else if(other.gameObject.tag=="Ground")
+        else if(other.gameObject.CompareTag("Ground"))
         {
             Debug.Log("got Ground");
             instantiatePoint = other.ClosestPoint(transform.position);

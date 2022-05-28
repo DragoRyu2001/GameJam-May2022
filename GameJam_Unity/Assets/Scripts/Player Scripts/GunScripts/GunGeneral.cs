@@ -10,6 +10,8 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] protected float fireRate;
     [SerializeField, ReadOnly] protected float firingDelay;
 
+    [SerializeField] protected Animator anim; 
+
     [SerializeField] protected int maxAmmo;
     [SerializeField, ReadOnly] protected int currentAmmo;
     [SerializeField, ReadOnly] protected bool canShoot = true;
@@ -55,6 +57,7 @@ public class GunGeneral : MonoBehaviour
             hitSomething = false;
         }
         muzzle.LookAt(dest);
+        Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
         if(aimPos!=null)
         aimPos.position = dest;
     }
@@ -71,7 +74,7 @@ public class GunGeneral : MonoBehaviour
     protected IEnumerator Reload()
     {
         reloading = true;
-        //animate here
+        anim.SetTrigger("Reload");
         yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
         reloading = false;

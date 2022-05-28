@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] bool isPlayer;
     [SerializeField] float maxDist;
-    [SerializeField] PlayerScript playerScript;
     Vector3 startPos;
     bool canMove;
 

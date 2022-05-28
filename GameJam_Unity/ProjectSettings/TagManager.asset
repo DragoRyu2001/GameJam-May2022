@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Level
   - Ground
+  - Vampire
   layers:
   - Default
   - TransparentFX

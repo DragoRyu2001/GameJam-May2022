@@ -42,7 +42,7 @@ public class Rifle : GunGeneral
 
     private void Shoot()
     {
-        Debug.Log("Shot");
+        anim.SetTrigger("Attack");
         if (hitSomething)
         {
             enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);

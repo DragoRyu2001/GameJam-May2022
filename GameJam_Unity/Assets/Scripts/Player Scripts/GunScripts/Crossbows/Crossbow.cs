@@ -20,6 +20,7 @@ public class Crossbow : GunGeneral
     {
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
+            anim.SetTrigger("Attack");
             Shoot();
             StartCoroutine(Reload());
         }

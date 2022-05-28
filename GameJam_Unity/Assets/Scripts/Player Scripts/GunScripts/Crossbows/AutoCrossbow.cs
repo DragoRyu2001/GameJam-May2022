@@ -26,7 +26,10 @@ public class AutoCrossbow : GunGeneral
         {
             Shoot();
             if (!inFireRateDelay)
+            {
+                anim.SetTrigger("Attack");
                 StartCoroutine(RateOfFireLimiter());
+            }
             if(currentAmmo==0&&!reloading)
                 StartCoroutine(Reload());
         }

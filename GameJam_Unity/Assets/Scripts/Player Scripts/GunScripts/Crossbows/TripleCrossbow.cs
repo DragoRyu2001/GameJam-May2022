@@ -26,6 +26,7 @@ public class TripleCrossbow : GunGeneral
     {
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
+            anim.SetTrigger("Attack");
             StartCoroutine(Shoot());
             StartCoroutine(Reload());
         }

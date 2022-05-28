@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 629443961397571332}
   - component: {fileID: 629443961397571333}
+  - component: {fileID: 6724738000334228242}
   m_Layer: 0
   m_Name: ClawDecal
   m_TagString: Untagged
@@ -55,3 +56,15 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 0}
   m_Size: {x: 1, y: 1, z: 1}
   m_FadeFactor: 1
+--- !u!114 &6724738000334228242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629443961397571338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e667c628b2d6442b2c63e2aecf8d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

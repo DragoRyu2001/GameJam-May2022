@@ -50,6 +50,7 @@ public class Shotgun : GunGeneral
     }
     private void Shoot()
     {
+        anim.SetTrigger("Attack");
         for (int i = 0; i < pellets; i++)
         {
             newDir = Random.insideUnitCircle * bloom;
@@ -60,7 +61,7 @@ public class Shotgun : GunGeneral
 
         foreach(Vector3 dir in directions)
         {
-            if(Physics.Raycast(muzzle.position, dir, out hit, maxDistance, layersToCheck))
+            if(Physics.Raycast(muzzle.position, -dir, out hit, maxDistance, layersToCheck))
             {
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
@@ -93,5 +94,15 @@ public class Shotgun : GunGeneral
             return Damage;
         }
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach(Vector3 vect in directions)
+        {
+            Debug.DrawRay(muzzle.position, -vect * maxDistance);
+            Debug.DrawRay(muzzle.position, -vect * medRange, Color.yellow);
+            Debug.DrawRay(muzzle.position, -vect * shortRange, Color.green);
+        }
     }
 }

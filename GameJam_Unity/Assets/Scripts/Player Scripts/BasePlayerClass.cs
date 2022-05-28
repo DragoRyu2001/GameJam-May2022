@@ -87,7 +87,7 @@ public class BasePlayerClass : MonoBehaviour
     
     protected bool GroundCheck()
     {
-        return Physics.CheckSphere(transform.position - new Vector3(0, 1f, 0), 0.4f, groundLayer);
+        return Physics.CheckSphere(transform.position - Vector3.down, 0.4f, groundLayer);
     }
 
     protected bool SlopeCheck()
@@ -136,6 +136,7 @@ public class BasePlayerClass : MonoBehaviour
     protected void Death()
     {
         isAlive = false;
+        anim.SetTrigger("Death");
         StopAllCoroutines();
     }
 
