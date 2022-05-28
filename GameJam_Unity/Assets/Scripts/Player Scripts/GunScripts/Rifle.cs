@@ -25,7 +25,7 @@ public class Rifle : GunGeneral
 
     private void ReadInput()
     {
-        if (Input.GetMouseButton(0) && canShoot)
+        if (Input.GetMouseButton(0) && CanShootCheck())
         {
             Shoot();
             if (!inFireRateDelay)
@@ -42,6 +42,7 @@ public class Rifle : GunGeneral
 
     private void Shoot()
     {
+        Debug.Log("Shot");
         if (hitSomething)
         {
             enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);

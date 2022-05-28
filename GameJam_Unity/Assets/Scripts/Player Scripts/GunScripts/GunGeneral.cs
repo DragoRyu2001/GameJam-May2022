@@ -77,8 +77,8 @@ public class GunGeneral : MonoBehaviour
         reloading = false;
     }
 
-    protected void CanShootCheck()
+    protected bool CanShootCheck()
     {
-        canShoot = !inFireRateDelay && !reloading && currentAmmo > 0;
+        return canShoot = !inFireRateDelay && !reloading && currentAmmo > 0;
     }
 }
