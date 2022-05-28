@@ -146,7 +146,6 @@ public class BasePlayerClass : MonoBehaviour
         playerHeight = coll.bounds.size.y;
         CurrentHealth = MaxHealth;
         IsAlive = CheckHealth();
-        
     }
 
     protected void RotateModelToOrientation()

@@ -12,6 +12,10 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        if(!isPlayer)
+        {
+            damage = GameManager.instance.CrossbowDamageUpdate();
+        }
         startPos = transform.position;
         canMove = true;
     }

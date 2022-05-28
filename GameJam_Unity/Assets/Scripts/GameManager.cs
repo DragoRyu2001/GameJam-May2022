@@ -60,9 +60,11 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
+    private float crossbowDamage;
 
     void Start()
     {
+        crossbowDamage = 20f;
         pScript = Player.GetComponent<PlayerScript>();
         currentTimeBetweenWave = timeBetweenWaves;
         spawnState = SpawnStates.CANSPAWN;
@@ -115,7 +117,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public float CrossbowDamageUpdate()
+    {
+        return crossbowDamage;
+    }
 
     public int RunRandom()
     {
