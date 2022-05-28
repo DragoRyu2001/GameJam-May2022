@@ -810,6 +810,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 5554774849368173693, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6291241459415835916, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
@@ -830,6 +835,11 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 2088494693}
+    - target: {fileID: 7096083372152747821, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: ultDuration
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 7613667379369052739, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_IsActive

@@ -146,8 +146,11 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsRewinding)
             {
-                desiredWalkAnimSpeed = rb.velocity.magnitude < 2f ? 1f : rb.velocity.magnitude / 5f;
-                anim.SetFloat("Move", Mathf.Lerp(currentWalkAnimSpeed, desiredWalkAnimSpeed, 500f * Time.deltaTime));
+                desiredWalkAnimSpeed = rb.velocity.magnitude<0.2f?0f:1;
+                if(desiredWalkAnimSpeed>0)
+                    anim.SetFloat("Move", 1f, 0.1f, Time.deltaTime);
+                else
+                    anim.SetFloat("Move", 0f);
 
                 GroundCheck();
                 onSlope = SlopeCheck();

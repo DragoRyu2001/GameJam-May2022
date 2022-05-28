@@ -40,7 +40,16 @@ public class WerewolfScript : BasePlayerClass
         playerHeight = otherCollider.bounds.size.y;
     }
 
-    private IEnumerator AttackAction(float time)
+    private IEnumerator AttackAction1(float time)
+    {
+        anim.SetBool("canAttack", true);
+        ToggleHandColliders(true);
+        yield return new WaitForSeconds(time);
+        ToggleHandColliders(false);
+        anim.SetBool("canAttack", false);
+    } 
+
+    private IEnumerator AttackAction2(float time)
     {
         ToggleHandColliders(true);
         canMove = false;
@@ -122,8 +131,9 @@ public class WerewolfScript : BasePlayerClass
 
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(AttackAction(2.46f));
+            StartCoroutine(AttackAction1(2.46f));
             anim.SetTrigger("Attack1");
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -138,7 +148,7 @@ public class WerewolfScript : BasePlayerClass
                 rb.AddForce(Vector3.down * poundForce, ForceMode.Impulse);
             }
 
-            StartCoroutine(AttackAction(1.42f));
+            StartCoroutine(AttackAction2(1.42f));
             enemyCol = Physics.OverlapSphere(transform.position, poundRange, enemyLayer);
             foreach (Collider col in enemyCol)
             {
