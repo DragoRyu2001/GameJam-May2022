@@ -10,12 +10,12 @@ public class EnableDisableIK : StateMachineBehaviour
     {
         if(enable)
         {
-            animator.gameObject.GetComponent<Animations>().SetTBIK(1);    
+            animator.gameObject.GetComponent<Animations>().SetWeights(1);    
             animator.SetLayerWeight(1, 1);
         }
         else
         {
-            animator.gameObject.GetComponent<Animations>().SetTBIK(0);
+            animator.gameObject.GetComponent<Animations>().SetWeights(0);
             animator.SetLayerWeight(1, 0);
         }
     }
@@ -31,12 +31,12 @@ public class EnableDisableIK : StateMachineBehaviour
     {
         if(enable)
         {
-            animator.gameObject.GetComponent<Animations>().SetTBIK(0);
+            animator.gameObject.GetComponent<Animations>().SetWeights(0);
             animator.SetLayerWeight(1, 0);   
         }
         else
         {
-            animator.gameObject.GetComponent<Animations>().SetTBIK(1);    
+            animator.gameObject.GetComponent<Animations>().SetWeights(1);    
             animator.SetLayerWeight(1, 1);
         }    
     }

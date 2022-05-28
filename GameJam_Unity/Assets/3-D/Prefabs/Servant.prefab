@@ -1358,7 +1358,7 @@ PrefabInstance:
     - target: {fileID: 5444159411536631566, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5444159411536631566, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
@@ -2103,7 +2103,7 @@ PrefabInstance:
     - target: {fileID: 5110692958050701717, guid: 950122331c8fb1e4ba5ac427d6de609b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5110692958050701717, guid: 950122331c8fb1e4ba5ac427d6de609b,
         type: 3}
@@ -2306,6 +2306,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4744524178836689196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1922105669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554774849368173693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa9b25c4673e6d4792d0b9be332d063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rifleTbik: {fileID: 687607889456339670}
+  shotgunTbik: {fileID: 8867996595497824168}
+  crossbowTbik: {fileID: 2129518238324180287}
+  mac: {fileID: 3387514053188612789}
+  rig: {fileID: 7873473165038569456}
 --- !u!114 &4945613959641165852
 MonoBehaviour:
   m_ObjectHideFlags: 0

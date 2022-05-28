@@ -8,7 +8,7 @@ public class SprintAnim : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetLayerWeight(1, 0);
-        animator.gameObject.GetComponent<Animations>().SetTBIK(0);    
+        animator.gameObject.GetComponent<Animations>().SetWeights(0);    
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,7 +21,7 @@ public class SprintAnim : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetLayerWeight(1, 1);   
-        animator.gameObject.GetComponent<Animations>().SetTBIK(1); 
+        animator.gameObject.GetComponent<Animations>().SetWeights(1); 
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
