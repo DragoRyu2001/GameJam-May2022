@@ -7,7 +7,10 @@ public class SwoopAttackTriggerScript : MonoBehaviour
     [SerializeField] Collider coll;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] GameObject clawDecal;
 
+    GameObject newDecal;
+    Vector3 instantiatePoint, collisionNormal;
 
     private Enemy enemyComponent;
     bool enemySuccess;
@@ -18,17 +21,22 @@ public class SwoopAttackTriggerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer==enemyLayer)
+        Debug.Log("Hello");
+        if(other.gameObject.tag=="Enemy")
         {
             Debug.Log("got enemy");
             enemySuccess = other.TryGetComponent<Enemy>(out enemyComponent);
             if(enemySuccess)
                 enemyComponent.TakeDamage(2000, true);
         }
-        else if(other.gameObject.layer==groundLayer)
+        else if(other.gameObject.tag=="Ground")
         {
             Debug.Log("got Ground");
-            //decal things;
+            instantiatePoint = other.ClosestPoint(transform.position);
+            collisionNormal = transform.position - instantiatePoint;
+            newDecal = Instantiate(clawDecal, instantiatePoint, Quaternion.identity);
+            newDecal.transform.rotation = Quaternion.FromToRotation(newDecal.transform.forward, collisionNormal);
+            newDecal.transform.Rotate(transform.forward, Random.Range(-180f, 180f));
         }
     }
 

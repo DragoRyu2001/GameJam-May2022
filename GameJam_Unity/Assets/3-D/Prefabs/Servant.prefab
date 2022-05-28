@@ -1535,7 +1535,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b12ee84520ac37e4b903eb342644c8b9, type: 2}
+      objectReference: {fileID: 9100000, guid: 4666227dd6e8ed64b9f37eac65497410, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d, type: 3}
 --- !u!95 &1206254637218311357 stripped
@@ -1829,6 +1829,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  clawDecal: {fileID: 629443961397571338, guid: d2599e15ae7eff545adfc821633887eb,
+    type: 3}
 --- !u!1 &5013698955001177332 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
@@ -1873,6 +1875,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  clawDecal: {fileID: 629443961397571338, guid: d2599e15ae7eff545adfc821633887eb,
+    type: 3}
 --- !u!4 &5683520801201454670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
