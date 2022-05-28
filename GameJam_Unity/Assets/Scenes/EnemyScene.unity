@@ -1781,12 +1781,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 111037862}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &662348161 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 111037862}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830484517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,7 +2176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf4fb30992bc2c439a794f357d56d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 662348161}
+  lookPosition: {fileID: 0}
   cam: {fileID: 329268183}
   rate: 2
   mouseSensX: 0.05
