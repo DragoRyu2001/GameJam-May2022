@@ -55,6 +55,9 @@ public class PlayerScript : BasePlayerClass
 
     [Header("Misc References")]
     [SerializeField] WerewolfScript werewolfScript;
+    [Header("Coffin Parameters")]
+    [SerializeField] Coffin coffin;
+    [SerializeField] float coffinRepairSpeed;
 
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
@@ -146,11 +149,21 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsRewinding)
             {
-                desiredWalkAnimSpeed = rb.velocity.magnitude<0.2f?0f:1;
-                if(desiredWalkAnimSpeed>0)
-                    anim.SetFloat("Move", 1f, 0.1f, Time.deltaTime);
+                if(rb.velocity.magnitude>0.2f)
+                {
+                    if(Mathf.Abs(Vector3.SignedAngle(transform.forward, rb.velocity.normalized, Vector3.up))>90f)
+                    {
+                        anim.SetFloat("Move", 0, 0.1f, Time.deltaTime);
+                    }
+                    else
+                    {
+                        anim.SetFloat("Move", 2, 0.1f, Time.deltaTime);
+                    }
+                }
                 else
-                    anim.SetFloat("Move", 0f, 0.1f, Time.deltaTime);
+                {
+                    anim.SetFloat("Move", 1, 0.1f, Time.deltaTime);
+                }
 
                 GroundCheck();
                 onSlope = SlopeCheck();
@@ -268,6 +281,11 @@ public class PlayerScript : BasePlayerClass
                 gunArray[currentGun].SetActive(true);
                 previousGun = currentGun;
             }
+        }
+
+        if(Input.GetKey(KeyCode.C)&&coffin.GetIfPlayerInRepairRange())
+        {
+            coffin.HealCoffin(Time.deltaTime*coffinRepairSpeed);
         }
     }
 

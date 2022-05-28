@@ -6,9 +6,12 @@ public class Coffin : MonoBehaviour
 {
     [SerializeField] GameObject upgradeObj;
     [SerializeField] float maxHealth;
-    [Header("Read Only")]
     [ReadOnly, SerializeField] float currentHealth;
+
+    [Header("Read Only")]
+    [SerializeField] LayerMask playerLayer;
     [ReadOnly, SerializeField] float h1, h2;
+    [SerializeField, ReadOnly] bool playerInRepairRange;
     void Start()
     {
         Init();        
@@ -35,6 +38,10 @@ public class Coffin : MonoBehaviour
         h2 = 2*h1;
     }
 
+    public bool GetIfPlayerInRepairRange()
+    {
+        return playerInRepairRange;
+    }
     public void TakeDamage(float dmg)
     {
         currentHealth=Mathf.Clamp(currentHealth-dmg, 0, maxHealth);
@@ -63,4 +70,22 @@ public class Coffin : MonoBehaviour
     {
         upgradeObj.SetActive(enable);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player") 
+        {
+            playerInRepairRange = true;
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player") 
+        {
+            playerInRepairRange = false;
+        }
+        
+    }
+
 }
