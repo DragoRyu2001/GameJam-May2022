@@ -150,7 +150,7 @@ public class PlayerScript : BasePlayerClass
                 if(desiredWalkAnimSpeed>0)
                     anim.SetFloat("Move", 1f, 0.1f, Time.deltaTime);
                 else
-                    anim.SetFloat("Move", 0f);
+                    anim.SetFloat("Move", 0f, 0.1f, Time.deltaTime);
 
                 GroundCheck();
                 onSlope = SlopeCheck();
@@ -436,8 +436,9 @@ public class PlayerScript : BasePlayerClass
 
     protected bool SprintCheck()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && CheckSprint())
+        if (Input.GetKey(KeyCode.LeftShift) && CheckSprint() && Input.GetKey(KeyCode.W))
         {
+            anim.SetBool("Sprint", true);
             CurrentSprint -= Time.deltaTime * SprintDecayRate;
             SprintRechargePause = true;
             return true;
@@ -451,6 +452,8 @@ public class PlayerScript : BasePlayerClass
                     StartCoroutine(StartSprintRecharge());
                 }
             }
+            
+            anim.SetBool("Sprint", false);
             return false;
         }
     }

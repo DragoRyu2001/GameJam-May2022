@@ -151,10 +151,10 @@ public class BasePlayerClass : MonoBehaviour
     protected void RotateModelToOrientation()
     {
         a = new Vector3(playerObj.forward.x, 0, playerObj.forward.z);
-        b = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        b = -new Vector3(orientation.forward.x, 0, orientation.forward.z);
         if (a != b)
         {
-            newDir = Vector3.RotateTowards(playerObj.forward, a - b, 5f * Time.deltaTime, 0f);
+            newDir = Vector3.RotateTowards(playerObj.forward, a - b, 50f * Time.deltaTime, 0f);
             playerObj.rotation = Quaternion.LookRotation(newDir);
         }
     }

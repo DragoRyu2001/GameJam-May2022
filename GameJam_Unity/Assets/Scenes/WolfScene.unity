@@ -800,21 +800,21 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2088494696}
-    - target: {fileID: 5013698955001177332, guid: e920cefadd5b16e429932d79e54479b6,
+    - target: {fileID: 3340369877751261811, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 150
       objectReference: {fileID: 0}
-    - target: {fileID: 5070304306120193735, guid: e920cefadd5b16e429932d79e54479b6,
+    - target: {fileID: 3387514053188612789, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554774849368173693, guid: e920cefadd5b16e429932d79e54479b6,
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 527920287}
+    - target: {fileID: 3785758626524957719, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 527920287}
     - target: {fileID: 6291241459415835916, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
@@ -825,6 +825,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2088494696}
+    - target: {fileID: 6570511118607744241, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: aimPos
+      value: 
+      objectReference: {fileID: 527920287}
     - target: {fileID: 6878374761736217675, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
@@ -835,16 +840,6 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 2088494693}
-    - target: {fileID: 7096083372152747821, guid: e920cefadd5b16e429932d79e54479b6,
-        type: 3}
-      propertyPath: ultDuration
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 7613667379369052739, guid: e920cefadd5b16e429932d79e54479b6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7688239809563077299, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
