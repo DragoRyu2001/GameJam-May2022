@@ -12,29 +12,48 @@ enum CrossbowTypes
 
 public class PlayerScript : BasePlayerClass
 {
-    [Header("Movement variables")]
-    [SerializeField] float moveMult;
-    [SerializeField] float sprintMult;
-    [SerializeField, Range(0.1f, 0.5f)] float airMoveMult;
-    [SerializeField] Transform orientation;
-    RaycastHit slopeHit;
+    [Header("Sprint")]
+    [SerializeField] private float maxSprint;
+    [SerializeField, ReadOnly] private float currentSprint;
+    [SerializeField] private float sprintRegenRate;
+    [SerializeField] private float sprintDecayRate;
+    [SerializeField] private bool sprintRecharging;
+    [SerializeField] private bool sprintRechargePause;
+    [SerializeField, Range(0.5f, 2f)] private float sprintRechargePauseTime;
+    [SerializeField] private float sprintMult;
 
-    [Header("Jump/Drag variables")]
+    [Header("Mana")]
+    [SerializeField] private float maxMana;
+    [SerializeField, ReadOnly] private float currentMana;
+    [SerializeField] private float manaRegenRate;
+    [SerializeField] private bool manaRecharging;
+    [SerializeField] private bool manaRechargePause;
+    [SerializeField, Range(0.5f, 2f)] private float manaRechargePauseTime;
+    [SerializeField] private float manaCost;
+
     [SerializeField] float jumpForce;
-    [SerializeField] float groundDrag;
-    [SerializeField] float airDrag;
-    [SerializeField, Range(0.01f, 0.3f)] float fallingDrag;
-    [SerializeField, Range(-0.8f, -0.1f)] float fallThreshold;
+    [Header("Dash Parameters")]
+    [SerializeField, ReadOnly] private bool isDashing;
+    [SerializeField] private float dashForce;
+    [SerializeField, Range(0.5f, 1.75f)] private float dashReloadTime;
+
+    [Header("Berserk")]
+    [SerializeField] private float berserkTime;
+    [SerializeField, ReadOnly] private float currentBT;
+    [SerializeField] private float berserkHealthMult;
+
+    [Header("Slow Mo Parameters")]
+    [SerializeField, ReadOnly] private bool inSlowMo;
+    [SerializeField] private float slowTime;
+    [SerializeField, Range(0.3f, 0.6f)] private float slowMult;
+    [SerializeField, Range(4f, 8f)] private float slowReloadTime;
+
+    [Header("Aggro Parameters")]
+    [SerializeField, ReadOnly] private bool canCall;
+    [SerializeField] private float aggroRange;
+    [SerializeField, Range(4f, 5f)] private float aggroReloadTime;
 
     [Header("Misc References")]
-    [SerializeField] Transform playerCam;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Collider coll;
-    [SerializeField] Collider wereWolfCollider;
-    [SerializeField] Transform playerObj;
-    [SerializeField] GameObject servantModel;
-    [SerializeField] GameObject werewolfModel;
     [SerializeField] WerewolfScript werewolfScript;
 
     [Header("Gun variables")]
@@ -45,30 +64,63 @@ public class PlayerScript : BasePlayerClass
 
     private float moveX;
     private float moveY;
-    private float angle;
-    private float playerHeight;
     private Collider[] aggroArr;
     private Enemy enemyComponent;
-    bool onSlope, gotEnemy;
+    bool gotEnemy;
+    protected List<FrameStats> recordedData;
+    private float desiredWalkAnimSpeed;
+    private float currentWalkAnimSpeed;
 
-    Vector3 translateVector;
-    Vector3 slopeTranslateDirection;
-    [Header("Translate Modifier")]
-    [SerializeField, ReadOnly] float translateModifier;
 
+    #region Setters and Getters
+    public float MaxSprint { get => maxSprint; set => maxSprint = value; }
+    public float CurrentSprint { get => currentSprint; set => currentSprint = value; }
+    public float SprintRegenRate { get => sprintRegenRate; set => sprintRegenRate = value; }
+    public float SprintDecayRate { get => sprintDecayRate; set => sprintDecayRate = value; }
+    public bool SprintRecharging { get => sprintRecharging; set => sprintRecharging = value; }
+    public bool SprintRechargePause { get => sprintRechargePause; set => sprintRechargePause = value; }
+    public float SprintRechargePauseTime { get => sprintRechargePauseTime; set => sprintRechargePauseTime = value; }
+    public float DashForce { get => dashForce; set => dashForce = value; }
+    public float DashReloadTime { get => dashReloadTime; set => dashReloadTime = value; }
+    public bool IsDashing { get => isDashing; set => isDashing = value; }
+    public float BerserkTime { get => berserkTime; set => berserkTime = value; }
+    public float CurrentBT { get => currentBT; set => currentBT = value; }
+    public float SlowTime { get => slowTime; set => slowTime = value; }
+    public float SlowMult { get => slowMult; set => slowMult = value; }
+    public float SlowReloadTime { get => slowReloadTime; set => slowReloadTime = value; }
+    public float AggroRange { get => aggroRange; set => aggroRange = value; }
+    public float AggroReloadTime { get => aggroReloadTime; set => aggroReloadTime = value; }
+    public bool InSlowMo { get => inSlowMo; set => inSlowMo = value; }
+    public bool CanCall { get => canCall; set => canCall = value; }
+    public float BerserkHealthMult { get => berserkHealthMult; set => berserkHealthMult = value; }
+    public float MaxMana { get => maxMana; set => maxMana = value; }
+    public float CurrentMana { get => currentMana; set => currentMana = value; }
+    public float ManaRegenRate { get => manaRegenRate; set => manaRegenRate = value; }
+    public bool ManaRecharging { get => manaRecharging; set => manaRecharging = value; }
+    public bool ManaRechargePause { get => manaRechargePause; set => manaRechargePause = value; }
+    public float ManaRechargePauseTime { get => manaRechargePauseTime; set => manaRechargePauseTime = value; }
+    public float ManaCost { get => manaCost; set => manaCost = value; }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         BaseParametersUpdate();
+        ServantSpecificUpdates();
         recordedData = new List<FrameStats>();
         ControlDrag();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        playerHeight = coll.bounds.size.y;
-
         gunArray[currentGun].SetActive(true);
         currentGun = previousGun;
+    }
+
+    private void ServantSpecificUpdates()
+    {
+        CurrentBT = BerserkTime;
+        canCall = true;
+        CurrentMana = MaxMana;
+        CurrentSprint = MaxSprint;
+        CheckSprint();
+        CheckMana();
     }
 
     private void FixedUpdate()
@@ -94,6 +146,9 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsRewinding)
             {
+                desiredWalkAnimSpeed = rb.velocity.magnitude < 2f ? 1f : rb.velocity.magnitude / 5f;
+                anim.SetFloat("Move", Mathf.Lerp(currentWalkAnimSpeed, desiredWalkAnimSpeed, 500f * Time.deltaTime));
+
                 GroundCheck();
                 onSlope = SlopeCheck();
                 ControlDrag();
@@ -142,9 +197,7 @@ public class PlayerScript : BasePlayerClass
             if (!InSlowMo)
             {
                 TriggerSlowMo();
-                ManaRechargePause = true;
-                if (!ManaRecharging)
-                    StartCoroutine(StartManaRecharge());
+
 
                 Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime / Time.timeScale);
             }
@@ -165,13 +218,14 @@ public class PlayerScript : BasePlayerClass
         }
 
         //Ultimate Input
-        if(Input.GetKey(KeyCode.X)&&CheckUltMana())
+        if (Input.GetKey(KeyCode.X) && CheckUltMana())
         {
+            rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
             servantModel.SetActive(false);
             werewolfModel.SetActive(true);
 
             coll.enabled = false;
-            wereWolfCollider.enabled = true;
+            otherCollider.enabled = true;
 
             werewolfScript.enabled = true;
             enabled = false;
@@ -184,7 +238,7 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentGun = 0;
-            if(currentGun!=previousGun)
+            if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
                 gunArray[currentGun].SetActive(true);
@@ -194,7 +248,7 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentGun = 1;
-            if(currentGun!=previousGun)
+            if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
                 gunArray[currentGun].SetActive(true);
@@ -205,13 +259,19 @@ public class PlayerScript : BasePlayerClass
         {
             currentGun = 2;
             currentGun += (int)currentType;
-            if(currentGun!=previousGun)
+            if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
                 gunArray[currentGun].SetActive(true);
                 previousGun = currentGun;
             }
         }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
 
@@ -282,59 +342,10 @@ public class PlayerScript : BasePlayerClass
         StartCoroutine(StartSprintRecharge());
     }
 
-    private void RotateModelToOrientation()
-    {
-        if (playerObj.forward != orientation.forward)
-        {
-            angle = Vector3.SignedAngle(playerObj.forward, orientation.forward, Vector3.up);
-            playerObj.Rotate(Vector3.up, angle * Time.deltaTime * 5f/Time.timeScale);
-        }
-        else
-        {
-            angle = 0;
-        }
-    }
-
-    private void ControlDrag()
-    {
-        if (GroundCheck())
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            if (rb.velocity.normalized.y < fallThreshold)
-            {
-                rb.drag = fallingDrag;
-            }
-            else
-            {
-                rb.drag = airDrag;
-            }
-        }
-    }
-
-
-
-    private void Move()
-    {
-        translateModifier = 1f;
-        translateModifier = SprintCheck() ? sprintMult / moveMult : 1f;
-        translateModifier = GroundCheck()? translateModifier : airMoveMult;
-        if (!onSlope)
-        {
-            rb.AddForce(translateModifier * moveMult * translateVector.normalized/Time.timeScale, ForceMode.Acceleration);
-        }
-        else
-        {
-            rb.AddForce(translateModifier * moveMult * slopeTranslateDirection.normalized/Time.timeScale, ForceMode.Acceleration);
-        }
-    }
-
-    
-
     private void TriggerAggroCall()
     {
+        SubtractMana();
+
         aggroArr = Physics.OverlapSphere(transform.position, AggroRange, enemyLayer);
         foreach(Collider col in aggroArr)
         {
@@ -371,13 +382,21 @@ public class PlayerScript : BasePlayerClass
 
     private void TriggerSlowMo()
     {
-        CurrentMana -= ManaCost;
+        SubtractMana();
         InSlowMo = true;
         ManaRechargePause = true;
         if (!ManaRecharging)
             StartCoroutine(StartManaRecharge());
         Time.timeScale *= SlowMult;
         Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime);
+    }
+
+    private void SubtractMana()
+    {
+        CurrentMana -= ManaCost;
+        ManaRechargePause = true;
+        if (!ManaRecharging)
+            StartCoroutine(StartManaRecharge());
     }
 
     private void SetDashingToFalse()
@@ -387,39 +406,34 @@ public class PlayerScript : BasePlayerClass
 
     private void Reposition()
     {
-        CurrentMana -= ManaCost;
-        ManaRechargePause = true;
-        if (!ManaRecharging)
-            StartCoroutine(StartManaRecharge());
+        SubtractMana();
+
         Vector3 ShootVector = playerCam.forward;
         rb.AddForce(ShootVector * DashForce, ForceMode.Impulse);
     }
 
-    private void Jump()
+    protected void Move()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        translateModifier = 1f;
+        translateModifier = SprintCheck() ? sprintMult / moveMult : 1f;
+        translateModifier = GroundCheck() ? translateModifier : airMoveMult;
+        if (!onSlope)
+        {
+            rb.AddForce(translateModifier * moveMult * translateVector.normalized / Time.timeScale, ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForce(translateModifier * moveMult * slopeTranslateDirection.normalized / Time.timeScale, ForceMode.Acceleration);
+        }
     }
 
-    #region Physical Checks
-    private bool SlopeCheck()
+
+
+    #region Player resource checks
+
+    protected bool SprintCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (playerHeight / 2) + 1.5f))
-        {
-            if (slopeHit.normal != Vector3.up)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return false;
-    }
-    private bool SprintCheck()
-    {
-        if (Input.GetKey(KeyCode.LeftShift)&&CheckSprint())
+        if (Input.GetKey(KeyCode.LeftShift) && CheckSprint())
         {
             CurrentSprint -= Time.deltaTime * SprintDecayRate;
             SprintRechargePause = true;
@@ -427,26 +441,86 @@ public class PlayerScript : BasePlayerClass
         }
         else
         {
-            if(CurrentSprint<MaxSprint)
+            if (CurrentSprint < MaxSprint)
             {
-                if(!SprintRecharging)
+                if (!SprintRecharging)
                 {
                     StartCoroutine(StartSprintRecharge());
-                }    
+                }
             }
             return false;
         }
     }
 
-    private bool GroundCheck()
+    public bool CheckMana()
     {
-        return Physics.CheckSphere(transform.position - new Vector3(0, playerHeight / 2, 0), 0.4f, groundLayer);
+        return CanCast = CurrentMana - 30 >= 0f;
     }
+    public bool CheckUltMana()
+    {
+        return currentMana >= maxMana;
+    }
+    public bool CheckSprint()
+    {
+        return CurrentSprint >= 0;
+    }
+
+    #endregion
+
+    #region Player specific resource recharges
+    public IEnumerator StartSprintRecharge()
+    {
+        SprintRecharging = true;
+        while (CurrentSprint < MaxSprint)
+        {
+            if (SprintRechargePause)
+            {
+                SprintRechargePause = false;
+                yield return new WaitForSecondsRealtime(SprintRechargePauseTime);
+            }
+            CurrentSprint += Time.deltaTime * SprintRegenRate;
+            yield return null;
+            if (CurrentSprint > MaxSprint || Mathf.Approximately(CurrentSprint, MaxSprint))
+            {
+                CurrentSprint = MaxSprint;
+                SprintRecharging = false;
+                yield break;
+            }
+
+        }
+        SprintRecharging = false;
+    }
+
+    public IEnumerator StartManaRecharge()
+    {
+        ManaRecharging = true;
+        while (CurrentMana < MaxMana)
+        {
+            if (ManaRechargePause)
+            {
+                ManaRechargePause = false;
+                yield return new WaitForSecondsRealtime(ManaRechargePauseTime);
+            }
+            CurrentMana += Time.deltaTime * ManaRegenRate;
+            yield return null;
+            if (CurrentMana > MaxMana || Mathf.Approximately(CurrentMana, MaxMana))
+            {
+                CurrentMana = MaxMana;
+                ManaRecharging = false;
+                yield break;
+            }
+        }
+        ManaRecharging = false;
+    }
+
+   
+    
     #endregion
 
     #region Debugs
     private void OnDrawGizmosSelected()
     {
+
     }
     #endregion
 }

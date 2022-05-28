@@ -8,6 +8,8 @@ public class AimScript : MonoBehaviour
     [SerializeField] Transform lookPosition;
     [SerializeField] Camera cam;
     [SerializeField] float rate;
+
+    [SerializeField] WerewolfScript wScript;
     float desiredFOV, elapsedTime = 0f;
 
 
@@ -35,6 +37,10 @@ public class AimScript : MonoBehaviour
     {
         ReadMouseInput();
         Look();
+        if (wScript.enabled != false)
+        {
+            return;
+        }
         Aim();
 
     }
