@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintAnim : StateMachineBehaviour
+public class EnableDisableIK : StateMachineBehaviour
 {
+    [SerializeField] bool enable;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetLayerWeight(1, 0);
-        animator.gameObject.GetComponent<Animations>().SetTBIK(0);    
+        if(enable)
+        {
+            animator.gameObject.GetComponent<Animations>().SetTBIK(1);    
+            animator.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            animator.gameObject.GetComponent<Animations>().SetTBIK(0);
+            animator.SetLayerWeight(1, 0);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,8 +29,16 @@ public class SprintAnim : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetLayerWeight(1, 1);   
-        animator.gameObject.GetComponent<Animations>().SetTBIK(1); 
+        if(enable)
+        {
+            animator.gameObject.GetComponent<Animations>().SetTBIK(0);
+            animator.SetLayerWeight(1, 0);   
+        }
+        else
+        {
+            animator.gameObject.GetComponent<Animations>().SetTBIK(1);    
+            animator.SetLayerWeight(1, 1);
+        }    
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
