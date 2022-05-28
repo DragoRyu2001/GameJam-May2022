@@ -778,6 +778,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Servant
       objectReference: {fileID: 0}
+    - target: {fileID: 1206254637218311357, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4666227dd6e8ed64b9f37eac65497410, type: 2}
     - target: {fileID: 3054374475354078087, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
@@ -787,6 +792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070304306120193735, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6291241459415835916, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}

@@ -68,6 +68,8 @@ public class PlayerScript : BasePlayerClass
     private Enemy enemyComponent;
     bool gotEnemy;
     protected List<FrameStats> recordedData;
+    private float desiredWalkAnimSpeed;
+    private float currentWalkAnimSpeed;
 
 
     #region Setters and Getters
@@ -144,7 +146,9 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsRewinding)
             {
-                //anim.SetFloat(0, rb.velocity.magnitude);
+                desiredWalkAnimSpeed = rb.velocity.magnitude < 2f ? 1f : rb.velocity.magnitude / 5f;
+                anim.SetFloat("Move", Mathf.Lerp(currentWalkAnimSpeed, desiredWalkAnimSpeed, 500f * Time.deltaTime));
+
                 GroundCheck();
                 onSlope = SlopeCheck();
                 ControlDrag();
