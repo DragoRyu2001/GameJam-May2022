@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -800,11 +800,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2088494696}
-    - target: {fileID: 3340369877751261811, guid: e920cefadd5b16e429932d79e54479b6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 3387514053188612789, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
@@ -815,6 +810,16 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 527920287}
+    - target: {fileID: 5057094093298362139, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426615731022340557, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6291241459415835916, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: cam
@@ -835,6 +840,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2088494696}
+    - target: {fileID: 6878374761736217675, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: aimPos
+      value: 
+      objectReference: {fileID: 527920287}
     - target: {fileID: 7096083372152747821, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: playerCam
@@ -845,6 +855,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2088494696}
+    - target: {fileID: 7688239809563077299, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: aimPos
+      value: 
+      objectReference: {fileID: 527920287}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e920cefadd5b16e429932d79e54479b6, type: 3}
 --- !u!4 &627521520 stripped

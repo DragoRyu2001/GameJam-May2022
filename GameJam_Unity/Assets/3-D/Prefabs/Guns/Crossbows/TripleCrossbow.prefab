@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69fb362190a24fa4e99e9849e19a1b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 6363198543863139730}
+  muzzle: {fileID: 3742120921023461465}
   cam: {fileID: 0}
   damage: 42
   reloadTime: 1
@@ -125,6 +125,7 @@ MonoBehaviour:
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576
+  aimPos: {fileID: 0}
   bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
   yOffset: 0.2
   xOffset: 0.2
