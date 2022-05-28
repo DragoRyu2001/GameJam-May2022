@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 enum SpawnStates
 {
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] Enemies;
     [SerializeField] GameObject Coffin;
     [SerializeField] Light sun;
+    [SerializeField] Coffin coffin;
+    [SerializeField] Upgrade upgrade;
+
     
     [Header("Phase Variables")]
     [SerializeField] int phase;
@@ -53,6 +57,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int enemyCount;
     [SerializeField] int killsThisWave;
 
+    [Header("UI")]
+    [SerializeField] TMP_Text phaseTimer;
+    [SerializeField] TMP_Text killsCounter;
 
     void Start()
     {
@@ -83,6 +90,7 @@ public class GameManager : MonoBehaviour
         currentWave = 0;
         wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
         enemiesThisWave = 5;
+        upgrade.Shop(false);
         // text here saying phase x start
 
     }
@@ -132,6 +140,7 @@ public class GameManager : MonoBehaviour
     {
         kills++;
         killsThisWave ++;
+        killsCounter.text = "Kills: " + kills;
     }
 
     private void Awake()
@@ -186,6 +195,34 @@ public class GameManager : MonoBehaviour
     {
         sun.intensity = 0;
         souls = kills * 150;
-        
+        coffin.Upgrade(true, souls);
+        StartCoroutine(PhaseTimer());
     }
+    IEnumerator PhaseTimer()
+    {
+        phaseTimer.gameObject.SetActive(true);
+        int i = 30; 
+        while(i>0)
+        {
+            phaseTimer.text = "Time remaining: "+i;
+            yield return new WaitForSeconds(1f);
+            i--;
+        }
+        yield return new WaitForSeconds(1f);
+        phaseTimer.gameObject.SetActive(false);
+        StartPhase();
+    }
+    #region PostGame
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        //End Game Score and High Score Calculation
+    }
+    void CalcScore()
+    {
+        //Calculate Score
+    }
+    
+    #endregion
+
 }

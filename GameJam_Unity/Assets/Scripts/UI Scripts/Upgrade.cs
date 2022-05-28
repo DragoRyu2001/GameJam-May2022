@@ -113,9 +113,14 @@ public class Upgrade : MonoBehaviour
         {
             Debug.Log("Shop Open");
             //Open Shop
-            upgradeMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            Shop(true);
         }
+    }
+    public void Shop(bool val)
+    {
+        upgradeMenu.SetActive(val);
+        Cursor.lockState = val?CursorLockMode.None:CursorLockMode.Locked;
+        Cursor.visible = val;
     }
     void UpdateSouls()
     {
