@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 enum CrossbowTypes
 {
     SINGLE = 0,
@@ -39,6 +41,7 @@ public class PlayerScript : BasePlayerClass
 
     [Header("Berserk")]
     [SerializeField] private float berserkTime;
+    [SerializeField] private float killsRequired;
     [SerializeField, ReadOnly] private float currentBT;
     [SerializeField] private float berserkHealthMult;
 
@@ -63,12 +66,21 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Material healthMat;
     [SerializeField] Material manaMat;
     [SerializeField] Material sprintMat;
+    [SerializeField] Image dashOutline; 
+    [SerializeField] Image slowMoOutline; 
+    [SerializeField] Image aggroOutline; 
+    [SerializeField] Image ultOutline; 
 
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
     [SerializeField] int currentGun;
     [SerializeField] int previousGun;
     [SerializeField] CrossbowTypes currentType;
+
+    [Header("UI variables")]
+    [SerializeField] float currentDashReloadTime;
+    [SerializeField] float currentSlowMoReloadTime;
+    [SerializeField] float currentAggroReloadTime;
 
     private float moveX;
     private float moveY;
@@ -219,9 +231,8 @@ public class PlayerScript : BasePlayerClass
         {
             if (!IsDashing)
             {
-                IsDashing = true;
                 Reposition();
-                Invoke(nameof(SetDashingToFalse), DashReloadTime / Time.timeScale);
+                StartCoroutine(SetDashingToFalse());
             }
         }
 
@@ -231,13 +242,7 @@ public class PlayerScript : BasePlayerClass
             if (!InSlowMo)
             {
                 TriggerSlowMo();
-
-
-                Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime / Time.timeScale);
-            }
-            else if (InSlowMo)
-            {
-                SetInSlowMoToFalse();
+                StartCoroutine(SetInSlowMoToFalse());
             }
         }
         //AggroCall input
@@ -245,14 +250,14 @@ public class PlayerScript : BasePlayerClass
         {
             if (CanCall)
             {
-                CanCall = false;
+
                 TriggerAggroCall();
-                Invoke(nameof(SetCanCallToTrue), AggroReloadTime);
+                StartCoroutine(SetCanCallToTrue());
             }
         }
 
         //Ultimate Input
-        if (Input.GetKey(KeyCode.X) && CheckUltMana())
+        if (Input.GetKey(KeyCode.X) && GameManager.instance.kills>3)
         {
             anim.StopPlayback();
             anim.SetTrigger("Death");
@@ -371,6 +376,11 @@ public class PlayerScript : BasePlayerClass
         }
     }
 
+    public void HandleWerewolfUI()
+    {
+        ultOutline.fillAmount = GameManager.instance.kills == 0 ? 1f : GameManager.instance.kills / killsRequired;
+    }
+
     public void Rewind()
     {
         if(recordedData.Count>0)
@@ -416,13 +426,31 @@ public class PlayerScript : BasePlayerClass
 
     }
 
-    private void SetCanCallToTrue()
+    private IEnumerator SetCanCallToTrue()
     {
+        CanCall = false;
+        currentAggroReloadTime = 0;
+        aggroOutline.fillAmount = 1;
+        while (currentAggroReloadTime < AggroReloadTime)
+        {
+            yield return null;
+            currentAggroReloadTime += Time.deltaTime / Time.timeScale;
+            aggroOutline.fillAmount = 1f-currentAggroReloadTime / aggroReloadTime;
+        }
         CanCall = true;
     }
 
-    private void SetInSlowMoToFalse()
+    private IEnumerator SetInSlowMoToFalse()
     {
+        InSlowMo = true;
+        currentSlowMoReloadTime = 0;
+        slowMoOutline.fillAmount = 1;
+        while (currentSlowMoReloadTime < SlowReloadTime)
+        {
+            yield return null;
+            currentSlowMoReloadTime += Time.deltaTime / Time.timeScale;
+            slowMoOutline.fillAmount = 1f-currentSlowMoReloadTime / slowReloadTime;
+        }
         InSlowMo = false;
         Time.timeScale = 1f;
     }
@@ -441,11 +469,8 @@ public class PlayerScript : BasePlayerClass
     {
         SubtractMana();
         InSlowMo = true;
-        ManaRechargePause = true;
-        if (!ManaRecharging)
             StartCoroutine(StartManaRecharge());
         Time.timeScale *= SlowMult;
-        Invoke(nameof(SetInSlowMoToFalse), SlowReloadTime);
     }
 
     private void SubtractMana()
@@ -456,15 +481,23 @@ public class PlayerScript : BasePlayerClass
             StartCoroutine(StartManaRecharge());
     }
 
-    private void SetDashingToFalse()
+    private IEnumerator SetDashingToFalse()
     {
+        IsDashing = true;
+        currentDashReloadTime = 0;
+        dashOutline.fillAmount = 1;
+        while (currentDashReloadTime<DashReloadTime)
+        {
+            yield return null;
+            currentDashReloadTime += Time.deltaTime / Time.timeScale;
+            dashOutline.fillAmount = 1f-currentDashReloadTime / dashReloadTime;
+        }
         IsDashing = false;
     }
 
     private void Reposition()
     {
         SubtractMana();
-
         Vector3 ShootVector = playerCam.forward;
         rb.AddForce(ShootVector * DashForce, ForceMode.Impulse);
     }

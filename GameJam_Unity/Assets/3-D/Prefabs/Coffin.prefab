@@ -47,7 +47,6 @@ MonoBehaviour:
   canShop: 0
   vampPhase: 0
   player: {fileID: 0}
-  gun: {fileID: 0}
   souls: 0
   costSouls: 0
   abilitySoulMult: 0

@@ -123,6 +123,7 @@ public class Upgrade : MonoBehaviour
     }
     void UpdateSouls()
     {
+        if(soulsText!=null)
         soulsText.text = souls.ToString();
     }
     #region Base Stats Upgrade

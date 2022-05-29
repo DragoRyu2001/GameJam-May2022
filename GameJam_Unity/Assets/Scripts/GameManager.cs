@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int survivedWaves;
     [SerializeField] int survivedPhases;
     [SerializeField] int souls;
-    [SerializeField] int kills;
+    [SerializeField] public int kills;
 
     [Header("Weighted Probability")]
     [SerializeField] float archerSpawnRate; 
@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         kills++;
         killsThisWave ++;
+        pScript.HandleWerewolfUI();
         if(killsCounter!=null)
         killsCounter.text = "Kills: " + kills;
     }
