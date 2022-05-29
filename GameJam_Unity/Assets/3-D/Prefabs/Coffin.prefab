@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4987847970050786901}
   - component: {fileID: 3674697273876909679}
   - component: {fileID: 406758818947221127}
+  - component: {fileID: 374385100258359168}
   m_Layer: 0
   m_Name: Coffin
   m_TagString: Coffin
@@ -190,7 +191,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 2}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!65 &406758818947221127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -204,3 +205,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &374385100258359168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987847970050786907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c674af492187d4e49beb8e0931d0ced8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeObj: {fileID: 3887052067197561710}
+  maxHealth: 1000
+  currentHealth: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  h1: 0
+  h2: 0
+  playerInRepairRange: 0

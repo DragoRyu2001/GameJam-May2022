@@ -191,9 +191,9 @@ public class PlayerScript : BasePlayerClass
 
     private void UpdateUI()
     {
-        healthMat.SetFloat("_Health", CurrentHealth / MaxHealth);
-        manaMat.SetFloat("_Health", currentMana / maxMana);
-        sprintMat.SetFloat("_Health", currentSprint / maxSprint);
+        healthMat.SetFloat("_val", CurrentHealth / MaxHealth);
+        manaMat.SetFloat("_val", currentMana / maxMana);
+        sprintMat.SetFloat("_val", currentSprint / maxSprint);
     }
 
     private void ReadInput()
@@ -207,6 +207,11 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
         {
             Jump();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            TakeDamage(40);
         }
 
         //dash input
@@ -306,6 +311,7 @@ public class PlayerScript : BasePlayerClass
 
     private void TurnToWerewolf()
     {
+        currentMana -= maxMana;
         //rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
         servantModel.SetActive(false);
         werewolfModel.SetActive(true);

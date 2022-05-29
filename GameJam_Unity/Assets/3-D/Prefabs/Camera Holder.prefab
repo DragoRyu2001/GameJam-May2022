@@ -48,6 +48,7 @@ MonoBehaviour:
   lookPosition: {fileID: 0}
   cam: {fileID: 5351574694188869042}
   rate: 2
+  wScript: {fileID: 0}
   mouseSensX: 0.05
   mouseSensY: 0.1
   orbitRadius: 3

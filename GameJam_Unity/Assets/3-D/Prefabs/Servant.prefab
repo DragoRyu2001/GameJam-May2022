@@ -314,6 +314,7 @@ MonoBehaviour:
   orientation: {fileID: 982878094335831250}
   translateModifier: 0
   playerScript: {fileID: 982878094783673622}
+  healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
   canUlt: 0
   isUlting: 0
   ultDuration: 10
@@ -381,7 +382,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: efdfb6f8acb66b84ba0f55963abb18b0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 0
-  m_Radius: 0.6
+  m_Radius: 0.45
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.05, z: -0.36}
@@ -2404,6 +2405,7 @@ MonoBehaviour:
   shotgunTbik: {fileID: 8867996595497824168}
   crossbowTbik: {fileID: 2129518238324180287}
   mac: {fileID: 3387514053188612789}
+  smac: {fileID: 3785758626524957719}
   rig: {fileID: 7873473165038569456}
 --- !u!114 &4945613959641165852
 MonoBehaviour:
