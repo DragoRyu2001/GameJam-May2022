@@ -4,7 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _BackTex ("Texture", 2D) = "black" {}
-        _Health("Health Bar", Range(0, 1)) = 0.5
+        _val("Value", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -13,6 +13,8 @@
 
         Pass
         {
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -35,7 +37,7 @@
             float4 _MainTex_ST;
             sampler2D _BackTex;
             float4 _BackTex_ST;
-            float _Health;
+            float _val;
             Interpolators vert (Meshdata v)
             {
                 Interpolators o;
@@ -50,8 +52,8 @@
             fixed4 frag (Interpolators i) : SV_Target
             {
                 // sample the texture
-                float healthBarMask = _Health>i.uv.x;
-                float3 healthBarColor = tex2D(_MainTex, float2(_Health, i.uv.y));
+                float healthBarMask = _val>i.uv.x;
+                float3 healthBarColor = tex2D(_MainTex, float2(_val, i.uv.y));
                 float3 backColor = tex2D(_BackTex, i.uv);
                 float3 output = lerp(backColor, healthBarColor+backColor, healthBarMask);
                 return float4(output,healthBarMask);

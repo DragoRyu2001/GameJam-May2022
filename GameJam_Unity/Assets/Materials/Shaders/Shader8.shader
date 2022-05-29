@@ -3,8 +3,8 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _BackTex ("Texture", 2D) = "black" {}
-        _Health("Health Bar", Range(0, 1)) = 0.5
+        _BackColor("BackColour", Color) = (0,0,0)
+        _val("Value", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -35,7 +35,8 @@
             float4 _MainTex_ST;
             sampler2D _BackTex;
             float4 _BackTex_ST;
-            float _Health;
+            float   _val;
+            float3 _BackColor;
             Interpolators vert (Meshdata v)
             {
                 Interpolators o;
@@ -50,10 +51,10 @@
             fixed4 frag (Interpolators i) : SV_Target
             {
                 // sample the texture
-                float healthBarMask = _Health>i.uv.x;
-                float3 healthBarColor = tex2D(_MainTex, float2(_Health, i.uv.y));
-                float3 backColor = tex2D(_BackTex, i.uv);
-                float3 output = lerp(backColor, healthBarColor+backColor, healthBarMask);
+                float healthBarMask =   _val>i.uv.x;
+                float3 healthBarColor = tex2D(_MainTex, float2  (_val, i.uv.y));
+                float3 backColor = _BackColor;
+                float3 output = lerp(backColor, healthBarColor, healthBarMask);
                 return float4(output,0);
             }
             ENDCG
