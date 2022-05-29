@@ -2401,6 +2401,7 @@ MonoBehaviour:
   shotgunTbik: {fileID: 8867996595497824168}
   crossbowTbik: {fileID: 2129518238324180287}
   mac: {fileID: 3387514053188612789}
+  smac: {fileID: 3785758626524957719}
   rig: {fileID: 7873473165038569456}
 --- !u!114 &4945613959641165852
 MonoBehaviour:
