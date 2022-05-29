@@ -41,7 +41,7 @@ public class PlayerScript : BasePlayerClass
 
     [Header("Berserk")]
     [SerializeField] private float berserkTime;
-    [SerializeField] private float killsRequired;
+
     [SerializeField, ReadOnly] private float currentBT;
     [SerializeField] private float berserkHealthMult;
 
@@ -69,7 +69,8 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Image dashOutline; 
     [SerializeField] Image slowMoOutline; 
     [SerializeField] Image aggroOutline; 
-    [SerializeField] Image ultOutline; 
+    [SerializeField] Image ultOutline;
+    [SerializeField] Image gunImage;
 
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
@@ -81,7 +82,9 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float currentDashReloadTime;
     [SerializeField] float currentSlowMoReloadTime;
     [SerializeField] float currentAggroReloadTime;
-
+    [SerializeField] private float killsRequired;
+    [SerializeField] private Sprite[] gunIcons;
+ 
     private float moveX;
     private float moveY;
     private Collider[] aggroArr;
@@ -127,10 +130,25 @@ public class PlayerScript : BasePlayerClass
     {
         BaseParametersUpdate();
         ServantSpecificUpdates();
+        UIStartSetup();
         recordedData = new List<FrameStats>();
         ControlDrag();
         gunArray[currentGun].SetActive(true);
         currentGun = previousGun;
+    }
+
+    private void UIStartSetup()
+    {
+        ultOutline.fillAmount = 1f;
+        aggroOutline.fillAmount = 1f;
+        dashOutline.fillAmount = 1f;
+        slowMoOutline.fillAmount = 1f;
+        healthMat.SetFloat("_val", 1f);
+        manaMat.SetFloat("_val", 1f);
+        sprintMat.SetFloat("_val", 1f);
+        gunImage.sprite = gunIcons[currentGun];
+
+
     }
 
     private void ServantSpecificUpdates()
@@ -257,8 +275,9 @@ public class PlayerScript : BasePlayerClass
         }
 
         //Ultimate Input
-        if (Input.GetKey(KeyCode.X) && GameManager.instance.kills>3)
+        if (Input.GetKey(KeyCode.X) && GameManager.instance.kills>=3)
         {
+            ultOutline.fillAmount = 1f;
             anim.StopPlayback();
             anim.SetTrigger("Death");
             Invoke(nameof(TurnToWerewolf), 1.2f);
@@ -271,6 +290,7 @@ public class PlayerScript : BasePlayerClass
             currentGun = 0;
             anim.SetInteger("Weapon", currentGun);
             anim.SetTrigger("ChangeWeapon");
+            gunImage.sprite = gunIcons[currentGun];
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -283,6 +303,7 @@ public class PlayerScript : BasePlayerClass
             currentGun = 1;
             anim.SetInteger("Weapon", currentGun);
             anim.SetTrigger("ChangeWeapon");
+            gunImage.sprite = gunIcons[currentGun];
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -294,7 +315,8 @@ public class PlayerScript : BasePlayerClass
         {
             currentGun = 2;
             currentGun += (int)currentType;
-            if(currentGun==4)
+            gunImage.sprite = gunIcons[currentGun];
+            if (currentGun==4)
             {
                 anim.SetBool("AutoCrossbow",true);
             }
@@ -378,7 +400,8 @@ public class PlayerScript : BasePlayerClass
 
     public void HandleWerewolfUI()
     {
-        ultOutline.fillAmount = GameManager.instance.kills == 0 ? 1f : GameManager.instance.kills / killsRequired;
+        Debug.Log(GameManager.instance.kills);
+        ultOutline.fillAmount = GameManager.instance.kills == 0 ? 1f : 1f-GameManager.instance.kills / killsRequired;
     }
 
     public void Rewind()

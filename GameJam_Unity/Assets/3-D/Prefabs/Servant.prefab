@@ -5086,6 +5086,7 @@ MonoBehaviour:
   slowMoOutline: {fileID: 0}
   aggroOutline: {fileID: 0}
   ultOutline: {fileID: 0}
+  gunImage: {fileID: 0}
   gunArray:
   - {fileID: 5426615731022340557}
   - {fileID: 5057094093298362139}
@@ -5098,6 +5099,13 @@ MonoBehaviour:
   currentDashReloadTime: 0
   currentSlowMoReloadTime: 0
   currentAggroReloadTime: 0
+  killsRequired: 3
+  gunIcons:
+  - {fileID: 21300000, guid: aa99ec97471f3f54fae5be7c2c65947a, type: 3}
+  - {fileID: 21300000, guid: 25972204884a04047927ea042633baca, type: 3}
+  - {fileID: 21300000, guid: a07fe654539653046bf902fb90761440, type: 3}
+  - {fileID: 21300000, guid: a6ed3909894b7544b8cfaaaf99a5451f, type: 3}
+  - {fileID: 21300000, guid: c3cc0bfa70bcbed498c559257f941f5e, type: 3}
 --- !u!114 &7096083372152747821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5151,7 +5159,7 @@ MonoBehaviour:
   currentUltDuration: 0
   leftHandCollider: {fileID: 754935341836596818}
   rightHandCollider: {fileID: 3854751801684658475}
-  poundRange: 3
+  poundRange: 10
   poundForce: 10
   canMove: 0
 --- !u!54 &982878094783673621

@@ -158,7 +158,9 @@ public class WerewolfScript : BasePlayerClass
             {
                 bool success = col.TryGetComponent<Enemy>(out enemyComp);
                 if (success)
+                {
                     enemyComp.TakeDamage(1000, true);
+                }
             }
             anim.SetTrigger("Attack2");
         }

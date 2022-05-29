@@ -58,8 +58,8 @@ public class GunGeneral : MonoBehaviour
         }
         muzzle.LookAt(dest);
         Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
-        if(aimPos!=null)
-        aimPos.position = dest;
+        if (aimPos != null)
+            aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.01f);
     }
 
     protected IEnumerator RateOfFireLimiter()
@@ -67,7 +67,6 @@ public class GunGeneral : MonoBehaviour
         inFireRateDelay = true;
         yield return new WaitForSecondsRealtime(fireRate);
         inFireRateDelay = false;
-
     }
 
 
