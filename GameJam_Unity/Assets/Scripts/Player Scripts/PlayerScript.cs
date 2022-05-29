@@ -140,9 +140,9 @@ public class PlayerScript : BasePlayerClass
     private void UIStartSetup()
     {
         ultOutline.fillAmount = 1f;
-        aggroOutline.fillAmount = 1f;
-        dashOutline.fillAmount = 1f;
-        slowMoOutline.fillAmount = 1f;
+        aggroOutline.fillAmount = 0f;
+        dashOutline.fillAmount = 0f;
+        slowMoOutline.fillAmount = 0f;
         healthMat.SetFloat("_val", 1f);
         manaMat.SetFloat("_val", 1f);
         sprintMat.SetFloat("_val", 1f);

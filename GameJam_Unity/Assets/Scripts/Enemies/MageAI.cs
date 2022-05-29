@@ -21,6 +21,8 @@ public class MageAI : Enemy
 
     private Coffin coffinComponent;
     private bool coffinGetSuccess;
+    private PlayerScript playerComponent;
+
     void Start()
     {
         SetTarget();
@@ -70,18 +72,22 @@ public class MageAI : Enemy
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
         foreach(var hitCollider in collider)
         {
-            if(hitCollider.tag=="Player")
+            if(hitCollider.CompareTag("Player"))
             {
-                Debug.Log("Player Took Damage");
+                if(hitCollider.transform.root.TryGetComponent<PlayerScript>(out playerComponent))
+                {
+                    playerComponent.TakeDamage(damage);
+                    Debug.Log("Player Took Damage");
+                }
             }
-            else if(hitCollider.tag=="Coffin")
+            else if(hitCollider.CompareTag("Coffin"))
             {
                 coffinGetSuccess = hitCollider.gameObject.TryGetComponent<Coffin>(out coffinComponent);
                 if(coffinGetSuccess)
                 {
                     coffinComponent.TakeDamage(damage);
+                    Debug.Log("Coffin Took Damage");
                 }
-                Debug.Log("Coffin Took Damage");
             }
         }
 

@@ -9,9 +9,9 @@ public class Sword : MonoBehaviour
     
     void OnTriggerEnter(Collider col)
     {
-        if(col.transform.tag=="Player" && knight.CanAttack())
+        if(col.transform.root.CompareTag("Player") && knight.CanAttack())
         {
-            //col.transform.gameObject.GetComponent<BasePlayerClass>().TakeDamage(damage);
+            col.transform.root.GetComponent<PlayerScript>().TakeDamage(damage);
             Debug.Log("STRIKE!!!: "+damage);
         }
     }

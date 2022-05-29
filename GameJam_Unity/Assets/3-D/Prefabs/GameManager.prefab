@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8889262109382974575}
   - component: {fileID: 8889262109382974574}
-  m_Layer: 0
+  - component: {fileID: 8365866309400537150}
+  m_Layer: 11
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,9 +64,9 @@ MonoBehaviour:
   survivedPhases: 0
   souls: 0
   kills: 0
-  archerSpawnRate: 90
-  knightSpawnRate: 1
-  mageSpawnRate: 1
+  archerSpawnRate: 33
+  knightSpawnRate: 33
+  mageSpawnRate: 33
   weightSum: 0
   spawnRate: 1
   spawnPos:
@@ -89,3 +90,20 @@ MonoBehaviour:
   servantAnim: {fileID: 0}
   phaseTimer: {fileID: 0}
   killsCounter: {fileID: 0}
+--- !u!114 &8365866309400537150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889262109382974573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5f6d335e8adbf1d4eb728499fd9c7b9f, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
