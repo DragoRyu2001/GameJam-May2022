@@ -7,7 +7,7 @@ public class WerewolfScript : BasePlayerClass
     [Header("Misc References")]
     [SerializeField] PlayerScript playerScript;
 
-    [Header("UI Tie-ins"]
+    [Header("UI Tie-ins")]
     [SerializeField] Material healthMat;
 
     [Header("Ultimate Parameters")]
