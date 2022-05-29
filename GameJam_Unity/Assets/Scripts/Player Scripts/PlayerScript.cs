@@ -59,6 +59,11 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Coffin coffin;
     [SerializeField] float coffinRepairSpeed;
 
+    [Header("UI Tie-ins")]
+    [SerializeField] Material healthMat;
+    [SerializeField] Material manaMat;
+    [SerializeField] Material sprintMat;
+
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
     [SerializeField] int currentGun;
@@ -172,6 +177,7 @@ public class PlayerScript : BasePlayerClass
                 ReadInput();
                 slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
                 RotateModelToOrientation();
+                UpdateUI();
                 if(InBerserk)
                 {
                     CurrentBT -= Time.deltaTime;
@@ -181,6 +187,13 @@ public class PlayerScript : BasePlayerClass
             }
         }
 
+    }
+
+    private void UpdateUI()
+    {
+        healthMat.SetFloat("_Health", CurrentHealth / MaxHealth);
+        manaMat.SetFloat("_Health", currentMana / maxMana);
+        sprintMat.SetFloat("_Health", currentSprint / maxSprint);
     }
 
     private void ReadInput()
@@ -474,7 +487,7 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKey(KeyCode.LeftShift) && CheckSprint() && Input.GetKey(KeyCode.W))
         {
             anim.SetBool("Sprint", true);
-            CurrentSprint -= Time.deltaTime * SprintDecayRate;
+            CurrentSprint -= Time.deltaTime * SprintDecayRate/Time.timeScale;
             SprintRechargePause = true;
             return true;
         }
@@ -519,7 +532,7 @@ public class PlayerScript : BasePlayerClass
                 SprintRechargePause = false;
                 yield return new WaitForSecondsRealtime(SprintRechargePauseTime);
             }
-            CurrentSprint += Time.deltaTime * SprintRegenRate;
+            CurrentSprint += Time.deltaTime * SprintRegenRate/Time.timeScale;
             yield return null;
             if (CurrentSprint > MaxSprint || Mathf.Approximately(CurrentSprint, MaxSprint))
             {
@@ -542,7 +555,7 @@ public class PlayerScript : BasePlayerClass
                 ManaRechargePause = false;
                 yield return new WaitForSecondsRealtime(ManaRechargePauseTime);
             }
-            CurrentMana += Time.deltaTime * ManaRegenRate;
+            CurrentMana += Time.deltaTime * ManaRegenRate/Time.timeScale;
             yield return null;
             if (CurrentMana > MaxMana || Mathf.Approximately(CurrentMana, MaxMana))
             {

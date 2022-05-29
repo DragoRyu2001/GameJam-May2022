@@ -256,6 +256,9 @@ MonoBehaviour:
   werewolfScript: {fileID: 7096083372152747821}
   coffin: {fileID: 0}
   coffinRepairSpeed: 0
+  healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
+  manaMat: {fileID: 2100000, guid: a8ea510070796674a8769846e27b9b9c, type: 2}
+  sprintMat: {fileID: 2100000, guid: 38fe299135bfbaa4789e2cff2e021458, type: 2}
   gunArray:
   - {fileID: 5426615731022340557}
   - {fileID: 5057094093298362139}
@@ -2401,7 +2404,6 @@ MonoBehaviour:
   shotgunTbik: {fileID: 8867996595497824168}
   crossbowTbik: {fileID: 2129518238324180287}
   mac: {fileID: 3387514053188612789}
-  smac: {fileID: 3785758626524957719}
   rig: {fileID: 7873473165038569456}
 --- !u!114 &4945613959641165852
 MonoBehaviour:

@@ -187,7 +187,7 @@ public class BasePlayerClass : MonoBehaviour
                 yield return new WaitForSecondsRealtime(healthRechargePauseTime);
             }
 
-            CurrentHealth += Time.deltaTime * HealthRegenRate;
+            CurrentHealth += Time.deltaTime * HealthRegenRate/Time.timeScale;
             yield return null;
 
             if (CurrentHealth > MaxHealth || Mathf.Approximately(CurrentHealth, MaxHealth))

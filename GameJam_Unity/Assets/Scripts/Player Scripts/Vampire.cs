@@ -7,8 +7,6 @@ public class Vampire : BasePlayerClass
 {
     private float moveX;
     private float moveY;
-    private float desiredWalkAnimSpeed;
-    private float currentWalkAnimSpeed;
     private Vector3 x;
     private Vector3 y;
     private Vector3 newDir1;
@@ -47,8 +45,6 @@ public class Vampire : BasePlayerClass
 
     void Update()
     {
-        desiredWalkAnimSpeed = rb.velocity.magnitude < 2f ? 1f : rb.velocity.magnitude / 5f;
-
         GroundCheck();
         onSlope = SlopeCheck();
         ControlDrag();
@@ -63,7 +59,7 @@ public class Vampire : BasePlayerClass
         y = -new Vector3(orientation.forward.x, 0, orientation.forward.z);
         if (x != y)
         {
-            newDir1 = Vector3.RotateTowards(playerObj.forward, x - y, 20f * Time.deltaTime, 0f);
+            newDir1 = Vector3.RotateTowards(playerObj.forward, x - y, 100f * Time.deltaTime, 0f);
             playerObj.rotation = Quaternion.LookRotation(newDir1);
         }
     }

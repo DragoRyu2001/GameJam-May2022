@@ -7,6 +7,9 @@ public class WerewolfScript : BasePlayerClass
     [Header("Misc References")]
     [SerializeField] PlayerScript playerScript;
 
+    [Header("UI Tie-ins"]
+    [SerializeField] Material healthMat;
+
     [Header("Ultimate Parameters")]
     [SerializeField, ReadOnly] private bool canUlt;
     [SerializeField, ReadOnly] private bool isUlting;
@@ -38,6 +41,7 @@ public class WerewolfScript : BasePlayerClass
         desiredWalkAnimSpeed = 1f;
         ControlDrag();
         playerHeight = otherCollider.bounds.size.y;
+        healthMat.SetFloat("_Health", CurrentHealth / MaxHealth);
     }
 
     private IEnumerator AttackAction1(float time)
