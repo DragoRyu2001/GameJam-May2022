@@ -10,12 +10,14 @@ public class EnableDisableIK : StateMachineBehaviour
     {
         if(enable)
         {
-            animator.gameObject.GetComponent<Animations>().SetWeights(1);    
+            animator.gameObject.GetComponent<Animations>().SetWeights(1);  
+            animator.gameObject.GetComponent<Animations>().SetSpine(0.5f);  
             animator.SetLayerWeight(1, 1);
         }
         else
         {
             animator.gameObject.GetComponent<Animations>().SetWeights(0);
+            animator.gameObject.GetComponent<Animations>().SetSpine(0);
             animator.SetLayerWeight(1, 0);
         }
     }
@@ -27,19 +29,10 @@ public class EnableDisableIK : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if(enable)
-        {
-            animator.gameObject.GetComponent<Animations>().SetWeights(0);
-            animator.SetLayerWeight(1, 0);   
-        }
-        else
-        {
-            animator.gameObject.GetComponent<Animations>().SetWeights(1);    
-            animator.SetLayerWeight(1, 1);
-        }    
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

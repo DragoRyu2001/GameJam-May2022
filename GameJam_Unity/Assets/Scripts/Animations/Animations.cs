@@ -6,10 +6,10 @@ public class Animations : MonoBehaviour
 {
     
     [SerializeField] TwoBoneIKConstraint rifleTbik, shotgunTbik, crossbowTbik;
-    [SerializeField] MultiAimConstraint mac;
+    [SerializeField] MultiAimConstraint mac, smac;
     [SerializeField] Rig rig;
     TwoBoneIKConstraint activeTBIK, prevTBIK;
-    float targetWeight = 1f;
+    float targetWeight = 1f, stargetWeight = 0.5f;
     void Start()
     {
         prevTBIK = rifleTbik;
@@ -33,7 +33,10 @@ public class Animations : MonoBehaviour
             activeTBIK.weight = targetWeight;
             mac.weight = targetWeight;
         }
-
+        if(stargetWeight!=smac.weight)
+        {
+            smac.weight = stargetWeight;
+        }
         
     }
     public void SetWeights(float weight)
@@ -57,5 +60,9 @@ public class Animations : MonoBehaviour
                 Debug.Log("Invalid Case provided in SetWeapon() in Animations.cs");
                 break;
         }
+    }
+    public void SetSpine(float weight)
+    {
+        stargetWeight = weight;
     }
 }

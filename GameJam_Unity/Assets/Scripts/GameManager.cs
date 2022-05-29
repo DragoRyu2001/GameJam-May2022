@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 enum SpawnStates
 {
@@ -59,14 +60,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] int killsThisWave;
     
     [Header("Swapping References")]
-    [SerializeField] Transform servantCamPos, servantOrientation, vampCamPos, vampOrentation;
+    [SerializeField] Transform servantCamPos;
+    [SerializeField] Transform servantOrientation, vampCamPos, vampOrentation;
     [SerializeField] AimScript camHolderAim;
+    [SerializeField] Image blackScreen;
     
+    [Header("Animations")]
+    [SerializeField] Animator servantAnim;
 
     [Header("UI")]
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
     private float crossbowDamage;
+    Color black;
+    float targetAlpha, targetSpeed;
 
     void Start()
     {
@@ -74,6 +81,7 @@ public class GameManager : MonoBehaviour
         pScript = Player.GetComponent<PlayerScript>();
         currentTimeBetweenWave = timeBetweenWaves;
         spawnState = SpawnStates.CANSPAWN;
+        black = Color.black;
         StartPhase();
     }
 
@@ -91,15 +99,27 @@ public class GameManager : MonoBehaviour
         {
             currentTimeBetweenWave -= Time.deltaTime;
         }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            EndPhase();
+        }
+        //Black Screen Fade
+        black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
+        blackScreen.color = black;
     }
 
     private void StartPhase()
     {
+        Player.GetComponent<PlayerScript>().enabled = true;
+        servantAnim.SetTrigger("Start");
+        Vampire.SetActive(false);
         camHolderAim.SetPlayer(servantCamPos, servantOrientation);
         currentWave = 0;
         wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
         enemiesThisWave = 5;
-        upgrade.Shop(false);
+        //upgrade.Shop(false);
+        targetSpeed = 0.25f;
+        targetAlpha = 0f;
         // text here saying phase x start
 
     }
@@ -207,23 +227,38 @@ public class GameManager : MonoBehaviour
     {
         sun.intensity = 0;
         souls = kills * 150;
-        coffin.Upgrade(true, souls);
+        //coffin.Upgrade(true, souls);
         
-        camHolderAim.SetPlayer(vampCamPos, vampOrentation);
-        StartCoroutine(PhaseTimer());
+        
+        StartCoroutine(EndPhaseTimer());
     }
-    IEnumerator PhaseTimer()
+    IEnumerator EndPhaseTimer()
     {
-        phaseTimer.gameObject.SetActive(true);
-        int i = 30; 
+        //Death Animation->Fade to black->Fade back to Vampire->Do Vamp Phase Things
+        servantAnim.ResetTrigger("Start");
+        servantAnim.SetTrigger("Death");
+        targetSpeed = 1.5f;
+        targetAlpha = 1f;
+        Player.GetComponent<PlayerScript>().enabled = false;
+        yield return new WaitForSeconds(2f);
+        targetAlpha = 0f;
+        Vampire.SetActive(true);
+        camHolderAim.SetPlayer(vampCamPos, vampOrentation);
+
+        //phaseTimer.gameObject.SetActive(true);
+        int i = 10;//THIS SHOULD BE CHANGED BACK TO 30++++++++++++++++++++================================ 
         while(i>0)
         {
-            phaseTimer.text = "Time remaining: "+i;
+            //phaseTimer.text = "Time remaining: "+i;
+            Debug.Log("Time remaining: "+ i);
             yield return new WaitForSeconds(1f);
             i--;
         }
+        
+        targetAlpha = 1f;
         yield return new WaitForSeconds(1f);
-        phaseTimer.gameObject.SetActive(false);
+        Vampire.SetActive(false);
+        //phaseTimer.gameObject.SetActive(false);
         StartPhase();
     }
     #region PostGame
