@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MageAI : Enemy
 {
@@ -20,7 +18,6 @@ public class MageAI : Enemy
     [SerializeField] GameObject explode_PS;
 
     private Coffin coffinComponent;
-    private bool coffinGetSuccess;
     private PlayerScript playerComponent;
 
     void Start()
@@ -66,7 +63,7 @@ public class MageAI : Enemy
     {
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(castPre);
-        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, (targetPos.y-1f),targetPos.z), AOESplash.transform.rotation);
+        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, (targetPos.y),targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
         
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
@@ -82,8 +79,7 @@ public class MageAI : Enemy
             }
             else if(hitCollider.CompareTag("Coffin"))
             {
-                coffinGetSuccess = hitCollider.gameObject.TryGetComponent<Coffin>(out coffinComponent);
-                if(coffinGetSuccess)
+                if(hitCollider.transform.root.TryGetComponent<Coffin>(out coffinComponent))
                 {
                     coffinComponent.TakeDamage(damage);
                     Debug.Log("Coffin Took Damage");

@@ -24,7 +24,7 @@ public class Shotgun : GunGeneral
     private GameObject decal;
     private Vector2 randDir;
     Vector3 newDir;
-
+    int hitCount;
     float distance;
     private void Start()
     {
@@ -58,7 +58,7 @@ public class Shotgun : GunGeneral
             newDir = transform.TransformDirection(newDir.normalized);
             directions[i] = newDir;
         }
-
+        hitCount = 0;
         foreach(Vector3 dir in directions)
         {
             if(Physics.Raycast(muzzle.position, -dir, out hit, maxDistance, layersToCheck))
@@ -66,6 +66,7 @@ public class Shotgun : GunGeneral
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
                     hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
+                    Debug.Log(hitCount++);
                 }
                 else
                 {

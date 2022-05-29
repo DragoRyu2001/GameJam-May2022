@@ -5066,7 +5066,6 @@ MonoBehaviour:
   dashForce: 35
   dashReloadTime: 1.75
   berserkTime: 15
-  killsRequired: 0
   currentBT: 0
   berserkHealthMult: 0.375
   inSlowMo: 0
@@ -6314,7 +6313,7 @@ PrefabInstance:
     - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: chokeDistance
-      value: 2.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6554067455169319981, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
