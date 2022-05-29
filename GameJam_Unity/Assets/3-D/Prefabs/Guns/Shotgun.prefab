@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3103703291296737151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 2758492189147848528}
   cam: {fileID: 0}
-  damage: 40
+  damage: 21
   reloadTime: 0.8
   fireRate: 0
   firingDelay: 0
@@ -127,11 +127,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   aimPos: {fileID: 0}
-  bloom: 2.5
+  bloom: 1
   pellets: 12
   aim: {fileID: 0}
   directions: []
-  chokeDistance: 2
+  chokeDistance: 4
   chokeDelta: 1.5
   choke: 0
   shortRange: 3.5

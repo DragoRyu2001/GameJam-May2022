@@ -154,15 +154,21 @@ public class WerewolfScript : BasePlayerClass
 
             StartCoroutine(AttackAction2(1.42f));
             enemyCol = Physics.OverlapSphere(transform.position, poundRange, enemyLayer);
-            foreach (Collider col in enemyCol)
-            {
-                bool success = col.TryGetComponent<Enemy>(out enemyComp);
-                if (success)
-                {
-                    enemyComp.TakeDamage(1000, true);
-                }
-            }
+            StartCoroutine(AttackGround());
             anim.SetTrigger("Attack2");
+        }
+    }
+
+    private IEnumerator AttackGround()
+    {
+        yield return new WaitForSeconds(0.75f);
+        foreach (Collider col in enemyCol)
+        {
+            bool success = col.TryGetComponent<Enemy>(out enemyComp);
+            if (success)
+            {
+                enemyComp.TakeDamage(1000, true);
+            }
         }
     }
 

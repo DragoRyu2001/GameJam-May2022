@@ -6,7 +6,6 @@ using UnityEngine;
 public class AimScript : MonoBehaviour
 {
     [SerializeField] Transform lookPosition;
-    [SerializeField] Transform camLookAt;
     [SerializeField] Camera cam;
     [SerializeField] float rate;
 
@@ -65,7 +64,7 @@ public class AimScript : MonoBehaviour
         transform.position = new Vector3(camXPos, camYPos, camZPos);
         if(Physics.Linecast(lookPosition.position, transform.position, out RaycastHit hit))
         {
-            if(hit.transform.tag=="Ground")
+            if(hit.transform.tag=="Level")
             {   
                 transform.position = hit.point;
             }

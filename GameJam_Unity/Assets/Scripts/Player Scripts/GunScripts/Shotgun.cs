@@ -5,14 +5,14 @@ using UnityEngine;
 public class Shotgun : GunGeneral
 {
 
-    [SerializeField, Range(1f, 4f)] float bloom;
+    [SerializeField, Range(0.1f, 1f)] float bloom;
     [SerializeField] int pellets;
     [SerializeField] AimScript aim;
     [ReadOnly] public Vector3[] directions;
 
     Enemy hitEnemyComponent;
 
-    [SerializeField, Range(2f, 4f)] float chokeDistance;
+    [SerializeField, Range(4f, 8f)] float chokeDistance;
     [SerializeField, Range(0.75f, 1.5f)] float chokeDelta;
     [SerializeField] bool choke;
 
@@ -22,7 +22,6 @@ public class Shotgun : GunGeneral
 
     int randIndex;
     private GameObject decal;
-    private Vector2 randDir;
     Vector3 newDir;
     int hitCount;
     float distance;
@@ -54,8 +53,8 @@ public class Shotgun : GunGeneral
         for (int i = 0; i < pellets; i++)
         {
             newDir = Random.insideUnitCircle * bloom;
-            newDir.z = transform.forward.z - (chokeDistance + (choke?chokeDistance:0));
-            newDir = transform.TransformDirection(newDir.normalized);
+            newDir.z = dest.normalized.z - (chokeDistance + (choke?chokeDistance:0));
+            newDir = muzzle.TransformDirection(newDir.normalized);
             directions[i] = newDir;
         }
         hitCount = 0;
@@ -65,8 +64,8 @@ public class Shotgun : GunGeneral
             {
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
+                    Debug.Log(CalculateDamage(hit.point));
                     hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
-                    Debug.Log(hitCount++);
                 }
                 else
                 {
@@ -82,28 +81,29 @@ public class Shotgun : GunGeneral
     protected float CalculateDamage(Vector3 hitPos)
     {
         distance = Vector3.Distance(muzzle.position, hitPos);
-        if(distance<maxDistance)
+        if(distance<shortRange)
         {
-            return Damage / distance;
+            return Damage;
         }
-        else if( distance< medRange)
+        else if(distance<medRange)
         {
-            return Damage - 2;
+            return Damage - 5;
         }
         else
         {
-            return Damage;
+            return Damage/2;
         }
 
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        foreach(Vector3 vect in directions)
+        foreach (Vector3 vect in directions)
         {
             Debug.DrawRay(muzzle.position, -vect * maxDistance);
             Debug.DrawRay(muzzle.position, -vect * medRange, Color.yellow);
             Debug.DrawRay(muzzle.position, -vect * shortRange, Color.green);
         }
+        Gizmos.color = Color.green;
     }
 }

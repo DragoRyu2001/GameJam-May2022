@@ -5158,7 +5158,7 @@ MonoBehaviour:
   currentUltDuration: 0
   leftHandCollider: {fileID: 754935341836596818}
   rightHandCollider: {fileID: 3854751801684658475}
-  poundRange: 10
+  poundRange: 15
   poundForce: 10
   canMove: 0
 --- !u!54 &982878094783673621

@@ -14,5 +14,10 @@ public class Sword : MonoBehaviour
             col.transform.root.GetComponent<PlayerScript>().TakeDamage(damage);
             Debug.Log("STRIKE!!!: "+damage);
         }
+        else if(col.transform.root.CompareTag("Coffin") && knight.CanAttack())
+        {
+            col.transform.root.GetComponent<Coffin>().TakeDamage(damage);
+            Debug.Log("STRIKE!!!: "+damage);
+        }
     }
 }
