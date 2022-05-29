@@ -100,4 +100,9 @@ public class AimScript : MonoBehaviour
             elapsedTime = 0;
         }
     }
+    public void SetPlayer(Transform pos, Transform ori)
+    {
+        lookPosition = pos;
+        orientation = ori;
+    }
 }

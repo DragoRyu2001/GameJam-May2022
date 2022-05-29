@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject Vampire;
     [SerializeField] GameObject[] Enemies;
     [SerializeField] GameObject Coffin;
     [SerializeField] Light sun;
@@ -56,6 +57,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int waveNumber;
     [SerializeField] int enemyCount;
     [SerializeField] int killsThisWave;
+    
+    [Header("Swapping References")]
+    [SerializeField] Transform servantCamPos, servantOrientation, vampCamPos, vampOrentation;
+    [SerializeField] AimScript camHolderAim;
+    
 
     [Header("UI")]
     [SerializeField] TMP_Text phaseTimer;
@@ -89,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void StartPhase()
     {
+        camHolderAim.SetPlayer(servantCamPos, servantOrientation);
         currentWave = 0;
         wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
         enemiesThisWave = 5;
@@ -201,6 +208,8 @@ public class GameManager : MonoBehaviour
         sun.intensity = 0;
         souls = kills * 150;
         coffin.Upgrade(true, souls);
+        
+        camHolderAim.SetPlayer(vampCamPos, vampOrentation);
         StartCoroutine(PhaseTimer());
     }
     IEnumerator PhaseTimer()
