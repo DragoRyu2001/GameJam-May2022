@@ -8,18 +8,19 @@ public class MageAI : Enemy
     ///<summary>
     //This Scripts handles the AI logic of the Mage
     ///</summary>
-    
-    
 
     [Header("Shooting")]
     [SerializeField] float shootingRange;
     [SerializeField] float aoeRadius;
-    [SerializeField]float castPre;
+    [SerializeField] float castPre;
     [SerializeField] float castTime;
     [SerializeField] float reloadTime;
+    [SerializeField] float damage;
     [SerializeField] GameObject AOESplash;
     [SerializeField] GameObject explode_PS;
 
+    private Coffin coffinComponent;
+    private bool coffinGetSuccess;
     void Start()
     {
         SetTarget();
@@ -75,6 +76,11 @@ public class MageAI : Enemy
             }
             else if(hitCollider.tag=="Coffin")
             {
+                coffinGetSuccess = hitCollider.gameObject.TryGetComponent<Coffin>(out coffinComponent);
+                if(coffinGetSuccess)
+                {
+                    coffinComponent.TakeDamage(damage);
+                }
                 Debug.Log("Coffin Took Damage");
             }
         }
