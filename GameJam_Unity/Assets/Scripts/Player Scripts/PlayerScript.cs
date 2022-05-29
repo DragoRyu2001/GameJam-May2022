@@ -153,6 +153,8 @@ public class PlayerScript : BasePlayerClass
 
     private void ServantSpecificUpdates()
     {
+        StartCoroutine(StartManaRecharge());
+        StartCoroutine(StartSprintRecharge());
         CurrentBT = BerserkTime;
         canCall = true;
         CurrentMana = MaxMana;
