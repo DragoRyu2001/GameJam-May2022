@@ -818,6 +818,12 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 965364942822997293, guid: a0341b1f2793ceb42a9792dd236c475e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e4634cc519106e4ebe7a184e6acf1f0,
+        type: 3}
     - target: {fileID: 1129264737872986799, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1003,10 +1009,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 4337696694863764546, guid: a0341b1f2793ceb42a9792dd236c475e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad52cf13dd8a647438da34d6ff2c3fe6,
+        type: 3}
     - target: {fileID: 4894569954854880003, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5077443250051484492, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
@@ -1066,7 +1078,7 @@ PrefabInstance:
     - target: {fileID: 5227744903815521990, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5708446153403938835, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
@@ -1178,10 +1190,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6391875691000822901, guid: a0341b1f2793ceb42a9792dd236c475e,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391875691000822901, guid: a0341b1f2793ceb42a9792dd236c475e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e90f9e9617da9043b4b476e2b1d4748,
+        type: 3}
     - target: {fileID: 6614394343160092702, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7077562744423586257, guid: a0341b1f2793ceb42a9792dd236c475e,
         type: 3}
@@ -2953,6 +2976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 619346611}
+  Vampire: {fileID: 0}
   Enemies: []
   Coffin: {fileID: 54528375}
   sun: {fileID: 1602720385}
@@ -2981,6 +3005,13 @@ MonoBehaviour:
   waveNumber: 0
   enemyCount: 0
   killsThisWave: 0
+  servantCamPos: {fileID: 0}
+  servantOrientation: {fileID: 0}
+  vampCamPos: {fileID: 0}
+  vampOrentation: {fileID: 0}
+  camHolderAim: {fileID: 0}
+  blackScreen: {fileID: 0}
+  servantAnim: {fileID: 0}
   phaseTimer: {fileID: 0}
   killsCounter: {fileID: 0}
 --- !u!1001 &2111570665
