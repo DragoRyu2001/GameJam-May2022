@@ -1746,7 +1746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1425121255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2361,6 +2361,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3946607162328225526, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d,
     type: 3}
   m_PrefabInstance: {fileID: 149344011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2023095716 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5918677666203026655, guid: e920cefadd5b16e429932d79e54479b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 982878093672509367}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2025489253 stripped
 Transform:
@@ -7512,17 +7518,17 @@ PrefabInstance:
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.2
+      value: 7.7
       objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.673
+      value: 5.91
       objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.5
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 982878094783673623, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
@@ -7684,6 +7690,11 @@ PrefabInstance:
       objectReference: {fileID: 1976591850}
     - target: {fileID: 5351574694032130454, guid: c2f02212c3142b249a73aca570194e72,
         type: 3}
+      propertyPath: camLookAt
+      value: 
+      objectReference: {fileID: 2023095716}
+    - target: {fileID: 5351574694032130454, guid: c2f02212c3142b249a73aca570194e72,
+        type: 3}
       propertyPath: orientation
       value: 
       objectReference: {fileID: 2025489253}
@@ -7828,6 +7839,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488576700109163397, guid: f3cb4f36e91d4e142985585de575c294,
         type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488576700109163397, guid: f3cb4f36e91d4e142985585de575c294,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -7865,6 +7881,11 @@ PrefabInstance:
       propertyPath: Vampire
       value: 
       objectReference: {fileID: 792437905}
+    - target: {fileID: 8889262109382974574, guid: 968fb26b2c5f8714cb8cebe7f45e0212,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8889262109382974574, guid: 968fb26b2c5f8714cb8cebe7f45e0212,
         type: 3}
       propertyPath: vampCamPos

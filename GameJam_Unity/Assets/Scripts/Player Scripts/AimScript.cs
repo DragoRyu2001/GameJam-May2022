@@ -6,6 +6,7 @@ using UnityEngine;
 public class AimScript : MonoBehaviour
 {
     [SerializeField] Transform lookPosition;
+    [SerializeField] Transform camLookAt;
     [SerializeField] Camera cam;
     [SerializeField] float rate;
 
@@ -62,6 +63,13 @@ public class AimScript : MonoBehaviour
     private void Look()
     {
         transform.position = new Vector3(camXPos, camYPos, camZPos);
+        if(Physics.Linecast(lookPosition.position, transform.position, out RaycastHit hit))
+        {
+            if(hit.transform.tag=="Ground")
+            {   
+                transform.position = hit.point;
+            }
+        }
         transform.LookAt(new Vector3(lookPosition.position.x, -xRot+lookPosition.position.y, lookPosition.position.z));
         orientation.rotation = Quaternion.Euler(0, yRot*Mathf.Rad2Deg,0);
     }
