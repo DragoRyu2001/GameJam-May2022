@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
             if (other.TryGetComponent(out enemyComponent))
             {
                 enemyComponent.TakeDamage(damage, isPlayer);
-                Debug.Log("Enemy Shot");
             }
             transform.parent = other.transform;
             canMove = false;
@@ -54,7 +53,6 @@ public class Bullet : MonoBehaviour
             if(other.transform.root.TryGetComponent(out playerComponent))
             {
                 playerComponent.TakeDamage(damage);
-                Debug.Log("Player Shot");
             }
             Destroy(gameObject);
         }
