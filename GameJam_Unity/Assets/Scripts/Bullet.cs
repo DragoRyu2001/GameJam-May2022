@@ -9,6 +9,10 @@ public class Bullet : MonoBehaviour
     Vector3 startPos;
     bool canMove;
 
+    private PlayerScript playerComponent;
+    private Enemy enemyComponent;
+
+
     void Start()
     {
         if(!isPlayer)
@@ -36,15 +40,22 @@ public class Bullet : MonoBehaviour
     {
         if (isPlayer && other.transform.CompareTag("Enemy"))
         {
-            other.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage, isPlayer);
-            this.transform.parent = other.transform;
+            if (other.TryGetComponent(out enemyComponent))
+            {
+                enemyComponent.TakeDamage(damage, isPlayer);
+                Debug.Log("Enemy Shot");
+            }
+            transform.parent = other.transform;
             canMove = false;
             Destroy(gameObject, 5f);
         }
-        else if (!isPlayer && other.transform.tag == "Player")
+        else if (!isPlayer && other.transform.CompareTag("Player"))
         {
-            other.transform.gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
-            Debug.Log("Player Shot");
+            if(other.transform.root.TryGetComponent(out playerComponent))
+            {
+                playerComponent.TakeDamage(damage);
+                Debug.Log("Player Shot");
+            }
             Destroy(gameObject);
         }
         else if (other.transform.CompareTag("Level"))

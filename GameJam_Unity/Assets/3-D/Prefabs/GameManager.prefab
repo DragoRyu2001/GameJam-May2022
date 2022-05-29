@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8889262109382974573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8889262109382974575}
+  - component: {fileID: 8889262109382974574}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8889262109382974575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889262109382974573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8889262109382974574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889262109382974573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e572c0b345d5cf41b4fd1ee21de56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Vampire: {fileID: 0}
+  Enemies:
+  - {fileID: 3894956386507947132, guid: 4da8f39d902758b40ab84c27b84afe42, type: 3}
+  - {fileID: 2864659008571195927, guid: 2dbba7b191e310b4f997b68c6812e888, type: 3}
+  - {fileID: 2864614773998203533, guid: a96f14627c6dfb148adffe985a1fa24e, type: 3}
+  Coffin: {fileID: 0}
+  sun: {fileID: 0}
+  upgrade: {fileID: 0}
+  phase: 0
+  currentWave: 0
+  wavesThisPhase: 0
+  enemiesThisWave: 0
+  enemyWaveDelta: 0
+  difficultyScaling: 0
+  survivedWaves: 0
+  survivedPhases: 0
+  souls: 0
+  kills: 0
+  archerSpawnRate: 90
+  knightSpawnRate: 1
+  mageSpawnRate: 1
+  weightSum: 0
+  spawnRate: 1
+  spawnPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnState: 2
+  nextWave: 0
+  timeBetweenWaves: 5
+  currentTimeBetweenWave: 0
+  waveNumber: 0
+  enemyCount: 0
+  killsThisWave: 0
+  servantCamPos: {fileID: 0}
+  servantOrientation: {fileID: 0}
+  vampCamPos: {fileID: 0}
+  vampOrentation: {fileID: 0}
+  camHolderAim: {fileID: 0}
+  blackScreen: {fileID: 0}
+  servantAnim: {fileID: 0}
+  phaseTimer: {fileID: 0}
+  killsCounter: {fileID: 0}

@@ -498,7 +498,7 @@ MonoBehaviour:
   arrow: {fileID: 2475439408802478170, guid: ff18624ad005bee4e8774c50f58da164, type: 3}
   aimMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 256
   arrowPos: {fileID: 3894956384627228553}
   targetLookAt: {fileID: 3894956384636124725}
 --- !u!1001 &3894956384730682379

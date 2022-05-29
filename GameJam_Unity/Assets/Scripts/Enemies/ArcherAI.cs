@@ -15,10 +15,6 @@ public class ArcherAI : Enemy
     [SerializeField] LayerMask aimMask;
     [SerializeField] Transform arrowPos;
     [SerializeField] GameObject targetLookAt;
-    
-    
-
-    
 
     void Start()
     {
@@ -50,7 +46,7 @@ public class ArcherAI : Enemy
                 if(canAttack)
                 {
                     canAttack = false;
-                    StartCoroutine(Shoot(target.transform.position));
+                    StartCoroutine(Shoot());
                 }
             }
             else
@@ -66,9 +62,10 @@ public class ArcherAI : Enemy
         Vector3 startPos = arrowPos.position;
         Vector3 dir = target.transform.position - startPos;
         dir = dir.normalized;
+        Debug.DrawRay(startPos, dir*shootingRange, Color.green);
         if(Physics.Raycast(startPos, dir, out RaycastHit hit, shootingRange, aimMask))
         {
-            if(hit.transform.tag=="Player")
+            if(hit.transform.CompareTag("Player"))
             {
                 return true;
             }
@@ -76,9 +73,8 @@ public class ArcherAI : Enemy
         return false;
     }
 
-    IEnumerator Shoot(Vector3 targetPos)
-    {
-        
+    IEnumerator Shoot()
+    {  
         yield return new WaitForSeconds(drawSpeed);
         anim.SetTrigger("Attack");
         Instantiate(arrow, arrowPos.position, arrowPos.rotation);

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] Enemies;
     [SerializeField] GameObject Coffin;
     [SerializeField] Light sun;
-    [SerializeField] Coffin coffin;
+    private Coffin coffinScript;
     [SerializeField] Upgrade upgrade;
 
     
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         currentTimeBetweenWave = timeBetweenWaves;
         spawnState = SpawnStates.CANSPAWN;
         black = Color.black;
+        coffinScript = Coffin.GetComponent<Coffin>();
         StartPhase();
     }
 
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         kills++;
         killsThisWave ++;
+        if(killsCounter!=null)
         killsCounter.text = "Kills: " + kills;
     }
 
