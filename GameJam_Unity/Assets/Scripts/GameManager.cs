@@ -72,10 +72,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
     [SerializeField] TMP_Text timer;
+    
     [Header("Post Game")]
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text highScoreText;
+    [SerializeField] TMP_Text timeSurvivedText;
+    [SerializeField] TMP_Text killsText;
+    [SerializeField] TMP_Text soulsEarnedText;
+    [ReadOnly, SerializeField] int soulsEarned;
+
     [Header("ReadOnly")]
-    [ReadOnly, SerializeField] float score;
+    [ReadOnly, SerializeField] int score, highScore;
     [ReadOnly, SerializeField] float timeSurvived;
     [ReadOnly, SerializeField] bool game, vamp;
 
@@ -85,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
         crossbowDamage = 20f;
         pScript = Player.GetComponent<PlayerScript>();
         currentTimeBetweenWave = timeBetweenWaves;
@@ -92,6 +100,7 @@ public class GameManager : MonoBehaviour
         black = Color.black;
         timeSurvived = 0f;
         game = true;
+        soulsEarned = 0;
         coffinScript = Coffin.GetComponent<Coffin>();
         StartPhase();
     }
@@ -283,13 +292,20 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         game = false;
+        CalcScore();
         //
         //End Game Score and High Score Calculation
     }
     void CalcScore()
     {
-        score = kills* phase* timeSurvived;
-        scoreText.text = "Score: "+ score;
+        score = kills* phase* (int)timeSurvived;
+        highScore = highScore<score?score:highScore;
+        PlayerPrefs.SetInt("HighScore", (int)highScore);
+        scoreText.text = ""+ score;
+        highScoreText.text = ""+highScore;
+        timeSurvivedText.text = (int)(timeSurvived/60)+":"+timeSurvived%60;
+        soulsEarnedText.text = ""+soulsEarned;
+        killsText.text = ""+kills;
         //Calculate Score
     }
     
