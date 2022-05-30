@@ -37,7 +37,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 0.006770152, g: 0, b: 0.5754717, a: 0}
+    - _HalorColour: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4247164520837754301
 MonoBehaviour:
