@@ -100,10 +100,6 @@ public class GameManager : MonoBehaviour
         {
             currentTimeBetweenWave -= Time.deltaTime;
         }
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            EndPhase();
-        }
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
@@ -111,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     private void StartPhase()
     {
+        
         Player.GetComponent<PlayerScript>().enabled = true;
         servantAnim.SetTrigger("Start");
         Vampire.SetActive(false);
@@ -118,9 +115,11 @@ public class GameManager : MonoBehaviour
         currentWave = 0;
         wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
         enemiesThisWave = 5;
+        killsThisWave = 0;
         //upgrade.Shop(false);
         targetSpeed = 0.25f;
         targetAlpha = 0f;
+        spawnState= SpawnStates.CANSPAWN;
         // text here saying phase x start
 
     }
