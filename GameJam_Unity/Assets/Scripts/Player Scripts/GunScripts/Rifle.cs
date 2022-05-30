@@ -45,7 +45,7 @@ public class Rifle : GunGeneral
         anim.SetTrigger("Attack");
         if(audioSrc.clip!=shootAudio)
             audioSrc.clip = shootAudio;
-        audioSrc.volume = 0.5f;
+        audioSrc.volume = 0.05f;
         audioSrc.Play();
         if (hitSomething)
         {

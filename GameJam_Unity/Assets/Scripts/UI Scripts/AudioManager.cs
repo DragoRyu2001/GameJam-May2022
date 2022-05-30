@@ -33,14 +33,7 @@ public class AudioManager : MonoBehaviour
        
     }
 
-    void PlayMainMenuMusic()
-    {
-        if(!audioSource.isPlaying)
-        { 
-            audioSource.Play();
-        }
-    }
-    void PlayVampMusic()
+    public void PlayVampMusic()
     {
         if(!audioSource.isPlaying)
         { 
@@ -49,16 +42,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void PlayGameMusic()
+    public void PlayGameMusic()
     {
         if(!audioSource.isPlaying)
-        { 
-            audioSource.clip = Random.Range(0,100)>50?playMusic1:playMusic2;
+        {
+            bool first = Random.Range(0, 100) > 51f;
+            audioSource.clip = first?playMusic1:playMusic2;
+            audioSource.volume = first ? 0.05f : 0.03f;
             audioSource.Play();
         }
     }
 
-    void StopPlaying()
+    public void StopPlaying()
     {
         audioSource.Stop();
     }

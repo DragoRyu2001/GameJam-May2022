@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] static bool GameIsPaused = false;
-    [SerializeField] GameObject pauseMenu;
+
+
 
     //Main Menu
     public void loadLevel(int level)
@@ -17,37 +17,6 @@ public class UIManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    //Pause Menu
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-
-    }
-
-    public void Resume()
-    {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-    }
-
-    public void Pause()
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
     }
 
     public void BackToMainMenu()

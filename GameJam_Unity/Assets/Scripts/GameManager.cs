@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Coffin;
     [SerializeField] Light sun;
     [SerializeField] GameObject playerDown;
+    [SerializeField] AudioManager AM;
     private Coffin coffinScript;
     [SerializeField] Upgrade upgrade;
 
@@ -27,7 +28,6 @@ public class GameManager : MonoBehaviour
     [Header("Phase Variables")]
     [SerializeField] int phase;
     [SerializeField, ReadOnly] int currentWave;
-    [SerializeField] int wavesThisPhase;
     [SerializeField] int enemiesThisWave;
 
     [Header("Scaling Parameters")]
@@ -86,10 +86,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator servantAnim;
 
     [Header("UI")]
+    [SerializeField] static bool GameIsPaused = false;
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
     [SerializeField] TMP_Text timer;
-    
+    [SerializeField] GameObject pauseMenu;
+
     [Header("Post Game")]
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text highScoreText;
@@ -150,11 +152,23 @@ public class GameManager : MonoBehaviour
         {
             currentTimeBetweenWave -= Time.deltaTime;
         }
-        if(game&&!vamp)
+        if (game && !vamp)
         {
-            timeSurvived+=Time.deltaTime;
-            timer.text="Time: "+(int)timeSurvived;
+            timeSurvived += Time.deltaTime;
+            timer.text = "Time: " + (int)timeSurvived;
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused)
+            {
+                Toggle();
+            }
+            else
+            {
+                Toggle();
+            }
+        }
+
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
@@ -162,13 +176,13 @@ public class GameManager : MonoBehaviour
 
     private void StartPhase()
     {
+        AM.StopPlaying();
+        AM.PlayGameMusic();
         vamp = false;
         pScript.enabled = true;
         Vampire.SetActive(false);
         camHolderAim.SetPlayer(servantCamPos, servantOrientation);
         currentWave = 0;
-        wavesThisPhase = 2 + Mathf.RoundToInt(phase/2);
-        enemiesThisWave = 5;
         killsThisWave = 0;
         //upgrade.Shop(false);
         targetSpeed = 0.25f;
@@ -275,7 +289,7 @@ public class GameManager : MonoBehaviour
         spawnState = SpawnStates.WAITING;
         yield return new WaitUntil(() => killsThisWave == enemiesThisWave);
         currentWave++;
-        if(currentWave<wavesThisPhase)
+        if(currentWave<3)
         {
             Debug.Log("Wave Complete, moving on to next wave");
             currentTimeBetweenWave = timeBetweenWaves;
@@ -296,14 +310,23 @@ public class GameManager : MonoBehaviour
         souls = kills * 150;
         //coffin.Upgrade(true, souls);
         vamp = true;
-        
+
         StartCoroutine(EndPhaseTimer());
     }
+
+    public void Toggle()
+    {
+        GameIsPaused = !GameIsPaused;
+        pauseMenu.SetActive(GameIsPaused);
+        Time.timeScale = GameIsPaused ? 0f : 1f;
+    }
+
     IEnumerator EndPhaseTimer()
     {
         //Death Animation->Fade to black->Fade back to Vampire->Do Vamp Phase Things
         servantAnim.ResetTrigger("Start");
-
+        AM.StopPlaying();
+        AM.PlayVampMusic();
         targetSpeed = 1.5f;
         targetAlpha = 1f;
         servantAnim.SetTrigger("Death");
@@ -363,6 +386,8 @@ public class GameManager : MonoBehaviour
           mageCurrentHealth += mageHealth * survivedPhases * 0.2f;
         archerCurrentHealth += archerHealth * survivedPhases * 0.1f;
         knightCurrentHealth += knightHealth * survivedPhases * 0.05f;
+        enemiesThisWave = 5 + (survivedPhases + 1) * 2;
+        Debug.Log(enemiesThisWave);
     }
 
     private void SetMCDownAfterAnim()
