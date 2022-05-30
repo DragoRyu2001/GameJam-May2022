@@ -71,6 +71,9 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
+    [ReadOnly, SerializeField] float score;
+    [ReadOnly, SerializeField] float timeSurvived;
+    [ReadOnly, SerializeField] bool game;
     private float crossbowDamage;
     Color black;
     float targetAlpha, targetSpeed;
@@ -82,6 +85,8 @@ public class GameManager : MonoBehaviour
         currentTimeBetweenWave = timeBetweenWaves;
         spawnState = SpawnStates.CANSPAWN;
         black = Color.black;
+        timeSurvived = 0f;
+        game = true;
         coffinScript = Coffin.GetComponent<Coffin>();
         StartPhase();
     }
@@ -100,6 +105,8 @@ public class GameManager : MonoBehaviour
         {
             currentTimeBetweenWave -= Time.deltaTime;
         }
+        if(game)
+            timeSurvived+=Time.deltaTime;
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
@@ -267,10 +274,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
+        game = false;
+        //
         //End Game Score and High Score Calculation
     }
     void CalcScore()
     {
+        score = kills* phase* timeSurvived;
+        //scoreText.text = "Score: "+ score;
         //Calculate Score
     }
     
