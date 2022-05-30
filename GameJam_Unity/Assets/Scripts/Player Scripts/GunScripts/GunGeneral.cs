@@ -59,7 +59,7 @@ public class GunGeneral : MonoBehaviour
         muzzle.LookAt(dest);
         Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
         if (aimPos != null)
-            aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.01f);
+            aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.05f);
     }
 
     protected IEnumerator RateOfFireLimiter()

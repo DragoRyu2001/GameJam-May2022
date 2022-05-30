@@ -115,13 +115,14 @@ MonoBehaviour:
   reloadTime: 3
   fireRate: 0.5
   firingDelay: 0
+  anim: {fileID: 0}
   maxAmmo: 6
   currentAmmo: 0
   canShoot: 1
   reloading: 0
   fired: 0
   inFireRateDelay: 0
-  maxDistance: 0
+  maxDistance: 100
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576

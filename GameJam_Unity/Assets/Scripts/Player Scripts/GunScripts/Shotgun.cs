@@ -11,6 +11,7 @@ public class Shotgun : GunGeneral
     [ReadOnly] public Vector3[] directions;
 
     Enemy hitEnemyComponent;
+    Collider[] enemyColliders;
 
     [SerializeField, Range(4f, 8f)] float chokeDistance;
     [SerializeField, Range(0.75f, 1.5f)] float chokeDelta;
@@ -58,14 +59,14 @@ public class Shotgun : GunGeneral
             directions[i] = newDir;
         }
         hitCount = 0;
-        foreach(Vector3 dir in directions)
+        foreach (Vector3 dir in directions)
         {
-            if(Physics.Raycast(muzzle.position, -dir, out hit, maxDistance, layersToCheck))
+            if (Physics.Raycast(muzzle.position, -dir, out hit, maxDistance, layersToCheck))
             {
                 if (hit.transform.TryGetComponent(out hitEnemyComponent))
                 {
-                    Debug.Log(CalculateDamage(hit.point));
-                    hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
+                    //Debug.Log(CalculateDamage(hit.point));
+                    //hitEnemyComponent.TakeDamage(CalculateDamage(hit.point), true);
                 }
                 else
                 {
@@ -74,8 +75,18 @@ public class Shotgun : GunGeneral
                     decal.transform.rotation = Quaternion.FromToRotation(decal.transform.forward, hit.normal);
                 }
             }
+
         }
-        
+        enemyColliders = Physics.OverlapBox(muzzle.position + muzzle.forward * 2f, new Vector3(2, 2, 3));
+        foreach(Collider col in enemyColliders)
+        {
+            if (col.TryGetComponent(out hitEnemyComponent))
+            {
+                Debug.Log("shockwave hit");
+                hitEnemyComponent.TakeDamage(300, true);
+            }
+        }
+
     }
 
     protected float CalculateDamage(Vector3 hitPos)
@@ -105,5 +116,6 @@ public class Shotgun : GunGeneral
             Debug.DrawRay(muzzle.position, -vect * shortRange, Color.green);
         }
         Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(muzzle.position + muzzle.forward * 2f, new Vector3(2, 2, 3));
     }
 }
