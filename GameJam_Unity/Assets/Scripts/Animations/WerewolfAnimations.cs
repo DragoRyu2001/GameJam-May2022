@@ -5,7 +5,7 @@ using UnityEngine;
 public class WerewolfAnimations : MonoBehaviour
 {
     [SerializeField] AudioSource audioSrc;
-    [SerializeField] AudioClip swoopAudio, poundAudio;
+    [SerializeField] AudioClip swoopAudio, poundAudio, howlAudio;
 
     void Swoop()
     {
@@ -15,6 +15,11 @@ public class WerewolfAnimations : MonoBehaviour
     void Pound()
     {
         audioSrc.clip = poundAudio;
+        audioSrc.Play();
+    }
+    void Howl()
+    {
+        audioSrc.clip = howlAudio;
         audioSrc.Play();
     }
 }
