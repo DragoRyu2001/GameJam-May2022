@@ -14,7 +14,7 @@ public class Shotgun : GunGeneral
     Collider[] enemyColliders;
 
     [SerializeField, Range(4f, 8f)] float chokeDistance;
-    [SerializeField, Range(0.75f, 1.5f)] float chokeDelta;
+    [SerializeField, Range(1.5f, 3f)] float chokeDelta;
     [SerializeField] bool choke;
 
     [SerializeField] float shortRange, medRange;
@@ -116,6 +116,5 @@ public class Shotgun : GunGeneral
             Debug.DrawRay(muzzle.position, -vect * shortRange, Color.green);
         }
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(muzzle.position + muzzle.forward * 2f, new Vector3(2, 2, 3));
     }
 }

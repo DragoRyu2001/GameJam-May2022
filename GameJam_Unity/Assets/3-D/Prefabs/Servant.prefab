@@ -5014,7 +5014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   critical: 0
-  maxHealth: 200
+  maxHealth: 20
   currentHealth: 0
   healthRegenRate: 7.5
   healthRecharging: 0
@@ -5106,6 +5106,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 723cb85ee87037d44a03b7ea81b58131, type: 3}
   - {fileID: 21300000, guid: a533ea5f832b4ce46b45b0f71d68825e, type: 3}
   - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
+  clothMaterial: {fileID: 2100000, guid: 420614a4d2d07264eb21652654f164b3, type: 2}
+  rewindColor: {r: 1, g: 0.87421644, b: 0.3339622, a: 1}
+  berserkColor: {r: 1, g: 0.41764444, b: 0.2584905, a: 1}
 --- !u!114 &7096083372152747821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6321,12 +6324,7 @@ PrefabInstance:
     - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: chokeDelta
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
-        type: 3}
-      propertyPath: chokeDistance
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6554067455169319981, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
@@ -7677,7 +7675,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bolt
       value: 
-      objectReference: {fileID: 2475439408802478170, guid: 55254b68c488ea14ea4c1ea6b6d0a78e,
+      objectReference: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e,
         type: 3}
     - target: {fileID: 606474854079368008, guid: 0840669883f91e84ab5db699e7b3fa67,
         type: 3}

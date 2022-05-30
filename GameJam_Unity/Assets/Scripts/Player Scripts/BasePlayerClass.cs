@@ -133,9 +133,12 @@ public class BasePlayerClass : MonoBehaviour
 
     protected void Death()
     {
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
         isAlive = false;
-        anim.SetTrigger("Death");
+        moveMult = 0;
         StopAllCoroutines();
+        GameManager.instance.GameOver();
     }
 
     public void BaseParametersUpdate()

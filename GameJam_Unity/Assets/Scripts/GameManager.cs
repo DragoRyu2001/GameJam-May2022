@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] Enemies;
     [SerializeField] GameObject Coffin;
     [SerializeField] Light sun;
+    [SerializeField] GameObject playerDown;
     private Coffin coffinScript;
     [SerializeField] Upgrade upgrade;
 
+    private GameObject currentPlayerDown;
     
     [Header("Phase Variables")]
     [SerializeField] int phase;
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform[] spawnPos;
     [SerializeField] SpawnStates spawnState = SpawnStates.COUNTINGDOWN;
     PlayerScript pScript;
+    WerewolfScript wScript;
     public static GameManager instance;
 
     [Header("Wave Variables")]
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         crossbowDamage = 20f;
         pScript = Player.GetComponent<PlayerScript>();
+        wScript = Player.GetComponent<WerewolfScript>();
         currentTimeBetweenWave = timeBetweenWaves;
         spawnState = SpawnStates.CANSPAWN;
         black = Color.black;
@@ -132,8 +136,7 @@ public class GameManager : MonoBehaviour
     private void StartPhase()
     {
         vamp = false;
-        Player.GetComponent<PlayerScript>().enabled = true;
-        servantAnim.SetTrigger("Start");
+        pScript.enabled = true;
         Vampire.SetActive(false);
         camHolderAim.SetPlayer(servantCamPos, servantOrientation);
         currentWave = 0;
@@ -213,6 +216,16 @@ public class GameManager : MonoBehaviour
         return pScript.InBerserk;
     }
 
+    public bool IsPlayerRewinding()
+    {
+        return pScript.IsRewinding;
+    }
+
+    public bool IsPlayerAlive()
+    {
+        return pScript.IsAlive;
+    }
+
     public GameObject WhereIsPlayer()
     {
         return Player;
@@ -262,10 +275,11 @@ public class GameManager : MonoBehaviour
     {
         //Death Animation->Fade to black->Fade back to Vampire->Do Vamp Phase Things
         servantAnim.ResetTrigger("Start");
-        servantAnim.SetTrigger("Death");
+
         targetSpeed = 1.5f;
         targetAlpha = 1f;
-        Player.GetComponent<PlayerScript>().enabled = false;
+        servantAnim.SetTrigger("Death");
+        Invoke(nameof(SetMCDownAfterAnim), 2.4f);
         yield return new WaitForSeconds(2f);
         targetAlpha = 0f;
         Vampire.SetActive(true);
@@ -273,19 +287,28 @@ public class GameManager : MonoBehaviour
 
         phaseTimer.gameObject.SetActive(true);
         int i = 10;//THIS SHOULD BE CHANGED BACK TO 30++++++++++++++++++++================================ 
-        while(i>0)
+        while (i > 0)
         {
-            phaseTimer.text = "Time remaining: "+i;
-            Debug.Log("Time remaining: \n "+ i);
+            phaseTimer.text = "Time remaining: " + i;
+            Debug.Log("Time remaining: \n " + i);
             yield return new WaitForSeconds(1f);
             i--;
         }
-        
+
         targetAlpha = 1f;
         yield return new WaitForSeconds(1f);
         Vampire.SetActive(false);
         phaseTimer.gameObject.SetActive(false);
+        playerDown.SetActive(false);
+        Player.SetActive(true);
         StartPhase();
+    }
+
+    private void SetMCDownAfterAnim()
+    {
+        Player.SetActive(false);
+        playerDown.SetActive(true);
+        playerDown.transform.SetPositionAndRotation(Player.transform.position, Player.transform.rotation);
     }
     #region PostGame
     public void GameOver()

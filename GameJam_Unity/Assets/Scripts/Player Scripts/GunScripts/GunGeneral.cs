@@ -45,21 +45,24 @@ public class GunGeneral : MonoBehaviour
 
     public void OrientMuzzle()
     {
-        destRay = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        if (Physics.Raycast(destRay, out hit, 100f, layersToCheck))
+        if(!GameManager.instance.IsPlayerRewinding()&&GameManager.instance.IsPlayerAlive())
         {
-            dest = hit.point;
-            hitSomething = true;
+            destRay = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+            if (Physics.Raycast(destRay, out hit, 100f, layersToCheck))
+            {
+                dest = hit.point;
+                hitSomething = true;
+            }
+            else
+            {
+                dest = destRay.GetPoint(100);
+                hitSomething = false;
+            }
+            muzzle.LookAt(dest);
+            Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
+            if (aimPos != null)
+                aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.05f);
         }
-        else
-        {
-            dest = destRay.GetPoint(100);
-            hitSomething = false;
-        }
-        muzzle.LookAt(dest);
-        Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
-        if (aimPos != null)
-            aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.05f);
     }
 
     protected IEnumerator RateOfFireLimiter()

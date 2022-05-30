@@ -58,6 +58,7 @@ public class PlayerScript : BasePlayerClass
 
     [Header("Misc References")]
     [SerializeField] WerewolfScript werewolfScript;
+    [SerializeField] GameObject playerDown;
     [Header("Coffin Parameters")]
     [SerializeField] Coffin coffin;
     [SerializeField] float coffinRepairSpeed;
@@ -85,7 +86,14 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float currentAggroReloadTime;
     [SerializeField] private float killsRequired;
     [SerializeField] private Sprite[] gunIcons;
- 
+
+    [Header("Special Effects")]
+    [SerializeField] Material clothMaterial;
+    [SerializeField] Color rewindColor;
+    [SerializeField] Color berserkColor;
+
+    private Color desiredColor;
+
     private float moveX;
     private float moveY;
     private Collider[] aggroArr;
@@ -95,6 +103,7 @@ public class PlayerScript : BasePlayerClass
     private float desiredWalkAnimSpeed;
     private float currentWalkAnimSpeed;
     private bool isAnimating;
+    private bool canMove=true;
 
 
     #region Setters and Getters
@@ -135,8 +144,7 @@ public class PlayerScript : BasePlayerClass
         currentGun = previousGun;
         gunArray[currentGun].SetActive(true);
         AssertServantStatus();
-        isAnimating = true;
-        Invoke(nameof(setIsAnimatingToFalse), 1.208f);
+        
     }
     void Start()
     {
@@ -161,16 +169,20 @@ public class PlayerScript : BasePlayerClass
         manaMat.SetFloat("_val", 1f);
         sprintMat.SetFloat("_val", 1f);
         gunImage.sprite = gunIcons[currentGun];
-
-
     }
 
     private void ServantSpecificUpdates()
     {
+        rb.isKinematic = true;
+        isAnimating = true;
+        Invoke(nameof(setIsAnimatingToFalse), 1.208f);
         StartCoroutine(StartManaRecharge());
         StartCoroutine(StartSprintRecharge());
+        desiredColor = Color.black;
+        clothMaterial.SetColor("_HaloColor", Color.black);
         CurrentBT = BerserkTime;
         canCall = true;
+        canMove = true;
         CurrentMana = MaxMana;
         CurrentSprint = MaxSprint;
         CheckSprint();
@@ -216,6 +228,8 @@ public class PlayerScript : BasePlayerClass
                     anim.SetFloat("Move", 1, 0.1f, Time.deltaTime);
                 }
 
+                LerpClothColor();
+
                 GroundCheck();
                 onSlope = SlopeCheck();
                 ControlDrag();
@@ -238,6 +252,11 @@ public class PlayerScript : BasePlayerClass
 
     }
 
+    private void LerpClothColor()
+    {
+        clothMaterial.SetColor("_HaloColor", Color.Lerp(clothMaterial.GetColor("_HaloColor"), desiredColor, 10f*Time.deltaTime));
+    }
+
     private void UpdateUI()
     {
         healthMat.SetFloat("_val", CurrentHealth / MaxHealth);
@@ -256,11 +275,6 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
         {
             Jump();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            TakeDamage(40);
         }
 
         //dash input
@@ -374,7 +388,7 @@ public class PlayerScript : BasePlayerClass
 
         gunArray[currentGun].SetActive(false);
     } 
-    private void AssertServantStatus()
+    public void AssertServantStatus()
     {
         servantModel.SetActive(true);
         werewolfModel.SetActive(false);
@@ -397,38 +411,59 @@ public class PlayerScript : BasePlayerClass
 
     public void TakeDamage(float damage)
     {
-        if(!IsRewinding)
+        if(!IsRewinding&&IsAlive)
         {
-            CurrentHealth -= damage;
-            IsAlive = CheckHealth();
-            HealthRechargePause = true;
-            if (!HealthRecharging)
-                StartCoroutine(StartHealthRecharge());
-
-            if (CurrentHealth / MaxHealth < 0.25f)
+            if(CurrentHealth-damage<=0&&!InBerserk)
             {
-                Critical = true;
+                CallBerserk();
             }
+            else
+            {
+                CurrentHealth -= damage;
+                IsAlive = CheckHealth();
+                HealthRechargePause = true;
+                if (!HealthRecharging&&!InBerserk)
+                    StartCoroutine(StartHealthRecharge());
 
-            if (!IsAlive && !InBerserk)
-            {
-                InBerserk = true;
-                IsAlive = true;
-                StopAllCoroutines();
-                Rewind();
-            }
-            else if (!IsAlive && InBerserk)
-            {
-                InBerserk = false;
-                Death();
+                if (CurrentHealth / MaxHealth < 0.25f&&!InBerserk)
+                {
+                    Critical = true;
+                }
+                else if (!IsAlive && InBerserk)
+                {
+                    anim.SetFloat("Move", 1f);
+                    anim.SetTrigger("Death");
+                    healthMat.SetFloat("_val", 0f);
+                    canMove = false;
+                    InBerserk = false;
+                    Invoke(nameof(DeathEvent),2.4f) ;
+                }
             }
         }
     }
 
-   void setIsAnimatingToFalse()
-   {
+    private void DeathEvent()
+    {
+        servantModel.SetActive(false);
+        playerDown.SetActive(true);
+        playerDown.transform.position = transform.position;
+        playerDown.transform.LookAt(playerObj.forward);
+        Death();
+    }
+
+    private void CallBerserk()
+    {
+        InBerserk = true;
+        desiredColor = rewindColor;
+        StopCoroutine(StartHealthRecharge());
+        Rewind();
+    }
+
+    void setIsAnimatingToFalse()
+    {
+        rb.isKinematic = false;
         isAnimating = false;
-   }
+    }
 
     public void StartRecording()
     {
@@ -449,14 +484,16 @@ public class PlayerScript : BasePlayerClass
     {
         if(recordedData.Count>0)
         {
+            IsRewinding = true;
             transform.position = recordedData[0].playerPos;
             playerObj.rotation = recordedData[0].playerRot;
             recordedData.RemoveAt(0);
-            IsRewinding = true;
+            Debug.Log("Rewinding");
         }
         else
         {
             InBerserk = true;
+            desiredColor = berserkColor;
             IsRewinding = false;
             Time.timeScale = 1f;
             rb.isKinematic = false;
@@ -471,6 +508,7 @@ public class PlayerScript : BasePlayerClass
         StartCoroutine(StartHealthRecharge());
         StartCoroutine(StartManaRecharge());
         StartCoroutine(StartSprintRecharge());
+        desiredColor = Color.black;
     }
 
     private void TriggerAggroCall()
@@ -484,7 +522,7 @@ public class PlayerScript : BasePlayerClass
             if(gotEnemy)
             {
                 enemyComponent.Aggro(gameObject);
-                enemyComponent.TakeDamage(40, true);
+                enemyComponent.TakeDamage(100, true);
             }
         }
 
@@ -571,6 +609,7 @@ public class PlayerScript : BasePlayerClass
         translateModifier = 1f;
         translateModifier = SprintCheck() ? sprintMult / moveMult : 1f;
         translateModifier = GroundCheck() ? translateModifier : airMoveMult;
+        translateModifier = canMove ? translateModifier : 0f;
         if (!onSlope)
         {
             rb.AddForce(translateModifier * moveMult * translateVector.normalized / Time.timeScale, ForceMode.Acceleration);

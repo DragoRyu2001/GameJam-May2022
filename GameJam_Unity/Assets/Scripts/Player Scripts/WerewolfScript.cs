@@ -230,7 +230,6 @@ public class WerewolfScript : BasePlayerClass
         rb.velocity = Vector3.zero;
         canMove = false;
         yield return StartCoroutine(TurnToServant());
-
     }
 
     private IEnumerator TurnToServant()

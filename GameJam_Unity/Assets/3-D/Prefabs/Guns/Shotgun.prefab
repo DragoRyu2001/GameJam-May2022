@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3103703291296737151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,11 +131,11 @@ MonoBehaviour:
   pellets: 12
   aim: {fileID: 0}
   directions: []
-  chokeDistance: 4
-  chokeDelta: 1.5
+  chokeDistance: 8
+  chokeDelta: 3
   choke: 0
-  shortRange: 3.5
-  medRange: 7
+  shortRange: 7
+  medRange: 10
   decalArray:
   - {fileID: 5212180497988015349, guid: 68b02b067a2626c4d82ab36fc1c652f1, type: 3}
   - {fileID: 5212180497988015349, guid: d704eef917264f6419dfc391f10eefe5, type: 3}
