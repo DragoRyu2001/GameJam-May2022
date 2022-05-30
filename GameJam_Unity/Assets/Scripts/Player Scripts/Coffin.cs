@@ -27,14 +27,6 @@ public class Coffin : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            TakeDamage(25);
-        }
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            HealCoffin(25);
-        }
         if(currentHealth<=0)
         {
             GameManager.instance.GameOver();
@@ -93,6 +85,7 @@ public class Coffin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) 
         {
+            Debug.Log("collision");
             playerInRepairRange = true;
         }
         

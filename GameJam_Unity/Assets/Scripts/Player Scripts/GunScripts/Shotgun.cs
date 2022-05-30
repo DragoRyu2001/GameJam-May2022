@@ -24,7 +24,6 @@ public class Shotgun : GunGeneral
     int randIndex;
     private GameObject decal;
     Vector3 newDir;
-    int hitCount;
     float distance;
     private void Start()
     {
@@ -66,7 +65,6 @@ public class Shotgun : GunGeneral
             newDir = muzzle.TransformDirection(newDir.normalized);
             directions[i] = newDir;
         }
-        hitCount = 0;
         foreach (Vector3 dir in directions)
         {
             if (Physics.Raycast(muzzle.position, -dir, out hit, maxDistance, layersToCheck))

@@ -5081,7 +5081,7 @@ MonoBehaviour:
   werewolfScript: {fileID: 7096083372152747821}
   playerDown: {fileID: 0}
   coffin: {fileID: 0}
-  coffinRepairSpeed: 0
+  coffinRepairSpeed: 25
   playerUIPanel: {fileID: 0}
   healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
   manaMat: {fileID: 2100000, guid: a8ea510070796674a8769846e27b9b9c, type: 2}
@@ -5100,7 +5100,7 @@ MonoBehaviour:
   - {fileID: 2709487757807939176}
   currentGun: 0
   previousGun: 0
-  currentType: 1
+  currentType: 0
   currentDashReloadTime: 0
   currentSlowMoReloadTime: 0
   currentAggroReloadTime: 0

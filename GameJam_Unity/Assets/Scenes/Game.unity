@@ -537,6 +537,16 @@ PrefabInstance:
       objectReference: {fileID: 1714850256}
     - target: {fileID: 8889262109382974574, guid: 968fb26b2c5f8714cb8cebe7f45e0212,
         type: 3}
+      propertyPath: phaseTimer1
+      value: 
+      objectReference: {fileID: 1797899142}
+    - target: {fileID: 8889262109382974574, guid: 968fb26b2c5f8714cb8cebe7f45e0212,
+        type: 3}
+      propertyPath: phaseTimer2
+      value: 
+      objectReference: {fileID: 1449812941}
+    - target: {fileID: 8889262109382974574, guid: 968fb26b2c5f8714cb8cebe7f45e0212,
+        type: 3}
       propertyPath: servantAnim
       value: 
       objectReference: {fileID: 607562887}
@@ -2380,6 +2390,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1449812941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7590832570374173929, guid: a0341b1f2793ceb42a9792dd236c475e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1759562675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1574003304

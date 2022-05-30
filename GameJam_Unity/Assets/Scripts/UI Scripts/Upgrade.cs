@@ -408,8 +408,13 @@ public class Upgrade : MonoBehaviour
         //Level 3: Model change, Prefab different arrow= +20% 22 per shot (Auto)
         if(crossbowLevel<3)
         {
-            player.SetCrossbowType(crossbowLevel);
-            crossbowLevel++;
+            int cost = crossbowLevel * costSouls * gunSoulMult;
+            if(souls-cost>=0)
+            {
+                crossbowLevel++;
+                souls -= cost;
+                player.SetCrossbowType(crossbowLevel);
+            }
         }
         else
         {

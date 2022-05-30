@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int phase;
     [SerializeField, ReadOnly] int currentWave;
     [SerializeField] int enemiesThisWave;
+    [SerializeField] int startEnemies;
+
 
     [Header("Scaling Parameters")]
     [SerializeField] float crossbowBaseDamage;
@@ -69,7 +71,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Wave Variables")]
-    [SerializeField] int nextWave = 0;
     [SerializeField] float timeBetweenWaves = 5f;
     [SerializeField, ReadOnly] float currentTimeBetweenWave;
     [SerializeField] int waveNumber;
@@ -87,7 +88,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] static bool GameIsPaused = false;
-    [SerializeField] TMP_Text phaseTimer;
+    [SerializeField] TMP_Text phaseTimer1;
+    [SerializeField] TMP_Text phaseTimer2;
     [SerializeField] TMP_Text killsCounter;
     [SerializeField] TMP_Text timer;
     [SerializeField] GameObject pauseMenu;
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour
         timeSurvived = 0f;
         game = true;
         soulsEarned = 0;
+        startEnemies = enemiesThisWave;
         postPanel.SetActive(false);
         coffinScript = Coffin.GetComponent<Coffin>();
         StartPhase();
@@ -343,11 +346,12 @@ public class GameManager : MonoBehaviour
         Vampire.SetActive(true);
         camHolderAim.SetPlayer(vampCamPos, vampOrentation);
 
-        phaseTimer.gameObject.SetActive(true);
-        int i = 10;//THIS SHOULD BE CHANGED BACK TO 30++++++++++++++++++++================================ 
+        phaseTimer1.gameObject.SetActive(true);
+        int i = 30;
         while (i > 0)
         {
-            phaseTimer.text = "Time remaining: " + i;
+            phaseTimer1.text = "Time remaining: " + i;
+            phaseTimer2.text = i.ToString();
             Debug.Log("Time remaining: \n " + i);
             yield return new WaitForSeconds(1f);
             i--;
@@ -356,7 +360,7 @@ public class GameManager : MonoBehaviour
         targetAlpha = 1f;
         yield return new WaitForSeconds(1f);
         Vampire.SetActive(false);
-        phaseTimer.gameObject.SetActive(false);
+        phaseTimer1.gameObject.SetActive(false);
         playerDown.SetActive(false);
         Player.SetActive(true);
         ScaleEnemies();
@@ -393,7 +397,7 @@ public class GameManager : MonoBehaviour
           mageCurrentHealth += mageHealth * survivedPhases * 0.2f;
         archerCurrentHealth += archerHealth * survivedPhases * 0.1f;
         knightCurrentHealth += knightHealth * survivedPhases * 0.05f;
-        enemiesThisWave = 5 + (survivedPhases + 1) * 2;
+        enemiesThisWave = startEnemies + survivedPhases * 2;
         Debug.Log(enemiesThisWave);
     }
 

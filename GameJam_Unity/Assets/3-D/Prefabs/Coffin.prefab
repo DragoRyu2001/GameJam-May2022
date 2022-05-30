@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6333236436048977260}
   - component: {fileID: 3902422025893362767}
+  - component: {fileID: 869334757}
   m_Layer: 8
   m_Name: UpgradeHolder
   m_TagString: Untagged
@@ -45,12 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canShop: 0
-  vampPhase: 0
   player: {fileID: 0}
   souls: 0
-  costSouls: 0
-  abilitySoulMult: 0
-  gunSoulMult: 0
+  costSouls: 100
+  abilitySoulMult: 2
+  gunSoulMult: 10
   rifle: {fileID: 0}
   shotgun: {fileID: 0}
   crossbow: {fileID: 0}
@@ -91,6 +91,20 @@ MonoBehaviour:
   shotgunReloadDecrease: 0
   rifleDamageIncrease: 0
   shotGunDamageIncrease: 0
+  shopping: 0
+--- !u!65 &869334757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008476061253680423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 4, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4552891427551229885
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2154762132038414020
 Transform:
   m_ObjectHideFlags: 0
@@ -147,6 +161,8 @@ GameObject:
   - component: {fileID: 5543850284102692254}
   - component: {fileID: 4639189055701715808}
   - component: {fileID: 4286999688912868511}
+  - component: {fileID: 1876565921}
+  - component: {fileID: 1876565922}
   m_Layer: 8
   m_Name: Coffin
   m_TagString: Coffin
@@ -191,6 +207,14 @@ MonoBehaviour:
   coffinClose: {fileID: 2514786438861557778}
   maxHealth: 1000
   currentHealth: 0
+  coffinPlayer: {fileID: 0}
+  coffinWerewolf: {fileID: 0}
+  coffinNailsP:
+  - {fileID: 0}
+  - {fileID: 0}
+  coffinNailsW:
+  - {fileID: 0}
+  - {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -213,6 +237,32 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &1876565921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344307749506415118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!65 &1876565922
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344307749506415118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 5, z: 6}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &6529075274594026134
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7977900562560215755
 Transform:
   m_ObjectHideFlags: 0

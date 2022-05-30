@@ -376,6 +376,7 @@ public class PlayerScript : BasePlayerClass
 
         if(Input.GetKey(KeyCode.C)&&coffin.GetIfPlayerInRepairRange())
         {
+            Debug.Log("Hello");
             coffin.HealCoffin(Time.deltaTime*coffinRepairSpeed);
         }
     }
