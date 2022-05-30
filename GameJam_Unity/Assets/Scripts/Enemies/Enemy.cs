@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] protected GameObject target;
-    [SerializeField]protected NavMeshAgent agent;
-    [SerializeField]protected float maxHealth;
+    [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] protected float maxHealth;
     [ReadOnly, SerializeField]protected float currentHealth;
     [ReadOnly, SerializeField]protected bool isAlive;
     [SerializeField]protected Animator anim;

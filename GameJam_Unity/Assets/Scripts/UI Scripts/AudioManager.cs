@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioClip[] soundtrack;
+    [SerializeField] AudioClip mainMenuMusic;
+    [SerializeField] AudioClip vampMusic;
+    [SerializeField] AudioClip playMusic1;
+    [SerializeField] AudioClip playMusic2;
     [SerializeField] Slider volumeSlider;
 
-    AudioSource audioSource;
+
+    [SerializeField] AudioSource audioSource;
 
 
     void Awake()
@@ -21,22 +25,37 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
 
-        if (!audioSource.playOnAwake)
-        {
-            audioSource.clip = soundtrack[Random.Range(0, soundtrack.Length)];
-            audioSource.Play();
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = soundtrack[Random.Range(0, soundtrack.Length)];
+       
+    }
 
+    void PlayMainMenuMusic()
+    {
+        if(!audioSource.isPlaying)
+        { 
+            audioSource.clip = mainMenuMusic;
+            audioSource.Play();
+        }
+    }
+    void PlayVampMusic()
+    {
+        if(!audioSource.isPlaying)
+        { 
+            audioSource.clip = vampMusic;
+            audioSource.Play();
+        }
+    }
+
+    void PlayGameMusic()
+    {
+        if(!audioSource.isPlaying)
+        { 
+            audioSource.clip = Random.Range(0,100)>50?playMusic1:playMusic2;
             audioSource.Play();
         }
     }
@@ -44,11 +63,11 @@ public class AudioManager : MonoBehaviour
     void OnEnable()
     {
         //Register Slider Events
-        volumeSlider.onValueChanged.AddListener(delegate { changeVolume(volumeSlider.value); });
+        volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(volumeSlider.value); });
     }
 
     //Called when Slider is moved
-    void changeVolume(float sliderValue)
+    void ChangeVolume(float sliderValue)
     {
         audioSource.volume = sliderValue;
     }

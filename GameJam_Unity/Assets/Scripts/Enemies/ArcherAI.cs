@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +20,16 @@ public class ArcherAI : Enemy
     void Start()
     {
         SetTarget();
+        PhaseUpdate();
         SetBaseParameters();
     }
+
+    private void PhaseUpdate()
+    {
+        drawSpeed = GameManager.instance.ArcherCurrentReloadTime;
+        maxHealth = GameManager.instance.ArcherCurrentHealth;
+    }
+
     void Update()
     {
         Move();

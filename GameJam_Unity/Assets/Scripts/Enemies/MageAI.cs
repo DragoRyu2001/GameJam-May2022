@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -23,8 +24,17 @@ public class MageAI : Enemy
     void Start()
     {
         SetTarget();
+        PhaseUpdate();
         SetBaseParameters();
     }
+
+    private void PhaseUpdate()
+    {
+        reloadTime = GameManager.instance.MageCurrentReloadTime;
+        damage = GameManager.instance.MageCurrentBaseDamage;
+        maxHealth = GameManager.instance.MageCurrentHealth;
+    }
+
     void Update()
     {
         Move();

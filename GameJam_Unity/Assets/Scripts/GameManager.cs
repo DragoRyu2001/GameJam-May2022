@@ -31,8 +31,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] int enemiesThisWave;
 
     [Header("Scaling Parameters")]
-    [SerializeField] int enemyWaveDelta;
-    [SerializeField] float difficultyScaling;
+    [SerializeField] float crossbowBaseDamage;
+    [SerializeField] float swordBaseDamage;
+    [SerializeField] float mageBaseDamage;
+    [SerializeField] float mageReloadTime;
+    [SerializeField] float archerReloadTime;
+    [SerializeField] float mageHealth;
+    [SerializeField] float archerHealth;
+    [SerializeField] float knightHealth;
+    [SerializeField] float crossbowCurrentBaseDamage;
+    [SerializeField] float swordCurrentBaseDamage;
+    [SerializeField] float mageCurrentBaseDamage;
+    [SerializeField] float mageCurrentReloadTime;
+    [SerializeField] float archerCurrentReloadTime;
+    [SerializeField] float mageCurrentHealth;
+    [SerializeField] float archerCurrentHealth;
+    [SerializeField] float knightCurrentHealth;
 
     [Header("Player Progression")]
     [SerializeField] int survivedWaves;
@@ -92,6 +106,18 @@ public class GameManager : MonoBehaviour
     private float crossbowDamage;
     Color black;
     float targetAlpha, targetSpeed;
+
+    #region Setters and Getters
+    public float CrossbowCurrentBaseDamage { get => crossbowCurrentBaseDamage; set => crossbowCurrentBaseDamage = value; }
+    public float SwordCurrentBaseDamage { get => swordCurrentBaseDamage; set => swordCurrentBaseDamage = value; }
+    public float MageCurrentBaseDamage { get => mageCurrentBaseDamage; set => mageCurrentBaseDamage = value; }
+    public float MageCurrentReloadTime { get => mageCurrentReloadTime; set => mageCurrentReloadTime = value; }
+    public float ArcherCurrentReloadTime { get => archerCurrentReloadTime; set => archerCurrentReloadTime = value; }
+    public float MageCurrentHealth { get => mageCurrentHealth; set => mageCurrentHealth = value; }
+    public float ArcherCurrentHealth { get => archerCurrentHealth; set => archerCurrentHealth = value; }
+    public float KnightCurrentHealth { get => knightCurrentHealth; set => knightCurrentHealth = value; }
+
+    #endregion
 
     void Start()
     {
@@ -163,7 +189,7 @@ public class GameManager : MonoBehaviour
         }
         else if(component.name.Contains("Mage"))
         {
-            return Coffin;
+            return Random.Range(0, 100) > 70 ? Player : Coffin;
         }
         else
         {
@@ -301,7 +327,28 @@ public class GameManager : MonoBehaviour
         phaseTimer.gameObject.SetActive(false);
         playerDown.SetActive(false);
         Player.SetActive(true);
+        ScaleEnemies();
         StartPhase();
+    }
+
+    private void ScaleEnemies()
+    {
+            mageCurrentBaseDamage += mageBaseDamage * survivedPhases * 0.7f;
+        crossbowCurrentBaseDamage += crossbowBaseDamage * survivedPhases * 0.3f;
+           swordCurrentBaseDamage += swordBaseDamage * survivedPhases * 0.05f;
+
+        if(mageReloadTime>3f)
+        {
+            mageCurrentReloadTime -= mageReloadTime * survivedPhases * 0.1f;
+        }
+        if(archerReloadTime>1f)
+        {
+            archerCurrentReloadTime -= archerReloadTime * survivedPhases * 0.1f;
+        }
+
+          mageCurrentHealth += mageHealth * survivedPhases * 0.2f;
+        archerCurrentHealth += archerHealth * survivedPhases * 0.1f;
+        knightCurrentHealth += knightHealth * survivedPhases * 0.05f;
     }
 
     private void SetMCDownAfterAnim()

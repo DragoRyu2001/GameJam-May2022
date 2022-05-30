@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,15 @@ public class KnightAI : Enemy
     void Start()
     {
         SetTarget();
+        PhaseUpdate();
         SetBaseParameters();
     }
 
-    
+    private void PhaseUpdate()
+    {
+        maxHealth = GameManager.instance.KnightCurrentHealth;
+    }
+
     void Update()
     {
         
