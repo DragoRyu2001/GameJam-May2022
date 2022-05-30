@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1700065597}
   - component: {fileID: 1700065599}
   - component: {fileID: 1700065598}
+  - component: {fileID: 470989337}
   m_Layer: 8
   m_Name: Movement_Fx
   m_TagString: Untagged
@@ -41,13 +42,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700065596}
   serializedVersion: 8
-  lengthInSec: 0.1
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 1
+  emitterVelocityMode: 0
   looping: 1
   prewarm: 1
   playOnAwake: 1
@@ -116,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -169,7 +170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -661,15 +662,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
-    angle: 25
+    type: 4
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: -0.09, z: 0.27}
+    m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.43, y: 1.45, z: 0.19}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -729,13 +730,14 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    m_Mesh: {fileID: 0}
+    m_Mesh: {fileID: -6153663081527216589, guid: 1de454dcb7584a14aabd72829cd6a45a,
+      type: 3}
     m_MeshRenderer: {fileID: 0}
-    m_SkinnedMeshRenderer: {fileID: 0}
+    m_SkinnedMeshRenderer: {fileID: 6210144935947105930}
     m_Sprite: {fileID: 0}
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
-    m_UseMeshColors: 1
+    m_UseMeshColors: 0
     alignToDirection: 0
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
@@ -748,7 +750,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.32
       mode: 0
       spread: 0
       speed:
@@ -919,7 +921,7 @@ ParticleSystem:
         m_RotationOrder: 4
     rateOverDistance:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 0
       scalar: 20
       minScalar: 0
       maxCurve:
@@ -3936,8 +3938,8 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     ratio: 0.1
     lifetime:
       serializedVersion: 2
@@ -3993,7 +3995,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minVertexDistance: 0.2
-    textureMode: 3
+    textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 1
@@ -4771,6 +4773,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4821,6 +4824,105 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!96 &470989337
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700065596}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Time: 1
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.5038452
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 0.44705883}
+      key1: {r: 0.8581184, g: 1, b: 0, a: 0.48235294}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 30647
+      atime2: 65535
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 3
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 1
+    textureMode: 1
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
+  m_Emitting: 1
 --- !u!1 &49685510404656911
 GameObject:
   m_ObjectHideFlags: 0
@@ -5076,6 +5178,7 @@ MonoBehaviour:
   aggroRange: 10
   aggroReloadTime: 5
   werewolfScript: {fileID: 7096083372152747821}
+  playerDown: {fileID: 0}
   coffin: {fileID: 0}
   coffinRepairSpeed: 0
   playerUIPanel: {fileID: 0}
@@ -5095,17 +5198,17 @@ MonoBehaviour:
   - {fileID: 2709487757807939176}
   currentGun: 0
   previousGun: 0
-  currentType: 0
+  currentType: 1
   currentDashReloadTime: 0
   currentSlowMoReloadTime: 0
   currentAggroReloadTime: 0
   killsRequired: 3
   gunIcons:
-  - {fileID: 21300000, guid: 122a0341424295a40b3b19a8ec407660, type: 3}
   - {fileID: 21300000, guid: ec3b7db324447f34eac1e7c9fc2b2211, type: 3}
+  - {fileID: 21300000, guid: 122a0341424295a40b3b19a8ec407660, type: 3}
+  - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
   - {fileID: 21300000, guid: 723cb85ee87037d44a03b7ea81b58131, type: 3}
   - {fileID: 21300000, guid: a533ea5f832b4ce46b45b0f71d68825e, type: 3}
-  - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
   clothMaterial: {fileID: 2100000, guid: 420614a4d2d07264eb21652654f164b3, type: 2}
   rewindColor: {r: 1, g: 0.87421644, b: 0.3339622, a: 1}
   berserkColor: {r: 1, g: 0.41764444, b: 0.2584905, a: 1}
@@ -6314,7 +6417,7 @@ PrefabInstance:
     - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
       propertyPath: bloom
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
@@ -6325,6 +6428,11 @@ PrefabInstance:
         type: 3}
       propertyPath: chokeDelta
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969247579806323806, guid: 628f01ab9ee6d264594cfbf6aac05e80,
+        type: 3}
+      propertyPath: chokeDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6554067455169319981, guid: 628f01ab9ee6d264594cfbf6aac05e80,
         type: 3}
@@ -7303,6 +7411,12 @@ MonoBehaviour:
   - m_Rig: {fileID: 7873473165038569456}
     m_Active: 1
   m_Effectors: []
+--- !u!137 &6210144935947105930 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7495904643919026266, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4744524178836689196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6338460549821988712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1594647912882073156, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d,
