@@ -127,7 +127,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   aimPos: {fileID: 0}
-  bloom: 1
+  bloom: 0.3
   pellets: 12
   aim: {fileID: 0}
   directions: []

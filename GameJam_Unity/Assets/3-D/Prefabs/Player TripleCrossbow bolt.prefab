@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2475439408802478169}
   - component: {fileID: -209673797525601363}
   m_Layer: 7
-  m_Name: Player Crossbow bolt
+  m_Name: Player TripleCrossbow bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ac7466451a08d45b075a478e2b5ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 125
-  speed: 50
+  damage: 42
+  speed: 40
   isPlayer: 1
   maxDist: 100
 --- !u!54 &2475439408802478182

@@ -115,6 +115,7 @@ MonoBehaviour:
   reloadTime: 1
   fireRate: 0.1
   firingDelay: 0
+  anim: {fileID: 0}
   maxAmmo: 1
   currentAmmo: 0
   canShoot: 0
@@ -126,7 +127,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   aimPos: {fileID: 0}
-  bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
+  bolt: {fileID: 2475439408802478170, guid: d045e34da080fdd40a3db1555abb2cb2, type: 3}
   yOffset: 0.2
   xOffset: 0.2
 --- !u!1001 &2646433491653205981

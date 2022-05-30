@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WerewolfScript : BasePlayerClass
 {
@@ -8,13 +9,19 @@ public class WerewolfScript : BasePlayerClass
     [SerializeField] PlayerScript playerScript;
 
     [Header("UI Tie-ins")]
+    [SerializeField] GameObject wereWolfUIPanel;
     [SerializeField] Material healthMat;
+    [SerializeField] Image swipeOutline;
+    [SerializeField] Image poundOutline;
+    [SerializeField] Image ultOutline;
 
     [Header("Ultimate Parameters")]
     [SerializeField, ReadOnly] private bool canUlt;
     [SerializeField, ReadOnly] private bool isUlting;
     [SerializeField] private float ultDuration;
     [SerializeField, ReadOnly] private float currentUltDuration;
+    [SerializeField, ReadOnly] private float currentSwipeDuration;
+    [SerializeField, ReadOnly] private float currentPoundDuration;
     [SerializeField] Collider leftHandCollider;
     [SerializeField] Collider rightHandCollider;
     [SerializeField] float poundRange;
@@ -37,11 +44,13 @@ public class WerewolfScript : BasePlayerClass
 
     void Start()
     {
-        canMove = true;
+        canMove = false;
+        Invoke(nameof(SetCanMoveToTrue), 2.45f);
         rb.velocity = Vector3.zero;
         BaseParametersUpdate();
         AssertWerewolfStatus();
         StartCoroutine(ReturnToHumanForm());
+        wereWolfUIPanel.SetActive(true);
         currentUltDuration = ultDuration + 2.5f;
         leftHandCollider.enabled = false;
         rightHandCollider.enabled = false;
@@ -68,7 +77,13 @@ public class WerewolfScript : BasePlayerClass
     {
         anim.SetBool("canAttack", true);
         ToggleHandColliders(true);
-        yield return new WaitForSeconds(time);
+        currentSwipeDuration = 0f;
+        while(currentSwipeDuration<time)
+        {
+            yield return null;
+            currentSwipeDuration += Time.deltaTime;
+            swipeOutline.fillAmount = 1f - currentSwipeDuration / time;
+        }
         ToggleHandColliders(false);
         anim.SetBool("canAttack", false);
     } 
@@ -77,9 +92,15 @@ public class WerewolfScript : BasePlayerClass
     {
         ToggleHandColliders(true);
         canMove = false;
-        yield return new WaitForSeconds(time);
+        currentPoundDuration = 0f;
+        while (currentSwipeDuration < time)
+        {
+            yield return null;
+            currentPoundDuration += Time.deltaTime;
+            poundOutline.fillAmount = 1f - currentPoundDuration / time;
+        }
         ToggleHandColliders(false);
-        canMove = true;
+
     }
 
     private void ToggleHandColliders(bool state)
@@ -93,12 +114,17 @@ public class WerewolfScript : BasePlayerClass
         Move();
     }
 
+    void SetCanMoveToTrue()
+    {
+        canMove = true;
+    }
 
     void Update()
     {
         if (IsAlive)
         {
             currentUltDuration -= Time.deltaTime;
+            ultOutline.fillAmount = 1 - currentUltDuration / ultDuration;
             desiredWalkAnimSpeed = rb.velocity.magnitude < 2f ? 1f : rb.velocity.magnitude / 6f;
             anim.SetFloat("Walk", Mathf.Lerp(currentWalkAnimSpeed, desiredWalkAnimSpeed, 500f * Time.deltaTime));
             GroundCheck();
@@ -136,7 +162,7 @@ public class WerewolfScript : BasePlayerClass
             rb.velocity = Vector3.zero;
             canMove = false;
             StopCoroutine(ReturnToHumanForm());
-            StartCoroutine(Swap());
+            StartCoroutine(TurnToServant());
             Death();
         }
 
@@ -155,6 +181,7 @@ public class WerewolfScript : BasePlayerClass
 
         if (Input.GetMouseButtonDown(0))
         {
+
             StartCoroutine(AttackAction1(2.46f));
             anim.SetTrigger("Attack1");
             
@@ -190,6 +217,7 @@ public class WerewolfScript : BasePlayerClass
                 enemyComp.TakeDamage(1000, true);
             }
         }
+        canMove = true;
     }
 
     private IEnumerator ReturnToHumanForm()
@@ -201,16 +229,17 @@ public class WerewolfScript : BasePlayerClass
         //ult duration wait;
         rb.velocity = Vector3.zero;
         canMove = false;
-        yield return StartCoroutine(Swap());
+        yield return StartCoroutine(TurnToServant());
 
     }
 
-    private IEnumerator Swap()
+    private IEnumerator TurnToServant()
     {
         anim.StopPlayback();
         anim.SetTrigger(IsAlive ? "Human" : "Death");
         yield return new WaitForSeconds(2.5f);
         rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+        wereWolfUIPanel.SetActive(false);
         servantModel.SetActive(true);
         werewolfModel.SetActive(false);
 
