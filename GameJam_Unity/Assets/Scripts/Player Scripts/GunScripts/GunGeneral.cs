@@ -85,6 +85,7 @@ public class GunGeneral : MonoBehaviour
         audioSrc.Play();
         yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
+        canShoot = true;
         reloading = false;
     }
 
