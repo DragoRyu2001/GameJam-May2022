@@ -63,7 +63,7 @@ public class MageAI : Enemy
     {
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(castPre);
-        GameObject obj = Instantiate(AOESplash, new Vector3(targetPos.x, (targetPos.y),targetPos.z), AOESplash.transform.rotation);
+        Instantiate(AOESplash, new Vector3(targetPos.x, (targetPos.y),targetPos.z), AOESplash.transform.rotation);
         yield return new WaitForSeconds(castTime);
         
         Collider []collider = Physics.OverlapSphere(targetPos, aoeRadius);
@@ -86,10 +86,6 @@ public class MageAI : Enemy
                 }
             }
         }
-
-        Destroy(obj);
-        GameObject explode = Instantiate(explode_PS,  new Vector3(targetPos.x, (targetPos.y-0.75f),targetPos.z), explode_PS.transform.rotation);
-        Destroy(explode, 1f);
         
     }
     void ResetShoot()
