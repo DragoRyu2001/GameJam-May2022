@@ -71,9 +71,14 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] TMP_Text phaseTimer;
     [SerializeField] TMP_Text killsCounter;
+    [SerializeField] TMP_Text timer;
+    [Header("Post Game")]
+    [SerializeField] TMP_Text scoreText;
+    [Header("ReadOnly")]
     [ReadOnly, SerializeField] float score;
     [ReadOnly, SerializeField] float timeSurvived;
-    [ReadOnly, SerializeField] bool game;
+    [ReadOnly, SerializeField] bool game, vamp;
+
     private float crossbowDamage;
     Color black;
     float targetAlpha, targetSpeed;
@@ -105,8 +110,11 @@ public class GameManager : MonoBehaviour
         {
             currentTimeBetweenWave -= Time.deltaTime;
         }
-        if(game)
+        if(game&&!vamp)
+        {
             timeSurvived+=Time.deltaTime;
+            timer.text="Time: "+(int)timeSurvived;
+        }
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
@@ -114,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     private void StartPhase()
     {
-        
+        vamp = false;
         Player.GetComponent<PlayerScript>().enabled = true;
         servantAnim.SetTrigger("Start");
         Vampire.SetActive(false);
@@ -237,7 +245,7 @@ public class GameManager : MonoBehaviour
         sun.intensity = 0;
         souls = kills * 150;
         //coffin.Upgrade(true, souls);
-        
+        vamp = true;
         
         StartCoroutine(EndPhaseTimer());
     }
@@ -254,12 +262,12 @@ public class GameManager : MonoBehaviour
         Vampire.SetActive(true);
         camHolderAim.SetPlayer(vampCamPos, vampOrentation);
 
-        //phaseTimer.gameObject.SetActive(true);
+        phaseTimer.gameObject.SetActive(true);
         int i = 10;//THIS SHOULD BE CHANGED BACK TO 30++++++++++++++++++++================================ 
         while(i>0)
         {
-            //phaseTimer.text = "Time remaining: "+i;
-            Debug.Log("Time remaining: "+ i);
+            phaseTimer.text = "Time remaining: "+i;
+            Debug.Log("Time remaining: \n "+ i);
             yield return new WaitForSeconds(1f);
             i--;
         }
@@ -267,7 +275,7 @@ public class GameManager : MonoBehaviour
         targetAlpha = 1f;
         yield return new WaitForSeconds(1f);
         Vampire.SetActive(false);
-        //phaseTimer.gameObject.SetActive(false);
+        phaseTimer.gameObject.SetActive(false);
         StartPhase();
     }
     #region PostGame
@@ -281,7 +289,7 @@ public class GameManager : MonoBehaviour
     void CalcScore()
     {
         score = kills* phase* timeSurvived;
-        //scoreText.text = "Score: "+ score;
+        scoreText.text = "Score: "+ score;
         //Calculate Score
     }
     
