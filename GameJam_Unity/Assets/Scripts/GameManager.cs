@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SetCurrentBaseStats();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         crossbowDamage = 20f;
         pScript = Player.GetComponent<PlayerScript>();
@@ -330,6 +331,18 @@ public class GameManager : MonoBehaviour
         Player.SetActive(true);
         ScaleEnemies();
         StartPhase();
+    }
+
+    void SetCurrentBaseStats()
+    {
+        mageCurrentBaseDamage = mageBaseDamage;
+        crossbowCurrentBaseDamage = crossbowBaseDamage;
+        swordCurrentBaseDamage = swordBaseDamage;
+        mageCurrentReloadTime = mageReloadTime;
+        archerCurrentReloadTime = archerReloadTime;
+        mageCurrentHealth = mageHealth;
+        archerCurrentHealth = archerHealth;
+        knightCurrentHealth = knightHealth;
     }
 
     private void ScaleEnemies()
