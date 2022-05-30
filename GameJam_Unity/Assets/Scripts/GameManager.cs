@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
         camHolderAim.SetPlayer(servantCamPos, servantOrientation);
         currentWave = 0;
         killsThisWave = 0;
-        //upgrade.Shop(false);
+        upgrade.Shop(false);
         targetSpeed = 0.25f;
         targetAlpha = 0f;
         spawnState= SpawnStates.CANSPAWN;
@@ -308,7 +308,7 @@ public class GameManager : MonoBehaviour
         survivedPhases++;
         sun.intensity = 0;
         souls = kills * 150;
-        //coffin.Upgrade(true, souls);
+        coffinScript.Upgrade(true, souls);
         vamp = true;
 
         StartCoroutine(EndPhaseTimer());
