@@ -1584,31 +1584,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1355787347413492269}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869334755}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f41c003d1c717c844b7c0b7f36e01115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &869334755 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2008476061253680423, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-    type: 3}
-  m_PrefabInstance: {fileID: 1355787347413492269}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &869334757
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869334755}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 4, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &923461099 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1620192237, guid: 7edb9f3807abdf346aa79fe205dc794d,
@@ -4255,6 +4236,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1355787347413492269}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1876565919 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
+    type: 3}
+  m_PrefabInstance: {fileID: 1355787347413492269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876565917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c674af492187d4e49beb8e0931d0ced8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1975951905 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9185095219630604556, guid: 7edb9f3807abdf346aa79fe205dc794d,
@@ -5196,18 +5189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &198462627492802206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7686577899482070041, guid: f888bcc6371f5bf44a78fb9b8b2ab633,
-    type: 3}
-  m_PrefabInstance: {fileID: 198462627492802202}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7524707294107996801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1355787347413492269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5215,21 +5196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2008476061253680423, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2514786438861557778, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392416653038452859, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 3902422025893362767, guid: 596a0ad8c83067f4c95e8f8e89c96059,
         type: 3}
       propertyPath: rifle
@@ -5290,16 +5256,6 @@ PrefabInstance:
       propertyPath: abilityInfoText
       value: 
       objectReference: {fileID: 1793823560}
-    - target: {fileID: 4286999688912868511, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_Carve
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4552891427551229885, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
         type: 3}
       propertyPath: coffinPlayer
@@ -5310,16 +5266,6 @@ PrefabInstance:
       propertyPath: coffinWerewolf
       value: 
       objectReference: {fileID: 198462627492802205}
-    - target: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: coffinNailsP.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: coffinNailsW.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
         type: 3}
       propertyPath: coffinNailsP.Array.data[0]
@@ -5340,11 +5286,6 @@ PrefabInstance:
       propertyPath: coffinNailsW.Array.data[1]
       value: 
       objectReference: {fileID: 198462627492802204}
-    - target: {fileID: 4639189055701715808, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: coffinNailsW.Array.data[2]
-      value: 
-      objectReference: {fileID: 198462627492802206}
     - target: {fileID: 5543850284102692254, guid: 596a0ad8c83067f4c95e8f8e89c96059,
         type: 3}
       propertyPath: m_RootOrder
@@ -5404,16 +5345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Coffin
-      objectReference: {fileID: 0}
-    - target: {fileID: 6344307749506415118, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6529075274594026134, guid: 596a0ad8c83067f4c95e8f8e89c96059,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 596a0ad8c83067f4c95e8f8e89c96059, type: 3}
@@ -5605,6 +5536,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
+        type: 3}
+      propertyPath: coffin
+      value: 
+      objectReference: {fileID: 1876565919}
     - target: {fileID: 982878094783673622, guid: e920cefadd5b16e429932d79e54479b6,
         type: 3}
       propertyPath: gunImage

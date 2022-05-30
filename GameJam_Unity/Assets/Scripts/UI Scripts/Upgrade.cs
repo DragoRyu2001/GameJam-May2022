@@ -7,7 +7,7 @@ using TMPro;
 public class Upgrade : MonoBehaviour
 {
     [Header("General")]
-    [ReadOnly, SerializeField] bool canShop;
+    [ SerializeField] bool canShop;
     [SerializeField] PlayerScript player;
     [SerializeField] int souls, costSouls, abilitySoulMult, gunSoulMult;
     [Header("GUNNSSSSSS")]
@@ -27,24 +27,24 @@ public class Upgrade : MonoBehaviour
     [SerializeField] TMP_Text soulsText;
 
     [Header("ReadOnly")]
-    [ReadOnly, SerializeField] int manaLevel, healthLevel, sprintLevel;//Base Stats
-    [ReadOnly, SerializeField] int aggroLevel, slowLevel, dashLevel;//Ability Stats
+    [ SerializeField] int manaLevel, healthLevel, sprintLevel;//Base Stats
+    [ SerializeField] int aggroLevel, slowLevel, dashLevel;//Ability Stats
     
     //Base Stats
-    [ReadOnly, SerializeField] float manaIncrease, manaRegenIncrease, manaCostDecrease;
-    [ReadOnly, SerializeField] float healthIncrease, healthRegenIncrease, healthPauseTimeDecrease;
-    [ReadOnly, SerializeField] float sprintIncrease, sprintRegenRateIncrease, sprintDecayRateDecrease;
+    [ SerializeField] float manaIncrease, manaRegenIncrease, manaCostDecrease;
+    [ SerializeField] float healthIncrease, healthRegenIncrease, healthPauseTimeDecrease;
+    [ SerializeField] float sprintIncrease, sprintRegenRateIncrease, sprintDecayRateDecrease;
     
     //Ability Stats
-    [ReadOnly, SerializeField] float aggroRange, aggroReload;
-    [ReadOnly, SerializeField] float dashForce, dashReload;
-    [ReadOnly, SerializeField] float slowDuration, slowReload;
+    [ SerializeField] float aggroRange, aggroReload;
+    [ SerializeField] float dashForce, dashReload;
+    [ SerializeField] float slowDuration, slowReload;
 
     //Gun Stats
-    [ReadOnly, SerializeField] int crossbowLevel, rifleLevel, shotgunLevel;
-    [ReadOnly, SerializeField] float crossBowReloadDecrease, rifleReloadDecrease, shotgunReloadDecrease;
-    [ReadOnly, SerializeField] float rifleDamageIncrease, shotGunDamageIncrease;
-    [ReadOnly, SerializeField] bool shopping = false;
+    [ SerializeField] int crossbowLevel, rifleLevel, shotgunLevel;
+    [ SerializeField] float crossBowReloadDecrease, rifleReloadDecrease, shotgunReloadDecrease;
+    [ SerializeField] float rifleDamageIncrease, shotGunDamageIncrease;
+    [ SerializeField] bool shopping = false;
 
     void OnTriggerEnter(Collider col)
     {

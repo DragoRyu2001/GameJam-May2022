@@ -9,7 +9,7 @@ public class Coffin : MonoBehaviour
     [SerializeField] GameObject coffinOpen;
     [SerializeField] GameObject coffinClose;
     [SerializeField] float maxHealth;
-    [ReadOnly, SerializeField] float currentHealth;
+    [ SerializeField] float currentHealth;
 
     [SerializeField] Image coffinPlayer;
     [SerializeField] Image coffinWerewolf;
@@ -19,8 +19,8 @@ public class Coffin : MonoBehaviour
 
     [Header("Read Only")]
     [SerializeField] LayerMask playerLayer;
-    [ReadOnly, SerializeField] float h1, h2;
-    [SerializeField, ReadOnly] bool playerInRepairRange;
+    [ SerializeField] float h1, h2;
+    [SerializeField] bool playerInRepairRange;
     void Start()
     {
         Init();        

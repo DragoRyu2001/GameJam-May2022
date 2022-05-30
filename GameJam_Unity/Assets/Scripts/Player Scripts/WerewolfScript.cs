@@ -16,12 +16,12 @@ public class WerewolfScript : BasePlayerClass
     [SerializeField] Image ultOutline;
 
     [Header("Ultimate Parameters")]
-    [SerializeField, ReadOnly] private bool canUlt;
-    [SerializeField, ReadOnly] private bool isUlting;
+    [SerializeField] private bool canUlt;
+    [SerializeField] private bool isUlting;
     [SerializeField] private float ultDuration;
-    [SerializeField, ReadOnly] private float currentUltDuration;
-    [SerializeField, ReadOnly] private float currentSwipeDuration;
-    [SerializeField, ReadOnly] private float currentPoundDuration;
+    [SerializeField] private float currentUltDuration;
+    [SerializeField] private float currentSwipeDuration;
+    [SerializeField] private float currentPoundDuration;
     [SerializeField] Collider leftHandCollider;
     [SerializeField] Collider rightHandCollider;
     [SerializeField] float poundRange;
@@ -34,7 +34,7 @@ public class WerewolfScript : BasePlayerClass
     private Collider[] enemyCol;
     private Enemy enemyComp;
 
-    [SerializeField, ReadOnly] private bool canMove;
+    [SerializeField] private bool canMove;
 
     private void OnEnable()
     {

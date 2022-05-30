@@ -16,7 +16,7 @@ public class PlayerScript : BasePlayerClass
 {
     [Header("Sprint")]
     [SerializeField] private float maxSprint;
-    [SerializeField, ReadOnly] private float currentSprint;
+    [SerializeField, ] private float currentSprint;
     [SerializeField] private float sprintRegenRate;
     [SerializeField] private float sprintDecayRate;
     [SerializeField] private bool sprintRecharging;
@@ -26,7 +26,7 @@ public class PlayerScript : BasePlayerClass
 
     [Header("Mana")]
     [SerializeField] private float maxMana;
-    [SerializeField, ReadOnly] private float currentMana;
+    [SerializeField] private float currentMana;
     [SerializeField] private float manaRegenRate;
     [SerializeField] private bool manaRecharging;
     [SerializeField] private bool manaRechargePause;
@@ -35,24 +35,24 @@ public class PlayerScript : BasePlayerClass
 
     [SerializeField] float jumpForce;
     [Header("Dash Parameters")]
-    [SerializeField, ReadOnly] private bool isDashing;
+    [SerializeField] private bool isDashing;
     [SerializeField] private float dashForce;
     [SerializeField, Range(0.5f, 1.75f)] private float dashReloadTime;
 
     [Header("Berserk")]
     [SerializeField] private float berserkTime;
 
-    [SerializeField, ReadOnly] private float currentBT;
+    [SerializeField] private float currentBT;
     [SerializeField] private float berserkHealthMult;
 
     [Header("Slow Mo Parameters")]
-    [SerializeField, ReadOnly] private bool inSlowMo;
+    [SerializeField] private bool inSlowMo;
     [SerializeField] private float slowTime;
     [SerializeField, Range(0.3f, 0.6f)] private float slowMult;
     [SerializeField, Range(4f, 8f)] private float slowReloadTime;
 
     [Header("Aggro Parameters")]
-    [SerializeField, ReadOnly] private bool canCall;
+    [SerializeField] private bool canCall;
     [SerializeField] private float aggroRange;
     [SerializeField, Range(4f, 5f)] private float aggroReloadTime;
 

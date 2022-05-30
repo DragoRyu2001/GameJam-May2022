@@ -8,16 +8,16 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float reloadTime;
     [SerializeField] protected float fireRate;
-    [SerializeField, ReadOnly] protected float firingDelay;
+    [SerializeField] protected float firingDelay;
 
     [SerializeField] protected Animator anim; 
 
     [SerializeField] protected int maxAmmo;
-    [SerializeField, ReadOnly] protected int currentAmmo;
-    [SerializeField, ReadOnly] protected bool canShoot = true;
-    [SerializeField, ReadOnly] protected bool reloading;
-    [SerializeField, ReadOnly] protected bool fired;
-    [SerializeField, ReadOnly] protected bool inFireRateDelay;
+    [SerializeField] protected int currentAmmo;
+    [SerializeField] protected bool canShoot = true;
+    [SerializeField] protected bool reloading;
+    [SerializeField] protected bool fired;
+    [SerializeField] protected bool inFireRateDelay;
     [SerializeField] protected float maxDistance;
     [SerializeField] protected LayerMask layersToCheck;
     [SerializeField] protected Transform aimPos;

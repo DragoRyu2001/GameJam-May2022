@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Phase Variables")]
     [SerializeField] int phase;
-    [SerializeField, ReadOnly] int currentWave;
+    [SerializeField] int currentWave;
     [SerializeField] int enemiesThisWave;
     [SerializeField] int startEnemies;
 
@@ -41,14 +41,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] float mageHealth;
     [SerializeField] float archerHealth;
     [SerializeField] float knightHealth;
-    [SerializeField, ReadOnly] float crossbowCurrentBaseDamage;
-    [SerializeField, ReadOnly] float swordCurrentBaseDamage;
-    [SerializeField, ReadOnly] float mageCurrentBaseDamage;
-    [SerializeField, ReadOnly] float mageCurrentReloadTime;
-    [SerializeField, ReadOnly] float archerCurrentReloadTime;
-    [SerializeField, ReadOnly] float mageCurrentHealth;
-    [SerializeField, ReadOnly] float archerCurrentHealth;
-    [SerializeField, ReadOnly] float knightCurrentHealth;
+    [SerializeField] float crossbowCurrentBaseDamage;
+    [SerializeField] float swordCurrentBaseDamage;
+    [SerializeField] float mageCurrentBaseDamage;
+    [SerializeField] float mageCurrentReloadTime;
+    [SerializeField] float archerCurrentReloadTime;
+    [SerializeField] float mageCurrentHealth;
+    [SerializeField] float archerCurrentHealth;
+    [SerializeField] float knightCurrentHealth;
 
     [Header("Player Progression")]
     [SerializeField] int survivedWaves;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float archerSpawnRate; 
     [SerializeField] float knightSpawnRate;
     [SerializeField] float mageSpawnRate;
-    [SerializeField, ReadOnly] float weightSum;
+    [SerializeField] float weightSum;
 
     [Header("Spawn Variables")]
     [SerializeField] float spawnRate;
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Wave Variables")]
     [SerializeField] float timeBetweenWaves = 5f;
-    [SerializeField, ReadOnly] float currentTimeBetweenWave;
+    [SerializeField] float currentTimeBetweenWave;
     [SerializeField] int waveNumber;
     [SerializeField] int enemyCount;
     [SerializeField] int killsThisWave;
@@ -101,12 +101,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text timeSurvivedText;
     [SerializeField] TMP_Text killsText;
     [SerializeField] TMP_Text soulsEarnedText;
-    [ReadOnly, SerializeField] int soulsEarned;
+    [SerializeField] int soulsEarned;
 
     [Header("ReadOnly")]
-    [ReadOnly, SerializeField] int score, highScore;
-    [ReadOnly, SerializeField] float timeSurvived;
-    [ReadOnly, SerializeField] bool game, vamp;
+    [SerializeField] int score, highScore;
+    [SerializeField] float timeSurvived;
+    [SerializeField] bool game, vamp;
 
     private float crossbowDamage;
     Color black;

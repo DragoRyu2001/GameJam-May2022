@@ -8,7 +8,7 @@ public class Shotgun : GunGeneral
     [SerializeField, Range(0.1f, 1f)] float bloom;
     [SerializeField] int pellets;
     [SerializeField] AimScript aim;
-    [ReadOnly] public Vector3[] directions;
+    public Vector3[] directions;
 
     Enemy hitEnemyComponent;
     Collider[] enemyColliders;

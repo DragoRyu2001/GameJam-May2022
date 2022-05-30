@@ -9,9 +9,9 @@ public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Health")]
-    [SerializeField, ReadOnly] private bool critical;
+    [SerializeField] private bool critical;
     [SerializeField] private float maxHealth;
-    [SerializeField, ReadOnly] private float currentHealth;
+    [SerializeField] private float currentHealth;
     [SerializeField] private float healthRegenRate;
     [SerializeField] private bool healthRecharging;
     [SerializeField] private bool healthRechargePause;
@@ -26,10 +26,10 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField, Range(-0.8f, -0.1f)] protected float fallThreshold;
 
     [Header("Statuses")]
-    [SerializeField, ReadOnly] private bool isAlive;
-    [SerializeField, ReadOnly] private bool isRewinding;
-    [SerializeField, ReadOnly] private bool inBerserk;
-    [SerializeField, ReadOnly] private bool canCast;
+    [SerializeField] private bool isAlive;
+    [SerializeField] private bool isRewinding;
+    [SerializeField] private bool inBerserk;
+    [SerializeField] private bool canCast;
 
     [Header("Misc References")]
     [SerializeField] protected Rigidbody rb;
@@ -54,7 +54,7 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] protected Transform orientation;
 
     [Header("Translate Modifier")]
-    [SerializeField, ReadOnly] protected float translateModifier;
+    [SerializeField] protected float translateModifier;
 
     Vector3 a, b, newDir;
 
