@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioClip mainMenuMusic;
     [SerializeField] AudioClip vampMusic;
     [SerializeField] AudioClip playMusic1;
     [SerializeField] AudioClip playMusic2;
@@ -38,7 +37,6 @@ public class AudioManager : MonoBehaviour
     {
         if(!audioSource.isPlaying)
         { 
-            audioSource.clip = mainMenuMusic;
             audioSource.Play();
         }
     }
