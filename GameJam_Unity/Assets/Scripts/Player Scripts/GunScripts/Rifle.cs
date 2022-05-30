@@ -11,6 +11,11 @@ public class Rifle : GunGeneral
     private GameObject decal;
     // Start is called before the first frame update
 
+    private void OnEnable()
+    {
+        SetBaseParameters();
+    }
+
     private void Start()
     {
         SetBaseParameters();
