@@ -42,6 +42,10 @@ public class AutoCrossbow : GunGeneral
 
     private void Shoot()
     {
+        if(audioSrc.clip!=shootAudio)
+            audioSrc.clip = shootAudio;
+        audioSrc.volume = 0.5f;
+        audioSrc.Play();
         Instantiate(bolt, muzzle.position, muzzle.rotation);
         currentAmmo -= 1;
     }

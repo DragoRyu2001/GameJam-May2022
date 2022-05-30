@@ -22,6 +22,9 @@ List of References used:
     Music:
 
         Background Music: https://freesound.org/people/szegvari/sounds/609647/
+        Cyber attack dark theme: Music by JuliusH from Pixabay: https://pixabay.com/users/juliush-3921568/?tab=audio&utm_source=link-attribution&utm_medium=referral&utm_campaign=audio&utm_content=7594
+        Scary Music for Facts Videos: Music by 26893160 https://pixabay.com/users/26893160-26893160/?tab=audio&amp;utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=audio&amp;utm_content=109851">
+        Golem: Music by SergeQuadrado from Pixabay: https://pixabay.com/users/sergequadrado-24990007/?tab=audio&utm_source=link-attribution&utm_medium=referral&utm_campaign=audio&utm_content=21565
         Sound Effects:
             1) Walking sound: https://pixabay.com/
             2) Music by JuliusH from Pixabay: https://pixabay.com/users/juliush-3921568/?tab=audio&utm_source=link-attribution&utm_medium=referral&utm_campaign=audio&utm_content=8395
@@ -35,5 +38,6 @@ List of References used:
     
     UI:
         1) Soul Icon: https://icons8.com/icons/set/soul
+        2) FlatIcons: 
 
 

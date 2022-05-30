@@ -43,6 +43,10 @@ public class Rifle : GunGeneral
     private void Shoot()
     {
         anim.SetTrigger("Attack");
+        if(audioSrc.clip!=shootAudio)
+            audioSrc.clip = shootAudio;
+        audioSrc.volume = 0.5f;
+        audioSrc.Play();
         if (hitSomething)
         {
             enemyHit = hit.transform.TryGetComponent(out hitEnemyComponent);

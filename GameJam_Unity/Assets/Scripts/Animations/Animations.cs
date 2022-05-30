@@ -6,9 +6,13 @@ public class Animations : MonoBehaviour
 {
     
     [SerializeField] TwoBoneIKConstraint rifleTbik, shotgunTbik, crossbowTbik;
+    [SerializeField] Animator anim;
     [SerializeField] MultiAimConstraint mac, smac;
+    [SerializeField] AudioSource audioSrc;
+    [SerializeField] AudioClip[] stepClips;
     [SerializeField] Rig rig;
     TwoBoneIKConstraint activeTBIK, prevTBIK;
+    float move;
     float targetWeight = 1f, stargetWeight = 0.5f;
     void Start()
     {
@@ -64,5 +68,15 @@ public class Animations : MonoBehaviour
     public void SetSpine(float weight)
     {
         stargetWeight = weight;
+    }
+    void Step()
+    {
+        move = anim.GetFloat("Move");
+        if(move<0.95f||move>1.05f)
+        {
+            Debug.Log("This is Playing");
+            audioSrc.clip = stepClips[Random.Range(0, stepClips.Length)];
+            audioSrc.Play();
+        }
     }
 }

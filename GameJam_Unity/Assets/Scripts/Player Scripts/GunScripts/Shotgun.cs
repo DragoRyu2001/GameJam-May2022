@@ -44,13 +44,21 @@ public class Shotgun : GunGeneral
     {
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
+            audioSrc.clip = shootAudio;
+            audioSrc.volume = 1f;
+            audioSrc.Play();
             Shoot();
-            StartCoroutine(Reload());
+            Invoke(nameof(CallReload), 0.6f);   
         }
+    }
+    void CallReload()
+    {
+        StartCoroutine(Reload());
     }
     private void Shoot()
     {
         anim.SetTrigger("Attack");
+        
         for (int i = 0; i < pellets; i++)
         {
             newDir = Random.insideUnitCircle * bloom;

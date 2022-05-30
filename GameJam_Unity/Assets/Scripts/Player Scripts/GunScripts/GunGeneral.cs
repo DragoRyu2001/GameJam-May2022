@@ -21,7 +21,10 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] protected float maxDistance;
     [SerializeField] protected LayerMask layersToCheck;
     [SerializeField] protected Transform aimPos;
-
+    [Header("Audio")]
+    [SerializeField]protected AudioSource audioSrc;
+    [SerializeField]protected AudioClip shootAudio;
+    [SerializeField]protected AudioClip reloadAudio;
     protected bool hitSomething;
 
 
@@ -77,6 +80,9 @@ public class GunGeneral : MonoBehaviour
     {
         reloading = true;
         anim.SetTrigger("Reload");
+        audioSrc.clip = reloadAudio;
+        audioSrc.volume = 1f;
+        audioSrc.Play();
         yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
         reloading = false;
