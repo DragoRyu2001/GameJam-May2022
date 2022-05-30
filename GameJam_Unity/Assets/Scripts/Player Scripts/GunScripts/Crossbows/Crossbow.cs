@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Crossbow : GunGeneral
 {
@@ -21,19 +22,19 @@ public class Crossbow : GunGeneral
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
             anim.SetTrigger("Attack");
-            Shoot();
-            StartCoroutine(Reload());
+            StartCoroutine(Shoot());
         }
     }
 
-    private void Shoot()
+    private IEnumerator Shoot()
     {
         if(audioSrc.clip!=shootAudio)
             audioSrc.clip = shootAudio;
-        audioSrc.volume = 0.5f;
+        audioSrc.volume = 1f;
         audioSrc.Play();
         Instantiate(bolt, muzzle.position, muzzle.rotation);
         currentAmmo -= 1;
-
+        yield return new WaitForSeconds(0.15f);
+        StartCoroutine(Reload());
     }
 }

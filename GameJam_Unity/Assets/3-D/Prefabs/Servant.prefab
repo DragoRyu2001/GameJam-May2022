@@ -5017,7 +5017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   critical: 0
-  maxHealth: 200
+  maxHealth: 100
   currentHealth: 0
   healthRegenRate: 7.5
   healthRecharging: 0
@@ -5099,17 +5099,17 @@ MonoBehaviour:
   - {fileID: 2709487757807939176}
   currentGun: 0
   previousGun: 0
-  currentType: 0
+  currentType: 1
   currentDashReloadTime: 0
   currentSlowMoReloadTime: 0
   currentAggroReloadTime: 0
   killsRequired: 3
   gunIcons:
-  - {fileID: 21300000, guid: ec3b7db324447f34eac1e7c9fc2b2211, type: 3}
   - {fileID: 21300000, guid: 122a0341424295a40b3b19a8ec407660, type: 3}
-  - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
+  - {fileID: 21300000, guid: ec3b7db324447f34eac1e7c9fc2b2211, type: 3}
   - {fileID: 21300000, guid: 723cb85ee87037d44a03b7ea81b58131, type: 3}
   - {fileID: 21300000, guid: a533ea5f832b4ce46b45b0f71d68825e, type: 3}
+  - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
   clothMaterial: {fileID: 2100000, guid: 420614a4d2d07264eb21652654f164b3, type: 2}
   rewindColor: {r: 1, g: 0.87421644, b: 0.3339622, a: 1}
   berserkColor: {r: 1, g: 0.41764444, b: 0.2584905, a: 1}

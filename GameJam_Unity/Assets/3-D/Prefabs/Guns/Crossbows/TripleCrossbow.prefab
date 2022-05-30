@@ -129,8 +129,8 @@ MonoBehaviour:
     m_Bits: 576
   aimPos: {fileID: 0}
   audioSrc: {fileID: 1523423256601792068}
-  shootAudio: {fileID: 8300000, guid: 64ca05b8d8502234e85db4e6ee2dc05c, type: 3}
-  reloadAudio: {fileID: 8300000, guid: 9a36d42a649244443813c16d85a97803, type: 3}
+  shootAudio: {fileID: 8300000, guid: e4da0b89362732a4cb351fe6ec340cd0, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 3c09c1d9424c10e47a73ea7c659752d3, type: 3}
   bolt: {fileID: 2475439408802478170, guid: d045e34da080fdd40a3db1555abb2cb2, type: 3}
   yOffset: 0.2
   xOffset: 0.2
