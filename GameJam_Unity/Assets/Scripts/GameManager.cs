@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] float mageHealth;
     [SerializeField] float archerHealth;
     [SerializeField] float knightHealth;
-    [SerializeField] float crossbowCurrentBaseDamage;
-    [SerializeField] float swordCurrentBaseDamage;
-    [SerializeField] float mageCurrentBaseDamage;
-    [SerializeField] float mageCurrentReloadTime;
-    [SerializeField] float archerCurrentReloadTime;
-    [SerializeField] float mageCurrentHealth;
-    [SerializeField] float archerCurrentHealth;
-    [SerializeField] float knightCurrentHealth;
+    [SerializeField, ReadOnly] float crossbowCurrentBaseDamage;
+    [SerializeField, ReadOnly] float swordCurrentBaseDamage;
+    [SerializeField, ReadOnly] float mageCurrentBaseDamage;
+    [SerializeField, ReadOnly] float mageCurrentReloadTime;
+    [SerializeField, ReadOnly] float archerCurrentReloadTime;
+    [SerializeField, ReadOnly] float mageCurrentHealth;
+    [SerializeField, ReadOnly] float archerCurrentHealth;
+    [SerializeField, ReadOnly] float knightCurrentHealth;
 
     [Header("Player Progression")]
     [SerializeField] int survivedWaves;
@@ -290,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     private void EndPhase()
     {
+        survivedPhases++;
         sun.intensity = 0;
         souls = kills * 150;
         //coffin.Upgrade(true, souls);

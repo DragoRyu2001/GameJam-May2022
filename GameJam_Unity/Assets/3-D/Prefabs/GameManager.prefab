@@ -52,13 +52,28 @@ MonoBehaviour:
   - {fileID: 2864614773998203533, guid: a96f14627c6dfb148adffe985a1fa24e, type: 3}
   Coffin: {fileID: 0}
   sun: {fileID: 0}
+  playerDown: {fileID: 0}
   upgrade: {fileID: 0}
   phase: 0
   currentWave: 0
   wavesThisPhase: 0
   enemiesThisWave: 0
-  enemyWaveDelta: 0
-  difficultyScaling: 0
+  crossbowBaseDamage: 25
+  swordBaseDamage: 10
+  mageBaseDamage: 100
+  mageReloadTime: 10
+  archerReloadTime: 5
+  mageHealth: 90
+  archerHealth: 70
+  knightHealth: 125
+  crossbowCurrentBaseDamage: 0
+  swordCurrentBaseDamage: 0
+  mageCurrentBaseDamage: 0
+  mageCurrentReloadTime: 0
+  archerCurrentReloadTime: 0
+  mageCurrentHealth: 0
+  archerCurrentHealth: 0
+  knightCurrentHealth: 0
   survivedWaves: 0
   survivedPhases: 0
   souls: 0
@@ -89,3 +104,15 @@ MonoBehaviour:
   servantAnim: {fileID: 0}
   phaseTimer: {fileID: 0}
   killsCounter: {fileID: 0}
+  timer: {fileID: 0}
+  scoreText: {fileID: 0}
+  highScoreText: {fileID: 0}
+  timeSurvivedText: {fileID: 0}
+  killsText: {fileID: 0}
+  soulsEarnedText: {fileID: 0}
+  soulsEarned: 0
+  score: 0
+  highScore: 0
+  timeSurvived: 0
+  game: 0
+  vamp: 0
