@@ -130,6 +130,7 @@ public class PlayerScript : BasePlayerClass
     {
         BaseParametersUpdate();
         ServantSpecificUpdates();
+        AssertServantStatus();
         UIStartSetup();
         recordedData = new List<FrameStats>();
         ControlDrag();
@@ -352,6 +353,19 @@ public class PlayerScript : BasePlayerClass
         enabled = false;
 
         gunArray[currentGun].SetActive(false);
+    } 
+    private void AssertServantStatus()
+    {
+        servantModel.SetActive(true);
+        werewolfModel.SetActive(false);
+
+        coll.enabled = true;
+        otherCollider.enabled = false;
+
+        werewolfScript.enabled = false;
+        enabled = true;
+
+        gunArray[currentGun].SetActive(true);
     }
 
     private void Jump()

@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
-    [Header("UI")]
-    Image healthBar;
     [Header("Health")]
     [SerializeField, ReadOnly] private bool critical;
     [SerializeField] private float maxHealth;
@@ -201,13 +199,6 @@ public class BasePlayerClass : MonoBehaviour
         }
         HealthRecharging = false;
     }
-    public void SetHealth()
-    {
-        healthBar.fillAmount = (currentHealth/maxHealth);
-    }
-
-   
-
 
     #endregion
 }

@@ -31,6 +31,7 @@ public class WerewolfScript : BasePlayerClass
 
     void Start()
     {
+        canMove = true;
         rb.velocity = Vector3.zero;
         BaseParametersUpdate();
         StartCoroutine(ReturnToHumanForm());
