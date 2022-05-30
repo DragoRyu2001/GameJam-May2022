@@ -93,6 +93,7 @@ public class PlayerScript : BasePlayerClass
     protected List<FrameStats> recordedData;
     private float desiredWalkAnimSpeed;
     private float currentWalkAnimSpeed;
+    private bool isAnimating;
 
 
     #region Setters and Getters
@@ -130,6 +131,8 @@ public class PlayerScript : BasePlayerClass
         currentGun = previousGun;
         gunArray[currentGun].SetActive(true);
         AssertServantStatus();
+        isAnimating = true;
+        Invoke(nameof(setIsAnimatingToFalse), 1.208f);
     }
     void Start()
     {
@@ -212,9 +215,12 @@ public class PlayerScript : BasePlayerClass
                 onSlope = SlopeCheck();
                 ControlDrag();
                 SprintCheck();
-                ReadInput();
                 slopeTranslateDirection = Vector3.ProjectOnPlane(translateVector, slopeHit.normal);
-                RotateModelToOrientation();
+                if(!isAnimating)
+                {
+                    ReadInput();
+                    RotateModelToOrientation();
+                }
                 UpdateUI();
                 if(InBerserk)
                 {
@@ -288,6 +294,9 @@ public class PlayerScript : BasePlayerClass
             ultOutline.fillAmount = 1f;
             anim.StopPlayback();
             anim.SetTrigger("Death");
+            isAnimating = true;
+            rb.velocity=Vector3.zero;
+            Invoke(nameof(setIsAnimatingToFalse), 1.208f);
             Invoke(nameof(TurnToWerewolf), 1.2f);
         }
 
@@ -409,6 +418,11 @@ public class PlayerScript : BasePlayerClass
             }
         }
     }
+
+   void setIsAnimatingToFalse()
+   {
+        isAnimating = false;
+   }
 
     public void StartRecording()
     {
