@@ -5100,11 +5100,11 @@ MonoBehaviour:
   currentAggroReloadTime: 0
   killsRequired: 3
   gunIcons:
-  - {fileID: 21300000, guid: aa99ec97471f3f54fae5be7c2c65947a, type: 3}
-  - {fileID: 21300000, guid: 25972204884a04047927ea042633baca, type: 3}
-  - {fileID: 21300000, guid: a07fe654539653046bf902fb90761440, type: 3}
-  - {fileID: 21300000, guid: a6ed3909894b7544b8cfaaaf99a5451f, type: 3}
-  - {fileID: 21300000, guid: c3cc0bfa70bcbed498c559257f941f5e, type: 3}
+  - {fileID: 21300000, guid: 122a0341424295a40b3b19a8ec407660, type: 3}
+  - {fileID: 21300000, guid: ec3b7db324447f34eac1e7c9fc2b2211, type: 3}
+  - {fileID: 21300000, guid: 723cb85ee87037d44a03b7ea81b58131, type: 3}
+  - {fileID: 21300000, guid: a533ea5f832b4ce46b45b0f71d68825e, type: 3}
+  - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
 --- !u!114 &7096083372152747821
 MonoBehaviour:
   m_ObjectHideFlags: 0

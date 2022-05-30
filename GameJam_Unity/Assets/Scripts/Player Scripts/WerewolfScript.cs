@@ -29,13 +29,20 @@ public class WerewolfScript : BasePlayerClass
 
     [SerializeField, ReadOnly] private bool canMove;
 
+    private void OnEnable()
+    {
+        StartCoroutine(ReturnToHumanForm());
+        AssertWerewolfStatus();
+    }
+
     void Start()
     {
         canMove = true;
         rb.velocity = Vector3.zero;
         BaseParametersUpdate();
+        AssertWerewolfStatus();
         StartCoroutine(ReturnToHumanForm());
-        currentUltDuration = ultDuration+2.5f;
+        currentUltDuration = ultDuration + 2.5f;
         leftHandCollider.enabled = false;
         rightHandCollider.enabled = false;
         currentWalkAnimSpeed = 1f;
@@ -43,6 +50,18 @@ public class WerewolfScript : BasePlayerClass
         ControlDrag();
         playerHeight = otherCollider.bounds.size.y;
         healthMat.SetFloat("_Health", CurrentHealth / MaxHealth);
+    }
+
+    private void AssertWerewolfStatus()
+    {
+        servantModel.SetActive(false);
+        werewolfModel.SetActive(true);
+
+        coll.enabled = true;
+        otherCollider.enabled = false;
+
+        playerScript.enabled = false;
+        enabled = true;
     }
 
     private IEnumerator AttackAction1(float time)

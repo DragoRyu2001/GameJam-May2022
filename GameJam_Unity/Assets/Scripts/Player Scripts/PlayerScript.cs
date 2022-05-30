@@ -125,17 +125,22 @@ public class PlayerScript : BasePlayerClass
     public float ManaCost { get => manaCost; set => manaCost = value; }
     #endregion
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        currentGun = previousGun;
+        gunArray[currentGun].SetActive(true);
+        AssertServantStatus();
+    }
     void Start()
     {
         BaseParametersUpdate();
         ServantSpecificUpdates();
+        currentGun = previousGun;
+        gunArray[currentGun].SetActive(true);
         AssertServantStatus();
         UIStartSetup();
         recordedData = new List<FrameStats>();
         ControlDrag();
-        gunArray[currentGun].SetActive(true);
-        currentGun = previousGun;
     }
 
     private void UIStartSetup()
@@ -364,7 +369,7 @@ public class PlayerScript : BasePlayerClass
 
         werewolfScript.enabled = false;
         enabled = true;
-
+        Debug.Log("Assert Servant");
         gunArray[currentGun].SetActive(true);
     }
 
