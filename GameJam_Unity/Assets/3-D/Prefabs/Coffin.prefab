@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6333236436048977260
 Transform:
@@ -106,7 +106,7 @@ GameObject:
   m_TagString: Coffin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2154762132038414020
 Transform:
@@ -152,7 +152,7 @@ GameObject:
   m_TagString: Coffin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5543850284102692254
 Transform:
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeObj: {fileID: 2008476061253680423}
+  coffinOpen: {fileID: 3392416653038452859}
+  coffinClose: {fileID: 2514786438861557778}
   maxHealth: 1000
   currentHealth: 0
   playerLayer:
@@ -207,7 +209,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 3, y: 1, z: 1}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
@@ -226,7 +228,7 @@ GameObject:
   m_TagString: Coffin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7977900562560215755
 Transform:
@@ -336,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea39f7c07c9f4b84f88f52599cbb713e,
         type: 3}
       propertyPath: m_Name
-      value: coffinclose
+      value: coffinOpen
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ea39f7c07c9f4b84f88f52599cbb713e,
         type: 3}
@@ -348,11 +350,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea39f7c07c9f4b84f88f52599cbb713e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea39f7c07c9f4b84f88f52599cbb713e, type: 3}
 --- !u!4 &2620980995851705025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea39f7c07c9f4b84f88f52599cbb713e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2582006422325116202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3392416653038452859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ea39f7c07c9f4b84f88f52599cbb713e,
     type: 3}
   m_PrefabInstance: {fileID: 2582006422325116202}
   m_PrefabAsset: {fileID: 0}
@@ -471,15 +484,26 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 734dec4b96ae449498ca9967abccada9,
         type: 3}
       propertyPath: m_Name
-      value: coffinopen
+      value: coffinClose
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 734dec4b96ae449498ca9967abccada9,
         type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 734dec4b96ae449498ca9967abccada9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 734dec4b96ae449498ca9967abccada9, type: 3}
+--- !u!1 &2514786438861557778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 734dec4b96ae449498ca9967abccada9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3325689662967459139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3003197666346683048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 734dec4b96ae449498ca9967abccada9,

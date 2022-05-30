@@ -5,6 +5,8 @@ using UnityEngine;
 public class Coffin : MonoBehaviour
 {
     [SerializeField] GameObject upgradeObj;
+    [SerializeField] GameObject coffinOpen;
+    [SerializeField] GameObject coffinClose;
     [SerializeField] float maxHealth;
     [ReadOnly, SerializeField] float currentHealth;
 

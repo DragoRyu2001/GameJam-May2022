@@ -91,7 +91,7 @@ MonoBehaviour:
   anim: {fileID: 2864659008146834024}
   deathFX: {fileID: 616900232720059127, guid: 7bcc2569e17280e4f9dd78c115cfd03c, type: 3}
   canAttack: 0
-  swordRange: 4
+  swordRange: 3
   coolDown: 2
   attackTime: 1.5
 --- !u!1001 &2864659008146834026
@@ -608,8 +608,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3103525, y: 3.8413694, z: 0.28999996}
-  m_Center: {x: -0.00088270137, y: 1.6620556, z: 0.00017279686}
+  m_Size: {x: 1.4801095, y: 3.8413694, z: 0.28999996}
+  m_Center: {x: -0.58575916, y: 1.6620597, z: 0.00017206946}
 --- !u!114 &2864659009222767101
 MonoBehaviour:
   m_ObjectHideFlags: 0
