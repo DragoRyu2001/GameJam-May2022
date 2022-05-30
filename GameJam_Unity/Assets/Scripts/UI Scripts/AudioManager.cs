@@ -60,6 +60,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void StopPlaying()
+    {
+        audioSource.Stop();
+    }
+
     void OnEnable()
     {
         //Register Slider Events
