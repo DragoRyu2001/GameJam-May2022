@@ -186,6 +186,8 @@ public class PlayerScript : BasePlayerClass
         clothMaterial.SetColor("_HaloColor", Color.black);
         CurrentBT = BerserkTime;
         canCall = true;
+        IsDashing = false;
+        inSlowMo = false; 
         canMove = true;
         CurrentMana = MaxMana;
         CurrentSprint = MaxSprint;
