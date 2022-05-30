@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
             if (GameIsPaused)
             {
                 Toggle();
+
             }
             else
             {
@@ -319,6 +320,8 @@ public class GameManager : MonoBehaviour
     public void Toggle()
     {
         GameIsPaused = !GameIsPaused;
+        Cursor.lockState = GameIsPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = GameIsPaused;
         pauseMenu.SetActive(GameIsPaused);
         Time.timeScale = GameIsPaused ? 0f : 1f;
     }

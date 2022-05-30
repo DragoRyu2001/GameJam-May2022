@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Coffin : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class Coffin : MonoBehaviour
     [SerializeField] GameObject coffinClose;
     [SerializeField] float maxHealth;
     [ReadOnly, SerializeField] float currentHealth;
+
+    [SerializeField] Image coffinPlayer;
+    [SerializeField] Image coffinWerewolf;
+
+    [SerializeField] Image[] coffinNailsP;
+    [SerializeField] Image[] coffinNailsW;
 
     [Header("Read Only")]
     [SerializeField] LayerMask playerLayer;
@@ -47,32 +54,44 @@ public class Coffin : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHealth=Mathf.Clamp(currentHealth-dmg, 0, maxHealth);
+        if(currentHealth<h2)
+        {
+            coffinNailsP[0].enabled = false;
+            coffinNailsW[0].enabled = false;
+        }
+        if(currentHealth<h1)
+        {
+            coffinNailsP[1].enabled = false;
+            coffinNailsW[1].enabled = false;
+        }
+        coffinPlayer.fillAmount = currentHealth / maxHealth;
+        coffinWerewolf.fillAmount = currentHealth / maxHealth;
     }
     public void HealCoffin(float health)
     {
-        
-        if(currentHealth<=h1)
+        if (currentHealth <= h1)
         {
-            currentHealth+=health;
+            currentHealth += health;
             currentHealth = Mathf.Clamp(currentHealth, 0, h1);
         }
-        else if(currentHealth<=h2)
+        else if (currentHealth <= h2)
         {
-            currentHealth+=health;
+            currentHealth += health;
             currentHealth = Mathf.Clamp(currentHealth, h1, h2);
         }
         else
         {
-            currentHealth+=health;
+            currentHealth += health;
             currentHealth = Mathf.Clamp(currentHealth, h2, maxHealth);
         }
-        Debug.Log(currentHealth);
+        coffinPlayer.fillAmount = currentHealth / maxHealth;
+        coffinWerewolf.fillAmount = currentHealth / maxHealth;
     }
     
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.CompareTag("Player")) 
         {
             playerInRepairRange = true;
         }
@@ -80,7 +99,7 @@ public class Coffin : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.CompareTag("Player")) 
         {
             playerInRepairRange = false;
         }
