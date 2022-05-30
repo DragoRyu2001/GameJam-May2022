@@ -7216,6 +7216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MC_Animated
       objectReference: {fileID: 0}
+    - target: {fileID: 1924068615633198266, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 420614a4d2d07264eb21652654f164b3, type: 2}
     - target: {fileID: 5866666021909216657, guid: 4a92bbd5a6649be4d97cf00ef2de4c6d,
         type: 3}
       propertyPath: m_Controller
