@@ -7947,6 +7947,7 @@ MonoBehaviour:
   audioSrc: {fileID: 1085034870}
   swoopAudio: {fileID: 8300000, guid: 63c7e1f4d448ebd4780e50da27af3a53, type: 3}
   poundAudio: {fileID: 8300000, guid: 9cfd056fbe8262b4ca62ac4a77592152, type: 3}
+  howlAudio: {fileID: 8300000, guid: 29f355cef3c379f4d90f60e1f3901d87, type: 3}
 --- !u!1 &5129583658950841669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1043326978179157216, guid: d4997ff2f3c0cfc4f8769ac850e1fb00,
