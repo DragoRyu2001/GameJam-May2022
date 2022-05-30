@@ -188,6 +188,7 @@ public class GameManager : MonoBehaviour
         targetSpeed = 0.25f;
         targetAlpha = 0f;
         spawnState= SpawnStates.CANSPAWN;
+        upgrade.gameObject.SetActive(false);
         // text here saying phase x start
 
     }
@@ -308,7 +309,8 @@ public class GameManager : MonoBehaviour
         survivedPhases++;
         sun.intensity = 0;
         souls = kills * 150;
-        coffinScript.Upgrade(true, souls);
+        upgrade.gameObject.SetActive(true);
+        upgrade.UpdateSouls(souls);
         vamp = true;
 
         StartCoroutine(EndPhaseTimer());

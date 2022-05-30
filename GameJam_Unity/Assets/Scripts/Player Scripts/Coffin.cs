@@ -68,10 +68,7 @@ public class Coffin : MonoBehaviour
         }
         Debug.Log(currentHealth);
     }
-    public void Upgrade(bool enable, int souls)
-    {
-        upgradeObj.SetActive(enable);
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {

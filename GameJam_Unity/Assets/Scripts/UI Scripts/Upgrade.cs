@@ -8,7 +8,6 @@ public class Upgrade : MonoBehaviour
 {
     [Header("General")]
     [ReadOnly, SerializeField] bool canShop;
-    [SerializeField] bool vampPhase;
     [SerializeField] PlayerScript player;
     [SerializeField] int souls, costSouls, abilitySoulMult, gunSoulMult;
     [Header("GUNNSSSSSS")]
@@ -45,11 +44,11 @@ public class Upgrade : MonoBehaviour
     [ReadOnly, SerializeField] int crossbowLevel, rifleLevel, shotgunLevel;
     [ReadOnly, SerializeField] float crossBowReloadDecrease, rifleReloadDecrease, shotgunReloadDecrease;
     [ReadOnly, SerializeField] float rifleDamageIncrease, shotGunDamageIncrease;
-
+    [ReadOnly, SerializeField] bool shopping = false;
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.transform.tag=="Player")
+        if(col.transform.tag=="Vampire")
         {
             canShop = true;
             openCloseText.SetActive(true);
@@ -57,8 +56,11 @@ public class Upgrade : MonoBehaviour
     }
     void OnTriggerExit(Collider col)
     {
-        if(col.transform.tag == "Player")
+        if(col.transform.tag == "Vampire")
+        {
             canShop = false;
+            openCloseText.SetActive(false);
+        }
     }
     void Start()
     {
@@ -73,6 +75,7 @@ public class Upgrade : MonoBehaviour
         aggroLevel = 0;
         slowLevel = 0;
         dashLevel = 0;
+        shopping = false;
         UpdateSouls();//Initialise Souls value
         //Base Stats Initialised=====================================
         //Set Mana values
@@ -108,12 +111,25 @@ public class Upgrade : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && canShop)
+        if(Input.GetKeyDown(KeyCode.F) && canShop && !shopping)
         {
             Debug.Log("Shop Open");
+            shopping = true;
+            openCloseText.SetActive(false);
             //Open Shop
             Shop(true);
         }
+        else if(Input.GetKeyDown(KeyCode.F) && shopping)
+        {
+            Debug.Log("Shop Closed");
+            shopping = false;
+            openCloseText.SetActive(true);
+            Shop(false);
+        }
+    }
+    public void UpdateSouls(int _souls)
+    {
+        souls = _souls;
     }
     public void Shop(bool val)
     {
