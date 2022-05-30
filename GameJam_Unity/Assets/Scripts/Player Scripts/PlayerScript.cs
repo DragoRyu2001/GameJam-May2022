@@ -92,6 +92,10 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Color rewindColor;
     [SerializeField] Color berserkColor;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSrc;
+    [SerializeField] AudioClip dashAudio, aggroAudio, slowAudio;
+
     private Color desiredColor;
 
     private float moveX;
@@ -283,6 +287,8 @@ public class PlayerScript : BasePlayerClass
             if (!IsDashing)
             {
                 Reposition();
+                audioSrc.clip = dashAudio;
+                audioSrc.Play();
                 StartCoroutine(SetDashingToFalse());
             }
         }
@@ -293,6 +299,8 @@ public class PlayerScript : BasePlayerClass
             if (!InSlowMo)
             {
                 TriggerSlowMo();
+                audioSrc.clip = slowAudio;
+                audioSrc.Play();
                 StartCoroutine(SetInSlowMoToFalse());
             }
         }
@@ -303,6 +311,8 @@ public class PlayerScript : BasePlayerClass
             {
 
                 TriggerAggroCall();
+                audioSrc.clip = aggroAudio;
+                audioSrc.Play();
                 StartCoroutine(SetCanCallToTrue());
             }
         }
