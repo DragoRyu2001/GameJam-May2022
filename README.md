@@ -24,6 +24,8 @@ List of References used:
         Background Music: https://freesound.org/people/szegvari/sounds/609647/
         Sound Effects:
             1) Walking sound: https://pixabay.com/
+            2) Music by JuliusH from Pixabay: https://pixabay.com/users/juliush-3921568/?tab=audio&utm_source=link-attribution&utm_medium=referral&utm_campaign=audio&utm_content=8395
+            3) Fire Effect: https://pixabay.com/sound-effects/fire-breath-6922/
     
     3-D Models:
 

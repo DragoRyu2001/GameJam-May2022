@@ -389,10 +389,10 @@
     "m_Guid": {
         "m_GuidSerialized": "e3a4823d-83fc-49bf-a3e0-c6c9dff5f556"
     },
-    "m_Name": "HalorColour",
+    "m_Name": "HaloColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "HalorColour",
-    "m_DefaultReferenceName": "_HalorColour",
+    "m_RefNameGeneratedByDisplayName": "HaloColor",
+    "m_DefaultReferenceName": "_HaloColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -879,7 +879,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "cc20fb5eb5574405a66ef0de88a392c7",
     "m_Id": 0,
-    "m_DisplayName": "HalorColour",
+    "m_DisplayName": "HaloColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

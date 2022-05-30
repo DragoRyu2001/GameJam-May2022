@@ -81,7 +81,7 @@ public class MageAI : Enemy
             {
                 if(hitCollider.transform.root.TryGetComponent<Coffin>(out coffinComponent))
                 {
-                    coffinComponent.TakeDamage(damage);
+                    coffinComponent.TakeDamage(damage/2);
                     Debug.Log("Coffin Took Damage");
                 }
             }

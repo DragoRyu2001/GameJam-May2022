@@ -82,6 +82,7 @@ MonoBehaviour:
   castPre: 0.6
   castTime: 2.5
   reloadTime: 20
+  damage: 100
   AOESplash: {fileID: 365452626698272959, guid: a57166ed66f482a40acd8f8f54562a77,
     type: 3}
   explode_PS: {fileID: 7541552498344450753, guid: 39c246995cf715548b0bfbe7304d9170,
