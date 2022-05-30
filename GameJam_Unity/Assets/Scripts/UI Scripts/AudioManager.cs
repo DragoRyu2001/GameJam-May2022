@@ -69,10 +69,4 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.volume = sliderValue;
     }
-
-    void OnDisable()
-    {
-        //Un-Register Slider Events
-        volumeSlider.onValueChanged.RemoveAllListeners();
-    }
 }

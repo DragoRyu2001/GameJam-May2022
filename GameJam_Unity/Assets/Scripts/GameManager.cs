@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
 
     [Header("Post Game")]
+    [SerializeField] GameObject postPanel;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text highScoreText;
     [SerializeField] TMP_Text timeSurvivedText;
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
         timeSurvived = 0f;
         game = true;
         soulsEarned = 0;
+        postPanel.SetActive(false);
         coffinScript = Coffin.GetComponent<Coffin>();
         StartPhase();
     }
@@ -407,6 +409,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
         game = false;
         CalcScore();
+        postPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         //
         //End Game Score and High Score Calculation
     }

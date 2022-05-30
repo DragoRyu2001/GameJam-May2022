@@ -5091,6 +5091,7 @@ MonoBehaviour:
   aggroOutline: {fileID: 0}
   ultOutline: {fileID: 0}
   gunImage: {fileID: 0}
+  crosshairImage: {fileID: 0}
   gunArray:
   - {fileID: 5426615731022340557}
   - {fileID: 5057094093298362139}
@@ -5110,6 +5111,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 723cb85ee87037d44a03b7ea81b58131, type: 3}
   - {fileID: 21300000, guid: a533ea5f832b4ce46b45b0f71d68825e, type: 3}
   - {fileID: 21300000, guid: f66c37624bb8cea4abd6012f3f7ef5f3, type: 3}
+  crosshairIcons:
+  - {fileID: 21300000, guid: 8ab6ac2163220eb40a13eae67f2c8bb6, type: 3}
+  - {fileID: 21300000, guid: d66ab9022e5939748b4e5efde8574090, type: 3}
+  - {fileID: 21300000, guid: bfe7837665d02584bb6bcb3f1a40adb7, type: 3}
+  - {fileID: 21300000, guid: 0a7de3d22a5b7a74391d703d35286fb0, type: 3}
+  - {fileID: 21300000, guid: d55ce0953da73b740a26bd8b894adc84, type: 3}
   clothMaterial: {fileID: 2100000, guid: 420614a4d2d07264eb21652654f164b3, type: 2}
   rewindColor: {r: 1, g: 0.87421644, b: 0.3339622, a: 1}
   berserkColor: {r: 1, g: 0.41764444, b: 0.2584905, a: 1}

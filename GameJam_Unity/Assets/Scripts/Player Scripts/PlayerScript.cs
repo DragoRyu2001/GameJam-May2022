@@ -73,6 +73,7 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] Image aggroOutline; 
     [SerializeField] Image ultOutline;
     [SerializeField] Image gunImage;
+    [SerializeField] Image crosshairImage;
 
     [Header("Gun variables")]
     [SerializeField] GameObject[] gunArray;
@@ -86,6 +87,7 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float currentAggroReloadTime;
     [SerializeField] private float killsRequired;
     [SerializeField] private Sprite[] gunIcons;
+    [SerializeField] private Sprite[] crosshairIcons;
 
     [Header("Special Effects")]
     [SerializeField] Material clothMaterial;
@@ -145,7 +147,6 @@ public class PlayerScript : BasePlayerClass
         ServantSpecificUpdates();
         UIStartSetup();
         currentGun = previousGun;
-        gunArray[currentGun].SetActive(true);
         AssertServantStatus();
         
     }
@@ -172,6 +173,7 @@ public class PlayerScript : BasePlayerClass
         manaMat.SetFloat("_val", 1f);
         sprintMat.SetFloat("_val", 1f);
         gunImage.sprite = gunIcons[currentGun];
+        crosshairImage.sprite = crosshairIcons[currentGun];
     }
 
     private void ServantSpecificUpdates()
@@ -308,7 +310,7 @@ public class PlayerScript : BasePlayerClass
                 audioSrc.Play();
                 StartCoroutine(SetCanCallToTrue());
             }
-        }
+        }  
 
         //Ultimate Input
         if (Input.GetKeyDown(KeyCode.X) && GameManager.instance.kills>=3)
@@ -330,6 +332,7 @@ public class PlayerScript : BasePlayerClass
             anim.SetInteger("Weapon", currentGun);
             anim.SetTrigger("ChangeWeapon");
             gunImage.sprite = gunIcons[currentGun];
+            crosshairImage.sprite = crosshairIcons[currentGun];
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -343,6 +346,7 @@ public class PlayerScript : BasePlayerClass
             anim.SetInteger("Weapon", currentGun);
             anim.SetTrigger("ChangeWeapon");
             gunImage.sprite = gunIcons[currentGun];
+            crosshairImage.sprite = crosshairIcons[currentGun];
             if (currentGun != previousGun)
             {
                 gunArray[previousGun].SetActive(false);
@@ -355,6 +359,7 @@ public class PlayerScript : BasePlayerClass
             currentGun = 2;
             currentGun += (int)currentType;
             gunImage.sprite = gunIcons[currentGun];
+            crosshairImage.sprite = crosshairIcons[currentGun];
             if (currentGun==4)
             {
                 anim.SetBool("AutoCrossbow",true);
