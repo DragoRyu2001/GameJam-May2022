@@ -135,7 +135,6 @@ public class BasePlayerClass : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.isKinematic = true;
-        isAlive = false;
         moveMult = 0;
         StopAllCoroutines();
         GameManager.instance.GameOver();
