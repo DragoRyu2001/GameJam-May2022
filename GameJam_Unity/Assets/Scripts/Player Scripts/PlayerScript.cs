@@ -96,7 +96,6 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] AudioSource audioSrc;
     [SerializeField] AudioClip dashAudio, aggroAudio, slowAudio;
 
-    private Color desiredColor;
 
     private float moveX;
     private float moveY;
@@ -182,7 +181,7 @@ public class PlayerScript : BasePlayerClass
         Invoke(nameof(setIsAnimatingToFalse), 1.208f);
         StartCoroutine(StartManaRecharge());
         StartCoroutine(StartSprintRecharge());
-        desiredColor = Color.black;
+        clothMaterial.SetColor("_HaloColor",Color.black);
         clothMaterial.SetColor("_HaloColor", Color.black);
         CurrentBT = BerserkTime;
         canCall = true;
@@ -234,8 +233,6 @@ public class PlayerScript : BasePlayerClass
                     anim.SetFloat("Move", 1, 0.1f, Time.deltaTime);
                 }
 
-                LerpClothColor();
-
                 GroundCheck();
                 onSlope = SlopeCheck();
                 ControlDrag();
@@ -257,12 +254,6 @@ public class PlayerScript : BasePlayerClass
         }
 
     }
-
-    private void LerpClothColor()
-    {
-        clothMaterial.SetColor("_HaloColor", Color.Lerp(clothMaterial.GetColor("_HaloColor"), desiredColor, 10f*Time.deltaTime));
-    }
-
     private void UpdateUI()
     {
         healthMat.SetFloat("_val", CurrentHealth / MaxHealth);
@@ -466,7 +457,7 @@ public class PlayerScript : BasePlayerClass
     private void CallBerserk()
     {
         InBerserk = true;
-        desiredColor = rewindColor;
+        clothMaterial.SetColor("_HaloColor" ,rewindColor);
         StopCoroutine(StartHealthRecharge());
         Rewind();
     }
@@ -505,7 +496,7 @@ public class PlayerScript : BasePlayerClass
         else
         {
             InBerserk = true;
-            desiredColor = berserkColor;
+            clothMaterial.SetColor("_HaloColor", berserkColor);
             IsRewinding = false;
             Time.timeScale = 1f;
             rb.isKinematic = false;
@@ -520,7 +511,7 @@ public class PlayerScript : BasePlayerClass
         StartCoroutine(StartHealthRecharge());
         StartCoroutine(StartManaRecharge());
         StartCoroutine(StartSprintRecharge());
-        desiredColor = Color.black;
+        clothMaterial.SetColor("_HaloColor", Color.black);
     }
 
     private void TriggerAggroCall()
