@@ -63,6 +63,7 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float coffinRepairSpeed;
 
     [Header("UI Tie-ins")]
+    [SerializeField] GameObject playerUIPanel;
     [SerializeField] Material healthMat;
     [SerializeField] Material manaMat;
     [SerializeField] Material sprintMat;
@@ -128,6 +129,9 @@ public class PlayerScript : BasePlayerClass
 
     private void OnEnable()
     {
+        BaseParametersUpdate();
+        ServantSpecificUpdates();
+        UIStartSetup();
         currentGun = previousGun;
         gunArray[currentGun].SetActive(true);
         AssertServantStatus();
@@ -148,6 +152,7 @@ public class PlayerScript : BasePlayerClass
 
     private void UIStartSetup()
     {
+        playerUIPanel.SetActive(true);
         ultOutline.fillAmount = 1f;
         aggroOutline.fillAmount = 0f;
         dashOutline.fillAmount = 0f;
@@ -289,7 +294,7 @@ public class PlayerScript : BasePlayerClass
         }
 
         //Ultimate Input
-        if (Input.GetKey(KeyCode.X) && GameManager.instance.kills>=3)
+        if (Input.GetKeyDown(KeyCode.X) && GameManager.instance.kills>=3)
         {
             ultOutline.fillAmount = 1f;
             anim.StopPlayback();
@@ -355,7 +360,8 @@ public class PlayerScript : BasePlayerClass
 
     private void TurnToWerewolf()
     {
-        currentMana -= maxMana;
+        currentMana = 0f;
+        playerUIPanel.SetActive(false);
         //rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
         servantModel.SetActive(false);
         werewolfModel.SetActive(true);

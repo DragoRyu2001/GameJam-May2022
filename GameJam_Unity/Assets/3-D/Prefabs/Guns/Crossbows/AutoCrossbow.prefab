@@ -84,6 +84,7 @@ MonoBehaviour:
   reloadTime: 3
   fireRate: 0.15
   firingDelay: 0
+  anim: {fileID: 0}
   maxAmmo: 12
   currentAmmo: 0
   canShoot: 1
@@ -94,7 +95,8 @@ MonoBehaviour:
   layersToCheck:
     serializedVersion: 2
     m_Bits: 576
-  bolt: {fileID: 2475439408802478170, guid: 0d7c8c1a674cf1e4a9f519725078d67e, type: 3}
+  aimPos: {fileID: 0}
+  bolt: {fileID: 2475439408802478170, guid: 55254b68c488ea14ea4c1ea6b6d0a78e, type: 3}
 --- !u!1 &8991618996129490841
 GameObject:
   m_ObjectHideFlags: 0

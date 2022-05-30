@@ -5078,6 +5078,7 @@ MonoBehaviour:
   werewolfScript: {fileID: 7096083372152747821}
   coffin: {fileID: 0}
   coffinRepairSpeed: 0
+  playerUIPanel: {fileID: 0}
   healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
   manaMat: {fileID: 2100000, guid: a8ea510070796674a8769846e27b9b9c, type: 2}
   sprintMat: {fileID: 2100000, guid: 38fe299135bfbaa4789e2cff2e021458, type: 2}
@@ -5151,11 +5152,17 @@ MonoBehaviour:
   orientation: {fileID: 982878094335831250}
   translateModifier: 0
   playerScript: {fileID: 982878094783673622}
+  wereWolfUIPanel: {fileID: 0}
   healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
+  swipeOutline: {fileID: 0}
+  poundOutline: {fileID: 0}
+  ultOutline: {fileID: 0}
   canUlt: 0
   isUlting: 0
   ultDuration: 10
   currentUltDuration: 0
+  currentSwipeDuration: 0
+  currentPoundDuration: 0
   leftHandCollider: {fileID: 754935341836596818}
   rightHandCollider: {fileID: 3854751801684658475}
   poundRange: 15
@@ -6116,6 +6123,12 @@ PrefabInstance:
       objectReference: {fileID: 1206254637218311357}
     - target: {fileID: 6551920166205233910, guid: d10ca54ee82976f42a305704a725bed1,
         type: 3}
+      propertyPath: bolt
+      value: 
+      objectReference: {fileID: 2475439408802478170, guid: 55254b68c488ea14ea4c1ea6b6d0a78e,
+        type: 3}
+    - target: {fileID: 6551920166205233910, guid: d10ca54ee82976f42a305704a725bed1,
+        type: 3}
       propertyPath: aimPos
       value: 
       objectReference: {fileID: 8700656578878244609}
@@ -6525,6 +6538,12 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1206254637218311357}
+    - target: {fileID: 2864486229254317722, guid: 80853998e6bd5f147837b32078ae0604,
+        type: 3}
+      propertyPath: bolt
+      value: 
+      objectReference: {fileID: 2475439408802478170, guid: d045e34da080fdd40a3db1555abb2cb2,
+        type: 3}
     - target: {fileID: 2864486229254317722, guid: 80853998e6bd5f147837b32078ae0604,
         type: 3}
       propertyPath: aimPos
@@ -7654,6 +7673,12 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1206254637218311357}
+    - target: {fileID: 606474854079368008, guid: 0840669883f91e84ab5db699e7b3fa67,
+        type: 3}
+      propertyPath: bolt
+      value: 
+      objectReference: {fileID: 2475439408802478170, guid: 55254b68c488ea14ea4c1ea6b6d0a78e,
+        type: 3}
     - target: {fileID: 606474854079368008, guid: 0840669883f91e84ab5db699e7b3fa67,
         type: 3}
       propertyPath: aimPos
