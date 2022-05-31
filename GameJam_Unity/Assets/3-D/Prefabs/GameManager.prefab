@@ -59,7 +59,7 @@ MonoBehaviour:
   upgrade: {fileID: 0}
   phase: 0
   currentWave: 0
-  enemiesThisWave: 1
+  enemiesThisWave: 3
   startEnemies: 0
   crossbowBaseDamage: 25
   swordBaseDamage: 10
