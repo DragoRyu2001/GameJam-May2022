@@ -31,6 +31,11 @@ public class Shotgun : GunGeneral
         directions = new Vector3[pellets];
     }
 
+    private void OnEnable()
+    {
+        SetBaseParameters();
+    }
+
     private void Update()
     {
         OrientMuzzle();
@@ -47,13 +52,12 @@ public class Shotgun : GunGeneral
             audioSrc.volume = 1f;
             audioSrc.Play();
             Shoot();
-            Invoke(nameof(CallReload), 0.6f);   
+            StartCoroutine(Reload());
+            Invoke(nameof(PlayReloadSound), 0.6f);
         }
     }
-    void CallReload()
-    {
-        StartCoroutine(Reload());
-    }
+
+
     private void Shoot()
     {
         anim.SetTrigger("Attack");

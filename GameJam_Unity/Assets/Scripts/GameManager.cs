@@ -247,7 +247,8 @@ public class GameManager : MonoBehaviour
     {
         kills++;
         killsThisWave ++;
-        pScript.HandleWerewolfUI();
+        pScript.KillsForUlt++;
+        pScript.HandleUltUI();
         if(killsCounter!=null)
         killsCounter.text = "Kills: " + kills;
     }
@@ -314,7 +315,8 @@ public class GameManager : MonoBehaviour
     {
         survivedPhases++;
         sun.intensity = 0;
-        souls = kills * 150;
+        souls = kills * 15000;
+        soulsEarned += souls;
         upgrade.gameObject.SetActive(true);
         upgrade.UpdateSouls(souls);
         vamp = true;
@@ -421,7 +423,7 @@ public class GameManager : MonoBehaviour
     }
     void CalcScore()
     {
-        score = kills* phase* (int)timeSurvived;
+        score = kills* survivedPhases* (int)timeSurvived;
         highScore = highScore<score?score:highScore;
         PlayerPrefs.SetInt("HighScore", (int)highScore);
         scoreText.text = ""+ score;

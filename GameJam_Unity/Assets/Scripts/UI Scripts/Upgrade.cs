@@ -48,7 +48,7 @@ public class Upgrade : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.transform.tag=="Vampire")
+        if(col.transform.CompareTag("Vampire"))
         {
             canShop = true;
             openCloseText.SetActive(true);
@@ -56,7 +56,7 @@ public class Upgrade : MonoBehaviour
     }
     void OnTriggerExit(Collider col)
     {
-        if(col.transform.tag == "Vampire")
+        if(col.transform.CompareTag("Vampire"))
         {
             canShop = false;
             openCloseText.SetActive(false);
@@ -496,13 +496,13 @@ public class Upgrade : MonoBehaviour
         switch(crossbowLevel+1)
         {
             case 1:
-                str="Damage: 75 + 25\n Reload Time: "+crossbow.ReloadTime+" - "+crossBowReloadDecrease;
+                str= " Cost: " + cost + "\nDamage: 75 + 25\n Reload Time: " +crossbow.ReloadTime+" - "+crossBowReloadDecrease;
                 break;
             case 2:
-                str = "Triple CrossBow";
+                str = " Cost: " + cost + "\nTriple CrossBow";
                 break;
             case 3:
-                str = "Auto CrossBow";
+                str = " Cost: " + cost + "\nAuto CrossBow";
                 break;
             default:
                 str = "No Upgrades available";

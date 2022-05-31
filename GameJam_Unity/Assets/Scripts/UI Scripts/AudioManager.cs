@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
         {
             bool first = Random.Range(0, 100) > 51f;
             audioSource.clip = first?playMusic1:playMusic2;
-            audioSource.volume = first ? 0.05f : 0.03f;
+            audioSource.volume = 0.5f;
             audioSource.Play();
         }
     }

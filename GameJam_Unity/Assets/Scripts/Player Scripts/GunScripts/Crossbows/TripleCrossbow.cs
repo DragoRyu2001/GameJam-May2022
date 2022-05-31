@@ -14,6 +14,11 @@ public class TripleCrossbow : GunGeneral
         SetBaseParameters();
     }
 
+    private void OnEnable()
+    {
+        SetBaseParameters();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +57,7 @@ public class TripleCrossbow : GunGeneral
         Debug.Log(audioSrc.clip.name);
         currentAmmo -= 1;
         StartCoroutine(Reload());
+        Invoke(nameof(PlayReloadSound), 0.2f);
     }
 
 }

@@ -5017,7 +5017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   critical: 0
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   healthRegenRate: 7.5
   healthRecharging: 0
@@ -5104,7 +5104,6 @@ MonoBehaviour:
   currentDashReloadTime: 0
   currentSlowMoReloadTime: 0
   currentAggroReloadTime: 0
-  killsRequired: 3
   gunIcons:
   - {fileID: 21300000, guid: 122a0341424295a40b3b19a8ec407660, type: 3}
   - {fileID: 21300000, guid: ec3b7db324447f34eac1e7c9fc2b2211, type: 3}
@@ -5124,6 +5123,8 @@ MonoBehaviour:
   dashAudio: {fileID: 8300000, guid: f30921536ffc72d4dbf0edd7fd2acfc2, type: 3}
   aggroAudio: {fileID: 8300000, guid: 29f355cef3c379f4d90f60e1f3901d87, type: 3}
   slowAudio: {fileID: 8300000, guid: 24d1d5252fd572e489d7136dc6bb21d6, type: 3}
+  killsForUlt: 0
+  requiredKills: 15
 --- !u!114 &7096083372152747821
 MonoBehaviour:
   m_ObjectHideFlags: 0

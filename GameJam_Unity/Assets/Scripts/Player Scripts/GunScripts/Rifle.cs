@@ -36,12 +36,16 @@ public class Rifle : GunGeneral
             if (!inFireRateDelay)
                 StartCoroutine(RateOfFireLimiter());
             if (currentAmmo == 0 && !reloading)
+            {
+                PlayReloadSound();
                 StartCoroutine(Reload());
+            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             StopAllCoroutines();
             StartCoroutine(Reload());
+            PlayReloadSound();
         }
     }
 
@@ -50,7 +54,7 @@ public class Rifle : GunGeneral
         anim.SetTrigger("Attack");
         if(audioSrc.clip!=shootAudio)
             audioSrc.clip = shootAudio;
-        audioSrc.volume = 0.05f;
+        audioSrc.volume = 0.3f;
         audioSrc.Play();
         if (hitSomething)
         {

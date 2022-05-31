@@ -9,6 +9,10 @@ public class Crossbow : GunGeneral
     {
         SetBaseParameters();
     }
+    private void OnEnable()
+    {
+        SetBaseParameters();
+    }
 
     private void Update()
     {
@@ -36,5 +40,6 @@ public class Crossbow : GunGeneral
         currentAmmo -= 1;
         yield return new WaitForSeconds(0.15f);
         StartCoroutine(Reload());
+        PlayReloadSound();
     }
 }

@@ -11,6 +11,10 @@ public class AutoCrossbow : GunGeneral
     {
         SetBaseParameters();
     }
+    private void OnEnable()
+    {
+        SetBaseParameters();
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,12 +35,16 @@ public class AutoCrossbow : GunGeneral
                 StartCoroutine(RateOfFireLimiter());
             }
             if(currentAmmo==0&&!reloading)
+            {
                 StartCoroutine(Reload());
+                PlayReloadSound();
+            }
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
             StopAllCoroutines();
             StartCoroutine(Reload());
+            PlayReloadSound();
         }
     }
 

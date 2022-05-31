@@ -59,7 +59,8 @@ MonoBehaviour:
   upgrade: {fileID: 0}
   phase: 0
   currentWave: 0
-  enemiesThisWave: 2
+  enemiesThisWave: 1
+  startEnemies: 0
   crossbowBaseDamage: 25
   swordBaseDamage: 10
   mageBaseDamage: 100
@@ -80,9 +81,9 @@ MonoBehaviour:
   survivedPhases: 0
   souls: 0
   kills: 0
-  archerSpawnRate: 33
-  knightSpawnRate: 33
-  mageSpawnRate: 33
+  archerSpawnRate: 40
+  knightSpawnRate: 40
+  mageSpawnRate: 20
   weightSum: 0
   spawnRate: 1
   spawnPos:
@@ -91,7 +92,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnState: 2
-  nextWave: 0
   timeBetweenWaves: 5
   currentTimeBetweenWave: 0
   waveNumber: 0
@@ -104,9 +104,12 @@ MonoBehaviour:
   camHolderAim: {fileID: 0}
   blackScreen: {fileID: 0}
   servantAnim: {fileID: 0}
-  phaseTimer: {fileID: 0}
+  phaseTimer1: {fileID: 0}
+  phaseTimer2: {fileID: 0}
   killsCounter: {fileID: 0}
   timer: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  postPanel: {fileID: 0}
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
   timeSurvivedText: {fileID: 0}

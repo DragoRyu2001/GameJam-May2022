@@ -85,7 +85,6 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] float currentDashReloadTime;
     [SerializeField] float currentSlowMoReloadTime;
     [SerializeField] float currentAggroReloadTime;
-    [SerializeField] private float killsRequired;
     [SerializeField] private Sprite[] gunIcons;
     [SerializeField] private Sprite[] crosshairIcons;
 
@@ -98,6 +97,9 @@ public class PlayerScript : BasePlayerClass
     [SerializeField] AudioSource audioSrc;
     [SerializeField] AudioClip dashAudio, aggroAudio, slowAudio;
 
+    [Header("Ult Trigger Requirements")]
+    [SerializeField] protected float killsForUlt;
+    [SerializeField] protected float requiredKills;
 
     private float moveX;
     private float moveY;
@@ -139,6 +141,7 @@ public class PlayerScript : BasePlayerClass
     public bool ManaRechargePause { get => manaRechargePause; set => manaRechargePause = value; }
     public float ManaRechargePauseTime { get => manaRechargePauseTime; set => manaRechargePauseTime = value; }
     public float ManaCost { get => manaCost; set => manaCost = value; }
+    public float KillsForUlt { get => killsForUlt; set => killsForUlt = value; }
     #endregion
 
     private void OnEnable()
@@ -148,8 +151,10 @@ public class PlayerScript : BasePlayerClass
         UIStartSetup();
         currentGun = previousGun;
         AssertServantStatus();
-        
     }
+
+
+
     void Start()
     {
         BaseParametersUpdate();
@@ -313,9 +318,10 @@ public class PlayerScript : BasePlayerClass
         }  
 
         //Ultimate Input
-        if (Input.GetKeyDown(KeyCode.X) && GameManager.instance.kills>=3)
+        if (Input.GetKeyDown(KeyCode.X) && killsForUlt>=requiredKills)
         {
             ultOutline.fillAmount = 1f;
+            killsForUlt = 0;
             anim.StopPlayback();
             anim.SetTrigger("Death");
             isAnimating = true;
@@ -434,7 +440,8 @@ public class PlayerScript : BasePlayerClass
                 if (!HealthRecharging&&!InBerserk)
                     StartCoroutine(StartHealthRecharge());
 
-                if (CurrentHealth / MaxHealth < 0.25f&&!InBerserk)
+                Critical = false;
+                if (CurrentHealth / MaxHealth < 0.45f&&!InBerserk)
                 {
                     Critical = true;
                 }
@@ -483,10 +490,9 @@ public class PlayerScript : BasePlayerClass
         }
     }
 
-    public void HandleWerewolfUI()
+    public void HandleUltUI()
     {
-        Debug.Log(GameManager.instance.kills);
-        ultOutline.fillAmount = GameManager.instance.kills == 0 ? 1f : 1f-GameManager.instance.kills / killsRequired;
+        ultOutline.fillAmount = GameManager.instance.kills == 0 ? 1f : 1f- killsForUlt / requiredKills;
     }
 
     public void Rewind()
@@ -531,7 +537,7 @@ public class PlayerScript : BasePlayerClass
             if(gotEnemy)
             {
                 enemyComponent.Aggro(gameObject);
-                enemyComponent.TakeDamage(100, true);
+                enemyComponent.TakeDamage(60, true);
             }
         }
 

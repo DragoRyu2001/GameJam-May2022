@@ -8,7 +8,6 @@ public class GunGeneral : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float reloadTime;
     [SerializeField] protected float fireRate;
-    [SerializeField] protected float firingDelay;
 
     [SerializeField] protected Animator anim; 
 
@@ -39,9 +38,8 @@ public class GunGeneral : MonoBehaviour
 
     protected void SetBaseParameters()
     {
-        currentAmmo = maxAmmo;
         canShoot = true;
-        firingDelay = 0f;
+        currentAmmo = maxAmmo;
         reloading = false;
         inFireRateDelay = false;
     }
@@ -80,13 +78,17 @@ public class GunGeneral : MonoBehaviour
     {
         reloading = true;
         anim.SetTrigger("Reload");
-        audioSrc.clip = reloadAudio;
-        audioSrc.volume = 1f;
-        audioSrc.Play();
         yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmo = maxAmmo;
         canShoot = true;
         reloading = false;
+    }
+
+    protected void PlayReloadSound()
+    {
+        audioSrc.clip = reloadAudio;
+        audioSrc.volume = 1f;
+        audioSrc.Play();
     }
 
     protected bool CanShootCheck()
