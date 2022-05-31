@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator servantAnim;
 
     [Header("UI")]
-    [SerializeField] static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
     [SerializeField] TMP_Text phaseTimer1;
     [SerializeField] TMP_Text phaseTimer2;
     [SerializeField] TMP_Text killsCounter;
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetCurrentBaseStats();
+        Time.timeScale = 1f;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         crossbowDamage = 20f;
         pScript = Player.GetComponent<PlayerScript>();
@@ -184,6 +185,7 @@ public class GameManager : MonoBehaviour
     {
         AM.StopPlaying();
         AM.PlayGameMusic();
+        coffinScript.ToggleCoffin(false);
         vamp = false;
         pScript.enabled = true;
         Vampire.SetActive(false);
@@ -313,9 +315,10 @@ public class GameManager : MonoBehaviour
 
     private void EndPhase()
     {
+        coffinScript.ToggleCoffin(false);
         survivedPhases++;
         sun.intensity = 0;
-        souls = kills * 15000;
+        souls = kills * 150;
         soulsEarned += souls;
         upgrade.gameObject.SetActive(true);
         upgrade.UpdateSouls(souls);

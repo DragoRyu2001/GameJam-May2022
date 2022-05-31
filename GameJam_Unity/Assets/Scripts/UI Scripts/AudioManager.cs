@@ -8,23 +8,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip vampMusic;
     [SerializeField] AudioClip playMusic1;
     [SerializeField] AudioClip playMusic2;
+    [SerializeField] Slider musicSlider;
     [SerializeField] Slider volumeSlider;
 
 
     [SerializeField] AudioSource audioSource;
 
 
-    void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
-
-    // Use this for initialization
-
-
     void Start()
     {
-
+        volumeSlider.value = AudioListener.volume;
+        musicSlider.value = 1f;
+        audioSource.volume = 1f;
     }
 
     // Update is called once per frame
@@ -58,15 +53,13 @@ public class AudioManager : MonoBehaviour
         audioSource.Stop();
     }
 
-    void OnEnable()
-    {
-        //Register Slider Events
-        volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(volumeSlider.value); });
-    }
-
     //Called when Slider is moved
-    void ChangeVolume(float sliderValue)
+    public void ChangeVolume(Slider val)
     {
-        audioSource.volume = sliderValue;
+        audioSource.volume = val.value;
+    }
+    public void ChangeGlobalVolume(Slider val)
+    {
+        AudioListener.volume = val.value;
     }
 }

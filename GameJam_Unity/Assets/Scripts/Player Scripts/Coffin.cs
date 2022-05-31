@@ -98,5 +98,10 @@ public class Coffin : MonoBehaviour
         }
         
     }
+    public void ToggleCoffin(bool isOpen)
+    {
+        coffinOpen.SetActive(isOpen);
+        coffinClose.SetActive(!isOpen);
+    }
 
 }

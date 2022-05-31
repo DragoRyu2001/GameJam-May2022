@@ -14,8 +14,6 @@ public class Upgrade : MonoBehaviour
     [SerializeField] Rifle rifle;
     [SerializeField] Shotgun shotgun;
     [SerializeField] Crossbow crossbow;
-    [SerializeField] AutoCrossbow autoCrossbow;
-    [SerializeField] TripleCrossbow tripleCrossbow;
 
     [Header("UI")]
     [SerializeField] GameObject upgradeMenu;
@@ -108,6 +106,7 @@ public class Upgrade : MonoBehaviour
         crossBowReloadDecrease = 0.2f*rifle.ReloadTime;
         rifleDamageIncrease = 0.2f*rifle.Damage;
         shotGunDamageIncrease = 0.2f*shotgun.Damage;
+        crossBowReloadDecrease = 0.2f*crossbow.ReloadTime;
     }
     void Update()
     {
@@ -115,6 +114,7 @@ public class Upgrade : MonoBehaviour
         {
             Debug.Log("Shop Open");
             shopping = true;
+            UpdateSouls();
             openCloseText.SetActive(false);
             //Open Shop
             Shop(true);
@@ -406,14 +406,21 @@ public class Upgrade : MonoBehaviour
         //Level 1: Prefab different arrow= Damage = 100 DPS->0.6        (Single)
         //Level 2: Model change, Prefab different arrow= +20%           (Triple)
         //Level 3: Model change, Prefab different arrow= +20% 22 per shot (Auto)
-        if(crossbowLevel<3)
+        //0->1
+        if(crossbowLevel<=3)
         {
-            int cost = crossbowLevel * costSouls * gunSoulMult;
+            int cost = (crossbowLevel+1) * costSouls * gunSoulMult;
             if(souls-cost>=0)
             {
                 crossbowLevel++;
                 souls -= cost;
-                player.SetCrossbowType(crossbowLevel);
+                if(crossbowLevel==1)
+                {
+                    crossbow.ReloadTime-=crossBowReloadDecrease;
+                }
+                player.SetCrossbowType(crossbowLevel-1);
+                UpdateSouls();
+                CrossbowShowUpgrade();
             }
         }
         else
@@ -434,6 +441,7 @@ public class Upgrade : MonoBehaviour
                 
                 rifle.ReloadTime-=rifleReloadDecrease;
                 rifle.Damage+=rifleDamageIncrease;
+                RifleShowUpgrade();
                 UpdateSouls();
             }
             else
@@ -459,6 +467,7 @@ public class Upgrade : MonoBehaviour
                 souls-=cost;
                 shotgun.ReloadTime-=shotgunReloadDecrease;
                 shotgun.Damage+=shotGunDamageIncrease;
+                ShotgunShowUpgrade();
                 UpdateSouls();
             }
             else
@@ -496,7 +505,7 @@ public class Upgrade : MonoBehaviour
         switch(crossbowLevel+1)
         {
             case 1:
-                str= " Cost: " + cost + "\nDamage: 75 + 25\n Reload Time: " +crossbow.ReloadTime+" - "+crossBowReloadDecrease;
+                str= " Cost: " + cost + "\n Reload Time: " +crossbow.ReloadTime+" - "+crossBowReloadDecrease;
                 break;
             case 2:
                 str = " Cost: " + cost + "\nTriple CrossBow";

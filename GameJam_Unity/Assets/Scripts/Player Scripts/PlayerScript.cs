@@ -644,7 +644,7 @@ public class PlayerScript : BasePlayerClass
         if (Input.GetKey(KeyCode.LeftShift) && CheckSprint() && Input.GetKey(KeyCode.W))
         {
             anim.SetBool("Sprint", true);
-            CurrentSprint -= Time.deltaTime * SprintDecayRate/Time.timeScale;
+            CurrentSprint -=(GameManager.instance.GameIsPaused)?0:Time.deltaTime * SprintDecayRate/Time.timeScale;
             SprintRechargePause = true;
             return true;
         }
@@ -689,7 +689,7 @@ public class PlayerScript : BasePlayerClass
                 SprintRechargePause = false;
                 yield return new WaitForSecondsRealtime(SprintRechargePauseTime);
             }
-            CurrentSprint += Time.deltaTime * SprintRegenRate/Time.timeScale;
+            CurrentSprint +=(GameManager.instance.GameIsPaused)?0:Time.deltaTime * SprintRegenRate/Time.timeScale;
             yield return null;
             if (CurrentSprint > MaxSprint || Mathf.Approximately(CurrentSprint, MaxSprint))
             {
@@ -712,7 +712,7 @@ public class PlayerScript : BasePlayerClass
                 ManaRechargePause = false;
                 yield return new WaitForSecondsRealtime(ManaRechargePauseTime);
             }
-            CurrentMana += Time.deltaTime * ManaRegenRate/Time.timeScale;
+            CurrentMana +=(GameManager.instance.GameIsPaused)?0:Time.deltaTime * ManaRegenRate/Time.timeScale;
             yield return null;
             if (CurrentMana > MaxMana || Mathf.Approximately(CurrentMana, MaxMana))
             {

@@ -56,6 +56,7 @@
                 float3 healthBarColor = tex2D(_MainTex, float2(_val, i.uv.y));
                 float3 backColor = tex2D(_BackTex, i.uv);
                 float3 output = lerp(backColor, healthBarColor+backColor, healthBarMask);
+                healthBarMask = healthBarMask*0.25;
                 return float4(output,healthBarMask);
             }
             ENDCG
