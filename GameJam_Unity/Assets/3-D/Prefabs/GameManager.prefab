@@ -60,6 +60,7 @@ MonoBehaviour:
   phase: 0
   currentWave: 0
   enemiesThisWave: 3
+  inVampirePhase: 0
   startEnemies: 0
   crossbowBaseDamage: 25
   swordBaseDamage: 10
@@ -104,6 +105,7 @@ MonoBehaviour:
   camHolderAim: {fileID: 0}
   blackScreen: {fileID: 0}
   servantAnim: {fileID: 0}
+  GameIsPaused: 0
   phaseTimer1: {fileID: 0}
   phaseTimer2: {fileID: 0}
   killsCounter: {fileID: 0}
@@ -232,5 +234,7 @@ MonoBehaviour:
   vampMusic: {fileID: 8300000, guid: 4ee116cb61b98ed48841a7f68e948053, type: 3}
   playMusic1: {fileID: 8300000, guid: 6e6b181d37ab0cd41b5563b214ed509a, type: 3}
   playMusic2: {fileID: 8300000, guid: 36ac3978f07ecea4eb57201b786e9ec2, type: 3}
+  musicSlider: {fileID: 0}
   volumeSlider: {fileID: 0}
+  first: 0
   audioSource: {fileID: 1275926139146536445}

@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider volumeSlider;
 
-
+    public bool first;
     [SerializeField] AudioSource audioSource;
 
 
@@ -28,6 +28,11 @@ public class AudioManager : MonoBehaviour
        
     }
 
+    public bool IsAMPlaying()
+    {
+        return audioSource.isPlaying;
+    }
+
     public void PlayVampMusic()
     {
         if(!audioSource.isPlaying)
@@ -41,7 +46,7 @@ public class AudioManager : MonoBehaviour
     {
         if(!audioSource.isPlaying)
         {
-            bool first = Random.Range(0, 100) > 51f;
+            first = Random.Range(0, 100) > 51f;
             audioSource.clip = first?playMusic1:playMusic2;
             audioSource.volume = 0.5f;
             audioSource.Play();

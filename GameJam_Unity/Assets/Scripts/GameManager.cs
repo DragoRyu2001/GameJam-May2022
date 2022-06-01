@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int phase;
     [SerializeField] int currentWave;
     [SerializeField] int enemiesThisWave;
+    [SerializeField] bool inVampirePhase;
     [SerializeField] int startEnemies;
 
 
@@ -112,6 +113,8 @@ public class GameManager : MonoBehaviour
     Color black;
     float targetAlpha, targetSpeed;
 
+    private bool calledNextTrack;
+
     #region Setters and Getters
     public float CrossbowCurrentBaseDamage { get => crossbowCurrentBaseDamage; set => crossbowCurrentBaseDamage = value; }
     public float SwordCurrentBaseDamage { get => swordCurrentBaseDamage; set => swordCurrentBaseDamage = value; }
@@ -175,14 +178,29 @@ public class GameManager : MonoBehaviour
                 Toggle();
             }
         }
+        if(!inVampirePhase&&!AM.IsAMPlaying())
+        {
+            if(!calledNextTrack)
+                StartCoroutine(PlayGameMusic());
+        }
 
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
     }
 
+    private IEnumerator PlayGameMusic()
+    {
+        calledNextTrack = true;
+        AM.first = !AM.first;
+        AM.PlayGameMusic();
+        yield return new WaitForSeconds(1f);
+        calledNextTrack = false;
+    }
+
     private void StartPhase()
     {
+        inVampirePhase = false;
         AM.StopPlaying();
         AM.PlayGameMusic();
         coffinScript.ToggleCoffin(false);
@@ -315,6 +333,7 @@ public class GameManager : MonoBehaviour
 
     private void EndPhase()
     {
+
         coffinScript.ToggleCoffin(false);
         survivedPhases++;
         sun.intensity = 0;
@@ -340,14 +359,15 @@ public class GameManager : MonoBehaviour
     {
         //Death Animation->Fade to black->Fade back to Vampire->Do Vamp Phase Things
         servantAnim.ResetTrigger("Start");
-        AM.StopPlaying();
-        AM.PlayVampMusic();
         targetSpeed = 1.5f;
         targetAlpha = 1f;
         servantAnim.SetTrigger("Death");
         Invoke(nameof(SetMCDownAfterAnim), 2.4f);
         yield return new WaitForSeconds(2f);
         targetAlpha = 0f;
+        inVampirePhase = true;
+        AM.StopPlaying();
+        AM.PlayVampMusic();
         Vampire.SetActive(true);
         camHolderAim.SetPlayer(vampCamPos, vampOrentation);
 
