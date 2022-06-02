@@ -111,6 +111,8 @@ MonoBehaviour:
   killsCounter: {fileID: 0}
   timer: {fileID: 0}
   pauseMenu: {fileID: 0}
+  hitMarkerUI: {fileID: 0}
+  FKey: {fileID: 0}
   postPanel: {fileID: 0}
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
@@ -123,6 +125,7 @@ MonoBehaviour:
   timeSurvived: 0
   game: 0
   vamp: 0
+  hitDuration: 4.5
 --- !u!82 &1275926139146536445
 AudioSource:
   m_ObjectHideFlags: 0

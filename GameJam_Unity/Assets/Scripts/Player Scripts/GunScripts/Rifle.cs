@@ -30,15 +30,19 @@ public class Rifle : GunGeneral
 
     private void ReadInput()
     {
-        if (Input.GetMouseButton(0) && CanShootCheck())
+
+        if (Input.GetMouseButton(0))
         {
-            Shoot();
-            if (!inFireRateDelay)
-                StartCoroutine(RateOfFireLimiter());
             if (currentAmmo == 0 && !reloading)
             {
                 PlayReloadSound();
                 StartCoroutine(Reload());
+            }
+            else if(CanShootCheck())
+            {
+                Shoot();
+                if (!inFireRateDelay)
+                    StartCoroutine(RateOfFireLimiter());
             }
         }
         if (Input.GetKeyDown(KeyCode.R))

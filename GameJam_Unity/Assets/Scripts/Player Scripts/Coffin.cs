@@ -85,7 +85,6 @@ public class Coffin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) 
         {
-            Debug.Log("collision");
             playerInRepairRange = true;
         }
         

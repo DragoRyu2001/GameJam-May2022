@@ -31,7 +31,7 @@ public class GunGeneral : MonoBehaviour
     protected RaycastHit hit;
     protected Vector3 dest;
 
-
+    private Vector3 lookAtPos;
     public float Damage { get => damage; set => damage = value; }
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
 
@@ -48,6 +48,7 @@ public class GunGeneral : MonoBehaviour
     {
         if(!GameManager.instance.IsPlayerRewinding()&&GameManager.instance.IsPlayerAlive())
         {
+            lookAtPos = destRay.GetPoint(100);
             destRay = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(destRay, out hit, 100f, layersToCheck))
             {
@@ -56,13 +57,15 @@ public class GunGeneral : MonoBehaviour
             }
             else
             {
-                dest = destRay.GetPoint(100);
+                dest = lookAtPos;
                 hitSomething = false;
             }
             muzzle.LookAt(dest);
             Debug.DrawRay(muzzle.position, muzzle.transform.forward * 20f, Color.red);
-            if (aimPos != null)
-                aimPos.position = Vector3.Lerp(aimPos.position, dest, 0.05f);
+
+            aimPos.position = Vector3.Lerp(aimPos.position, lookAtPos, 0.05f);
+                
+
         }
     }
 

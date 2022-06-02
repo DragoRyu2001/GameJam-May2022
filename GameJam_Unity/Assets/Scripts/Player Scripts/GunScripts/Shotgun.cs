@@ -61,11 +61,11 @@ public class Shotgun : GunGeneral
     private void Shoot()
     {
         anim.SetTrigger("Attack");
-        
+
         for (int i = 0; i < pellets; i++)
         {
             newDir = Random.insideUnitCircle * bloom;
-            newDir.z = dest.normalized.z - (chokeDistance + (choke?chokeDistance:0));
+            newDir.z = dest.normalized.z - (chokeDistance + (choke ? chokeDistance : 0));
             newDir = muzzle.TransformDirection(newDir.normalized);
             directions[i] = newDir;
         }
@@ -88,7 +88,7 @@ public class Shotgun : GunGeneral
 
         }
         enemyColliders = Physics.OverlapBox(muzzle.position + muzzle.forward * 2f, new Vector3(2, 2, 3));
-        foreach(Collider col in enemyColliders)
+        foreach (Collider col in enemyColliders)
         {
             if (col.TryGetComponent(out hitEnemyComponent))
             {
@@ -102,17 +102,17 @@ public class Shotgun : GunGeneral
     protected float CalculateDamage(Vector3 hitPos)
     {
         distance = Vector3.Distance(muzzle.position, hitPos);
-        if(distance<shortRange)
+        if (distance < shortRange)
         {
             return Damage;
         }
-        else if(distance<medRange)
+        else if (distance < medRange)
         {
             return Damage - 5;
         }
         else
         {
-            return Damage/2;
+            return Damage / 2;
         }
 
     }

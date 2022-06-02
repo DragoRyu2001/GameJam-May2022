@@ -7,10 +7,6 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]Slider audioVolume;
-    void Start()
-    {
-        audioVolume.value = AudioListener.volume;
-    }
     public void SetAudioVolume(Slider val)
     {
         AudioListener.volume = val.value;

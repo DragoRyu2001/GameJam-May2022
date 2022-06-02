@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text killsCounter;
     [SerializeField] TMP_Text timer;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] Image hitMarkerUI;
+    [SerializeField] GameObject FKey;
 
     [Header("Post Game")]
     [SerializeField] GameObject postPanel;
@@ -110,10 +112,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool game, vamp;
 
     private float crossbowDamage;
+    private float assignValue;
     Color black;
     float targetAlpha, targetSpeed;
 
     private bool calledNextTrack;
+    [SerializeField] float hitDuration;
+    private float hitElapsedTime;
+    private Color targetColor;
 
     #region Setters and Getters
     public float CrossbowCurrentBaseDamage { get => crossbowCurrentBaseDamage; set => crossbowCurrentBaseDamage = value; }
@@ -183,7 +189,7 @@ public class GameManager : MonoBehaviour
             if(!calledNextTrack)
                 StartCoroutine(PlayGameMusic());
         }
-
+        HitDetect();
         //Black Screen Fade
         black.a = Mathf.Lerp(black.a, targetAlpha, targetSpeed*Time.deltaTime);
         blackScreen.color = black;
@@ -215,6 +221,7 @@ public class GameManager : MonoBehaviour
         targetAlpha = 0f;
         spawnState= SpawnStates.CANSPAWN;
         upgrade.gameObject.SetActive(false);
+        FKey.SetActive(false);
         // text here saying phase x start
 
     }
@@ -334,7 +341,7 @@ public class GameManager : MonoBehaviour
     private void EndPhase()
     {
 
-        coffinScript.ToggleCoffin(false);
+        coffinScript.ToggleCoffin(true);
         survivedPhases++;
         sun.intensity = 0;
         souls = kills * 150;
@@ -456,7 +463,38 @@ public class GameManager : MonoBehaviour
         killsText.text = ""+kills;
         //Calculate Score
     }
-    
+
+    public void HitDetectHandler()
+    {
+        hitMarkerUI.color = Color.white;
+        hitElapsedTime = 0;
+        targetColor = Color.clear;
+    }
+    public void DeathDetectHandler()
+    {
+        hitMarkerUI.color = Color.white;
+        hitElapsedTime = 0;
+        targetColor = Color.red;
+    }
+
+    public void HitDetect()
+    {
+        if (hitMarkerUI.color != targetColor)
+        {
+            hitMarkerUI.color = Color.Lerp(hitMarkerUI.color, targetColor, hitElapsedTime / hitDuration);
+            hitElapsedTime += Time.deltaTime;
+            if (hitElapsedTime > hitDuration)
+            {
+                hitMarkerUI.color = targetColor;
+            }
+        }
+        else
+        {
+            hitElapsedTime = 0;
+        }
+
+    }
+
     #endregion
 
 }

@@ -5016,7 +5016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c55307358e9b534ca24a61bfbd8896e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  critical: 0
   maxHealth: 200
   currentHealth: 0
   healthRegenRate: 7.5
@@ -5081,7 +5080,7 @@ MonoBehaviour:
   werewolfScript: {fileID: 7096083372152747821}
   playerDown: {fileID: 0}
   coffin: {fileID: 0}
-  coffinRepairSpeed: 25
+  coffinRepairSpeed: 65
   playerUIPanel: {fileID: 0}
   healthMat: {fileID: 2100000, guid: e1d4090c00c2ad644bfd2976c66ba99b, type: 2}
   manaMat: {fileID: 2100000, guid: a8ea510070796674a8769846e27b9b9c, type: 2}
@@ -5137,7 +5136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac9fa29b2976e4595a9fea4430fe55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  critical: 0
   maxHealth: 200
   currentHealth: 0
   healthRegenRate: 10

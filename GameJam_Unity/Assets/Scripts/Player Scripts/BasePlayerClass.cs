@@ -2,22 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class BasePlayerClass : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Health")]
-    [SerializeField] private bool critical;
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthRegenRate;
     [SerializeField] private bool healthRecharging;
     [SerializeField] private bool healthRechargePause;
     [SerializeField, Range(2f, 3.5f)] private float healthRechargePauseTime;
-
-
 
     [Header("Jump/Drag variables")]
     [SerializeField] protected float groundDrag;
@@ -38,6 +35,7 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] protected Transform playerCam;
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected Volume volume;
 
     [Header("Models")]
     [SerializeField] protected GameObject servantModel;
@@ -57,6 +55,10 @@ public class BasePlayerClass : MonoBehaviour
     [SerializeField] protected float translateModifier;
 
     Vector3 a, b, newDir;
+    protected bool vigGet;
+    protected Vignette vig;
+    VolumeProfile vProfile;
+
 
     protected Vector3 translateVector;
     protected Vector3 slopeTranslateDirection;
@@ -76,8 +78,6 @@ public class BasePlayerClass : MonoBehaviour
     public bool InBerserk { get => inBerserk; set => inBerserk = value; }
     public bool CanCast { get => canCast; set => canCast = value; }
 
-
-    public bool Critical { get => critical; set => critical = value; }
     public bool IsRewinding { get => isRewinding; set => isRewinding = value; }
     #endregion
 
@@ -142,6 +142,8 @@ public class BasePlayerClass : MonoBehaviour
 
     public void BaseParametersUpdate()
     {
+        vProfile = volume.GetComponent<Volume>().profile;
+        vigGet = vProfile.TryGet<Vignette>(out vig);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerHeight = coll.bounds.size.y;
@@ -164,18 +166,14 @@ public class BasePlayerClass : MonoBehaviour
     public struct FrameStats
     {
         public Vector3 playerPos;
-        public Quaternion playerRot;
-        public FrameStats(Vector3 playerPos, Quaternion playerRot)
+        public FrameStats(Vector3 playerPos)
         {
             this.playerPos = playerPos;
-            this.playerRot = playerRot;
         }
     }
 
 
     #region Resource Recharge Functions
-
-
 
     public IEnumerator StartHealthRecharge()
     {
@@ -189,6 +187,7 @@ public class BasePlayerClass : MonoBehaviour
             }
 
             CurrentHealth +=(GameManager.instance.GameIsPaused)?0:Time.deltaTime * HealthRegenRate/Time.timeScale;
+
             yield return null;
 
             if (CurrentHealth > MaxHealth || Mathf.Approximately(CurrentHealth, MaxHealth))

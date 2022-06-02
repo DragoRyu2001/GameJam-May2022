@@ -31,6 +31,16 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float dmg, bool isPlayer)
     {
         currentHealth-=(GameManager.instance.IsPlayerBerserking()?(1.5f*dmg):dmg);
+        GameManager.instance.HitDetectHandler();
+        //if(currentHealth>0)
+        //{
+
+        //}
+        //else
+        //{
+        //    Debug.Log("red hitmarker");
+        //}
+
         if(isPlayer)
             target = GameManager.instance.WhereIsPlayer();
     }

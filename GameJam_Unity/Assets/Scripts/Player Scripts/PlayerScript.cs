@@ -153,8 +153,6 @@ public class PlayerScript : BasePlayerClass
         AssertServantStatus();
     }
 
-
-
     void Start()
     {
         BaseParametersUpdate();
@@ -206,7 +204,7 @@ public class PlayerScript : BasePlayerClass
         if(!IsRewinding)
         {
             Move();
-            if(Critical&&IsAlive)
+            if(IsAlive)
             {
                 StartRecording();
             }
@@ -239,7 +237,10 @@ public class PlayerScript : BasePlayerClass
                 {
                     anim.SetFloat("Move", 1, 0.1f, Time.deltaTime);
                 }
-
+                if(vigGet)
+                {
+                    vig.intensity.Override((1 - (CurrentHealth / MaxHealth)) * 0.4f);
+                }
                 GroundCheck();
                 onSlope = SlopeCheck();
                 ControlDrag();
@@ -440,11 +441,6 @@ public class PlayerScript : BasePlayerClass
                 if (!HealthRecharging&&!InBerserk)
                     StartCoroutine(StartHealthRecharge());
 
-                Critical = false;
-                if (CurrentHealth / MaxHealth < 0.45f&&!InBerserk)
-                {
-                    Critical = true;
-                }
                 else if (!IsAlive && InBerserk)
                 {
                     anim.SetFloat("Move", 1f);
@@ -483,7 +479,7 @@ public class PlayerScript : BasePlayerClass
 
     public void StartRecording()
     {
-        recordedData.Insert(0, new FrameStats(transform.position, transform.rotation));
+        recordedData.Insert(0, new FrameStats(transform.position));
         if(recordedData.Count > Mathf.Round(5f/Time.fixedDeltaTime))
         {
             recordedData.RemoveAt(recordedData.Count - 1);
@@ -501,7 +497,6 @@ public class PlayerScript : BasePlayerClass
         {
             IsRewinding = true;
             transform.position = recordedData[0].playerPos;
-            playerObj.rotation = recordedData[0].playerRot;
             recordedData.RemoveAt(0);
             Debug.Log("Rewinding");
         }

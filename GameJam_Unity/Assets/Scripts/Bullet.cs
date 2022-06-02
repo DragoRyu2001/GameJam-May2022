@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float damage;
+
     [SerializeField] float speed;
     [SerializeField] bool isPlayer;
     [SerializeField] float maxDist;
