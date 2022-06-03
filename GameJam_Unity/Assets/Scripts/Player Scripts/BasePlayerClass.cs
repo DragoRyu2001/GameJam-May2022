@@ -67,6 +67,7 @@ public class BasePlayerClass : MonoBehaviour
     protected float playerHeight;
 
     #region Setters and Getters
+    public Rigidbody RB{get => rb;}
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public float HealthRegenRate { get => healthRegenRate; set => healthRegenRate = value; }

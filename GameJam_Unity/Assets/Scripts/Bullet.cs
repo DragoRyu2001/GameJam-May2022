@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float damage;
 
     [SerializeField] float speed;
-    [SerializeField] bool isPlayer;
+    [SerializeField] bool isPlayer, hasShot;
     [SerializeField] float maxDist;
     Vector3 startPos;
     bool canMove;
@@ -39,30 +39,37 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (isPlayer && other.transform.CompareTag("Enemy"))
+        if(!hasShot)
         {
-            if (other.TryGetComponent(out enemyComponent))
+            if (isPlayer && other.transform.CompareTag("Enemy"))
             {
-                enemyComponent.TakeDamage(damage, isPlayer);
+                if (other.TryGetComponent(out enemyComponent))
+                {
+                    enemyComponent.TakeDamage(damage, isPlayer);
+                }
+                transform.parent = other.transform;
+                canMove = false;
+                this.GetComponent<TrailRenderer>().enabled = false;
+                hasShot = true;
+                Destroy(gameObject, 5f);
             }
-            transform.parent = other.transform;
-            canMove = false;
-            Destroy(gameObject, 5f);
-        }
-        else if (!isPlayer && other.transform.CompareTag("Player"))
-        {
-            if(other.transform.root.TryGetComponent(out playerComponent))
+            else if (!isPlayer && other.transform.CompareTag("Player"))
             {
-                playerComponent.TakeDamage(damage);
+                if(other.transform.root.TryGetComponent(out playerComponent))
+                {
+                    playerComponent.TakeDamage(damage);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            else if (other.transform.CompareTag("Level"))
+            {
+                canMove = false;
+                hasShot = true;
+                Destroy(gameObject, 5f);
+            }
+            
         }
-        else if (other.transform.CompareTag("Level"))
-        {
-            canMove = false;
-            Destroy(gameObject, 5f);
-        }
-
+        
     }
     public void SetDamage(float dmg)
     {

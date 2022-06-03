@@ -7,11 +7,12 @@ public class AimScript : MonoBehaviour
 {
     [SerializeField] Transform lookPosition;
     [SerializeField] Camera cam;
-    [SerializeField] float rate;
+    [SerializeField] float rate, fovSpeed, speedfovDesired;
+    [SerializeField] PlayerScript player;
 
     [SerializeField] WerewolfScript wScript;
     float desiredFOV, elapsedTime = 0f;
-
+    bool wasFast = false;
 
     [Header("Look variables")]
     [SerializeField] float mouseSensX;
@@ -42,7 +43,7 @@ public class AimScript : MonoBehaviour
             return;
         }
         Aim();
-
+        
     }
 
     private void ReadMouseInput()
@@ -76,6 +77,19 @@ public class AimScript : MonoBehaviour
 
     private void Aim()
     {
+        Debug.Log("Player Velocity: "+player.RB.velocity.magnitude);
+        if(player.RB.velocity.magnitude>=fovSpeed && !wasFast)
+        {
+            wasFast = true;
+            desiredFOV = speedfovDesired;
+            elapsedTime = 0;
+        }
+        else if(player.RB.velocity.magnitude<fovSpeed && wasFast)
+        {
+            wasFast = false;
+            desiredFOV = 60;
+            elapsedTime = 0;
+        }
         if (Input.GetMouseButtonDown(1))
         {
             isAiming = true;

@@ -636,7 +636,7 @@ public class PlayerScript : BasePlayerClass
 
     protected bool SprintCheck()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && CheckSprint() && Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.LeftShift) && CheckSprint() && Input.GetKey(KeyCode.W) && GroundCheck())
         {
             anim.SetBool("Sprint", true);
             CurrentSprint -=(GameManager.instance.GameIsPaused)?0:Time.deltaTime * SprintDecayRate/Time.timeScale;
