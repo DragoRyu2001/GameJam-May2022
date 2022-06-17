@@ -211,6 +211,8 @@ public class GameManager : MonoBehaviour
         AM.PlayGameMusic();
         coffinScript.ToggleCoffin(false);
         vamp = false;
+        sun.transform.rotation = Quaternion.Euler(new Vector3(75, 0, 0));
+
         pScript.enabled = true;
         Vampire.SetActive(false);
         camHolderAim.SetPlayer(servantCamPos, servantOrientation);
@@ -343,13 +345,12 @@ public class GameManager : MonoBehaviour
 
         coffinScript.ToggleCoffin(true);
         survivedPhases++;
-        sun.intensity = 0;
         souls = kills * 150;
         soulsEarned += souls;
         upgrade.gameObject.SetActive(true);
         upgrade.UpdateSouls(souls);
         vamp = true;
-
+        sun.transform.rotation = Quaternion.Euler(new Vector3(189, 0, 0));
         StartCoroutine(EndPhaseTimer());
     }
 
